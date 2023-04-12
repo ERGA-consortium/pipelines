@@ -23,20 +23,20 @@ rule split_ref:
 	output:
 		"split.genome.fasta"
 	conda:
-		"/projects/dazzler/brown/envs/busco"
+		"purge-dups"
 	shell:
-		"/projects/dazzler/brown/prog/purge_dups/src/split_fa {input} > {output}"
+		"split_fa {input} > {output}"
 
 rule self_map:
 	input:
 		"split.genome.fasta"
 	output:
-		"split.genome.block10kb.paf"
+		"split.genome.paf"
 	conda:
-		"/projects/dazzler/brown/envs/busco"
+		"purge-dups"
 	threads: 24
 	shell:
-		"/projects/dazzler/pippel/prog/minimap2/minimap2 -I200G -t {threads} -xasm5 -DP {input} {input} > {output}"
+		"minimap2 -I200G -t {threads} -xasm5 -DP {input} {input} > {output}"
 
 rule map_reads:
 	input:
@@ -45,10 +45,10 @@ rule map_reads:
 	output:
 		"{read_file}.paf"
 	conda:
-		"/projects/dazzler/brown/envs/busco"
+		"purge-dups"
 	threads: 24
 	shell:
-		"/projects/dazzler/pippel/prog/minimap2/minimap2 -I 200G -x map-pb -t {threads} {input.ref} {input.reads} > {output}"
+		"minimap2 -I 200G -x map-pb -t {threads} {input.ref} {input.reads} > {output}"
 
 rule pbstats:
 	input:
@@ -60,9 +60,9 @@ rule pbstats:
 	params:
 		outputDir="coverage"
 	conda:
-		"/projects/dazzler/brown/envs/busco"
+		"purge-dups"
 	shell:
-		"/projects/dazzler/brown/prog/purge_dups/src/pbcstat -O {params.outputDir} {input}"
+		"pbcstat -O {params.outputDir} {input}"
 
 rule calcuts:
 	input:
@@ -70,21 +70,21 @@ rule calcuts:
 	output:
 		"cutoffs"
 	conda:
-		"/projects/dazzler/brown/envs/busco"
+		"purge-dups"
 	shell:
-		"/projects/dazzler/brown/prog/purge_dups/src/calcuts {input} > {output}"
+		"calcuts {input} > {output}"
 
 rule purge_dups:
 	input:
 		cutoffs="cutoffs",
 		coverage="coverage/PB.base.cov",
-		split_paf="split.genome.block10kb.paf"
+		split_paf="split.genome.paf"
 	output:
 		"dups.bed"
 	conda:
-		"/projects/dazzler/brown/envs/busco"
+		"purge-dups"
 	shell:
-		"/projects/dazzler/brown/prog/purge_dups/src/purge_dups -2 -c {input.coverage} -T {input.cutoffs} {input.split_paf} > {output}"
+		"purge_dups -2 -c {input.coverage} -T {input.cutoffs} {input.split_paf} > {output}"
 
 rule get_seqs:
 	input:
@@ -94,7 +94,7 @@ rule get_seqs:
 		"{prefix}.purged.fa",
 		"{prefix}.hap.fa"
 	conda:
-		"/projects/dazzler/brown/envs/busco"
+		"purge-dups"
 	shell:
-		"/projects/dazzler/brown/prog/purge_dups/src/get_seqs -e -p {prefix} {input.dups} {input.genome}"
+		"get_seqs -e -p {prefix} {input.dups} {input.genome}"
 
