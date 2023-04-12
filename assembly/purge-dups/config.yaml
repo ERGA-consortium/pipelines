@@ -1,0 +1,9 @@
+genome: genome.fasta
+
+READ_FILES:
+    A: m54345U_221207_005326.Final_DC.fq.gz
+    B: m54345U_221214_012218.Final_DC.fq.gz
+    C: m54345U_221215_105159.Final_DC.fq.gz
+
+prefix:
+    asm_mLioSpu.hap1
