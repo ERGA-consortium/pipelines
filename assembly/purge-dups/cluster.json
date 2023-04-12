@@ -1,0 +1,23 @@
+{
+  "__default__":
+  {
+    "queue":"batch",
+    "h":"24",
+    "ram":"200",
+    "nc":"1",
+    "out":"{rule}.{wildcards}.out",
+    "err":"{rule}.{wildcards}.err"  
+  },
+  "map_reads":
+  {
+    "h":"24",
+    "ram":"200",
+    "nc":"24"
+  },
+  "self_map":
+  {
+    "h":"24",
+    "ram":"200",
+    "nc":"24"
+  }
+}

@@ -1,0 +1,1 @@
+snakemake --jobs 100 --cluster-config cluster.json --cluster "sbatch -p {cluster.queue} --ntasks=1 --cpus-per-task={cluster.nc} --time={cluster.h}:00:00 --mem={cluster.ram}G -o {cluster.out} -e {cluster.err}"

@@ -1,0 +1,100 @@
+import os
+import glob
+import sys
+
+configfile: "config.yaml"
+
+output_purged=config["prefix"]+".purged.fa"
+output_hap=config["prefix"]+".hap.fa"
+
+prefix=config["prefix"]
+
+def get_reads(wildcards):
+	return config["READ_FILES"][wildcards.read_file]
+
+rule all:
+	input:
+		output_purged,	
+		output_hap	
+
+rule split_ref:
+	input:
+		config["genome"]
+	output:
+		"split.genome.fasta"
+	conda:
+		"/projects/dazzler/brown/envs/busco"
+	shell:
+		"/projects/dazzler/brown/prog/purge_dups/src/split_fa {input} > {output}"
+
+rule self_map:
+	input:
+		"split.genome.fasta"
+	output:
+		"split.genome.block10kb.paf"
+	conda:
+		"/projects/dazzler/brown/envs/busco"
+	threads: 24
+	shell:
+		"/projects/dazzler/pippel/prog/minimap2/minimap2 -I200G -t {threads} -xasm5 -DP {input} {input} > {output}"
+
+rule map_reads:
+	input:
+		ref=config["genome"],
+		reads=get_reads
+	output:
+		"{read_file}.paf"
+	conda:
+		"/projects/dazzler/brown/envs/busco"
+	threads: 24
+	shell:
+		"/projects/dazzler/pippel/prog/minimap2/minimap2 -I 200G -x map-pb -t {threads} {input.ref} {input.reads} > {output}"
+
+rule pbstats:
+	input:
+		expand("{read_file}.paf", read_file=config["READ_FILES"])
+	output:
+		"coverage/PB.stat",
+		"coverage/PB.cov.wig",
+		"coverage/PB.base.cov"
+	params:
+		outputDir="coverage"
+	conda:
+		"/projects/dazzler/brown/envs/busco"
+	shell:
+		"/projects/dazzler/brown/prog/purge_dups/src/pbcstat -O {params.outputDir} {input}"
+
+rule calcuts:
+	input:
+		"coverage/PB.stat"
+	output:
+		"cutoffs"
+	conda:
+		"/projects/dazzler/brown/envs/busco"
+	shell:
+		"/projects/dazzler/brown/prog/purge_dups/src/calcuts {input} > {output}"
+
+rule purge_dups:
+	input:
+		cutoffs="cutoffs",
+		coverage="coverage/PB.base.cov",
+		split_paf="split.genome.block10kb.paf"
+	output:
+		"dups.bed"
+	conda:
+		"/projects/dazzler/brown/envs/busco"
+	shell:
+		"/projects/dazzler/brown/prog/purge_dups/src/purge_dups -2 -c {input.coverage} -T {input.cutoffs} {input.split_paf} > {output}"
+
+rule get_seqs:
+	input:
+		dups="dups.bed",
+		genome=config["genome"]
+	output:
+		"{prefix}.purged.fa",
+		"{prefix}.hap.fa"
+	conda:
+		"/projects/dazzler/brown/envs/busco"
+	shell:
+		"/projects/dazzler/brown/prog/purge_dups/src/get_seqs -e -p {prefix} {input.dups} {input.genome}"
+
