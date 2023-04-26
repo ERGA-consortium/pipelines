@@ -17,7 +17,7 @@ def get_reads(wildcards):
 
 rule all:
 	input:
-		config["prefix"]+"_genomescope"
+		"L{0}_U{1}_smudgeplot.png".format(L, U)
 
 rule count_kmers:
 	input:
@@ -66,28 +66,39 @@ rule run_genomescope:
 		1
 	shell:
 		"genomescope2 -i {input} -p {ploidy} -k {k} -o {output}"
-"""
+
 rule prepare_kmersSmudge:
 	input:
 		output_meryl
 	output:
-		config["prefix"]+"L"+{L}+"_U"+{U}+".kmers"
+		config["prefix"]+"L"+str({L})+"_U"+str({U})+".kmers"
 	conda:
 		"meryl"
 	threads:
 		6
 	shell:
-		meryl print less-than 1500 greater-than 10 threads={threads} memory=10G test.meryl > L10_U1500.meryl
+		"meryl print less-than 1500 greater-than 10 threads={threads} memory=10G test.meryl | sort > {output}"
 
 rule run_smudgeplot:
 	input:
-		config["prefix"]+"L"+{L}+"_U"+{U}+".kmers"
+		config["prefix"]+"L"+str({L})+"_U"+str({U})+".kmers"
 	output:
-		{L}10_{U}1500
+		"L"+str({L})+"_U"+str({U})+"_coordinates.tsv"
 	conda:
 		"smudgeplot"
 	threads:
 		1
 	shell:
-		"smudgeplot.py hetkmers -o {L}10_{U}1500 < L{L}_U{U}.meryl"
-"""
+		"smudgeplot.py hetkmers -o L{L}_U{U} < {input}"
+
+rule create_smudgeplot:
+	input:
+		"L"+str({L})+"_U"+str({U})+"_coordinates.tsv"
+	output:
+		"L"+str({L})+"_U"+str({U})+"_smudgeplot.png"
+	conda:
+		"smudgeplot"
+	threads:
+		1
+	shell:
+		"smudgeplot_plot.R {input} -o L{L}_U{U}"

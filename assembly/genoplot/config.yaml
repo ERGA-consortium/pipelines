@@ -12,7 +12,7 @@ kmersize:
     21
 
 Lbound:
-	10
+    10
 
 Ubound:
-	1500
+    1500
