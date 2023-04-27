@@ -1,3 +1,3 @@
 # pipelines
 
-A collection of pipelines in Snakemake, NextFlow or other related to Genome assembly and annotation
+A collection of pipelines in Galaxy, NextFlow and Snakemake related to Genome assembly and annotation
