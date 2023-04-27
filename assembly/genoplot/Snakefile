@@ -27,6 +27,7 @@ rule count_kmers:
 		directory("{read_file}.meryl")
 	conda:
 		"genoplots"
+
 	threads:
 		3
 	shell:
@@ -39,6 +40,7 @@ rule merge_kmers:
 		directory(output_meryl)
 	conda:
 		"genoplots"
+
 	threads:
 		6
 	shell:
@@ -51,6 +53,7 @@ rule create_hist:
 		config["prefix"]+".hist"
 	conda:
 		"genoplots"
+
 	threads:
 		1
 	shell:
@@ -63,6 +66,7 @@ rule run_genomescope:
 		directory(config["prefix"]+"_genomescope")
 	conda:
 		"genoplots"
+
 	threads:
 		1
 	shell:
@@ -75,6 +79,7 @@ rule prepare_kmersSmudge:
 		str(prefix)+"_L"+str(L)+"_U"+str(U)+".kmers"
 	conda:
 		"genoplots"
+
 	threads:
 		6
 	shell:
@@ -87,6 +92,7 @@ rule run_smudgeplot:
 		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coordinates.tsv"
 	conda:
 		"genoplots"
+
 	threads:
 		1
 	shell:
@@ -99,6 +105,7 @@ rule create_smudgeplot:
 		output_smudgeplot
 	conda:
 		"genoplots"
+
 	threads:
 		1
 	shell:
