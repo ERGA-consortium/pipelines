@@ -2,11 +2,9 @@
 
 A snakemake pipeline which takes high-accuracy whole-genome reads as input (e.g. PacBio HiFI, Illumina WGS, 10x linked-reads), creates a kmer database and runs Genomescope and Smudgeplot to get estimates on genome size, heterozygosity, ploidy and read coverage
 
-To run, you will need to create the following conda environments
+To run, you will need to create the following conda environment
 
-conda create -n meryl --file requirements_meryl.txt
-conda create -n genomescope2 --file requirements_genomescope2.txt
-conda create -n smudgeplot --file requirements_smudgeplot.txt
+conda create -n genoplots -c conda-forge -c bioconda meryl genomescope2 smudgeplot
 
 And edit the file names in the config.yaml file
 
