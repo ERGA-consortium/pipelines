@@ -4,20 +4,21 @@ import sys
 
 configfile: "config.yaml"
 
-output_meryl=config["prefix"]+".meryl"
-
 prefix=config["prefix"]
 ploidy=config["ploidy"]
 k=config["kmersize"]
 L=config["Lbound"]
 U=config["Ubound"]
 
+output_meryl=config["prefix"]+".meryl"
+output_smudgeplot=prefix+"_L"+str(L)+"_U"+str(U)+"_smudgeplot.png"
+
 def get_reads(wildcards):
 	return config["READ_FILES"][wildcards.read_file]
 
 rule all:
 	input:
-		"L{0}_U{1}_smudgeplot.png".format(L, U)
+		output_smudgeplot
 
 rule count_kmers:
 	input:
@@ -71,7 +72,7 @@ rule prepare_kmersSmudge:
 	input:
 		output_meryl
 	output:
-		config["prefix"]+"L"+str({L})+"_U"+str({U})+".kmers"
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+".kmers"
 	conda:
 		"meryl"
 	threads:
@@ -81,24 +82,24 @@ rule prepare_kmersSmudge:
 
 rule run_smudgeplot:
 	input:
-		config["prefix"]+"L"+str({L})+"_U"+str({U})+".kmers"
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+".kmers"
 	output:
-		"L"+str({L})+"_U"+str({U})+"_coordinates.tsv"
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coordinates.tsv"
 	conda:
 		"smudgeplot"
 	threads:
 		1
 	shell:
-		"smudgeplot.py hetkmers -o L{L}_U{U} < {input}"
+		"smudgeplot.py hetkmers -o {prefix}_L{L}_U{U} < {input}"
 
 rule create_smudgeplot:
 	input:
-		"L"+str({L})+"_U"+str({U})+"_coordinates.tsv"
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coordinates.tsv"
 	output:
-		"L"+str({L})+"_U"+str({U})+"_smudgeplot.png"
+		output_smudgeplot
 	conda:
 		"smudgeplot"
 	threads:
 		1
 	shell:
-		"smudgeplot_plot.R {input} -o L{L}_U{U}"
+		"smudgeplot_plot.R {input} -o {prefix}_L{L}_U{U}"
