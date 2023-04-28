@@ -75,7 +75,7 @@ libzlib=1.2.13=hfd90126_4
 llvm-openmp=16.0.2=hff08bdf_0
 llvm-tools=16.0.2=hf646ca0_0
 make=4.3=h22f3db7_1
-meryl=2013=0
+meryl=1.3=h61da179_1
 mpc=1.3.1=h81bd1dd_0
 mpfr=4.2.0=h4f9bd69_0
 ncurses=6.3=h96cf925_1
