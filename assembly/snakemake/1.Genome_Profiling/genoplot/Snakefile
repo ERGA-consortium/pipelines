@@ -18,7 +18,8 @@ def get_reads(wildcards):
 
 rule all:
 	input:
-		output_smudgeplot
+		output_smudgeplot,
+		"Estimated_genome_size"
 
 rule count_kmers:
 	input:
@@ -71,6 +72,16 @@ rule run_genomescope:
 		1
 	shell:
 		"genomescope2 -i {input} -p {ploidy} -k {k} -o {output}"
+
+rule get_genomescopeStats:
+	input:
+		config["prefix"]+"_genomescope"
+	output:
+		"Estimated_genome_size"
+	threads:
+		1
+	shell:
+		"bash get_stats.sh {input}"
 
 rule prepare_kmersSmudge:
 	input:

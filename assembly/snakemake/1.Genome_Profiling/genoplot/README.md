@@ -4,7 +4,7 @@ A snakemake pipeline which takes high-accuracy whole-genome reads as input (e.g.
 
 To run, you will need to create the following conda environment:
 
-`conda create -n genoplots -c conda-forge -c bioconda meryl genomescope2 smudgeplot`
+`conda create -n genoplots -c conda-forge -c bioconda meryl==1.3 genomescope2 smudgeplot`
 
 or:
 
