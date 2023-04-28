@@ -1,0 +1,112 @@
+import os
+import glob
+import sys
+
+configfile: "config.yaml"
+
+prefix=config["prefix"]
+ploidy=config["ploidy"]
+k=config["kmersize"]
+L=config["Lbound"]
+U=config["Ubound"]
+
+output_meryl=config["prefix"]+".meryl"
+output_smudgeplot=prefix+"_L"+str(L)+"_U"+str(U)+"_smudgeplot.png"
+
+def get_reads(wildcards):
+	return config["READ_FILES"][wildcards.read_file]
+
+rule all:
+	input:
+		output_smudgeplot
+
+rule count_kmers:
+	input:
+		reads=get_reads
+	output:
+		directory("{read_file}.meryl")
+	conda:
+		"genoplots"
+
+	threads:
+		3
+	shell:
+		"meryl count k={k} memory=10G threads={threads} {input.reads} output {output}"
+
+rule merge_kmers:
+	input:
+		expand("{read_file}.meryl", read_file=config["READ_FILES"])
+	output:
+		directory(output_meryl)
+	conda:
+		"genoplots"
+
+	threads:
+		6
+	shell:
+		"meryl union-sum memory=10G threads={threads} output {output} {input}"
+
+rule create_hist:
+	input:
+		output_meryl
+	output:
+		config["prefix"]+".hist"
+	conda:
+		"genoplots"
+
+	threads:
+		1
+	shell:
+		"meryl histogram {input} > {output}"
+
+rule run_genomescope:
+	input:
+		config["prefix"]+".hist"
+	output:
+		directory(config["prefix"]+"_genomescope")
+	conda:
+		"genoplots"
+
+	threads:
+		1
+	shell:
+		"genomescope2 -i {input} -p {ploidy} -k {k} -o {output}"
+
+rule prepare_kmersSmudge:
+	input:
+		output_meryl
+	output:
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+".kmers"
+	conda:
+		"genoplots"
+
+	threads:
+		6
+	shell:
+		"meryl print less-than 1500 greater-than 10 threads={threads} memory=10G test.meryl | sort > {output}"
+
+rule run_smudgeplot:
+	input:
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+".kmers"
+	output:
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coordinates.tsv"
+	conda:
+		"genoplots"
+
+	threads:
+		1
+	shell:
+		"smudgeplot.py hetkmers -o {prefix}_L{L}_U{U} < {input}"
+
+rule create_smudgeplot:
+	input:
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coordinates.tsv"
+	output:
+		output_smudgeplot
+	conda:
+		"genoplots"
+
+	threads:
+		1
+	shell:
+		"smudgeplot_plot.R {input} -o {prefix}_L{L}_U{U}"
