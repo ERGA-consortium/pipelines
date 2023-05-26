@@ -94,7 +94,7 @@ rule prepare_kmersSmudge:
 	threads:
 		6
 	shell:
-		"meryl print less-than 1500 greater-than 10 threads={threads} memory=10G test.meryl | sort > {output}"
+		"meryl print less-than 1500 greater-than 10 threads={threads} memory=10G {input} | sort > {output}"
 
 rule run_smudgeplot:
 	input:
