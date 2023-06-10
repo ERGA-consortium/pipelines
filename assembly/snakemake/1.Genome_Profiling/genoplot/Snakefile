@@ -120,4 +120,4 @@ rule create_smudgeplot:
 	threads:
 		1
 	shell:
-		"smudgeplot_plot.R {input} -o {prefix}_L{L}_U{U}"
+		"smudgeplot_plot.R -L {L} -i {input} -o {prefix}_L{L}_U{U}"
