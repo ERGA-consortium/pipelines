@@ -9,3 +9,6 @@ Default K-mer length and ploidy for Genomescope are 21 and 2, respectively.
 ![ProfIllu](pics/ProfIllu2305.png)
 
 ### HiFi Reads
+The workflow takes a trimmed HiFi reads collection, runs Meryl to create a K-mer database, Genomescope2 to estimate genome properties and Smudgeplot to estimate ploidy. The main results are K-mer database and genome profiling plots and tables.
+Default K-mer length and ploidy for Genomescope are 21 and 2, respectively.
+![ProfIllu](pics/ProfHifi2305.png)
