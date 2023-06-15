@@ -1,5 +1,5 @@
 # Genome Assembly and QC
-Galaxy Workflows for genome assembly and QC oranised by the long reads technologies (HiFi or ONT) and programs.
+Galaxy Workflows for genome assembly and QC organised by the long reads technologies (HiFi or ONT) and programs.
 
 Load the respective .ga file in Galaxy to run the workflow.
 
