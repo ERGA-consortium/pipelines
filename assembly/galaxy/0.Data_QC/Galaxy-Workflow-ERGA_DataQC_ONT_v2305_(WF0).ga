@@ -1,0 +1,390 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "creator": [
+        {
+            "address": "https://www.erga-biodiversity.eu",
+            "class": "Organization",
+            "name": "ERGA"
+        },
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "D. De Panis"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "ERGA DataQC ONT v2305 (WF0)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Raw ONT collection"
+                }
+            ],
+            "label": "Raw ONT collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "8064b393-1ba5-4cdc-9e4c-0926b3b10f67",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seqkit_stats/seqkit_stats/2.3.1+galaxy1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SeqKit statistics",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 249.06250594641082,
+                "top": 242.2812775719624
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "#stats, #ONT, #raw"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seqkit_stats/seqkit_stats/2.3.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "54a954ee64d4",
+                "name": "seqkit_stats",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"all\": true, \"basename\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"skip_err\": false, \"tabular\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.3.1+galaxy1",
+            "type": "tool",
+            "uuid": "24096620-2425-40e4-8b42-dcb99fa9affa",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.1+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool filtlong",
+                    "name": "external_references"
+                },
+                {
+                    "description": "runtime parameter for tool filtlong",
+                    "name": "external_references"
+                },
+                {
+                    "description": "runtime parameter for tool filtlong",
+                    "name": "external_references"
+                }
+            ],
+            "label": null,
+            "name": "filtlong",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 746.7968644982644,
+                "top": 22.46874773536867
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutfile": {
+                    "action_arguments": {
+                        "tags": "#ONT, #reads, #trimmed"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "41b2ad601cf0",
+                "name": "filtlong",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"external_references\": {\"assembly\": {\"__class__\": \"RuntimeValue\"}, \"illumina_1\": {\"__class__\": \"RuntimeValue\"}, \"illumina_2\": {\"__class__\": \"RuntimeValue\"}}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"other\": {\"window_size\": \"250\"}, \"output_thresholds\": {\"target_bases\": null, \"keep_percent\": null, \"max_length\": null, \"min_length\": \"5000\", \"min_mean_q\": \"80.0\", \"min_window_q\": null}, \"read_manipulation\": {\"trim\": false, \"split\": null}, \"score_weights\": {\"length_weight\": \"1.0\", \"mean_q_weight\": \"1.0\", \"window_q_weight\": \"1.0\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.1+galaxy0",
+            "type": "tool",
+            "uuid": "a44d9173-3d26-4024-8081-301ab458313b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "4c7bb086-fc14-41d9-b935-e0c6da3dd074"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_list": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "SeqKit ONT",
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 504.69998088596435,
+                "top": 367.7812386099634
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "90981f86000f",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.1.0",
+            "type": "tool",
+            "uuid": "1b1d293d-436d-463c-a21c-d74c71c4541a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "97e15904-2636-4d83-91aa-d9ed8805e25e"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "mode|reads|files": {
+                    "id": 2,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NanoPlot",
+            "outputs": [
+                {
+                    "name": "output_html",
+                    "type": "html"
+                },
+                {
+                    "name": "nanostats",
+                    "type": "tabular"
+                },
+                {
+                    "name": "nanostats_post_filtering",
+                    "type": "tabular"
+                },
+                {
+                    "name": "read_length",
+                    "type": "png"
+                },
+                {
+                    "name": "log_read_length",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 998.046814259532,
+                "top": 246.73436503388004
+            },
+            "post_job_actions": {
+                "HideDatasetActionlog_read_length": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "log_read_length"
+                },
+                "HideDatasetActionnanostats": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "nanostats"
+                },
+                "HideDatasetActionnanostats_post_filtering": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "nanostats_post_filtering"
+                },
+                "HideDatasetActionread_length": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "read_length"
+                },
+                "RemoveTagDatasetActionlog_read_length": {
+                    "action_arguments": {
+                        "tags": "#reads"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "log_read_length"
+                },
+                "RemoveTagDatasetActionnanostats": {
+                    "action_arguments": {
+                        "tags": "#reads"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "nanostats"
+                },
+                "RemoveTagDatasetActionnanostats_post_filtering": {
+                    "action_arguments": {
+                        "tags": "#reads"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "nanostats_post_filtering"
+                },
+                "RemoveTagDatasetActionoutput_html": {
+                    "action_arguments": {
+                        "tags": "#reads"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "output_html"
+                },
+                "RemoveTagDatasetActionread_length": {
+                    "action_arguments": {
+                        "tags": "#reads"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "read_length"
+                },
+                "TagDatasetActionlog_read_length": {
+                    "action_arguments": {
+                        "tags": "#stats"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "log_read_length"
+                },
+                "TagDatasetActionnanostats": {
+                    "action_arguments": {
+                        "tags": "#stats"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "nanostats"
+                },
+                "TagDatasetActionnanostats_post_filtering": {
+                    "action_arguments": {
+                        "tags": "#stats"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "nanostats_post_filtering"
+                },
+                "TagDatasetActionoutput_html": {
+                    "action_arguments": {
+                        "tags": "#stats, nanoplot"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output_html"
+                },
+                "TagDatasetActionread_length": {
+                    "action_arguments": {
+                        "tags": "#stats"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "read_length"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "0f1c34698076",
+                "name": "nanoplot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"customization\": {\"color\": null, \"plots\": null, \"N50\": false}, \"filter\": {\"maxlength\": null, \"minlength\": null, \"drop_outliers\": false, \"downsample\": null, \"loglength\": false, \"percentqual\": false, \"alength\": false, \"minqual\": null, \"runtime_until\": null, \"readtype\": null, \"barcoded\": false, \"no_supplementary\": false}, \"mode\": {\"choice\": \"batch\", \"__current_case__\": 0, \"reads\": {\"type\": \"fastq\", \"__current_case__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.41.0+galaxy0",
+            "type": "tool",
+            "uuid": "4d39b734-f6b1-4739-b64b-5290760df6ef",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "log_read_length",
+                    "uuid": "4cb80e58-65f7-496b-a131-6a94091e996a"
+                },
+                {
+                    "label": null,
+                    "output_name": "nanostats_post_filtering",
+                    "uuid": "9e2dfbc6-4fce-4ff6-b3e5-7daa78b33709"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_html",
+                    "uuid": "b8e37d55-4a03-49cd-871d-84295cfbaa93"
+                },
+                {
+                    "label": null,
+                    "output_name": "nanostats",
+                    "uuid": "9e954df4-9a9f-4295-91b7-d8aef2f1b3d0"
+                },
+                {
+                    "label": null,
+                    "output_name": "read_length",
+                    "uuid": "ecac484e-6840-44a8-a9e2-5339635f1617"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:ERGA",
+        "name:DataQC",
+        "name:ONT"
+    ],
+    "uuid": "9070d926-e0dc-41fd-94fd-35972d3c186b",
+    "version": 36
+}
