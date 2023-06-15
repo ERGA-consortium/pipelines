@@ -4,5 +4,6 @@ Galaxy Workflows for checking properties of the genome (size, heterozygosity, pl
 Load the respective .ga file in Galaxy to run the workflow.
 
 ### Illumina Reads
+![ProfIllu](pics/ProfIllu2305.png)
 
 ### HiFi Reads
