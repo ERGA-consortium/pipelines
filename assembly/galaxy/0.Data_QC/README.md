@@ -12,5 +12,7 @@ The workflow takes a [paired-reads collection](https://training.galaxyproject.or
 
 
 #### ONT Reads
+![QCont2305](pics/QCont2305.png)
+The workflow takes ONT reads collection and runs SeqKit, filters by quality and plots the result. The main outputs are a collection of filtered reads, a table with raw reads stats and a plot of filtered reads.
 
 
