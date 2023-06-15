@@ -1,5 +1,5 @@
 ## Reads preprocessing & QC
-Galaxy Workflows for checking quality and trimming reads from Illumina (WGS, HiC), PacBio and ONT.
+Galaxy Workflows for checking quality and trimming/filtering reads from Illumina (WGS, HiC), PacBio and ONT.
 
 Load the respective .ga file in Galaxy to run the workflow.
 
