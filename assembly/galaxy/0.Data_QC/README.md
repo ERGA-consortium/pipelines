@@ -10,7 +10,7 @@ The workflow takes a [paired-reads collection](https://training.galaxyproject.or
 ![QCillu2305](pics/QCillu2305.png)
 
 
-### PacBio Reads
+### HiFi Reads
 The workflow takes a HiFi reads collection, runs FastQC and SeqKit, filters with Cutadapt, and creates a MultiQC report. The main outputs are a collection of filtred reads, a report with raw and filtered reads stats, and a table with raw reads stats.
 
 ![QChifi2305](pics/QChifi2305.png)
