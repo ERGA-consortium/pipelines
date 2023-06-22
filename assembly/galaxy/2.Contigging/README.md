@@ -9,6 +9,8 @@ Load the respective .ga file in Galaxy to run the workflow.
 
 ### Hicanu
 
+### Flye
+
 ### Nextdenovo
 
 ## ONT-based assembly
