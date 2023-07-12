@@ -18,11 +18,11 @@ For genomescope2, you need to set the ploidy (default 2)
 
 For smudgeplot, you need to set minimum and maximum thresholds for the kmer counts. By default these are set to a minimum of 10 and maximum of 1500. If coverage is very high or low, these should be adjusted. A good estimate can be calculated by running 
 
-`conda activate smudgeplot && smudgeplot.py cutoff prefix.hist L`
+`conda activate genoplots && smudgeplot.py cutoff prefix.hist L`
 
 to get an estimate of the lower bound. And
 
-`conda activate smudgeplot && smudgeplot.py cutoff prefix.hist U`
+`conda activate genoplots && smudgeplot.py cutoff prefix.hist U`
 
 to get an estimate of the upper bound. This needs to be run after meryl has created the .hist file, which is the input for genomescope2.
 
