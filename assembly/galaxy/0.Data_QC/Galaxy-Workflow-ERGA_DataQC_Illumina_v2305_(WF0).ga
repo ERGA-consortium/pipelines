@@ -14,7 +14,7 @@
         }
     ],
     "format-version": "0.1",
-    "name": "ERGA DataQC Illumina v1.0 (WF0)",
+    "name": "ERGA DataQC Illumina v2305 (WF0)",
     "steps": {
         "0": {
             "annotation": "",
@@ -32,22 +32,89 @@
             "name": "Input dataset collection",
             "outputs": [],
             "position": {
-                "left": 0.0,
-                "top": 216.7269218851864
+                "left": 0,
+                "top": 375.362698201768
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"paired\"}",
             "tool_version": null,
             "type": "data_collection_input",
-            "uuid": "f3829b87-122a-4c7b-9bb1-9722e906dcb3",
+            "uuid": "c4b56969-0498-4a7a-994c-0b27fe9bd056",
             "when": null,
             "workflow_outputs": []
         },
         "1": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
             "errors": null,
             "id": 1,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "adapters"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": "FastQC Illumina Raw",
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 255.08425977545755,
+                "top": 0
+            },
+            "post_job_actions": {
+                "HideDatasetActionhtml_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "html_file"
+                },
+                "HideDatasetActiontext_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "text_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3d0c7bdf12f5",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.73+galaxy0",
+            "type": "tool",
+            "uuid": "91d5d610-d931-4fca-9942-c66998185d52",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0",
+            "errors": null,
+            "id": 2,
             "input_connections": {
                 "single_paired|paired_input": {
                     "id": 0,
@@ -72,8 +139,8 @@
                 }
             ],
             "position": {
-                "left": 251.4858925413169,
-                "top": 0
+                "left": 498.5156205640863,
+                "top": 397.0950131528864
             },
             "post_job_actions": {
                 "HideDatasetActionreport_html": {
@@ -118,82 +185,15 @@
             "tool_state": "{\"filter_options\": {\"quality_filtering_options\": {\"disable_quality_filtering\": false, \"qualified_quality_phred\": null, \"unqualified_percent_limit\": null, \"n_base_limit\": null}, \"length_filtering_options\": {\"disable_length_filtering\": false, \"length_required\": null, \"length_limit\": null}, \"low_complexity_filter\": {\"enable_low_complexity_filter\": false, \"complexity_threshold\": null}}, \"output_options\": {\"report_html\": true, \"report_json\": true}, \"overrepresented_sequence_analysis\": {\"overrepresentation_analysis\": false, \"overrepresentation_sampling\": null}, \"read_mod_options\": {\"polyg_tail_trimming\": {\"trimming_select\": \"\", \"__current_case__\": 1, \"poly_g_min_len\": null}, \"polyx_tail_trimming\": {\"polyx_trimming_select\": \"\", \"__current_case__\": 1}, \"umi_processing\": {\"umi\": false, \"umi_loc\": \"\", \"umi_len\": null, \"umi_prefix\": \"\"}, \"cutting_by_quality_options\": {\"cut_by_quality5\": false, \"cut_by_quality3\": false, \"cut_window_size\": null, \"cut_mean_quality\": null}, \"base_correction_options\": {\"correction\": false}}, \"single_paired\": {\"single_paired_selector\": \"paired_collection\", \"__current_case__\": 2, \"paired_input\": {\"__class__\": \"ConnectedValue\"}, \"adapter_trimming_options\": {\"disable_adapter_trimming\": false, \"adapter_sequence1\": null, \"adapter_sequence2\": null}, \"global_trimming_options\": {\"trim_front1\": null, \"trim_tail1\": null, \"trim_front2\": null, \"trim_tail2\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.23.2+galaxy0",
             "type": "tool",
-            "uuid": "d34eb849-2635-4f2e-b483-3a48ac28e832",
+            "uuid": "cf45c707-977c-4f04-b10b-e44c33c1af45",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "output_paired_coll",
-                    "uuid": "50d3d171-ee73-4245-b8d8-24eaa5cba88a"
+                    "uuid": "7fd13d75-3b89-4f08-8ba0-8a7789f55436"
                 }
             ]
-        },
-        "2": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
-            "errors": null,
-            "id": 2,
-            "input_connections": {
-                "input_file": {
-                    "id": 0,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FastQC",
-                    "name": "adapters"
-                },
-                {
-                    "description": "runtime parameter for tool FastQC",
-                    "name": "contaminants"
-                },
-                {
-                    "description": "runtime parameter for tool FastQC",
-                    "name": "limits"
-                }
-            ],
-            "label": "FastQC Illumina",
-            "name": "FastQC",
-            "outputs": [
-                {
-                    "name": "html_file",
-                    "type": "html"
-                },
-                {
-                    "name": "text_file",
-                    "type": "txt"
-                }
-            ],
-            "position": {
-                "left": 469.3116350839619,
-                "top": 221.21780764364226
-            },
-            "post_job_actions": {
-                "HideDatasetActionhtml_file": {
-                    "action_arguments": {},
-                    "action_type": "HideDatasetAction",
-                    "output_name": "html_file"
-                },
-                "HideDatasetActiontext_file": {
-                    "action_arguments": {},
-                    "action_type": "HideDatasetAction",
-                    "output_name": "text_file"
-                }
-            },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
-            "tool_shed_repository": {
-                "changeset_revision": "3d0c7bdf12f5",
-                "name": "fastqc",
-                "owner": "devteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.73+galaxy0",
-            "type": "tool",
-            "uuid": "9edf0108-0880-41c0-a7ec-e6e64dbfe171",
-            "when": null,
-            "workflow_outputs": []
         },
         "3": {
             "annotation": "",
@@ -207,7 +207,7 @@
                 }
             },
             "inputs": [],
-            "label": null,
+            "label": "SeqKit Illumina Raw",
             "name": "SeqKit statistics",
             "outputs": [
                 {
@@ -216,8 +216,8 @@
                 }
             ],
             "position": {
-                "left": 466.03128864312106,
-                "top": 572.5312511010796
+                "left": 267.53125440003345,
+                "top": 665.4531366282051
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -243,7 +243,7 @@
             "tool_state": "{\"all\": true, \"basename\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"skip_err\": false, \"tabular\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.3.1+galaxy1",
             "type": "tool",
-            "uuid": "e813a77b-8dd5-4e30-8dca-4cdd122298dc",
+            "uuid": "dc0dab18-aa13-4705-a3a8-3f1bcad480f4",
             "when": null,
             "workflow_outputs": []
         },
@@ -254,7 +254,7 @@
             "id": 4,
             "input_connections": {
                 "input": {
-                    "id": 2,
+                    "id": 1,
                     "output_name": "text_file"
                 }
             },
@@ -268,8 +268,8 @@
                 }
             ],
             "position": {
-                "left": 718.1875108227644,
-                "top": 332.7968693650009
+                "left": 543.9531206634917,
+                "top": 196.50737685338837
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -282,7 +282,7 @@
             "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"join_identifier\": \"_\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "2a2f5c4a-0dcf-4276-92ec-d49283b927d6",
+            "uuid": "5cd32fbf-fb62-4fe9-80ea-09d265a3ce27",
             "when": null,
             "workflow_outputs": []
         },
@@ -307,8 +307,8 @@
                 }
             ],
             "position": {
-                "left": 717.0542125037964,
-                "top": 659.1666870117188
+                "left": 579.9584771747587,
+                "top": 694.9837118651635
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -321,7 +321,7 @@
             "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"join_identifier\": \"_\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "7be5471b-cd1c-4927-9b98-9ba1e12a59a4",
+            "uuid": "9a9e1148-945b-4bdc-9bb9-cda7d8a46485",
             "when": null,
             "workflow_outputs": []
         },
@@ -331,17 +331,17 @@
             "errors": null,
             "id": 6,
             "input_connections": {
-                "results_0|software_cond|input": {
-                    "id": 1,
-                    "output_name": "report_json"
-                },
-                "results_1|software_cond|output_0|input": {
+                "results_0|software_cond|output_0|input": {
                     "id": 4,
                     "output_name": "output"
+                },
+                "results_1|software_cond|input": {
+                    "id": 2,
+                    "output_name": "report_json"
                 }
             },
             "inputs": [],
-            "label": null,
+            "label": "MultiQC Illumina",
             "name": "MultiQC",
             "outputs": [
                 {
@@ -354,8 +354,8 @@
                 }
             ],
             "position": {
-                "left": 967.1259151425572,
-                "top": 112.77755053813037
+                "left": 908.7085939538356,
+                "top": 232.1198920007319
             },
             "post_job_actions": {
                 "HideDatasetActionstats": {
@@ -365,14 +365,14 @@
                 },
                 "TagDatasetActionhtml_report": {
                     "action_arguments": {
-                        "tags": "#stats, multiqc_html"
+                        "tags": "#stats, #Illumina, multiqc_html"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "html_report"
                 },
                 "TagDatasetActionstats": {
                     "action_arguments": {
-                        "tags": "#stats, multiqc_stats"
+                        "tags": "#stats, #Illumina, multiqc_stats"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "stats"
@@ -385,21 +385,21 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastp\", \"__current_case__\": 7, \"input\": {\"__class__\": \"ConnectedValue\"}}}, {\"__index__\": 1, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}], \"saveLog\": false, \"title\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}, {\"__index__\": 1, \"software_cond\": {\"software\": \"fastp\", \"__current_case__\": 7, \"input\": {\"__class__\": \"ConnectedValue\"}}}], \"saveLog\": false, \"title\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.11+galaxy1",
             "type": "tool",
-            "uuid": "d2ecbdc4-9a4f-42d4-aec7-ea459d28fbd4",
+            "uuid": "fe50e775-f665-48e9-bd07-7a7756d62c04",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "stats",
-                    "uuid": "a5a3be2a-8fb8-4f5c-b11a-00d912a7664e"
+                    "uuid": "6a51a69d-ad5b-4f9c-82eb-02c26adab2af"
                 },
                 {
                     "label": null,
                     "output_name": "html_report",
-                    "uuid": "0880421d-9df7-4206-8fca-483ba8c3d525"
+                    "uuid": "236b6093-5a1a-44c6-af8d-c3577882b8cf"
                 }
             ]
         },
@@ -415,7 +415,7 @@
                 }
             },
             "inputs": [],
-            "label": null,
+            "label": "Seqkit Illumina",
             "name": "Collapse Collection",
             "outputs": [
                 {
@@ -424,8 +424,8 @@
                 }
             ],
             "position": {
-                "left": 960.4871822240348,
-                "top": 624.5928006898916
+                "left": 937.6363445878604,
+                "top": 726.0937861142387
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
@@ -438,13 +438,13 @@
             "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "5.1.0",
             "type": "tool",
-            "uuid": "5afdd5a1-5a35-4a2f-9096-7b5a3e1f820a",
+            "uuid": "94a165df-830b-4725-be07-db2ebfdb330d",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "output",
-                    "uuid": "4215f949-3cf7-4a11-ba50-b59dc14c9689"
+                    "uuid": "a23e420b-7dc8-469f-a3c5-3e7fa435d903"
                 }
             ]
         }
@@ -454,6 +454,6 @@
         "name:DataQC",
         "name:ILLUMINA"
     ],
-    "uuid": "b900e1a6-f9e1-48f6-b39c-d3cfa3bde257",
-    "version": 52
+    "uuid": "63e11aac-ced5-4b42-bdec-e38106dbbe1b",
+    "version": 61
 }

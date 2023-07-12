@@ -100,7 +100,7 @@ rule run_smudgeplot:
 	input:
 		str(prefix)+"_L"+str(L)+"_U"+str(U)+".kmers"
 	output:
-		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coordinates.tsv"
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coverages.tsv"
 	conda:
 		"genoplots"
 
@@ -111,7 +111,7 @@ rule run_smudgeplot:
 
 rule create_smudgeplot:
 	input:
-		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coordinates.tsv"
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coverages.tsv"
 	output:
 		output_smudgeplot
 	conda:
@@ -120,4 +120,4 @@ rule create_smudgeplot:
 	threads:
 		1
 	shell:
-		"smudgeplot_plot.R {input} -o {prefix}_L{L}_U{U}"
+		"smudgeplot_plot.R -L {L} -i {input} -o {prefix}_L{L}_U{U}"
