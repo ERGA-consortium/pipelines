@@ -1,0 +1,124 @@
+import os
+import glob
+import sys
+
+configfile: "config.yaml"
+
+prefix=config["prefix"]
+
+output_yahs=prefix+"_scaffolds_final.fa"
+
+def get_reads(wildcards):
+	return config["READ_FILES"][wildcards.read_file]
+
+rule all:
+	input:
+		output_yahs
+
+rule index_genome:
+	input:
+		input_assembly=config["input_assembly"]
+	output:
+		{input}+".fai"
+		{input}+".genome"
+		{input}+".bwt"
+		{input}+".pac"
+		{input}+".ann"
+		{input}+".amb"
+		{input}+".sa"
+	conda:
+		yahs
+	threads:
+		1
+	shell:
+		"samtools index {input} && cut -f1,2 {input}.fai > {input}.genome && bwa index {input}"
+
+rule map_hic:
+	input:
+		input_assembly=config["input_assembly"]
+		reads=get_reads
+	output:
+		config["prefix"]+"_bwa.sam"
+	conda:
+		"yahs"
+
+	threads:
+		config["threads"]
+	shell:
+		"bwa mem -5SP -T0 -t {threads} {input.input_assembly} <(zcat {input.reads_R1}) <(zcat {input.reads_R2}) -o {output}" 
+
+rule parse_pairsam: 
+	input:
+		input_sam=config["prefix"]+"_bwa.sam"
+		input_genome=config["input_assembly"]+".genome"
+	output:
+		config["prefix"]+"_bwa.parsed.pairsam"	
+	conda:
+		"yahs"
+	threads:
+		config["threads"]
+	shell:
+		"pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in {threads} --nproc-out {threads} --chroms-path {input.input_genome} {input.input_sam} > {output}"
+
+rule sort_pairsam:
+	input:
+		config["prefix"]+"_bwa.parsed.pairsam"
+	output:
+		config["prefix"]+"_bwa.sorted.pairsam"
+	conda:
+		"yahs"
+	threads:
+		config["threads"]	
+	shell:
+		"pairtools sort --nproc {threads} --tmpdir=/scratch/brown/asm_mBraTor/assembly/yahs/ {input} > {output}"
+
+rule dedup_pairsam:
+	input:
+		config["prefix"]+"_bwa.sorted.pairsam"
+	output:
+		output_pairsam=config["prefix"]+"_bwa.dedup.pairsam"
+		output_stats=config["prefix"]+".dedup.stats"
+	conda:
+		"yahs"
+	threads:
+		config["threads"]
+	shell:
+		"pairtools dedup --nproc-in {threads} --nproc-out {threads} --mark-dups --output-stats {output.output_stats} --output {output.output_pairsam} {input}"
+
+rule split_pairsam:
+	input:
+		config["prefix"]+"_bwa.dedup.pairsam"
+	output:
+		output_pairs=config["prefix"]+"_bwa.dedup.pairs"
+		output_bam=config["prefix"]+"_bwa.dedup.bam"
+	conda:
+		"yahs"
+	threads:
+		config["threads"]
+	shell:
+		"pairtools split --nproc-in {threads} --nproc-out {threads} --output-pairs {output.output_pairs} --output-sam {output.output_bam} {input}"
+
+rule sort_bam:
+	input:
+		config["prefix"]+"_bwa.dedup.bam"
+	output:
+		config["prefix"]+"_bwa.dedup.sortname.bam"
+	conda:
+		"yahs"
+	threads:
+		config["threads"]
+	shell:
+		"samtools -@ {threads} -n -T {tmpdir} -o {output} {input}
+
+rule run_yahs:
+	input:
+		config["prefix"]+"_bwa.dedup.sortname.bam"'
+	output:
+		config["prefix"]+"_scaffolds_final.fa"
+	conda:
+		"yahs"
+	threads:
+		1
+	shell:
+		"yahs {input.input_assembly} {input.input_bam} -v 1 -o {prefix}"
+

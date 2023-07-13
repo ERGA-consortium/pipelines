@@ -1,0 +1,12 @@
+READ_FILES:
+    A: ERR9588940.sample.part_001.fastq.gz
+    B: ERR9588940.sample.part_002.fastq.gz
+
+prefix:
+    test
+
+threads:
+        24
+
+input_assembly:
+        contigs.fasta
