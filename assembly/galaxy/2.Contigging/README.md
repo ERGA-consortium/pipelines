@@ -18,7 +18,3 @@ Load the respective .ga file in Galaxy to run the workflow.
 ### Flye
 
 ### Nextdenovo
-
-### NECAT
-
-### Raven
