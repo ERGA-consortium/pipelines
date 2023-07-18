@@ -8,7 +8,7 @@ To run, you will need to create the following conda environment:
 
 or:
 
-`conda create -n genoplots -c conda-forge -c bioconda --list requirements_genoplots.txt`
+`conda create -n genoplots -c conda-forge -c bioconda --file requirements_genoplots.txt`
 
 And edit the file names in the config.yaml file
 
