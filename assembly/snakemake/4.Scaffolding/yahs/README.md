@@ -4,10 +4,10 @@ A snakemake pipeline to perform scaffolding using Chromatin Conformation Capture
 
 To run, you will need to create the following conda environment:
 
-`conda create -n yahs -c conda-forge -c bioconda yahs pairtools bwa samtools`
+`conda create -n yahs -c conda-forge -c bioconda yahs pairtools bwa samtools numpy==1.23`
 
 or:
 
-`conda create -n yahs -c conda-forge -c bioconda --list requirements_genoplots.txt`
+`conda create -n yahs -c conda-forge -c bioconda --file requirements_yahs.txt`
 
 

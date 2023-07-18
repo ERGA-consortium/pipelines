@@ -5,11 +5,10 @@ import sys
 configfile: "config.yaml"
 
 prefix=config["prefix"]
-
+tmpdir=os.getcwd()
 output_yahs=prefix+"_scaffolds_final.fa"
 
-def get_reads(wildcards):
-	return config["READ_FILES"][wildcards.read_file]
+DATASETS=["L1","L2"]
 
 rule all:
 	input:
@@ -17,26 +16,28 @@ rule all:
 
 rule index_genome:
 	input:
-		input_assembly=config["input_assembly"]
+		config["input_assembly"]
 	output:
-		{input}+".fai"
-		{input}+".genome"
-		{input}+".bwt"
-		{input}+".pac"
-		{input}+".ann"
-		{input}+".amb"
-		{input}+".sa"
+		fai=config["input_assembly"]+".fai",
+		genome=config["input_assembly"]+".genome",
+		bwt=config["input_assembly"]+".bwt",
+		pac=config["input_assembly"]+".pac",
+		ann=config["input_assembly"]+".ann",
+		amb=config["input_assembly"]+".amb",
+		sa=config["input_assembly"]+".sa"
 	conda:
-		yahs
+		"yahs"
 	threads:
 		1
 	shell:
-		"samtools index {input} && cut -f1,2 {input}.fai > {input}.genome && bwa index {input}"
+		"samtools faidx {input} && cut -f1,2 {input}.fai > {input}.genome && bwa index {input}"
 
 rule map_hic:
 	input:
-		input_assembly=config["input_assembly"]
-		reads=get_reads
+		bwt=config["input_assembly"]+".bwt",
+		assembly=config["input_assembly"],
+		reads_r1=expand("{dataset}_R1.fq.gz", dataset=config["SAMPLES"]),
+		reads_r2=expand("{dataset}_R2.fq.gz", dataset=config["SAMPLES"])
 	output:
 		config["prefix"]+"_bwa.sam"
 	conda:
@@ -45,11 +46,11 @@ rule map_hic:
 	threads:
 		config["threads"]
 	shell:
-		"bwa mem -5SP -T0 -t {threads} {input.input_assembly} <(zcat {input.reads_R1}) <(zcat {input.reads_R2}) -o {output}" 
+		"echo {input.reads_r1} && echo {input.reads_r2} && bwa mem -5SP -T0 -t {threads} -o {output} {input.assembly} <(cat {input.reads_r1}) <(cat {input.reads_r2})" 
 
 rule parse_pairsam: 
 	input:
-		input_sam=config["prefix"]+"_bwa.sam"
+		input_sam=config["prefix"]+"_bwa.sam",
 		input_genome=config["input_assembly"]+".genome"
 	output:
 		config["prefix"]+"_bwa.parsed.pairsam"	
@@ -70,13 +71,13 @@ rule sort_pairsam:
 	threads:
 		config["threads"]	
 	shell:
-		"pairtools sort --nproc {threads} --tmpdir=/scratch/brown/asm_mBraTor/assembly/yahs/ {input} > {output}"
+		"pairtools sort --nproc {threads} --tmpdir={tmpdir} {input} > {output}"
 
 rule dedup_pairsam:
 	input:
 		config["prefix"]+"_bwa.sorted.pairsam"
 	output:
-		output_pairsam=config["prefix"]+"_bwa.dedup.pairsam"
+		output_pairsam=config["prefix"]+"_bwa.dedup.pairsam",
 		output_stats=config["prefix"]+".dedup.stats"
 	conda:
 		"yahs"
@@ -89,7 +90,7 @@ rule split_pairsam:
 	input:
 		config["prefix"]+"_bwa.dedup.pairsam"
 	output:
-		output_pairs=config["prefix"]+"_bwa.dedup.pairs"
+		output_pairs=config["prefix"]+"_bwa.dedup.pairs",
 		output_bam=config["prefix"]+"_bwa.dedup.bam"
 	conda:
 		"yahs"
@@ -108,11 +109,12 @@ rule sort_bam:
 	threads:
 		config["threads"]
 	shell:
-		"samtools -@ {threads} -n -T {tmpdir} -o {output} {input}
+		"samtools sort -@ {threads} -n -T {tmpdir} -o {output} {input}"
 
 rule run_yahs:
 	input:
-		config["prefix"]+"_bwa.dedup.sortname.bam"'
+		bam=config["prefix"]+"_bwa.dedup.sortname.bam",
+		assembly=config["input_assembly"]
 	output:
 		config["prefix"]+"_scaffolds_final.fa"
 	conda:
@@ -120,5 +122,5 @@ rule run_yahs:
 	threads:
 		1
 	shell:
-		"yahs {input.input_assembly} {input.input_bam} -v 1 -o {prefix}"
+		"yahs {input.assembly} {input.bam} -v 1 -o {prefix}"
 
