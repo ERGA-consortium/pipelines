@@ -1,0 +1,6 @@
+#parameters
+snakemake_dir_path: '/srv/public/users/brown/pipelines/assembly/snakemake/5.Decontamination/'
+hifi: '/srv/public/users/brown/pipelines/assembly/snakemake/5.Decontamination/nextdenovo_correctedReads.fasta'
+prim_asm: '/srv/public/users/brown/pipelines/assembly/snakemake/5.Decontamination/asm_uoPhaMul.nd.flye.purged.fa'
+name: "uoPhaMul"
+busco_phylum: 'stramenopiles_odb10'
