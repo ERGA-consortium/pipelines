@@ -15,7 +15,7 @@
     ],
     "format-version": "0.1",
     "license": "MIT",
-    "name": "ERGA DataQC ONT v1.0 (WF0)",
+    "name": "ERGA DataQC ONT v2305 (WF0)",
     "steps": {
         "0": {
             "annotation": "",
@@ -40,7 +40,7 @@
             "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
             "tool_version": null,
             "type": "data_collection_input",
-            "uuid": "14cee17c-12b0-4763-b183-75199e046d13",
+            "uuid": "8064b393-1ba5-4cdc-9e4c-0926b3b10f67",
             "when": null,
             "workflow_outputs": []
         },
@@ -65,8 +65,8 @@
                 }
             ],
             "position": {
-                "left": 249.08278112327446,
-                "top": 242.2887233208941
+                "left": 249.06250594641082,
+                "top": 242.2812775719624
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -92,7 +92,7 @@
             "tool_state": "{\"all\": true, \"basename\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"skip_err\": false, \"tabular\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.3.1+galaxy1",
             "type": "tool",
-            "uuid": "1f27ced7-dc26-4e69-ac05-dcdc4ea82cbc",
+            "uuid": "24096620-2425-40e4-8b42-dcb99fa9affa",
             "when": null,
             "workflow_outputs": []
         },
@@ -130,8 +130,8 @@
                 }
             ],
             "position": {
-                "left": 746.7969092399737,
-                "top": 22.470640110019424
+                "left": 746.7968644982644,
+                "top": 22.46874773536867
             },
             "post_job_actions": {
                 "TagDatasetActionoutfile": {
@@ -152,13 +152,13 @@
             "tool_state": "{\"external_references\": {\"assembly\": {\"__class__\": \"RuntimeValue\"}, \"illumina_1\": {\"__class__\": \"RuntimeValue\"}, \"illumina_2\": {\"__class__\": \"RuntimeValue\"}}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"other\": {\"window_size\": \"250\"}, \"output_thresholds\": {\"target_bases\": null, \"keep_percent\": null, \"max_length\": null, \"min_length\": \"5000\", \"min_mean_q\": \"80.0\", \"min_window_q\": null}, \"read_manipulation\": {\"trim\": false, \"split\": null}, \"score_weights\": {\"length_weight\": \"1.0\", \"mean_q_weight\": \"1.0\", \"window_q_weight\": \"1.0\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.2.1+galaxy0",
             "type": "tool",
-            "uuid": "f4d30853-dfef-4bdf-9fd4-28e73b9db6ed",
+            "uuid": "a44d9173-3d26-4024-8081-301ab458313b",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "outfile",
-                    "uuid": "c3fa92ff-1a11-423f-8188-85d7cf8acf3b"
+                    "uuid": "4c7bb086-fc14-41d9-b935-e0c6da3dd074"
                 }
             ]
         },
@@ -174,7 +174,7 @@
                 }
             },
             "inputs": [],
-            "label": null,
+            "label": "SeqKit ONT",
             "name": "Collapse Collection",
             "outputs": [
                 {
@@ -183,8 +183,8 @@
                 }
             ],
             "position": {
-                "left": 503.6719286708983,
-                "top": 367.7877069071942
+                "left": 504.69998088596435,
+                "top": 367.7812386099634
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
@@ -197,13 +197,13 @@
             "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "5.1.0",
             "type": "tool",
-            "uuid": "2248191a-c583-4188-a8d5-b1d9c35bcdaf",
+            "uuid": "1b1d293d-436d-463c-a21c-d74c71c4541a",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "output",
-                    "uuid": "6af22ce4-4f23-407e-adb9-50eb01785b86"
+                    "uuid": "97e15904-2636-4d83-91aa-d9ed8805e25e"
                 }
             ]
         },
@@ -244,8 +244,8 @@
                 }
             ],
             "position": {
-                "left": 998.0468503945845,
-                "top": 246.74078740077837
+                "left": 998.046814259532,
+                "top": 246.73436503388004
             },
             "post_job_actions": {
                 "HideDatasetActionlog_read_length": {
@@ -268,32 +268,39 @@
                     "action_type": "HideDatasetAction",
                     "output_name": "read_length"
                 },
-                "RenameDatasetActionlog_read_length": {
+                "RemoveTagDatasetActionlog_read_length": {
                     "action_arguments": {
-                        "newname": "/${species_name}/${species_tolid}/evaluation/nanoplot/"
+                        "tags": "#reads"
                     },
-                    "action_type": "RenameDatasetAction",
+                    "action_type": "RemoveTagDatasetAction",
                     "output_name": "log_read_length"
                 },
-                "RenameDatasetActionnanostats": {
+                "RemoveTagDatasetActionnanostats": {
                     "action_arguments": {
-                        "newname": "/${species_name}/${species_tolid}/evaluation/nanoplot/"
+                        "tags": "#reads"
                     },
-                    "action_type": "RenameDatasetAction",
+                    "action_type": "RemoveTagDatasetAction",
                     "output_name": "nanostats"
                 },
-                "RenameDatasetActionnanostats_post_filtering": {
+                "RemoveTagDatasetActionnanostats_post_filtering": {
                     "action_arguments": {
-                        "newname": "/${species_name}/${species_tolid}/evaluation/nanoplot/"
+                        "tags": "#reads"
                     },
-                    "action_type": "RenameDatasetAction",
+                    "action_type": "RemoveTagDatasetAction",
                     "output_name": "nanostats_post_filtering"
                 },
-                "RenameDatasetActionread_length": {
+                "RemoveTagDatasetActionoutput_html": {
                     "action_arguments": {
-                        "newname": "/${species_name}/${species_tolid}/evaluation/nanoplot/"
+                        "tags": "#reads"
                     },
-                    "action_type": "RenameDatasetAction",
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "output_html"
+                },
+                "RemoveTagDatasetActionread_length": {
+                    "action_arguments": {
+                        "tags": "#reads"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
                     "output_name": "read_length"
                 },
                 "TagDatasetActionlog_read_length": {
@@ -342,33 +349,33 @@
             "tool_state": "{\"customization\": {\"color\": null, \"plots\": null, \"N50\": false}, \"filter\": {\"maxlength\": null, \"minlength\": null, \"drop_outliers\": false, \"downsample\": null, \"loglength\": false, \"percentqual\": false, \"alength\": false, \"minqual\": null, \"runtime_until\": null, \"readtype\": null, \"barcoded\": false, \"no_supplementary\": false}, \"mode\": {\"choice\": \"batch\", \"__current_case__\": 0, \"reads\": {\"type\": \"fastq\", \"__current_case__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.41.0+galaxy0",
             "type": "tool",
-            "uuid": "4d1777a4-a067-4e45-a67f-1f59765a8a74",
+            "uuid": "4d39b734-f6b1-4739-b64b-5290760df6ef",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "log_read_length",
-                    "uuid": "20d35a53-cb07-48ac-a900-82a1b8a210ed"
+                    "uuid": "4cb80e58-65f7-496b-a131-6a94091e996a"
                 },
                 {
                     "label": null,
                     "output_name": "nanostats_post_filtering",
-                    "uuid": "ef57883c-aafb-403c-862e-22f351333cff"
+                    "uuid": "9e2dfbc6-4fce-4ff6-b3e5-7daa78b33709"
                 },
                 {
                     "label": null,
                     "output_name": "output_html",
-                    "uuid": "0d23e208-d9d6-4517-8b2f-ac631e82c45b"
+                    "uuid": "b8e37d55-4a03-49cd-871d-84295cfbaa93"
                 },
                 {
                     "label": null,
                     "output_name": "nanostats",
-                    "uuid": "dd6f5ce2-8924-4d41-aeef-0b533f9c2c10"
+                    "uuid": "9e954df4-9a9f-4295-91b7-d8aef2f1b3d0"
                 },
                 {
                     "label": null,
                     "output_name": "read_length",
-                    "uuid": "f1885514-0a86-486c-9b15-e5e510b54224"
+                    "uuid": "ecac484e-6840-44a8-a9e2-5339635f1617"
                 }
             ]
         }
@@ -378,6 +385,6 @@
         "name:DataQC",
         "name:ONT"
     ],
-    "uuid": "5b5b604e-f41c-4ce1-a41a-bffa9c1b67da",
-    "version": 31
+    "uuid": "9070d926-e0dc-41fd-94fd-35972d3c186b",
+    "version": 36
 }
