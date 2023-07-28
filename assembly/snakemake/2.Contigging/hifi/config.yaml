@@ -1,0 +1,8 @@
+#parameters
+
+hifi: '/srv/public/users/brown/pipelines/assembly/snakemake/2.Contigging/hifi/nextdenovo_correctedReads.fasta'
+snakemake_dir_path: '/srv/public/users/brown/pipelines/assembly/snakemake/2.Contigging/hifi/'
+species_name: "Phaeosaccion multiseriatum" # for mitohifi (complete name)
+ploidy: 2
+genome_sie_estimate: 80m #  '4.7m' equals '4700k' equals '4700000'
+purgel: "1"

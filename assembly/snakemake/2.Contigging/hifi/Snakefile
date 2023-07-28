@@ -1,0 +1,146 @@
+# 
+configfile: 'config.yaml'
+
+rule all:
+    input:
+        asm_hicanu = os.path.join(config['snakemake_dir_path'], 'results/2_Build_asm/hicanu/asm.contigs.fasta'),
+        asm_p_fa = os.path.join(config['snakemake_dir_path'] +  'results/2_Build_asm/hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.p_ctg.fasta'),
+        asm_a_fa = os.path.join(config['snakemake_dir_path'] +  'results/2_Build_asm/hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.a_ctg.fasta'),
+        asm_flye = os.path.join(config['snakemake_dir_path'], 'results/2_Build_asm/flye/assembly.fasta')
+
+rule hifiasm:
+    """Execute Hifiasm to generate primary and alternative assemblies."""
+
+    input:
+        hifi_fastq = config['hifi']
+    output:
+        asm_p_gfa = os.path.join(config['snakemake_dir_path'] + 'results/2_Build_asm/hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.p_ctg.gfa'),
+        asm_a_gfa = os.path.join(config['snakemake_dir_path'] + 'results/2_Build_asm/hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.a_ctg.gfa')
+    log:
+        os.path.join(config['snakemake_dir_path'] + 'logs/2_Build_asm/hifiasm/hifiasmL' + config['purgel'] + '.log')
+    conda:
+        'hifiasm'
+    threads: 20
+
+    resources:
+        mem_mb = 70000
+    params:
+        runtime = '40:00:00',
+	prefix = os.path.join(config['snakemake_dir_path'] + 'results/2_Build_asm/hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm')
+    shell:
+        """
+        (hifiasm -o {params.prefix}  --primary -t {threads} -f 0 -l config['purgel'] {input.hifi_fastq}) 2> {log}
+        """
+
+
+rule hicanu:
+    """Execute HiCanu to generate primary and alternative assemblies."""
+
+    input:
+        hifi_fastq = config['hifi']
+    output:
+        outdir = directory(os.path.join(config['snakemake_dir_path'], 'results/2_Build_asm/hicanu')),
+        outasm = os.path.join(config['snakemake_dir_path'], 'results/2_Build_asm/hicanu/asm.contigs.fasta'),
+    log:
+        os.path.join(config['snakemake_dir_path'], 'logs/2_Build_asm/hicanu/hicanu.log')
+    threads: 60
+    resources:
+        mem_mb = 70000
+    params:
+        runtime = '40:00:00',
+        genomeSize = config['genome_sie_estimate']
+    shell:
+        """
+        (/srv/public/users/brown/progs/canu-2.2/bin/canu -p asm -d {output.outdir} genomeSize={params.genomeSize} -pacbio-hifi {input.hifi_fastq}) 2> {log}
+        """
+
+
+rule flye:
+    """Execute Flye to generate primary and alternative assemblies."""
+
+    input:
+        hifi_fastq = config['hifi']
+    output:
+        outdir = directory(os.path.join(config['snakemake_dir_path'], 'results/2_Build_asm/flye')),
+        outasm = os.path.join(config['snakemake_dir_path'], 'results/2_Build_asm/flye/assembly.fasta'),
+    log:
+        os.path.join(config['snakemake_dir_path'], 'logs/2_Build_asm/flye/flye.log')
+    threads: 20
+    resources:
+        mem_mb = 70000
+    conda:
+        'flye'
+    params:
+        genomeSize = config['genome_sie_estimate']
+    shell:
+        """
+        (flye --threads {threads} --out-dir {output.outdir} --genome-size {params.genomeSize} --pacbio-hifi {input.hifi_fastq}) 2> {log}
+        """
+
+rule gfa_to_fasta:
+    """Convert the GFA output from Hifiasm into a FASTA format."""
+    input:
+        asm_p_gfa = os.path.join(config['snakemake_dir_path'] +  'results/2_Build_asm/hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.p_ctg.gfa'),
+        asm_a_gfa = os.path.join(config['snakemake_dir_path'] +  'results/2_Build_asm/hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.a_ctg.gfa')
+    output:
+        asm_p_fa = os.path.join(config['snakemake_dir_path'] +  'results/2_Build_asm/hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.p_ctg.fasta'),
+        asm_a_fa = os.path.join(config['snakemake_dir_path'] +  'results/2_Build_asm/hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.a_ctg.fasta')
+    log:
+        os.path.join(config['snakemake_dir_path'], 'logs/2_Build_asm/gfa_to_fa/gfa_to_fa_L',config['purgel'],'.log')
+    threads: 1
+    resources:
+        mem_mb = 1000
+    params:
+        ploidy = config['ploidy'],
+        runtime = '03:00:00'
+    run:
+        shell("""awk '/^S/{{print ">"$2;print $3}}' {input.asm_p_gfa} > {output.asm_p_fa} 2> {log};
+            awk '/^S/{{print ">"$2;print $3}}' {input.asm_a_gfa} > {output.asm_a_fa} 2>> {log}
+            """)
+
+
+
+rule prepare_mitohifi:
+    """Mitohifi do not process compressed file (and only fasta !) and docker do not allows to manipulate file beside working directory"""
+    input:
+        hifi_fastq = config['hifi']
+    output:
+        hifi_fa = os.path.join(config['snakemake_dir_path'], 'results/2_Build_asm/MitoHifi/hifi.fasta')
+    threads: 2
+    resources:
+        mem_mb = 10000
+    params:
+        runtime = '4:00:00',
+    shell:
+        """
+        cat {input.hifi_fastq} | awk '{{if(NR%4==1) {{printf(">%s\\n",substr($0,2));}} else if(NR%4==2) print;}}' > {output.hifi_fa}
+        """
+
+
+
+rule MitoHifi:
+    """ build mito asm from raw reads (better than from asm !), peut etre a deplacer dans decontam comme apres il faut filtrer les reads """
+
+    input:
+        hifi_fa = os.path.join(config['snakemake_dir_path'], 'results/2_Build_asm/MitoHifi/hifi.fasta')
+    output:
+        outdir = directory(os.path.join(config['snakemake_dir_path'], 'results/2_Build_asm/MitoHifi/out_ref'))
+    log:
+        os.path.join(config['snakemake_dir_path'],'logs/2_Build_asm/MitoHifi/MitoHifi.log')
+    threads: 10
+    resources:
+        mem_mb = 20000
+    params:
+        runtime = '25:00:00',
+        species_name = config["species_name"]
+    singularity:
+        'docker://ghcr.io/marcelauliano/mitohifi:master'
+    shell:
+        """
+        findMitoReference.py --species "{params.species_name}" --outfolder {output.outdir}
+        fasta=$(ls {output.outdir}/*.fasta)
+        gb=$(ls {output.outdir}/*.gb)
+        cd results/2_Build_asm/MitoHifi
+        mitohifi.py -r {input.hifi_fa} -f $fasta -g $gb -t {threads} -o 1
+#        rm {input.hifi_fa}
+        """
