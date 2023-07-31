@@ -1,0 +1,36 @@
+# Add hifiasm-phased assembly option with HiC reads
+# Create config file which an asssembler as input (e.g. hifiasm/hicanu/flye) so that purge-dups only looks for a single output
+configfile: 'config.yaml'
+
+rule all:
+    input:
+        asm_mito = os.path.join(config['snakemake_dir_path'], 'MitoHifi/sequence.fasta')
+
+rule MitoHifi:
+    """ build mito asm from raw reads (better than from asm !), peut etre a deplacer dans decontam comme apres il faut filtrer les reads """
+
+    input:
+        hifi_fastq = config['hifi']
+    output:
+        outdir = directory(os.path.join(config['snakemake_dir_path'], 'MitoHifi')),
+        outdir_ref = directory(os.path.join(config['snakemake_dir_path'], 'MitoHifi/ref')),
+        asm_mito = os.path.join(config['snakemake_dir_path'], 'MitoHifi/sequence.fasta')
+    log:
+        os.path.join(config['snakemake_dir_path'],'logs/MitoHifi.log')
+    threads:
+        config['threads']
+    resources:
+        mem_mb = 20000
+    params:
+        runtime = '25:00:00',
+        species_name = config["species_name"],
+        MitoHifi_sif = os.path.join(config['snakemake_dir_path'], config['MitoHifi_sif'])
+    shell:
+        """
+        cat {input.hifi_fastq} | awk '{{if(NR%4==1) {{printf(">%s\\n",substr($0,2));}} else if(NR%4==2) print;}}' > 'MitoHifi/hifi.fasta' 
+        singularity exec -B {output.outdir} {params.MitoHifi_sif} findMitoReference.py --species "{params.species_name}" --outfolder {output.outdir_ref}
+        cd {output.outdir}
+        fasta=$(ls {output.outdir_ref}/*.fasta)
+        gb=$(ls {output.outdir_ref}/*.gb)
+        singularity exec -B {output.outdir} {params.MitoHifi_sif} mitohifi.py -r hifi.fasta -f $fasta -g $gb -t {threads} -o 1
+        """
