@@ -1,72 +1,67 @@
-from datetime import datetime
-import os
 import re
-import subprocess
+import os
+import yaml
 
-date = datetime.now().strftime('%Y%m%d.%H%M%S')
+configfile: 'config.yaml'
 
-module assembly_workflow:
-  snakefile: "../modules/assemble_genomes.rules.smk"
+if not os.path.exists("logs"):
+  os.makedirs("logs")
 
-working_dir = config["Outputs"]["base_dir"]
-scripts_dir = config["Inputs"]["scripts_dir"]
-
-keepfiles = config["Parameters"]["keep_intermediate"]
-base = config["Parameters"]["base_name"]
-
-assembled = []
-
-##0. Define path for files and variables
-
-flye_dir = config["Outputs"]["flye_dir"]
-nextdenovo_dir = config["Outputs"]["nextdenovo_dir"]
-flye_assembly = config["Outputs"]["flye_out"]
-nextdenovo_assembly = config["Outputs"]["nextdenovo_out"]
-
-
-ONT_filtered = config["Inputs"]["ONT_filtered"] 
-
-##1. Run assemblers
-if config["Parameters"]["run_flye"] == True:
-  assembled.append(flye_assembly)
-  use rule flye from assembly_workflow with:
-    input:
-      reads = ONT_filtered,
-    output:
-      assembly = flye_assembly,
-      gfa = report(flye_dir + "assembly_graph.gfa.png",
-            caption="../report/flye.rst",
-            category = "Evaluate assemblies",
-            subcategory = flye_dir)
-    params:
-      outdir = flye_dir,
-      readtype = config["Parameters"]["lr_type"],
-      pol_iterations = config["Flye"]["Flye polishing iterations"],
-      other_flye_opts = config["Flye"]["options"]
-    log:
-      flye_dir + "logs/" + str(date) + ".j%j.flye.out",
-      flye_dir + "logs/" + str(date) + ".j%j.flye.err"
-    benchmark:
-      flye_dir + "logs/" + str(date) + ".flye.benchmark.txt",
-    conda:
-      '../envs/flye2.9.1.yaml'
-    threads: config["Flye"]["Flye cores"]
-
-if config["Parameters"]["run_nextdenovo"] == True:
- assembled.append(nextdenovo_assembly)
- use rule nextdenovo from assembly_workflow with:
+rule all:
   input:
-    reads = ONT_filtered
+    asm_flye = os.getcwd() + "/flye/flye.assembly.fasta",
+    asm_nd = os.getcwd() + "/nextDenovo/nextdenovo.assembly.fasta"
+
+rule flye:
+  input:
+    reads = config['reads']
   output:
-    assembly = nextdenovo_assembly
+    assembly = os.getcwd() + "/flye/flye.assembly.fasta"
   params:
-    outdir = nextdenovo_dir,
-    config = config["Parameters"]["ndconfFile"]
+    outdir = os.getcwd() + "/flye/",
+    readtype = config['read_type'],
+    pol_iterations = 2,
+    genome_size = config['genome_size']
+  threads:
+    config['threads']
   log:
-    nextdenovo_dir + "logs/" + str(date) + ".j%j.nextdenovo.out",
-    nextdenovo_dir + "logs/" + str(date) + ".j%j.nextdenovo.err"
+    "logs/flye.out",
+    "logs/flye.err",
   benchmark:
-    nextdenovo_dir + "logs/" + str(date) + ".j%j.nextdenovo.benchmark.txt"
-  envmodules:
-    "NextDenovo/2.5.0"
-  threads: config["Nextdenovo"]["Nextdenovo cores"]
+    "logs/flye.benchmark.txt"
+  conda:
+    'flye'
+  shell:
+    "mkdir -p {params.outdir};"
+    "cd {params.outdir};"
+    "echo 'Running command: flye --{params.readtype} {input.reads} -o {params.outdir} -t {threads} -i {params.pol_iterations} -g {params.genome_size}';"
+    "flye --{params.readtype} {input.reads} -o {params.outdir} -t {threads} -i {params.pol_iterations} -g {params.genome_size};"
+    "ln -s assembly.fasta flye.assembly.fasta;"
+
+rule nextdenovo:
+  input:
+    reads = config['reads']
+  output:
+    assembly = os.getcwd() + "/nextDenovo/nextdenovo.assembly.fasta"
+  params:
+    outdir = os.getcwd() + "/nextDenovo/",
+    config = "run.cfg",
+    nextdenovo = config['nextdenovo']
+  threads:
+    config['threads']
+  log:
+    "logs/nextdenovo.out",
+    "logs/nextdenovo.err",
+  benchmark:
+    "logs/nextdenovo.benchmark.txt"
+  conda:
+    'nextdenovo'
+  shell:
+    "mkdir -p {params.outdir};"
+    "ls {input.reads} > {params.outdir}long_reads.fofn;"
+    "cp {params.config} {params.outdir};"
+    "cd {params.outdir};"
+    "{params.nextdenovo} {params.config};"
+    "ln -s {params.outdir}01_rundir/03.ctg_graph/nd.asm.fasta {output.assembly};"
+
+
