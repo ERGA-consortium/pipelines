@@ -5,4 +5,4 @@ snakemake_dir_path: '/srv/public/users/brown/pipelines/assembly/snakemake/9.Mito
 species_name: "Helleia helle" # for mitohifi (complete name)
 threads: 40
 use-singularity: True
-MitoHifi_sif: 'mitohifi_master.sif'
+singularity-args: "--bind /srv/public/users/brown/pipelines/assembly/snakemake/9.Mito_Assembly/"

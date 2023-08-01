@@ -1,0 +1,25 @@
+hifi_reads : 'data/hifi/hifi.fofn'
+ont_reads : 'data/ont/ont.fofn'
+illumina_reads : 'data/illumina/illumina.fofn'
+hic_reads : 'data/hic/hic.fofn'
+
+lr_type : 'ont' # 'hifi', 'ont-raw', 'ont-corr', 'ont-hq'
+
+# Run ont read correction followed by assembly. For example can run nextdenovo read correction followed by flye assembler in nano-corr mode. If assembler nextdenovo is chosen, by default this will first correct the reads and then run the assembly.
+ont_readCorrection : 'none' # 'none', 'nextdenovo', 'ratatosk', 'nanopolish'
+
+hifi_assembler : 'hifiasm' # 'hifiasm, 'hicanu', 'flye'
+ont_assembler : 'flye' # 'flye', 'nextdenovo'
+
+scaffolder : 'yahs' # 'yahs'
+
+polisher : 'hypo' # 'hypo', 'medaka', 'nextpolish'
+
+busco_db : 'auto' # 'auto', 'eukaryota', 'metazoa', 'vertebrata', etc...
+
+est_genomeSize: '100m' # e.g. 50k, 100m, 1g
+
+## Advanced parameters
+
+hifiasm_purgeL : 1 # 0, 1, 2, 3 - No purging / Purge contained haplotigs /  Purge all haplotigs / Purge all haplotigs aggresively (default)
+

@@ -23,14 +23,15 @@ rule MitoHifi:
         mem_mb = 20000
     params:
         runtime = '25:00:00',
-        species_name = config["species_name"],
-        MitoHifi_sif = os.path.join(config['snakemake_dir_path'], config['MitoHifi_sif'])
+        species_name = config["species_name"]
+    singularity:
+        'docker://ghcr.io/marcelauliano/mitohifi:master'
     shell:
         """
         cat {input.hifi_fastq} | awk '{{if(NR%4==1) {{printf(">%s\\n",substr($0,2));}} else if(NR%4==2) print;}}' > 'MitoHifi/hifi.fasta' 
-        singularity exec -B {output.outdir} {params.MitoHifi_sif} findMitoReference.py --species "{params.species_name}" --outfolder {output.outdir_ref}
+        findMitoReference.py --species "{params.species_name}" --outfolder {output.outdir_ref}
         cd {output.outdir}
         fasta=$(ls {output.outdir_ref}/*.fasta)
         gb=$(ls {output.outdir_ref}/*.gb)
-        singularity exec -B {output.outdir} {params.MitoHifi_sif} mitohifi.py -r hifi.fasta -f $fasta -g $gb -t {threads} -o 1
+        mitohifi.py -r hifi.fasta -f $fasta -g $gb -t {threads} -o 1
         """
