@@ -1,0 +1,12 @@
+SAMPLES:
+    ["L1",
+    "L2"]
+
+prefix:
+    test
+
+threads:
+    4 
+
+input_assembly:
+    asm_mBraTor.flye.purged.fa
