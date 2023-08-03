@@ -1,0 +1,10 @@
+#parameters
+
+snakemake_dir_path: '/srv/public/users/brown/pipelines/assembly/snakemake/8.Evaluation/'
+meryl_db: '/srv/public/users/brown/pipelines/assembly/snakemake/1.Genome_Profiling/genoplot/uoPhaMul.meryl/'
+asm_fasta_pri: '/srv/public/users/brown/pipelines/assembly/snakemake/2.Contigging/hifi/hifiasm/purgeL1/hifiasmL1.asm.p_ctg.fasta'
+asm_fasta_alt: '/srv/public/users/brown/pipelines/assembly/snakemake/2.Contigging/hifi/hifiasm/purgeL1/hifiasmL1.asm.a_ctg.fasta'
+ploidy: 2
+genome_size_estimate: 65m #  '4.7m' equals '4700k' equals '4700000'
+prefix: "uoPhaMul"
+busco_phylum: 'stramenopiles'

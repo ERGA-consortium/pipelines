@@ -1,0 +1,71 @@
+import os
+import yaml
+
+configfile: 'config.yaml'
+
+rule all:
+    input:
+        out_qv = os.path.join(config['snakemake_dir_path'], 'merqury.qv'),
+        out_completeness = os.path.join(config['snakemake_dir_path'], 'merqury.completeness.stats'),
+        out_gfastats = os.path.join(config['snakemake_dir_path'], 'gfastats.txt'),
+        busco_out = config['snakemake_dir_path'] + 'busco_out/short_summary.specific.' + config['busco_phylum'] + '_odb10.busco_out.txt'
+rule merqury:
+    """ Execute Merqury following Hifiasm to evaluate the quality and accuracy of the assembled genome."""
+
+    input:
+        asm_p = config['asm_fasta_pri'],
+        asm_a = config['asm_fasta_alt']
+    output:
+        out_qv = os.path.join(config['snakemake_dir_path'], 'merqury.qv'),
+        out_completeness = os.path.join(config['snakemake_dir_path'], 'merqury.completeness.stats')
+    log:
+        os.path.join(config['snakemake_dir_path'],'logs/merqury.log')
+    conda:
+        'evaluation'
+    threads: 20
+    resources: 
+        mem_mb = 5000
+    params:
+        runtime = '10:00:00',
+        out_prefix = 'merqury',
+        meryl_db = config['meryl_db']
+    shell:
+        "(merqury.sh {params.meryl_db} {input.asm_p} {input.asm_a} {params.out_prefix}) 2> {log};"
+
+rule busco:
+    """ Execute BUSCO following Hifiasm to assess the completeness of the assembled genome based on conserved genes."""
+        
+    input:
+        asm_p = config['asm_fasta_pri']
+    output:
+        outdir = directory(os.path.join(config['snakemake_dir_path'],'busco_out')),
+        busco_out = config['snakemake_dir_path'] + 'busco_out/short_summary.specific.' + config['busco_phylum'] + '_odb10.busco_out.txt'
+    log:
+        os.path.join(config['snakemake_dir_path'],'logs/busco.log')
+    conda:
+        'evaluation'
+    threads: 20
+    params:
+        out_path =  os.path.join(config['snakemake_dir_path']),
+        out_name = 'busco_out',
+        lineage = config['busco_phylum']
+    shell:
+        "(busco -f -m genome -i {input.asm_p} -o {params.out_name} --out_path {params.out_path} -l {params.lineage} -c {threads}) 2> {log};"
+
+
+rule gfastats:
+    """ run gfastats on assembly"""
+
+    input:
+        asm_p = config['asm_fasta_pri']
+    output:
+        out_gfastats = os.path.join(config['snakemake_dir_path'], 'gfastats.txt')
+    log:
+        os.path.join(config['snakemake_dir_path'], 'logs/gfastats.log')
+    conda:
+        'evaluation'
+    threads:
+        1
+    shell:
+        "(gfastats --nstar-report {input.asm_p} > {output}) 2> {log};"
+
