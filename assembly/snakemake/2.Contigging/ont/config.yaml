@@ -1,0 +1,7 @@
+#parameters
+
+reads: '/srv/public/users/brown/pipelines/assembly/snakemake/data/hifi/nextdenovo_correctedReads.fasta'
+read_type: 'nano-corr'  #Flye options: 'nano-raw', 'nano-corr', 'nano-hq'
+genome_size: 80m #  '4.7m' equals '4700k' equals '4700000'
+threads: 80
+nextdenovo: '/srv/public/users/brown/progs/NextDenovo/nextDenovo'

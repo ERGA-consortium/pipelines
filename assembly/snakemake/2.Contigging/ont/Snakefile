@@ -1,0 +1,67 @@
+import re
+import os
+import yaml
+
+configfile: 'config.yaml'
+
+if not os.path.exists("logs"):
+  os.makedirs("logs")
+
+rule all:
+  input:
+    asm_flye = os.getcwd() + "/flye/flye.assembly.fasta",
+    asm_nd = os.getcwd() + "/nextDenovo/nextdenovo.assembly.fasta"
+
+rule flye:
+  input:
+    reads = config['reads']
+  output:
+    assembly = os.getcwd() + "/flye/flye.assembly.fasta"
+  params:
+    outdir = os.getcwd() + "/flye/",
+    readtype = config['read_type'],
+    pol_iterations = 2,
+    genome_size = config['genome_size']
+  threads:
+    config['threads']
+  log:
+    "logs/flye.out",
+    "logs/flye.err",
+  benchmark:
+    "logs/flye.benchmark.txt"
+  conda:
+    'flye'
+  shell:
+    "mkdir -p {params.outdir};"
+    "cd {params.outdir};"
+    "echo 'Running command: flye --{params.readtype} {input.reads} -o {params.outdir} -t {threads} -i {params.pol_iterations} -g {params.genome_size}';"
+    "flye --{params.readtype} {input.reads} -o {params.outdir} -t {threads} -i {params.pol_iterations} -g {params.genome_size};"
+    "ln -s assembly.fasta flye.assembly.fasta;"
+
+rule nextdenovo:
+  input:
+    reads = config['reads']
+  output:
+    assembly = os.getcwd() + "/nextDenovo/nextdenovo.assembly.fasta"
+  params:
+    outdir = os.getcwd() + "/nextDenovo/",
+    config = "run.cfg",
+    nextdenovo = config['nextdenovo']
+  threads:
+    config['threads']
+  log:
+    "logs/nextdenovo.out",
+    "logs/nextdenovo.err",
+  benchmark:
+    "logs/nextdenovo.benchmark.txt"
+  conda:
+    'nextdenovo'
+  shell:
+    "mkdir -p {params.outdir};"
+    "ls {input.reads} > {params.outdir}long_reads.fofn;"
+    "cp {params.config} {params.outdir};"
+    "cd {params.outdir};"
+    "{params.nextdenovo} {params.config};"
+    "ln -s {params.outdir}01_rundir/03.ctg_graph/nd.asm.fasta {output.assembly};"
+
+

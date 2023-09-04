@@ -1,0 +1,8 @@
+#parameters
+
+hifi: '/srv/public/users/brown/pipelines/assembly/snakemake/2.Contigging/hifi/nextdenovo_correctedReads.fasta'
+snakemake_dir_path: '/srv/public/users/brown/pipelines/assembly/snakemake/2.Contigging/hifi/'
+ploidy: 2
+genome_sie_estimate: 80m #  '4.7m' equals '4700k' equals '4700000'
+purgel: "1" #Hifiasm purging parameter - 0 = no purging, 1 = purge contained haplotigs (s=0.75), 2 = purge all haplotigs (s=0.75), 3 = aggresive purging of all haplotigs (s=0.55)
+threads: 40

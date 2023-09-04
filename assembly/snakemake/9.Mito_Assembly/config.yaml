@@ -1,0 +1,8 @@
+#parameters
+
+hifi: '/srv/public/users/brown/pipelines/assembly/snakemake/9.Mito_Assembly/ilHelHel_reads.fasta'
+snakemake_dir_path: '/srv/public/users/brown/pipelines/assembly/snakemake/9.Mito_Assembly/'
+species_name: "Helleia helle" # for mitohifi (complete name)
+threads: 40
+use-singularity: True
+singularity-args: "--bind /srv/public/users/brown/pipelines/assembly/snakemake/9.Mito_Assembly/"

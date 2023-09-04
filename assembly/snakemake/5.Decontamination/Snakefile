@@ -1,0 +1,144 @@
+# Allow multiple input files (here lr, but could be lr/ont/clr/illumina)
+
+import os
+import glob
+import sys
+import yaml
+
+# Define the config.yaml file path
+configfile : "config.yaml"
+
+
+def get_input_files(wildcards):
+    with open(config['lr']) as f:
+        return f.read().strip().split("\n")
+
+def get_bam_files():
+    return expand("{sample}.bam", sample=get_input_files(wildcards))
+
+rule all:
+    input:
+        decont_asm = os.path.join(config['snakemake_dir_path'], 'asm_decontaminated.fasta')
+
+rule blast:
+    """Perform a BLAST search on the assembled contigs to filter out potential contaminants by identifying taxonomic matches."""
+
+    input:
+        asm_p = config['prim_asm']
+    output:
+        out_blast = os.path.join(config['snakemake_dir_path'],'asm.vs.nt.max10.1e25.blastn.out')
+    log:
+        os.path.join(config['snakemake_dir_path'],'logs/blast.log')
+    conda:
+        'decontamination'
+    threads:
+        config['threads']
+    resources: 
+        mem_mb = 200000
+    params: 
+        runtime = '72:00:00',
+        nt_db = os.path.join(config['nt_dbDir'],'nt')
+    shell:
+        """
+        (blastn -query {input.asm_p} -db {params.nt_db} -outfmt '6 qseqid staxids bitscore evalue std sscinames sskingdoms stitle' -max_target_seqs 10 -max_hsps 1 -evalue 1e-25 -num_threads {threads} -out {output.out_blast}) 2>> {log}
+        """
+
+rule map_reads:
+    """Map long reads to input assembly with minimap2"""
+
+    input:
+        asm_p = config['prim_asm'],
+        read_files = get_input_files
+    output:
+        bam="{sample}.bam",
+        bai="{sample}.bam.bai"
+    log:
+        os.path.join(config['snakemake_dir_path'],'logs','{sample}_minimap2.log')
+    conda:
+        'decontamination'
+    threads:
+        config['threads']
+    shell:
+        """
+        (minimap2 -t {threads} -ax map-pb {input.asm_p} {input.read_files} | samtools sort -@ {threads} -o {output.bam}) 2> {log}
+        (samtools index -@ {threads} {output.bam}) 2> {log}
+        """
+
+rule cov_estimate:
+    """Extract coverage information with the map2cov utility from BlobTools """
+
+    input:
+        asm_p = config['prim_asm'],
+        bam = "merged.bam",
+        bai = "merged.bam"
+    output: 
+        map2cov = os.path.join(config['snakemake_dir_path'],'map2cov_blob.merged.bam.cov')
+    log:
+        os.path.join(config['snakemake_dir_path'],'logs/cov_estimate.log')
+    conda:
+        'decontamination'
+    threads:
+        config['threads']
+    shell:
+        """
+        (blobtools map2cov -i {input.asm_p} -b {input.bam} -o map2cov_blob) 2>> {log}
+        """
+
+
+rule blobtools:
+    """ creates a BlobTools database using the assembled genome, BLAST output, and coverage information, then generates a blob plot and a summary table """
+
+    input:
+        out_blast = os.path.join(config['snakemake_dir_path'],'asm.vs.nt.max10.1e25.blastn.out'),
+        asm_p = config['prim_asm'],
+        map2cov = os.path.join(config['snakemake_dir_path'],'map2cov_blob.merged.bam.cov')
+    output:
+        blob_json = os.path.join(config['snakemake_dir_path'], 'blob_output.blobDB.json'),
+        blob_table = os.path.join(config['snakemake_dir_path'], 'table.blob_output.blobDB.table.txt'),
+        blob_png = os.path.join(config['snakemake_dir_path'], 'plot.blob_output.blobDB.json.bestsumorder.phylum.p8.count.100.blobplot.cov0.png') 
+    log:
+        os.path.join(config['snakemake_dir_path'],'logs/blobtools.log')
+    conda:
+        'decontamination'
+    threads:
+        config['threads']
+    resources:
+        mem_mb = 20000
+    params:
+        runtime = '70:00:00',
+        db = os.path.join(config['snakemake_dir_path'], 'nodesDB.txt')
+    shell:
+        """
+        (blobtools create -i {input.asm_p} -t {input.out_blast} --db {params.db} -c {input.map2cov} -x bestsumorder -o blob_output) 2> {log}
+        (blobtools plot -i blob_output.blobDB.json --sort count --hist count -x bestsumorder -o plot) 2>> {log}
+        (blobtools view -i blob_output.blobDB.json --hits --rank all -x bestsumorder -o table) 2>> {log}
+        """
+
+
+
+
+rule filter_asm:
+    """ Remove contaminant contigs from the assembly """
+
+    input:
+        asm_p = config['prim_asm'],
+        blob_table = os.path.join(config['snakemake_dir_path'], 'table.blob_output.blobDB.table.txt')
+    output:
+        contam_scaff = os.path.join(config['snakemake_dir_path'], 'contam_scaff.txt'),
+        decont_asm = os.path.join(config['snakemake_dir_path'], 'asm_decontaminated.fasta')
+    log:
+        os.path.join(config['snakemake_dir_path'],'logs/filter_asm.log')
+    conda:
+        'decontamination'
+    threads:
+        config['threads']
+    resources:
+        mem_mb = 5000
+    params:
+        runtime = '70:00:00'
+    shell:
+        """
+        (gawk 'FNR > 10 {{if ($6 != "Eukaryota" && $6 !="no-hit" && $1 != "#") {{print $1}}}}' {input.blob_table} > {output.contam_scaff}) &> {log}
+        (filterbyname.sh in={input.asm_p} names={output.contam_scaff} out={output.decont_asm} include=f) &>> {log}
+        """
+

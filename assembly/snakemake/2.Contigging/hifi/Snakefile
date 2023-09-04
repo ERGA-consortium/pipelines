@@ -1,0 +1,105 @@
+# Add hifiasm-phased assembly option with HiC reads
+# Create config file which an asssembler as input (e.g. hifiasm/hicanu/flye) so that purge-dups only looks for a single output
+configfile: 'config.yaml'
+
+rule all:
+    input:
+        asm_hicanu = os.path.join(config['snakemake_dir_path'], 'hicanu/asm.contigs.fasta'),
+        asm_p_fa = os.path.join(config['snakemake_dir_path'] +  'hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.p_ctg.fasta'),
+        asm_a_fa = os.path.join(config['snakemake_dir_path'] +  'hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.a_ctg.fasta'),
+        asm_flye = os.path.join(config['snakemake_dir_path'], 'flye/assembly.fasta')
+
+rule hifiasm:
+    """Execute Hifiasm to generate primary and alternative assemblies."""
+
+    input:
+        hifi_fastq = config['hifi']
+    output:
+        asm_p_gfa = os.path.join(config['snakemake_dir_path'] + 'hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.p_ctg.gfa'),
+        asm_a_gfa = os.path.join(config['snakemake_dir_path'] + 'hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.a_ctg.gfa')
+    log:
+        os.path.join(config['snakemake_dir_path'] + 'logs/hifiasmL' + config['purgel'] + '.log')
+    conda:
+        'hifiasm'
+    threads:
+        config['threads']
+    resources:
+        mem_mb = 70000
+    params:
+        runtime = '40:00:00',
+	prefix = os.path.join(config['snakemake_dir_path'] + 'hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm')
+    shell:
+        """
+        (hifiasm -o {params.prefix}  --primary -t {threads} -f 0 -l config['purgel'] {input.hifi_fastq}) 2> {log}
+        """
+
+
+rule hicanu:
+    """Execute HiCanu to generate primary and alternative assemblies."""
+
+    input:
+        hifi_fastq = config['hifi']
+    output:
+        outdir = directory(os.path.join(config['snakemake_dir_path'], 'hicanu')),
+        outasm = os.path.join(config['snakemake_dir_path'], 'hicanu/asm.contigs.fasta')
+    log:
+        os.path.join(config['snakemake_dir_path'], 'logs/hicanu.log')
+    conda:
+        'canu'
+    threads:
+        config['threads']
+    resources:
+        mem_mb = 70000
+    params:
+        runtime = '40:00:00',
+        genomeSize = config['genome_sie_estimate']
+    shell:
+        """
+        (canu -p asm -d {output.outdir} genomeSize={params.genomeSize} -pacbio-hifi {input.hifi_fastq}) 2> {log}
+        """
+
+
+rule flye:
+    """Execute Flye to generate primary and alternative assemblies."""
+
+    input:
+        hifi_fastq = config['hifi']
+    output:
+        outdir = directory(os.path.join(config['snakemake_dir_path'], 'flye')),
+        asm_flye = os.path.join(config['snakemake_dir_path'], 'flye/assembly.fasta'),
+    log:
+        os.path.join(config['snakemake_dir_path'], 'logs/2_Build_asm/flye/flye.log')
+    threads:
+        config['threads']
+    resources:
+        mem_mb = 70000
+    conda:
+        'flye'
+    params:
+        genomeSize = config['genome_sie_estimate']
+    shell:
+        """
+        (flye --threads {threads} --out-dir {output.outdir} --genome-size {params.genomeSize} --pacbio-hifi {input.hifi_fastq}) 2> {log}
+        """
+
+rule gfa_to_fasta:
+    """Convert the GFA output from Hifiasm into a FASTA format."""
+    input:
+        asm_p_gfa = os.path.join(config['snakemake_dir_path'] +  'hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.p_ctg.gfa'),
+        asm_a_gfa = os.path.join(config['snakemake_dir_path'] +  'hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.a_ctg.gfa')
+    output:
+        asm_p_fa = os.path.join(config['snakemake_dir_path'] +  'hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.p_ctg.fasta'),
+        asm_a_fa = os.path.join(config['snakemake_dir_path'] +  'hifiasm/purgeL' + config['purgel'] + '/hifiasmL' + config['purgel'] + '.asm.a_ctg.fasta')
+    log:
+        os.path.join(config['snakemake_dir_path'], 'logs/gfa_to_fa_L',config['purgel'],'.log')
+    threads:
+        config['threads']
+    resources:
+        mem_mb = 1000
+    params:
+        ploidy = config['ploidy'],
+        runtime = '03:00:00'
+    run:
+        shell("""awk '/^S/{{print ">"$2;print $3}}' {input.asm_p_gfa} > {output.asm_p_fa} 2> {log};
+            awk '/^S/{{print ">"$2;print $3}}' {input.asm_a_gfa} > {output.asm_a_fa} 2>> {log}
+            """)
