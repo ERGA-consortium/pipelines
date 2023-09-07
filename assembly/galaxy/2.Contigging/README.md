@@ -19,6 +19,4 @@ Load the respective .ga file in Galaxy to run the workflow.
 
 ### Nextdenovo
 
-### NECAT
-
-### Raven
+### Shasta
