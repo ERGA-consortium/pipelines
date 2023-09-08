@@ -6,7 +6,7 @@ rule braker:
         aln_sam = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/test.txt") # to replace by proper output
     output:
         os.path.join(config['snakemake_dir_path'],"results/2_braker/out_braker/braker/braker.aa") 
-    threads: 40
+    threads: 10
     resources:
         mem_mb = 100000
     log:
@@ -17,6 +17,7 @@ rule braker:
         out_dir = directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/out_braker"))
     singularity:
         '/srv/public/users/brown/pipelines/annotation/braker3_latest.sif'
+        #docker://teambraker/braker3::v.1.0.4'
     shell:
         """
         list_aln=(`ls {params.bams_dir}/*.sorted.bam`)
@@ -36,6 +37,7 @@ rule eval:
         os.path.join(config['snakemake_dir_path'],'logs/2_braker/busco/busco.log')
     singularity:
         '/srv/public/users/brown/pipelines/annotation/busco_v5.5.0_cv1.sif'
+        #'docker://ezlabgva/busco:v5.5.0_cv1'
     threads: 10
     resources:
         mem_mb = 30000

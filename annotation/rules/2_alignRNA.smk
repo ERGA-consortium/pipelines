@@ -10,10 +10,10 @@ rule fastqc:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/align_RNA/fastqc.log')
     conda:
         '../envs/fastqc.yaml'
-    threads: 40
+    threads: 10
     shell:
         """
-        mkdir {output.outdir}
+        mkdir -p {output.outdir}
         cd {input.RNA_dir}
         for file in $(ls {input.RNA_dir})
         do
@@ -34,12 +34,12 @@ rule trimm:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/align_RNA/trimm.log')
     conda:
         '../envs/trimm.yaml'
-    threads: 40
+    threads: 10
     params:
         trimlog = os.path.join(config['snakemake_dir_path'], 'results/2_braker/align_RNA/trimlog.log'),
     shell:
         """
-        mkdir results/2_braker/align_RNA/out_trim_galore
+        mkdir -p results/2_braker/align_RNA/out_trim_galore
         for filepath in {input.RNA_dir}/*_1.fastq.gz
         do
             i=$(basename "$filepath" _1.fastq.gz)
@@ -60,16 +60,32 @@ rule fastqc_trimmed:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/align_RNA/fastqc_trimmed.log')
     conda:
         '../envs/fastqc.yaml'
-    threads: 40
+    threads: 10
     shell:
         """
-        mkdir {output.outdir}
+        mkdir -p {output.outdir}
         cd {input.outTrimm}
-        for file in $(ls {input.outTrimm})
+        for filepath in {input.outTrimm}/*gz
         do
-            SAMPLE=$(basename $file)
+            SAMPLE=$(basename $filepath)
             fastqc -t {threads} $SAMPLE -o {output.outdir}
         done
+        """
+
+rule hisat2_index:
+    """ (Be careful, if genome fasta has long header it will cause problems afterward, so cut header with cut -d ' ' -f1 your_file.fa > new_file.fa) """
+    input:
+        asm = config['asm']
+    output:
+        asm_index = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/index/genome_index.6.ht2")
+    conda:
+        '../envs/hisat.yaml'
+    params:
+        index_dir = directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/index"))
+    shell:
+        """
+        mkdir -p {params.index_dir}
+        hisat2-build {input.asm} {params.index_dir}/genome_index
         """
 
 
@@ -77,11 +93,11 @@ rule hisat2:
     """ (Be careful, if genome fasta has long header it will cause problems afterward, so cut header with cut -d ' ' -f1 your_file.fa > new_file.fa) """
     input:
         out_trimm = directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/out_trim_galore")),
-        asm = config['asm']
+        asm_index = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/index/genome_index.6.ht2")
     output:
         aln_out = directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2")),
         aln_summary = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/splicesite.txt")
-    threads: 40
+    threads: 10
     log:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/align_RNA/hisat2/hisat2.log')
     params:
@@ -90,13 +106,11 @@ rule hisat2:
         '../envs/hisat.yaml'
     shell:
         """
-        mkdir {params.index_dir}
-        (hisat2-build {input.asm} {params.index_dir}/genome_index) 2> {log}
-        for filepath in {input.out_trimm}/*_R1_paired.fq.gz
+        for filepath in {input.out_trimm}/*_1_val_1.fq.gz
         do
-             i=$(basename "$filepath" _R1_paired.fq.gz)
+             i=$(basename "$filepath" _1_val_1.fq.gz)
              echo "$i"
-             hisat2 --phred33 --new-summary --novel-splicesite-outfile {output.aln_summary} -p {threads} -x {params.index_dir}/genome_index -1 {input.out_trimm}/$i\_R1_paired.fq.gz -2 {input.out_trimm}/$i\_R2_paired.fq.gz -S {output.aln_out}/$i\_accepted_hits.sam
+             hisat2 --phred33 --new-summary --novel-splicesite-outfile {output.aln_summary} -p {threads} -x {params.index_dir}/genome_index -1 {input.out_trimm}/$i\_1_val_1.fq.gz -2 {input.out_trimm}/$i\_2_val_2.fq.gz -S {output.aln_out}/$i\_accepted_hits.sam
         done
         """
 
