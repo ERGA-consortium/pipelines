@@ -40,7 +40,7 @@ rule blast:
         nt_db = os.path.join(config['nt_dbDir'],'nt')
     shell:
         """
-        (blastn -query {input.asm_p} -db {params.nt_db} -outfmt '6 qseqid staxids bitscore evalue std sscinames sskingdoms stitle' -max_target_seqs 10 -max_hsps 1 -evalue 1e-25 -num_threads {threads} -out {output.out_blast}) 2>> {log}
+        (blastn -query {input.asm_p} -db {params.nt_db} -outfmt '6 qseqid staxids bitscore evalue std sscinames sskingdoms stitle' -max_target_seqs 5 -max_hsps 1 -evalue 1e-25 -num_threads {threads} -out {output.out_blast}) 2>> {log}
         """
 
 rule map_reads:
