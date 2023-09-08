@@ -1,0 +1,6 @@
+name: tePSI
+channels:
+  - nanjiang
+  - bioconda
+dependencies:
+  - transposonpsi=1.0.0

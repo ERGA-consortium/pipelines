@@ -1,0 +1,8 @@
+#parameters
+
+asm: '/srv/public/users/brown/pipelines/annotation/data/ref/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna'
+snakemake_dir_path: '/srv/public/users/brown/pipelines/annotation/'
+name: 'iDroMel1'
+RNA_dir: '/srv/public/users/brown/pipelines/annotation/data/rnaseq'
+busco_phylum: 'arthropoda_odb10'
+

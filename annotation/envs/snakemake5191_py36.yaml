@@ -1,0 +1,6 @@
+name: sm5191py36
+channels:
+  - bioconda
+dependencies:
+  - snakemake=5.19.1
+  - python=3.6.0

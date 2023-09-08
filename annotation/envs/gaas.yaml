@@ -1,0 +1,5 @@
+name: gaas
+channels:
+  - bioconda
+dependencies:
+  - gaas=1.2.0
