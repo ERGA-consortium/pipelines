@@ -1,0 +1,13 @@
+configfile: 'config/config.yaml'
+
+include: 'rules/1_MaskRepeat.smk'
+include: 'rules/2_alignRNA.smk'
+include: 'rules/3_braker.smk'
+
+
+rule all:
+    input:
+        directory(os.path.join(config['snakemake_dir_path'], 'results/1_MaskRepeat/RepeatMasker')),
+        directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/out_fastQC")),
+        directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/out_fastQC_trimmed")),
+        directory(os.path.join(config['snakemake_dir_path'], 'results/2_braker/braker_busco'))

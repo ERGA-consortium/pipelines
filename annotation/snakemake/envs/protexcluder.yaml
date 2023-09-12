@@ -1,0 +1,5 @@
+name: protexcluder
+channels:
+  - nanjiang
+dependencies:
+  - protexcluder=1.2

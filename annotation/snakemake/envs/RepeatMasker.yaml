@@ -1,0 +1,7 @@
+channels:
+ - conda-forge
+ - bioconda
+ - defaults
+dependencies:
+ - repeatmasker == 4.1.5
+
