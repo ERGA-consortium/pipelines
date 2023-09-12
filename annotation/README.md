@@ -49,7 +49,7 @@ Your data should be placed in the `data` folder, with the reference genome in th
 The config file requires the following to be given:
 
 ```
-asm: 'absolute path do reference fasta'
+asm: 'absolute path to reference fasta'
 snakemake_dir_path: 'path to snakemake working directory'
 name: 'name for project, e.g. mHomSap1'
 RNA_dir: 'absolute path to rnaseq directory'
