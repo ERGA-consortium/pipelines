@@ -95,12 +95,12 @@ rule hisat2:
         out_trimm = directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/out_trim_galore")),
         asm_index = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/index/genome_index.6.ht2")
     output:
-        aln_out = directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2")),
         aln_summary = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/splicesite.txt")
     threads: 10
     log:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/align_RNA/hisat2/hisat2.log')
     params:
+        aln_out = directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2")),
         index_dir = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/index"),
     conda:
         '../envs/hisat.yaml'
@@ -110,7 +110,7 @@ rule hisat2:
         do
              i=$(basename "$filepath" _1_val_1.fq.gz)
              echo "$i"
-             hisat2 --phred33 --new-summary --novel-splicesite-outfile {output.aln_summary} -p {threads} -x {params.index_dir}/genome_index -1 {input.out_trimm}/$i\_1_val_1.fq.gz -2 {input.out_trimm}/$i\_2_val_2.fq.gz -S {output.aln_out}/$i\_accepted_hits.sam
+             hisat2 --phred33 --new-summary --novel-splicesite-outfile {output.aln_summary} -p {threads} -x {params.index_dir}/genome_index -1 {input.out_trimm}/$i\_1_val_1.fq.gz -2 {input.out_trimm}/$i\_2_val_2.fq.gz -S {param.aln_out}/$i\_accepted_hits.sam
         done
         """
 
@@ -141,11 +141,21 @@ rule to_bam:
         """
 
 
-
-# I should do like a output function to have proper output file not sheeting as I do
-
-
-
+rule merge_bam:
+    input:
+        aln_sam = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/test.txt")
+    output:
+        aln_merge = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/merge.sorted.bam")
+    threads: 4
+    params:
+        sam_dir = directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/"))
+    conda:
+        '../envs/samtools.yaml'
+    shell:
+        """
+        cd {params.sam_dir}
+        samtools merge -@ {threads} {output.aln_merge} *_accepted_hits.sorted.bam
+        """
 
 
 

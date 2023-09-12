@@ -1,29 +1,25 @@
 
 
 rule braker:
-    input: 
-        asm_masked = os.path.join(config['snakemake_dir_path'], 'results/1_MaskRepeat/RepeatMasker/asm_decontaminated.fasta.masked'),
-        aln_sam = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/test.txt") # to replace by proper output
+    input:
+        asm_masked = os.path.join(config['snakemake_dir_path'], 'results/1_MaskRepeat/RepeatMasker/', os.path.basename(config['asm'])) + '.masked',
+        aln_bam = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/merge.sorted.bam")
     output:
         os.path.join(config['snakemake_dir_path'],"results/2_braker/out_braker/braker/braker.aa") 
-    threads: 10
-    resources:
-        mem_mb = 100000
+    threads: 40
     log:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/out_braker/out_braker.log')
     params:
-        protDB = os.path.join(config['snakemake_dir_path'], 'files/proteins.fasta'),
+        protDB = os.path.join(config['snakemake_dir_path'], 'files/uniprot_sprot.fasta'),
         bams_dir = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2"),
         out_dir = directory(os.path.join(config['snakemake_dir_path'],"results/2_braker/out_braker"))
     singularity:
-        '/srv/public/users/brown/pipelines/annotation/braker3_latest.sif'
-        #docker://teambraker/braker3::v.1.0.4'
+        docker://teambraker/braker3:v.1.0.4'
     shell:
         """
-        list_aln=(`ls {params.bams_dir}/*.sorted.bam`)
-        mkdir {params.out_dir}
+        sed -i '/^>/ s/ .*//' {input.asm_masked}
         cd {params.out_dir}
-        (braker.pl --genome={input.asm_masked} --prot_seq={params.protDB} --bam="${{list_aln[@]}}" --softmasking --threads {threads} --gff3) 2> {log}
+        (braker.pl --genome={input.asm_masked} --prot_seq={params.protDB} --bam={input.aln_bam} --softmasking --threads {threads} --gff3) 2> {log}
         """
 
 
@@ -36,11 +32,8 @@ rule eval:
     log:
         os.path.join(config['snakemake_dir_path'],'logs/2_braker/busco/busco.log')
     singularity:
-        '/srv/public/users/brown/pipelines/annotation/busco_v5.5.0_cv1.sif'
-        #'docker://ezlabgva/busco:v5.5.0_cv1'
-    threads: 10
-    resources:
-        mem_mb = 30000
+        'docker://ezlabgva/busco:v5.5.0_cv1'
+    threads: 40
     params:
         out_path =  os.path.join(config['snakemake_dir_path'], 'results/2_braker'),
         out_name = 'braker_busco',
