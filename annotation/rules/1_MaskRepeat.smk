@@ -10,7 +10,7 @@ rule RepeatModeler:
         os.path.join(config['snakemake_dir_path'], 'logs/1_MaskRepeat/RepeatModeler/RepeatModeler.log')
     singularity:
         'docker://dfam/tetools:1.85'
-    threads: 10
+    threads: config['max_threads']
     params:
         out_db = directory(os.path.join(config['snakemake_dir_path'], 'results/1_MaskRepeat/RepeatModeler')),
         name = config['name']
@@ -181,7 +181,7 @@ rule mask:
     singularity:
         '/srv/public/users/brown/pipelines/annotation/tetools_latest.sif'
         #'docker://dfam/tetools:1.85'
-    threads: 10
+    threads: 12
     shell:
         """
         (RepeatMasker -pa {threads} -gff -xsmall -dir {output.out_mask} -lib {input.repmo_fil} {input.asm}) 2> {log}

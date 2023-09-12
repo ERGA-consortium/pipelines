@@ -5,4 +5,4 @@ snakemake_dir_path: '/srv/public/users/brown/pipelines/annotation/'
 name: 'iDroMel1'
 RNA_dir: '/srv/public/users/brown/pipelines/annotation/data/rnaseq'
 busco_phylum: 'arthropoda_odb10'
-
+max_threads: 40

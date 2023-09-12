@@ -10,7 +10,7 @@ rule fastqc:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/align_RNA/fastqc.log')
     conda:
         '../envs/fastqc.yaml'
-    threads: 10
+    threads: 8
     shell:
         """
         mkdir -p {output.outdir}
@@ -34,7 +34,7 @@ rule trimm:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/align_RNA/trimm.log')
     conda:
         '../envs/trimm.yaml'
-    threads: 10
+    threads: 8
     params:
         trimlog = os.path.join(config['snakemake_dir_path'], 'results/2_braker/align_RNA/trimlog.log'),
     shell:
@@ -60,7 +60,7 @@ rule fastqc_trimmed:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/align_RNA/fastqc_trimmed.log')
     conda:
         '../envs/fastqc.yaml'
-    threads: 10
+    threads: 8
     shell:
         """
         mkdir -p {output.outdir}
@@ -96,7 +96,7 @@ rule hisat2:
         asm_index = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/index/genome_index.6.ht2")
     output:
         aln_summary = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/splicesite.txt")
-    threads: 10
+    threads: config['max_threads']
     log:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/align_RNA/hisat2/hisat2.log')
     params:

@@ -6,7 +6,7 @@ rule braker:
         aln_bam = os.path.join(config['snakemake_dir_path'],"results/2_braker/align_RNA/hisat2/merge.sorted.bam")
     output:
         os.path.join(config['snakemake_dir_path'],"results/2_braker/out_braker/braker/braker.aa") 
-    threads: 40
+    threads: config['max_threads']
     log:
         os.path.join(config['snakemake_dir_path'], 'logs/2_braker/out_braker/out_braker.log')
     params:
@@ -33,7 +33,7 @@ rule eval:
         os.path.join(config['snakemake_dir_path'],'logs/2_braker/busco/busco.log')
     singularity:
         'docker://ezlabgva/busco:v5.5.0_cv1'
-    threads: 40
+    threads: config['max_threads']
     params:
         out_path =  os.path.join(config['snakemake_dir_path'], 'results/2_braker'),
         out_name = 'braker_busco',
