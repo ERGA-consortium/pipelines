@@ -1,7 +1,7 @@
 #parameters
-snakemake_dir_path: '/srv/public/users/brown/pipelines/assembly/snakemake/5.Decontamination/'
-nt_dbDir: '/srv/public/users/brown/db/nt/' # Directory containing ncbi nt database
-lr: '/srv/public/users/brown/pipelines/assembly/snakemake/5.Decontamination/lr.fofn'
+snakemake_dir_path: '/scratch/brown/pipelines/assembly/snakemake/5.Decontamination/'
+nt_dbDir: '/scratch/brown/db/nt/' # Directory containing ncbi nt database
+lr: '/scratch/brown/pipelines/assembly/snakemake/5.Decontamination/lr.fofn'
 read_type: 'hifi' #Possible options: hifi, ont, clr
-prim_asm: '/srv/public/users/brown/pipelines/assembly/snakemake/5.Decontamination/assembly.fasta'
-threads: 40
+prim_asm: '/scratch/brown/asm_mBraTor/assembly/Flye/run_07/purge_dups/asm_mBraTor.flye.run07.purged.fa'
+threads: 48
