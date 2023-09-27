@@ -920,7 +920,11 @@
             "workflow_outputs": []
         }
     },
-    "tags": [],
+    "tags": [
+        "name:ERGA",
+        "name:ASSEMBLY+QC",
+        "name:HIC"
+    ],
     "uuid": "1e66186b-c600-4c24-9444-525c3fb9959e",
     "version": 15
 }
