@@ -179,8 +179,7 @@ rule mask:
     log:
         os.path.join(config['snakemake_dir_path'], 'logs/1_MaskRepeat/RepeatMasker/RepeatMasker.log')
     singularity:
-        '/srv/public/users/brown/pipelines/annotation/tetools_latest.sif'
-        #'docker://dfam/tetools:1.85'
+        'docker://dfam/tetools:1.85'
     threads: 12
     shell:
         """
