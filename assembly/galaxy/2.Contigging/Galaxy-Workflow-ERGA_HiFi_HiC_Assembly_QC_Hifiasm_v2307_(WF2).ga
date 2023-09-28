@@ -33,8 +33,8 @@
             "name": "Input dataset collection",
             "outputs": [],
             "position": {
-                "left": 0.0,
-                "top": 642.892931783291
+                "left": 239.68812069543173,
+                "top": 442.88928131197133
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
@@ -60,8 +60,8 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 2.7460927212097204,
-                "top": 923.7031058998183
+                "left": 0.0,
+                "top": 571.4491141047564
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -87,8 +87,8 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 192.8548877709727,
-                "top": 1163.8750055384926
+                "left": 206.5038560558976,
+                "top": 936.9447880036057
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\"}",
@@ -114,8 +114,8 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 245.94866900841566,
-                "top": 1275.0031599332397
+                "left": 226.80480870202484,
+                "top": 1052.7384012271073
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\"}",
@@ -141,8 +141,8 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 249.87064185377608,
-                "top": 1841.3212505873946
+                "left": 216.65351696655625,
+                "top": 1493.4829311726426
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\"}",
@@ -168,8 +168,8 @@
             "name": "Input parameter",
             "outputs": [],
             "position": {
-                "left": 1182.4721304637817,
-                "top": 1444.834571727203
+                "left": 1100.2683519914697,
+                "top": 1204.1275046044461
             },
             "tool_id": null,
             "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
@@ -195,8 +195,8 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 1768.0040036202142,
-                "top": 1350.4410618088295
+                "left": 1505.8584639712774,
+                "top": 1200.6151407316318
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\"}",
@@ -227,8 +227,8 @@
                 }
             ],
             "position": {
-                "left": 237.9193654306489,
-                "top": 910.1615015764983
+                "left": 246.87157649990553,
+                "top": 625.8322901728507
             },
             "post_job_actions": {
                 "HideDatasetActioninteger_param": {
@@ -273,8 +273,8 @@
                 }
             ],
             "position": {
-                "left": 557.8065357467744,
-                "top": 1835.3885061437086
+                "left": 476.5747460494767,
+                "top": 1543.7860647689513
             },
             "post_job_actions": {
                 "HideDatasetActioninteger_param": {
@@ -355,8 +355,8 @@
                 }
             ],
             "position": {
-                "left": 619.0424923586324,
-                "top": 949.4059441163264
+                "left": 537.819896887412,
+                "top": 667.4196273998745
             },
             "post_job_actions": {
                 "HideDatasetActionnoseq_files": {
@@ -443,11 +443,6 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "hic_balanced_contig_hap2_graph",
-                    "uuid": "4c7e0fbb-fc59-4e89-83dd-9ae5cabfff5a"
-                },
-                {
-                    "label": null,
                     "output_name": "hic_acontig_graph",
                     "uuid": "356b4672-9462-471e-a269-b224b997c0db"
                 },
@@ -465,6 +460,11 @@
                     "label": null,
                     "output_name": "hic_raw_initig",
                     "uuid": "afe74373-c62b-4e5e-9746-bffb9a4bb310"
+                },
+                {
+                    "label": null,
+                    "output_name": "hic_balanced_contig_hap2_graph",
+                    "uuid": "4c7e0fbb-fc59-4e89-83dd-9ae5cabfff5a"
                 }
             ]
         },
@@ -489,8 +489,8 @@
                 }
             ],
             "position": {
-                "left": 939.2743982715631,
-                "top": 0
+                "left": 978.3377463076241,
+                "top": 0.0
             },
             "post_job_actions": {
                 "HideDatasetActionout_fa": {
@@ -534,8 +534,8 @@
                 }
             ],
             "position": {
-                "left": 1010.6649000198786,
-                "top": 160.3303387847111
+                "left": 998.6623225978088,
+                "top": 120.27814858331834
             },
             "post_job_actions": {
                 "TagDatasetActionoutfile": {
@@ -591,8 +591,8 @@
                 }
             ],
             "position": {
-                "left": 1145.6362854440606,
-                "top": 355.51561022446595
+                "left": 1016.2398186855036,
+                "top": 286.2638479256509
             },
             "post_job_actions": {
                 "RemoveTagDatasetActionstats": {
@@ -651,8 +651,8 @@
                 }
             ],
             "position": {
-                "left": 1131.004569588254,
-                "top": 787.4062402837518
+                "left": 982.9957944400595,
+                "top": 643.2431608092229
             },
             "post_job_actions": {
                 "HideDatasetActionout_fa": {
@@ -696,8 +696,8 @@
                 }
             ],
             "position": {
-                "left": 1073.0806756598977,
-                "top": 928.8025264378523
+                "left": 979.6578877781009,
+                "top": 769.0768333975309
             },
             "post_job_actions": {
                 "TagDatasetActionoutfile": {
@@ -753,8 +753,8 @@
                 }
             ],
             "position": {
-                "left": 1052.8393662562457,
-                "top": 1111.9062194916382
+                "left": 975.5199149964054,
+                "top": 938.0058213770455
             },
             "post_job_actions": {
                 "RemoveTagDatasetActionstats": {
@@ -813,8 +813,8 @@
                 }
             ],
             "position": {
-                "left": 1111.6966238303346,
-                "top": 1626.7213831145732
+                "left": 1016.2822419726234,
+                "top": 1440.8740012236158
             },
             "post_job_actions": {
                 "HideDatasetActionout_fa": {
@@ -862,8 +862,8 @@
                 }
             ],
             "position": {
-                "left": 1112.135359224081,
-                "top": 1821.5365389035246
+                "left": 1027.974828380791,
+                "top": 1563.0702396357797
             },
             "post_job_actions": {
                 "RemoveTagDatasetActionstats": {
@@ -922,8 +922,8 @@
                 }
             ],
             "position": {
-                "left": 1140.04521825903,
-                "top": 2062.0544789298788
+                "left": 1045.9528760685014,
+                "top": 1778.8852309293663
             },
             "post_job_actions": {
                 "TagDatasetActionoutfile": {
@@ -975,8 +975,8 @@
                 }
             ],
             "position": {
-                "left": 1131.2059372918477,
-                "top": 2438.1712379880287
+                "left": 1050.0017645489886,
+                "top": 2060.6078163542443
             },
             "post_job_actions": {
                 "HideDatasetActionout_fa": {
@@ -1024,8 +1024,8 @@
                 }
             ],
             "position": {
-                "left": 1091.3237880795311,
-                "top": 2587.453191572766
+                "left": 1034.5672905344445,
+                "top": 2185.0328961758732
             },
             "post_job_actions": {
                 "RemoveTagDatasetActionstats": {
@@ -1084,8 +1084,8 @@
                 }
             ],
             "position": {
-                "left": 1041.67417280751,
-                "top": 2817.303228825124
+                "left": 1018.761480836375,
+                "top": 2381.006905462834
             },
             "post_job_actions": {
                 "TagDatasetActionoutfile": {
@@ -1153,8 +1153,8 @@
                 }
             ],
             "position": {
-                "left": 1693.3238040854415,
-                "top": 28.517785980276376
+                "left": 1626.9846549679862,
+                "top": 30.38390490087511
             },
             "post_job_actions": {
                 "TagDatasetActionbusco_missing": {
@@ -1248,8 +1248,8 @@
                 }
             ],
             "position": {
-                "left": 1560.3236681821015,
-                "top": 911.0937729235964
+                "left": 1498.331855111167,
+                "top": 670.3341014455219
             },
             "post_job_actions": {
                 "TagDatasetActionbusco_missing": {
@@ -1296,13 +1296,13 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "busco_sum",
-                    "uuid": "e372c0bd-41c7-4f80-b645-b9f09fc903f6"
+                    "output_name": "summary_image",
+                    "uuid": "541917f2-a8c7-4e94-a967-cbfe4a2cf81c"
                 },
                 {
                     "label": null,
-                    "output_name": "summary_image",
-                    "uuid": "541917f2-a8c7-4e94-a967-cbfe4a2cf81c"
+                    "output_name": "busco_sum",
+                    "uuid": "e372c0bd-41c7-4f80-b645-b9f09fc903f6"
                 }
             ]
         },
@@ -1347,8 +1347,8 @@
                 }
             ],
             "position": {
-                "left": 2116.701507239166,
-                "top": 765.1083814316919
+                "left": 1781.0501004190612,
+                "top": 474.579622078546
             },
             "post_job_actions": {
                 "HideDatasetActionlog_file": {
@@ -1466,8 +1466,8 @@
                 }
             ],
             "position": {
-                "left": 1546.4330671404894,
-                "top": 1740.2812171137184
+                "left": 1516.9168152085292,
+                "top": 1471.042627042247
             },
             "post_job_actions": {
                 "TagDatasetActionbusco_missing": {
@@ -1514,21 +1514,116 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "summary_image",
-                    "uuid": "c7d77047-9337-4abf-8c43-3a760c640046"
+                    "output_name": "busco_sum",
+                    "uuid": "3c00fa80-4a66-4a65-9c2f-f70b3b4bb7de"
                 },
                 {
                     "label": null,
-                    "output_name": "busco_sum",
-                    "uuid": "3c00fa80-4a66-4a65-9c2f-f70b3b4bb7de"
+                    "output_name": "summary_image",
+                    "uuid": "c7d77047-9337-4abf-8c43-3a760c640046"
                 }
             ]
         },
         "26": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
             "errors": null,
             "id": 26,
+            "input_connections": {
+                "input": {
+                    "id": 19,
+                    "output_name": "out_fa"
+                },
+                "lineage|lineage_dataset": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "BUSCO hap2",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1541.0140301478928,
+                "top": 2089.476224988711
+            },
+            "post_job_actions": {
+                "TagDatasetActionbusco_missing": {
+                    "action_arguments": {
+                        "tags": "#hap2,#contig,#QC,busco_mis"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_missing"
+                },
+                "TagDatasetActionbusco_sum": {
+                    "action_arguments": {
+                        "tags": "#hap2,#contig,#QC,busco_sum"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_sum"
+                },
+                "TagDatasetActionbusco_table": {
+                    "action_arguments": {
+                        "tags": "#hap2,#contig,#QC,busco_tab"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_table"
+                },
+                "TagDatasetActionsummary_image": {
+                    "action_arguments": {
+                        "tags": "#hap2,#contig,#QC,busco_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "summary_image"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "41030a6c03b7",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"outputs\": [\"short_summary\", \"missing\", \"image\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.3.2+galaxy0",
+            "type": "tool",
+            "uuid": "d8cfc371-d152-4d1b-94da-e61b21548611",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "busco_sum",
+                    "uuid": "9919ea04-6b22-4313-a307-307b6458c87e"
+                },
+                {
+                    "label": null,
+                    "output_name": "summary_image",
+                    "uuid": "1499c1a1-17dc-4989-b0d5-5d70e72e7ab1"
+                }
+            ]
+        },
+        "27": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2",
+            "errors": null,
+            "id": 27,
             "input_connections": {
                 "mode|assembly_options|assembly_01": {
                     "id": 16,
@@ -1565,8 +1660,8 @@
                 }
             ],
             "position": {
-                "left": 2228.7918729837174,
-                "top": 1626.7218017552161
+                "left": 1794.740268946087,
+                "top": 1889.1851131077412
             },
             "post_job_actions": {
                 "HideDatasetActionlog_file": {
@@ -1632,11 +1727,6 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "qv_files",
-                    "uuid": "cfd57c43-60a2-408f-9c8d-041990955c8f"
-                },
-                {
-                    "label": null,
                     "output_name": "stats_files",
                     "uuid": "a0cdce82-f564-4f6f-9891-5e4da83e167f"
                 },
@@ -1644,101 +1734,11 @@
                     "label": null,
                     "output_name": "png_files",
                     "uuid": "9ec9722e-4107-4dfc-935d-e598671b2e89"
-                }
-            ]
-        },
-        "27": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
-            "errors": null,
-            "id": 27,
-            "input_connections": {
-                "input": {
-                    "id": 19,
-                    "output_name": "out_fa"
-                },
-                "lineage|lineage_dataset": {
-                    "id": 5,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": "BUSCO hap2",
-            "name": "Busco",
-            "outputs": [
-                {
-                    "name": "busco_sum",
-                    "type": "txt"
-                },
-                {
-                    "name": "busco_table",
-                    "type": "tabular"
-                },
-                {
-                    "name": "busco_missing",
-                    "type": "tabular"
-                },
-                {
-                    "name": "summary_image",
-                    "type": "png"
-                }
-            ],
-            "position": {
-                "left": 1661.7456715087158,
-                "top": 2465.53133775802
-            },
-            "post_job_actions": {
-                "TagDatasetActionbusco_missing": {
-                    "action_arguments": {
-                        "tags": "#hap2,#contig,#QC,busco_mis"
-                    },
-                    "action_type": "TagDatasetAction",
-                    "output_name": "busco_missing"
-                },
-                "TagDatasetActionbusco_sum": {
-                    "action_arguments": {
-                        "tags": "#hap2,#contig,#QC,busco_sum"
-                    },
-                    "action_type": "TagDatasetAction",
-                    "output_name": "busco_sum"
-                },
-                "TagDatasetActionbusco_table": {
-                    "action_arguments": {
-                        "tags": "#hap2,#contig,#QC,busco_tab"
-                    },
-                    "action_type": "TagDatasetAction",
-                    "output_name": "busco_table"
-                },
-                "TagDatasetActionsummary_image": {
-                    "action_arguments": {
-                        "tags": "#hap2,#contig,#QC,busco_png"
-                    },
-                    "action_type": "TagDatasetAction",
-                    "output_name": "summary_image"
-                }
-            },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
-            "tool_shed_repository": {
-                "changeset_revision": "41030a6c03b7",
-                "name": "busco",
-                "owner": "iuc",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"outputs\": [\"short_summary\", \"missing\", \"image\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "5.3.2+galaxy0",
-            "type": "tool",
-            "uuid": "d8cfc371-d152-4d1b-94da-e61b21548611",
-            "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "summary_image",
-                    "uuid": "1499c1a1-17dc-4989-b0d5-5d70e72e7ab1"
                 },
                 {
                     "label": null,
-                    "output_name": "busco_sum",
-                    "uuid": "9919ea04-6b22-4313-a307-307b6458c87e"
+                    "output_name": "qv_files",
+                    "uuid": "cfd57c43-60a2-408f-9c8d-041990955c8f"
                 }
             ]
         }
@@ -1749,6 +1749,6 @@
         "name:HIFI",
         "name:HIC"
     ],
-    "uuid": "b91d7f25-e0b5-49f5-993b-a4a222a272a2",
-    "version": 160
+    "uuid": "883b264a-4355-4184-9386-9760669d78de",
+    "version": 161
 }

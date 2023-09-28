@@ -32,8 +32,8 @@
             "name": "Input dataset collection",
             "outputs": [],
             "position": {
-                "left": 0,
-                "top": 134.00987863474467
+                "left": 17.446875838013625,
+                "top": 56.883694162859285
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
@@ -59,8 +59,8 @@
             "name": "Input parameter",
             "outputs": [],
             "position": {
-                "left": 123.60520842213765,
-                "top": 453.03562471627583
+                "left": 0.0,
+                "top": 455.2223935522542
             },
             "tool_id": null,
             "tool_state": "{\"default\": 21, \"parameter_type\": \"integer\", \"optional\": true}",
@@ -86,7 +86,7 @@
             "name": "Input parameter",
             "outputs": [],
             "position": {
-                "left": 868.4531706237414,
+                "left": 762.4683465182324,
                 "top": 442.4596030205571
             },
             "tool_id": null,
@@ -122,7 +122,7 @@
                 }
             ],
             "position": {
-                "left": 364.66461575745427,
+                "left": 258.67979165194527,
                 "top": 138.93350690797598
             },
             "post_job_actions": {
@@ -167,7 +167,7 @@
                 }
             ],
             "position": {
-                "left": 627.0440597933423,
+                "left": 521.0592356878333,
                 "top": 0
             },
             "post_job_actions": {},
@@ -212,7 +212,7 @@
                 }
             ],
             "position": {
-                "left": 888.6133578131039,
+                "left": 782.6285337075949,
                 "top": 255.31385341297
             },
             "post_job_actions": {
@@ -273,7 +273,7 @@
                 }
             ],
             "position": {
-                "left": 1162.51557913991,
+                "left": 1056.530755034401,
                 "top": 0.7690816713897789
             },
             "post_job_actions": {
@@ -321,6 +321,11 @@
             "workflow_outputs": [
                 {
                     "label": null,
+                    "output_name": "smudgeplot_log",
+                    "uuid": "02a4ccc6-bb94-48db-8d62-4cea1e04eea8"
+                },
+                {
+                    "label": null,
                     "output_name": "smudgeplot",
                     "uuid": "bad85d9a-b739-4095-be21-da41c04fbcf6"
                 },
@@ -333,11 +338,6 @@
                     "label": null,
                     "output_name": "genome_summary",
                     "uuid": "a13f1880-7881-4dad-9762-9fe3dd2d46ea"
-                },
-                {
-                    "label": null,
-                    "output_name": "smudgeplot_log",
-                    "uuid": "02a4ccc6-bb94-48db-8d62-4cea1e04eea8"
                 }
             ]
         },
@@ -394,7 +394,7 @@
                 }
             ],
             "position": {
-                "left": 1168.1732762830268,
+                "left": 1062.1884521775178,
                 "top": 392.6971494349418
             },
             "post_job_actions": {
@@ -463,6 +463,11 @@
             "workflow_outputs": [
                 {
                     "label": null,
+                    "output_name": "transformed_linear_plot",
+                    "uuid": "ed57e42b-24c9-403e-93b1-9beef187f0af"
+                },
+                {
+                    "label": null,
                     "output_name": "transformed_log_plot",
                     "uuid": "867b4350-b4c8-48f3-b26d-cda8c1cc7785"
                 },
@@ -490,11 +495,6 @@
                     "label": null,
                     "output_name": "log_plot",
                     "uuid": "bcb48b68-4b21-4f84-bbb7-28adaab2be04"
-                },
-                {
-                    "label": null,
-                    "output_name": "transformed_linear_plot",
-                    "uuid": "ed57e42b-24c9-403e-93b1-9beef187f0af"
                 }
             ]
         },
@@ -519,7 +519,7 @@
                 }
             ],
             "position": {
-                "left": 1438.8776497680278,
+                "left": 1332.8928256625188,
                 "top": 691.1208753423557
             },
             "post_job_actions": {
@@ -548,12 +548,7 @@
                     "output_name": "summary"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Replace",
-                    "name": "infile"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Replace",
             "outputs": [
@@ -563,7 +558,7 @@
                 }
             ],
             "position": {
-                "left": 1437.321950297253,
+                "left": 1331.337126191744,
                 "top": 823.0164350303917
             },
             "post_job_actions": {
@@ -580,7 +575,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \",\", \"replace_pattern\": null, \"is_regex\": false, \"global\": true, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \",\", \"replace_pattern\": null, \"is_regex\": false, \"global\": true, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.4",
             "type": "tool",
             "uuid": "839acc26-cd54-49a6-8685-4e3409f7948d",
@@ -608,7 +603,7 @@
                 }
             ],
             "position": {
-                "left": 1685.1940550189602,
+                "left": 1579.2092309134512,
                 "top": 621.8084023100649
             },
             "post_job_actions": {
@@ -643,12 +638,7 @@
                     "output_name": "outfile"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Replace",
-                    "name": "infile"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Replace",
             "outputs": [
@@ -658,7 +648,7 @@
                 }
             ],
             "position": {
-                "left": 1680.6912655797507,
+                "left": 1574.7064414742417,
                 "top": 896.3955901615396
             },
             "post_job_actions": {
@@ -675,7 +665,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"bp\", \"replace_pattern\": null, \"is_regex\": false, \"global\": true, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"bp\", \"replace_pattern\": null, \"is_regex\": false, \"global\": true, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.4",
             "type": "tool",
             "uuid": "be8baa35-5b12-421a-8a30-f021741a5f7f",
@@ -703,7 +693,7 @@
                 }
             ],
             "position": {
-                "left": 1933.8899763338077,
+                "left": 1827.9051522282987,
                 "top": 474.76462545186325
             },
             "post_job_actions": {
@@ -738,12 +728,7 @@
                     "output_name": "outfile"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Search in textfiles",
-                    "name": "infile"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Search in textfiles",
             "outputs": [
@@ -753,7 +738,7 @@
                 }
             ],
             "position": {
-                "left": 1915.5255570467375,
+                "left": 1809.5407329412285,
                 "top": 847.8563102408882
             },
             "post_job_actions": {
@@ -770,7 +755,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"case_sensitive\": \"-i\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-G\", \"url_paste\": \"Haploid\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"case_sensitive\": \"-i\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-G\", \"url_paste\": \"Haploid\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
             "type": "tool",
             "uuid": "61a7b08e-ebd8-404b-85a3-d9bc35ad99ca",
@@ -798,7 +783,7 @@
                 }
             ],
             "position": {
-                "left": 2182.0781192410077,
+                "left": 2076.093295135499,
                 "top": 341.9062415323583
             },
             "post_job_actions": {
@@ -837,7 +822,7 @@
                 }
             ],
             "position": {
-                "left": 2195.698204174029,
+                "left": 2089.71338006852,
                 "top": 760.3618221219335
             },
             "post_job_actions": {
@@ -866,12 +851,7 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Convert",
-                    "name": "input"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Convert",
             "outputs": [
@@ -881,7 +861,7 @@
                 }
             ],
             "position": {
-                "left": 2154.000096763723,
+                "left": 2048.015272658214,
                 "top": 940.5937778574556
             },
             "post_job_actions": {
@@ -892,7 +872,7 @@
                 }
             },
             "tool_id": "Convert characters1",
-            "tool_state": "{\"condense\": true, \"convert_from\": \"s\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"strip\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"condense\": true, \"convert_from\": \"s\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"strip\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
             "uuid": "0d3e30f9-bfea-463f-833b-758a8136c94c",
@@ -920,7 +900,7 @@
                 }
             ],
             "position": {
-                "left": 2425.857493494231,
+                "left": 2319.8726693887224,
                 "top": 455.17503091828405
             },
             "post_job_actions": {
@@ -974,7 +954,7 @@
                 }
             ],
             "position": {
-                "left": 2434.7968531933193,
+                "left": 2328.8120290878105,
                 "top": 667.874983901332
             },
             "post_job_actions": {
@@ -1018,12 +998,7 @@
                     "output_name": "out_file1"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Advanced Cut",
-                    "name": "input"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Advanced Cut",
             "outputs": [
@@ -1033,7 +1008,7 @@
                 }
             ],
             "position": {
-                "left": 2396.421759438487,
+                "left": 2290.436935332978,
                 "top": 909.640638071563
             },
             "post_job_actions": {
@@ -1050,7 +1025,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"5\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"5\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.0",
             "type": "tool",
             "uuid": "d4ffcf79-ee53-4180-ad86-8dd2b3a80f1e",
@@ -1078,7 +1053,7 @@
                 }
             ],
             "position": {
-                "left": 2642.915757363175,
+                "left": 2536.9309332576663,
                 "top": 870.7499933911221
             },
             "post_job_actions": {
@@ -1117,6 +1092,6 @@
         "name:HiFi",
         "name:PROFILING"
     ],
-    "uuid": "dd4d7a46-4a15-4d51-b588-5a7939b50eff",
-    "version": 26
+    "uuid": "93ca7c1a-fb4b-4feb-ac48-0a9ce60e3fc0",
+    "version": 27
 }
