@@ -6,4 +6,4 @@ The workflow takes a trimmed HiFi reads collection, Hap1/Hap2 contigs, and the v
 ![PurgeHap1Hap2](pics/PurgeHap1Hap21908.png)
 
 ## Pri/Alt assemblies
-/[in preparation]
+\[in preparation]
