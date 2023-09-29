@@ -14,7 +14,7 @@
         }
     ],
     "format-version": "0.1",
-    "name": "ERGA DataQC HiFi v2305 (WF0)",
+    "name": "ERGA DataQC HiFi v2309 (WF0)",
     "steps": {
         "0": {
             "annotation": "",
@@ -135,8 +135,8 @@
                 }
             ],
             "position": {
-                "left": 536.5468961909862,
-                "top": 345.09375650534884
+                "left": 531.9431509840499,
+                "top": 352.4758788732325
             },
             "post_job_actions": {
                 "ChangeDatatypeActionout1": {
@@ -151,11 +151,11 @@
                     "action_type": "HideDatasetAction",
                     "output_name": "report"
                 },
-                "RemoveTagDatasetActionout1": {
+                "TagDatasetActionout1": {
                     "action_arguments": {
-                        "tags": "#HiFi, #trimmed"
+                        "tags": "#HiFi,#trimmed"
                     },
-                    "action_type": "RemoveTagDatasetAction",
+                    "action_type": "TagDatasetAction",
                     "output_name": "out1"
                 }
             },
@@ -200,20 +200,13 @@
                 }
             ],
             "position": {
-                "left": 271.48426365011346,
-                "top": 581.140612162147
+                "left": 271.4687125756147,
+                "top": 581.140607644207
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
                     "action_arguments": {},
                     "action_type": "HideDatasetAction",
-                    "output_name": "output"
-                },
-                "TagDatasetActionoutput": {
-                    "action_arguments": {
-                        "tags": "#stats, #HiFi, #raw"
-                    },
-                    "action_type": "TagDatasetAction",
                     "output_name": "output"
                 }
             },
@@ -260,8 +253,8 @@
                 }
             ],
             "position": {
-                "left": 889.0469084629287,
-                "top": 196.8281415057355
+                "left": 887.7436880876215,
+                "top": 191.61554722462174
             },
             "post_job_actions": {
                 "HideDatasetActionstats": {
@@ -357,6 +350,6 @@
         "name:DataQC",
         "name:HiFi"
     ],
-    "uuid": "39fec450-764a-4e3a-b394-2e37dc981d1e",
-    "version": 11
+    "uuid": "82e9856e-c0b3-4927-aff8-08a739c86b3a",
+    "version": 15
 }
