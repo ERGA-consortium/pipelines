@@ -14,7 +14,7 @@
         }
     ],
     "format-version": "0.1",
-    "name": "ERGA Profiling HiFi v0928 (WF1)",
+    "name": "ERGA Profiling HiFi v2309 (WF1)",
     "steps": {
         "0": {
             "annotation": "",
@@ -33,13 +33,13 @@
             "outputs": [],
             "position": {
                 "left": 17.446875838013625,
-                "top": 56.883694162859285
+                "top": 129.4598284794688
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
             "tool_version": null,
             "type": "data_collection_input",
-            "uuid": "25b6d4a1-8e99-4b54-8327-d0deb3f9368e",
+            "uuid": "4a46a35f-bfcc-41d8-abb5-3ac90686c298",
             "when": null,
             "workflow_outputs": []
         },
@@ -60,13 +60,13 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 455.2223935522542
+                "top": 527.7985278688637
             },
             "tool_id": null,
             "tool_state": "{\"default\": 21, \"parameter_type\": \"integer\", \"optional\": true}",
             "tool_version": null,
             "type": "parameter_input",
-            "uuid": "6228dd07-4e75-4348-ab9d-696f9991ca34",
+            "uuid": "fb73385f-e68f-449a-8208-c84d5a8f1c7e",
             "when": null,
             "workflow_outputs": []
         },
@@ -87,13 +87,13 @@
             "outputs": [],
             "position": {
                 "left": 762.4683465182324,
-                "top": 442.4596030205571
+                "top": 515.0357373371667
             },
             "tool_id": null,
             "tool_state": "{\"default\": 2, \"parameter_type\": \"integer\", \"optional\": true}",
             "tool_version": null,
             "type": "parameter_input",
-            "uuid": "d8da07bc-dd28-49a6-a1c5-848f24bace3e",
+            "uuid": "f002c938-20d1-497f-a67f-9ada8026c2b6",
             "when": null,
             "workflow_outputs": []
         },
@@ -123,7 +123,7 @@
             ],
             "position": {
                 "left": 258.67979165194527,
-                "top": 138.93350690797598
+                "top": 211.5096412245855
             },
             "post_job_actions": {
                 "HideDatasetActionread_db": {
@@ -142,7 +142,7 @@
             "tool_state": "{\"operation_type\": {\"command_type\": \"count-kmers\", \"__current_case__\": 0, \"count_operations\": \"count\", \"input_reads\": {\"__class__\": \"ConnectedValue\"}, \"options_kmer_size\": {\"kmer_size\": \"provide\", \"__current_case__\": 0, \"input_kmer_size\": {\"__class__\": \"ConnectedValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.3+galaxy6",
             "type": "tool",
-            "uuid": "b8dd8b3e-b99d-43a7-bafb-18d01ed2dbe6",
+            "uuid": "01d3de79-a5e5-4161-9cb7-1a94bc23360d",
             "when": null,
             "workflow_outputs": []
         },
@@ -167,8 +167,8 @@
                 }
             ],
             "position": {
-                "left": 521.0592356878333,
-                "top": 0
+                "left": 521.0468665615931,
+                "top": 0.0
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6",
@@ -181,13 +181,13 @@
             "tool_state": "{\"operation_type\": {\"command_type\": \"groups-kmers\", \"__current_case__\": 3, \"groups_operations\": \"union-sum\", \"input_meryldb_02\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.3+galaxy6",
             "type": "tool",
-            "uuid": "0c3c3a08-42c6-44db-a138-cb1727b046a2",
+            "uuid": "8b2fe61f-48d4-4b24-a063-e74a4531b1ce",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "Merged Meryl DB",
                     "output_name": "read_db",
-                    "uuid": "e2c02633-eba5-4170-8eb7-7894dae96bef"
+                    "uuid": "55f91284-62a9-4b81-b965-c82ebc1151d1"
                 }
             ]
         },
@@ -213,7 +213,7 @@
             ],
             "position": {
                 "left": 782.6285337075949,
-                "top": 255.31385341297
+                "top": 327.8899877295795
             },
             "post_job_actions": {
                 "HideDatasetActionread_db_hist": {
@@ -232,7 +232,7 @@
             "tool_state": "{\"operation_type\": {\"command_type\": \"histogram-kmers\", \"__current_case__\": 4, \"input_meryldb_02\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.3+galaxy6",
             "type": "tool",
-            "uuid": "87fd0df0-6c1d-4d20-accc-54d0d2f26b6b",
+            "uuid": "cc50b951-c18e-4125-b451-08e94f200afc",
             "when": null,
             "workflow_outputs": []
         },
@@ -273,10 +273,38 @@
                 }
             ],
             "position": {
-                "left": 1056.530755034401,
-                "top": 0.7690816713897789
+                "left": 1061.2340383661744,
+                "top": 0.7686004686396473
             },
             "post_job_actions": {
+                "RemoveTagDatasetActiongenome_summary": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "genome_summary"
+                },
+                "RemoveTagDatasetActiongenome_summary_verbose": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "genome_summary_verbose"
+                },
+                "RemoveTagDatasetActionsmudgeplot": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "smudgeplot"
+                },
+                "RemoveTagDatasetActionsmudgeplot_log": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "smudgeplot_log"
+                },
                 "TagDatasetActiongenome_summary": {
                     "action_arguments": {
                         "tags": "smudgeplot_tab"
@@ -316,28 +344,28 @@
             "tool_state": "{\"file\": {\"input\": {\"input_select\": \"dump\", \"__current_case__\": 1, \"input_mode\": {\"selector\": \"meryl\", \"__current_case__\": 1, \"meryl_histogram\": {\"__class__\": \"ConnectedValue\"}, \"meryl_database\": {\"__class__\": \"ConnectedValue\"}, \"lower_cutoff\": null, \"upper_cutoff\": null}}}, \"homozygous\": false, \"table_output\": true, \"verbose_output\": true, \"warnings_output\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.2.5+galaxy3",
             "type": "tool",
-            "uuid": "a13d2fde-ef47-4c8a-b8e7-a6a8e1c7a477",
+            "uuid": "b968decf-72f3-48d5-b01b-76b6bcbd580d",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "genome_summary_verbose",
-                    "uuid": "67e392d1-5d1e-4a0d-b802-ac3ee82dc1bd"
-                },
-                {
-                    "label": null,
                     "output_name": "genome_summary",
-                    "uuid": "a13f1880-7881-4dad-9762-9fe3dd2d46ea"
+                    "uuid": "7034fa37-7753-4029-bb51-cebdd39a0110"
                 },
                 {
                     "label": null,
                     "output_name": "smudgeplot_log",
-                    "uuid": "02a4ccc6-bb94-48db-8d62-4cea1e04eea8"
+                    "uuid": "2cbeca5e-73ad-4f50-9ffd-0c1e6e552994"
                 },
                 {
                     "label": null,
                     "output_name": "smudgeplot",
-                    "uuid": "bad85d9a-b739-4095-be21-da41c04fbcf6"
+                    "uuid": "a315805b-15ed-4acc-bd95-6403d67a8359"
+                },
+                {
+                    "label": null,
+                    "output_name": "genome_summary_verbose",
+                    "uuid": "77a1f7f5-c42a-47b9-8872-cbb9eeadae05"
                 }
             ]
         },
@@ -394,10 +422,52 @@
                 }
             ],
             "position": {
-                "left": 1062.1884521775178,
-                "top": 392.6971494349418
+                "left": 1062.1874760591215,
+                "top": 465.26363024694894
             },
             "post_job_actions": {
+                "RemoveTagDatasetActionlinear_plot": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "linear_plot"
+                },
+                "RemoveTagDatasetActionlog_plot": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "log_plot"
+                },
+                "RemoveTagDatasetActionmodel": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "model"
+                },
+                "RemoveTagDatasetActionmodel_params": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "model_params"
+                },
+                "RemoveTagDatasetActiontransformed_linear_plot": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "transformed_linear_plot"
+                },
+                "RemoveTagDatasetActiontransformed_log_plot": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "transformed_log_plot"
+                },
                 "TagDatasetActionlinear_plot": {
                     "action_arguments": {
                         "tags": "genomescope_lin"
@@ -428,7 +498,7 @@
                 },
                 "TagDatasetActionsummary": {
                     "action_arguments": {
-                        "tags": "genomescope_sum"
+                        "tags": "genomescope_sum,#HIFI,#trimmed"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "summary"
@@ -458,43 +528,43 @@
             "tool_state": "{\"advanced_options\": {\"topology\": null, \"initial_repetitiveness\": null, \"initial_heterozygosities\": \"\", \"transform_exp\": null, \"testing\": true, \"true_params\": \"\", \"trace_flag\": false, \"num_rounds\": null}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"kmer_length\": {\"__class__\": \"ConnectedValue\"}, \"lambda\": null, \"max_kmercov\": null, \"output_options\": {\"output_files\": [\"model_output\", \"summary_output\"], \"no_unique_sequence\": false}, \"ploidy\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.0+galaxy2",
             "type": "tool",
-            "uuid": "6940f12b-350a-4632-ba52-ab6cb184f9b2",
+            "uuid": "d7b05c00-a3f1-45e1-b269-868b7656f250",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "linear_plot",
-                    "uuid": "7c9630ff-ef01-4657-b30a-98e283701c49"
+                    "uuid": "c56b3a3d-4c79-424b-a5ce-66364aab4bc2"
                 },
                 {
                     "label": null,
                     "output_name": "log_plot",
-                    "uuid": "bcb48b68-4b21-4f84-bbb7-28adaab2be04"
+                    "uuid": "b3e038c1-e0ff-4503-8317-4ddae8f68612"
                 },
                 {
                     "label": null,
                     "output_name": "transformed_linear_plot",
-                    "uuid": "ed57e42b-24c9-403e-93b1-9beef187f0af"
+                    "uuid": "1f6a79f9-9404-440c-a125-4342ba76bb32"
                 },
                 {
                     "label": null,
                     "output_name": "transformed_log_plot",
-                    "uuid": "867b4350-b4c8-48f3-b26d-cda8c1cc7785"
+                    "uuid": "b9fb5235-acc8-4c30-bebf-f4b43fed66ae"
                 },
                 {
                     "label": null,
                     "output_name": "model",
-                    "uuid": "d9dbd212-4fbd-454b-9149-3197eaac9893"
+                    "uuid": "a5b76b84-414b-407b-b83a-3aa77a40a341"
                 },
                 {
                     "label": null,
                     "output_name": "summary",
-                    "uuid": "f0d61849-0e2e-4611-aad8-ad8f85c1cd3a"
+                    "uuid": "cc993c5e-5beb-45c2-a6b1-87b3d0f67883"
                 },
                 {
                     "label": null,
                     "output_name": "model_params",
-                    "uuid": "919987dd-e323-4ba2-85ab-65178f5591c0"
+                    "uuid": "f8177a7d-388a-412b-961c-faafd0cda1e6"
                 }
             ]
         },
@@ -520,7 +590,7 @@
             ],
             "position": {
                 "left": 1342.2656265581902,
-                "top": 464.3065754046539
+                "top": 536.8827097212635
             },
             "post_job_actions": {
                 "HideDatasetActionoutfile": {
@@ -539,7 +609,7 @@
             "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \",\", \"replace_pattern\": null, \"is_regex\": false, \"global\": true, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.4",
             "type": "tool",
-            "uuid": "839acc26-cd54-49a6-8685-4e3409f7948d",
+            "uuid": "8df23f21-6727-40ff-9ec2-3f6e4a27195d",
             "when": null,
             "workflow_outputs": []
         },
@@ -564,8 +634,8 @@
                 }
             ],
             "position": {
-                "left": 1319.296861089436,
-                "top": 875.0908178875105
+                "left": 1314.7031690313106,
+                "top": 1080.716722563127
             },
             "post_job_actions": {
                 "HideDatasetActionout_file1": {
@@ -584,7 +654,7 @@
             "tool_state": "{\"avoid_scientific_notation\": false, \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"no\", \"__current_case__\": 0, \"expressions\": [{\"__index__\": 0, \"cond\": \"round(1.5*c3)\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.0",
             "type": "tool",
-            "uuid": "d834241c-022d-4187-85c7-7c2d2f8e4f30",
+            "uuid": "257ce0b3-fef0-4259-839d-0eec23dd0a7a",
             "when": null,
             "workflow_outputs": []
         },
@@ -610,7 +680,7 @@
             ],
             "position": {
                 "left": 1573.042585841137,
-                "top": 409.48734674025076
+                "top": 482.06348105686027
             },
             "post_job_actions": {
                 "HideDatasetActionoutfile": {
@@ -629,7 +699,7 @@
             "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"bp\", \"replace_pattern\": null, \"is_regex\": false, \"global\": true, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.4",
             "type": "tool",
-            "uuid": "be8baa35-5b12-421a-8a30-f021741a5f7f",
+            "uuid": "bb55732c-db52-49cd-a1d0-1fa8fbccb13a",
             "when": null,
             "workflow_outputs": []
         },
@@ -654,8 +724,8 @@
                 }
             ],
             "position": {
-                "left": 1556.4686909261804,
-                "top": 857.9999801742382
+                "left": 1556.468762257385,
+                "top": 1001.6034106513177
             },
             "post_job_actions": {
                 "HideDatasetActionout_file1": {
@@ -674,7 +744,7 @@
             "tool_state": "{\"avoid_scientific_notation\": false, \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"no\", \"__current_case__\": 0, \"expressions\": [{\"__index__\": 0, \"cond\": \"round(3*c7)\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.0",
             "type": "tool",
-            "uuid": "a15e9769-a197-4fd0-a63f-87e0706ba700",
+            "uuid": "46690654-e6c0-4dd1-81fc-ebd544d786d3",
             "when": null,
             "workflow_outputs": []
         },
@@ -700,7 +770,7 @@
             ],
             "position": {
                 "left": 1804.593804759083,
-                "top": 482.67435921460054
+                "top": 555.25049353121
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -719,7 +789,7 @@
             "tool_state": "{\"case_sensitive\": \"-i\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-G\", \"url_paste\": \"Haploid\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
             "type": "tool",
-            "uuid": "61a7b08e-ebd8-404b-85a3-d9bc35ad99ca",
+            "uuid": "6e4935b9-fc93-457a-87db-542f71a2440f",
             "when": null,
             "workflow_outputs": []
         },
@@ -744,8 +814,8 @@
                 }
             ],
             "position": {
-                "left": 1812.8750285359977,
-                "top": 695.5312539358216
+                "left": 1818.3386646426306,
+                "top": 784.4982557476053
             },
             "post_job_actions": {
                 "HideDatasetActionout_file1": {
@@ -758,7 +828,7 @@
             "tool_state": "{\"columnList\": \"c7\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.2",
             "type": "tool",
-            "uuid": "77cc9599-1c65-4929-a6b5-883c151aaf1c",
+            "uuid": "d9412679-0db8-4f04-8e16-31e78d88c9e9",
             "when": null,
             "workflow_outputs": []
         },
@@ -783,8 +853,8 @@
                 }
             ],
             "position": {
-                "left": 1819.9218765658059,
-                "top": 888.6407128885696
+                "left": 1817.1901804503157,
+                "top": 1032.232365255344
             },
             "post_job_actions": {
                 "HideDatasetActionout_file1": {
@@ -797,7 +867,7 @@
             "tool_state": "{\"columnList\": \"c8\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.2",
             "type": "tool",
-            "uuid": "f3239095-9224-48c2-a318-4217049e9bdd",
+            "uuid": "6eb97877-cd09-4319-bc82-b54744edff5b",
             "when": null,
             "workflow_outputs": []
         },
@@ -823,7 +893,7 @@
             ],
             "position": {
                 "left": 2043.0468977521882,
-                "top": 417.5113551437793
+                "top": 490.08748946038884
             },
             "post_job_actions": {
                 "HideDatasetActionout_file1": {
@@ -836,7 +906,7 @@
             "tool_state": "{\"condense\": true, \"convert_from\": \"s\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"strip\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "0d3e30f9-bfea-463f-833b-758a8136c94c",
+            "uuid": "0687fedd-8d28-4de2-8456-ca6b4ccafb42",
             "when": null,
             "workflow_outputs": []
         },
@@ -861,8 +931,8 @@
                 }
             ],
             "position": {
-                "left": 2051.718765232394,
-                "top": 641.0000133112258
+                "left": 2058.5483519104314,
+                "top": 734.0647433573364
             },
             "post_job_actions": {
                 "ChangeDatatypeActioninteger_param": {
@@ -870,6 +940,13 @@
                         "newtype": "txt"
                     },
                     "action_type": "ChangeDatatypeAction",
+                    "output_name": "integer_param"
+                },
+                "RemoveTagDatasetActioninteger_param": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
                     "output_name": "integer_param"
                 },
                 "TagDatasetActioninteger_param": {
@@ -884,13 +961,13 @@
             "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"param_type\": \"integer\", \"remove_newlines\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
-            "uuid": "e36a2dd1-2c67-47c7-89d3-79773f88ed7e",
+            "uuid": "864112cd-9494-46e0-ae27-d622d41c3336",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "transition_parameter",
                     "output_name": "integer_param",
-                    "uuid": "1c4aef84-9182-4b46-b340-23e1b858d529"
+                    "uuid": "f7cef014-30fd-49e7-bc81-5a1d1fe80d07"
                 }
             ]
         },
@@ -915,8 +992,8 @@
                 }
             ],
             "position": {
-                "left": 2055.7273068132954,
-                "top": 835.6050824536234
+                "left": 2059.479327736185,
+                "top": 948.7445841001363
             },
             "post_job_actions": {
                 "ChangeDatatypeActioninteger_param": {
@@ -924,6 +1001,13 @@
                         "newtype": "txt"
                     },
                     "action_type": "ChangeDatatypeAction",
+                    "output_name": "integer_param"
+                },
+                "RemoveTagDatasetActioninteger_param": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
                     "output_name": "integer_param"
                 },
                 "TagDatasetActioninteger_param": {
@@ -938,13 +1022,13 @@
             "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"param_type\": \"integer\", \"remove_newlines\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
-            "uuid": "423ba906-f22a-441e-955e-066f913d0a20",
+            "uuid": "2ca50bfd-4377-44ee-9180-3f124435bf7b",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "max_depth",
                     "output_name": "integer_param",
-                    "uuid": "3c88dfa2-c042-43b4-85a3-05a7f7e6df0f"
+                    "uuid": "63780456-c408-4e79-9d56-b80f965e729a"
                 }
             ]
         },
@@ -970,7 +1054,7 @@
             ],
             "position": {
                 "left": 2278.0708387330615,
-                "top": 501.69587637689347
+                "top": 574.272010693503
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -989,7 +1073,7 @@
             "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"5\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.0",
             "type": "tool",
-            "uuid": "d4ffcf79-ee53-4180-ad86-8dd2b3a80f1e",
+            "uuid": "485dc01b-d0ad-46cb-bbe2-993eba06f251",
             "when": null,
             "workflow_outputs": []
         },
@@ -1015,7 +1099,7 @@
             ],
             "position": {
                 "left": 2520.4687203125745,
-                "top": 388.7827284821412
+                "top": 461.3588627987507
             },
             "post_job_actions": {
                 "ChangeDatatypeActioninteger_param": {
@@ -1023,6 +1107,13 @@
                         "newtype": "txt"
                     },
                     "action_type": "ChangeDatatypeAction",
+                    "output_name": "integer_param"
+                },
+                "RemoveTagDatasetActioninteger_param": {
+                    "action_arguments": {
+                        "tags": "#HIFI,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
                     "output_name": "integer_param"
                 },
                 "TagDatasetActioninteger_param": {
@@ -1037,13 +1128,13 @@
             "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"param_type\": \"integer\", \"remove_newlines\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
-            "uuid": "b6f51efb-725a-47e1-b7b1-d06e23304f8a",
+            "uuid": "16849515-c23f-4fba-816c-04f07860d92e",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "genome_size",
                     "output_name": "integer_param",
-                    "uuid": "39c63496-3d78-4019-b841-828e35537747"
+                    "uuid": "d91222ab-3980-48cc-b1dd-c4ac11bd315e"
                 }
             ]
         }
@@ -1053,6 +1144,6 @@
         "name:HiFi",
         "name:PROFILING"
     ],
-    "uuid": "3e88fb16-c86a-4a46-82cd-06e8b01d9862",
-    "version": 30
+    "uuid": "d6cede42-886d-470c-b52b-a29452c0422c",
+    "version": 33
 }
