@@ -135,8 +135,8 @@
                 }
             ],
             "position": {
-                "left": 531.9431509840499,
-                "top": 352.4758788732325
+                "left": 535.4687773484378,
+                "top": 347.7313289749164
             },
             "post_job_actions": {
                 "ChangeDatatypeActionout1": {
@@ -153,7 +153,7 @@
                 },
                 "TagDatasetActionout1": {
                     "action_arguments": {
-                        "tags": "#HiFi,#trimmed"
+                        "tags": "#HiFi,#trimmed,#reads"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "out1"
@@ -262,6 +262,20 @@
                     "action_type": "HideDatasetAction",
                     "output_name": "stats"
                 },
+                "RemoveTagDatasetActionhtml_report": {
+                    "action_arguments": {
+                        "tags": "#reads"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "html_report"
+                },
+                "RemoveTagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#reads"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "stats"
+                },
                 "TagDatasetActionhtml_report": {
                     "action_arguments": {
                         "tags": "#stats, multiqc_html"
@@ -350,6 +364,6 @@
         "name:DataQC",
         "name:HiFi"
     ],
-    "uuid": "82e9856e-c0b3-4927-aff8-08a739c86b3a",
-    "version": 15
+    "uuid": "c01cac98-5d9c-4e15-8519-d694099a1a01",
+    "version": 17
 }
