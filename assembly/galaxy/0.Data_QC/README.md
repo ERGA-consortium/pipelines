@@ -7,7 +7,7 @@ Load the respective .ga file in Galaxy to run the workflow.
 ### Illumina Reads
 The workflow takes a [paired-reads collection](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html), runs FastQC and SeqKit, trims with Fastp, and creates a MultiQC report. The main outputs are a paired collection of trimmed reads, a report with raw and trimmed reads stats, and a table with raw reads stats.
 
-![QCillu2305](pics/QC_illu2309.png)
+![QCillu2305](pics/QC_illu_2309.png)
 
 
 ### HiFi Reads
