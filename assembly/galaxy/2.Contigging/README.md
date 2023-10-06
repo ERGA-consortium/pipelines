@@ -7,7 +7,7 @@ Load the respective .ga file in Galaxy to run the workflow.
 
 ### Hifiasm
 The workflow takes a trimmed HiFi reads collection, Forward/Reverse HiC reads, and the max coverage depth (calculated from WF1) to run Hifiasm in HiC phasing mode. It produces both Pri/Alt and Hap1/Hap2 assemblies, and runs all the QC analysis (gfastats, BUSCO, and Merqury). The default Hifiasm purge level is Light (l1).
-![ContHifiasmHiC](pics/ContHifiasmHiC2307.png)
+![ContHifiasmHiC](pics/Cont_hifiasm_hic_2309.png)
 
 
 ### Hicanu
