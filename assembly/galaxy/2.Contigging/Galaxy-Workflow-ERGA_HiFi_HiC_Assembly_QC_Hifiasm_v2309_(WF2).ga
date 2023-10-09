@@ -150,13 +150,7 @@
             "type": "parameter_input",
             "uuid": "1982287e-3549-4feb-aad8-595557ce65eb",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "df6607b3-7c34-4b92-83b0-7dbea38838f7"
-                }
-            ]
+            "workflow_outputs": []
         },
         "5": {
             "annotation": "",
@@ -487,11 +481,6 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "hic_balanced_contig_hap1_graph",
-                    "uuid": "1860ea88-cd5b-4357-a4da-8903cc0048c7"
-                },
-                {
-                    "label": null,
                     "output_name": "hic_pcontig_graph",
                     "uuid": "4ceee0bf-ccf6-44a9-8fab-0ccc1eb9fead"
                 },
@@ -504,6 +493,11 @@
                     "label": null,
                     "output_name": "hic_acontig_graph",
                     "uuid": "12c4d024-5595-4181-b5ff-088d7c8c660b"
+                },
+                {
+                    "label": null,
+                    "output_name": "hic_balanced_contig_hap1_graph",
+                    "uuid": "1860ea88-cd5b-4357-a4da-8903cc0048c7"
                 }
             ]
         },
@@ -529,7 +523,7 @@
             ],
             "position": {
                 "left": 997.8217308120162,
-                "top": 0.0
+                "top": 0
             },
             "post_job_actions": {
                 "HideDatasetActionout_fa": {
@@ -573,8 +567,8 @@
                 }
             ],
             "position": {
-                "left": 1024.1134378284746,
-                "top": 121.20004088528638
+                "left": 1027.870584692476,
+                "top": 123.08136585435277
             },
             "post_job_actions": {
                 "TagDatasetActionoutfile": {
@@ -636,7 +630,7 @@
             "post_job_actions": {
                 "TagDatasetActionstats": {
                     "action_arguments": {
-                        "tags": "asm_stats"
+                        "tags": "#QC,asm_stats"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "stats"
@@ -791,7 +785,7 @@
             "post_job_actions": {
                 "TagDatasetActionstats": {
                     "action_arguments": {
-                        "tags": "asm_stats"
+                        "tags": "#QC,asm_stats"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "stats"
@@ -893,7 +887,7 @@
             "post_job_actions": {
                 "TagDatasetActionstats": {
                     "action_arguments": {
-                        "tags": "asm_stats"
+                        "tags": "#QC,asm_stats"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "stats"
@@ -1048,7 +1042,7 @@
             "post_job_actions": {
                 "TagDatasetActionstats": {
                     "action_arguments": {
-                        "tags": "asm_stats"
+                        "tags": "#QC,asm_stats"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "stats"
@@ -1212,13 +1206,13 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "summary_image",
-                    "uuid": "6c9e9182-6393-4e96-bc92-689cb5b5388c"
+                    "output_name": "busco_sum",
+                    "uuid": "4061c320-7f66-436a-b448-26a5be1489ed"
                 },
                 {
                     "label": null,
-                    "output_name": "busco_sum",
-                    "uuid": "4061c320-7f66-436a-b448-26a5be1489ed"
+                    "output_name": "summary_image",
+                    "uuid": "6c9e9182-6393-4e96-bc92-689cb5b5388c"
                 }
             ]
         },
@@ -1307,13 +1301,13 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "busco_sum",
-                    "uuid": "b4bba0e9-410d-4e03-a7c1-e49e0d150dcb"
+                    "output_name": "summary_image",
+                    "uuid": "fc49dc68-7d05-42e5-b34e-9f1af38d9f68"
                 },
                 {
                     "label": null,
-                    "output_name": "summary_image",
-                    "uuid": "fc49dc68-7d05-42e5-b34e-9f1af38d9f68"
+                    "output_name": "busco_sum",
+                    "uuid": "b4bba0e9-410d-4e03-a7c1-e49e0d150dcb"
                 }
             ]
         },
@@ -1532,13 +1526,13 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "busco_sum",
-                    "uuid": "8da04deb-42c8-4e30-bf29-db48f95e893f"
+                    "output_name": "summary_image",
+                    "uuid": "a6674724-5b9d-496a-ac1d-768b6658b653"
                 },
                 {
                     "label": null,
-                    "output_name": "summary_image",
-                    "uuid": "a6674724-5b9d-496a-ac1d-768b6658b653"
+                    "output_name": "busco_sum",
+                    "uuid": "8da04deb-42c8-4e30-bf29-db48f95e893f"
                 }
             ]
         },
@@ -1627,13 +1621,13 @@
             "workflow_outputs": [
                 {
                     "label": null,
-                    "output_name": "busco_sum",
-                    "uuid": "4ba5d391-ec1b-423a-a34e-acfb17834683"
+                    "output_name": "summary_image",
+                    "uuid": "99b1c845-d07a-4572-8f8d-899a972b8558"
                 },
                 {
                     "label": null,
-                    "output_name": "summary_image",
-                    "uuid": "99b1c845-d07a-4572-8f8d-899a972b8558"
+                    "output_name": "busco_sum",
+                    "uuid": "4ba5d391-ec1b-423a-a34e-acfb17834683"
                 }
             ]
         },
@@ -1774,6 +1768,6 @@
         "name:HiFi",
         "name:HiC"
     ],
-    "uuid": "94b98141-7674-4684-8995-a661bee7df9d",
-    "version": 206
+    "uuid": "cab1fb4f-66ba-47ca-b3f4-870d4ff7da0c",
+    "version": 207
 }
