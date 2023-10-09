@@ -14,7 +14,7 @@
         }
     ],
     "format-version": "0.1",
-    "name": "ERGA HiFi Hap1Hap2 Purge+QC v1908 (WF3)",
+    "name": "ERGA HiFi Hap1Hap2 Purge+QC v2309 (WF3)",
     "steps": {
         "0": {
             "annotation": "",
@@ -33,7 +33,7 @@
             "outputs": [],
             "position": {
                 "left": 266.9204520648568,
-                "top": 180.60854113944742
+                "top": 156.4090833496318
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -60,7 +60,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 545.6849460943251
+                "top": 521.4854883045095
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -87,7 +87,7 @@
             "outputs": [],
             "position": {
                 "left": 296.73598862689755,
-                "top": 693.2339732909386
+                "top": 669.034515501123
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
@@ -114,7 +114,7 @@
             "outputs": [],
             "position": {
                 "left": 8.868941903994852,
-                "top": 822.3563624654697
+                "top": 798.1569046756541
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -141,7 +141,7 @@
             "outputs": [],
             "position": {
                 "left": 234.25659911792576,
-                "top": 1311.4908300809104
+                "top": 1287.2913722910946
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -167,8 +167,8 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 1649.2086556659017,
-                "top": 867.9870879185329
+                "left": 1693.2161019086252,
+                "top": 869.7805851861692
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -179,14 +179,14 @@
             "workflow_outputs": []
         },
         "6": {
-            "annotation": "lineage for BUSCO, e.g.: arthropoda, vertebrata, mammalia, aves, tetrapoda ...",
+            "annotation": "lineage for BUSCO, e.g.: arthropoda_odb10, vertebrata_odb10, mammalia_odb10, aves_odb10, tetrapoda_odb10 ...",
             "content_id": null,
             "errors": null,
             "id": 6,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "lineage for BUSCO, e.g.: arthropoda, vertebrata, mammalia, aves, tetrapoda ...",
+                    "description": "lineage for BUSCO, e.g.: arthropoda_odb10, vertebrata_odb10, mammalia_odb10, aves_odb10, tetrapoda_odb10 ...",
                     "name": "lineage"
                 }
             ],
@@ -194,8 +194,8 @@
             "name": "Input parameter",
             "outputs": [],
             "position": {
-                "left": 2242.2097928642456,
-                "top": 864.6249967018933
+                "left": 2261.4264768568532,
+                "top": 877.4623640796353
             },
             "tool_id": null,
             "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
@@ -221,8 +221,8 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 2828.7598424121634,
-                "top": 703.0590226532021
+                "left": 2782.753696440919,
+                "top": 762.5339460184359
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -253,8 +253,8 @@
                 }
             ],
             "position": {
-                "left": 540.1489909246199,
-                "top": 49.88813411196679
+                "left": 547.3417957022536,
+                "top": 0
             },
             "post_job_actions": {
                 "HideDatasetActionout_fa": {
@@ -299,7 +299,7 @@
             ],
             "position": {
                 "left": 255.61370642749128,
-                "top": 405.37234720395986
+                "top": 381.17288941414427
             },
             "post_job_actions": {
                 "HideDatasetActioninteger_param": {
@@ -338,7 +338,7 @@
             ],
             "position": {
                 "left": 272.48858564438825,
-                "top": 880.2854498198041
+                "top": 856.0859920299885
             },
             "post_job_actions": {
                 "HideDatasetActioninteger_param": {
@@ -377,7 +377,7 @@
             ],
             "position": {
                 "left": 486.39716844852626,
-                "top": 1401.9653358102598
+                "top": 1377.765878020444
             },
             "post_job_actions": {
                 "HideDatasetActionout_fa": {
@@ -422,7 +422,7 @@
             ],
             "position": {
                 "left": 1944.7565482123944,
-                "top": 866.7500114916475
+                "top": 842.5505537018319
             },
             "post_job_actions": {
                 "HideDatasetActioninteger_param": {
@@ -465,8 +465,8 @@
                 }
             ],
             "position": {
-                "left": 866.3537718253018,
-                "top": 179.80666783124377
+                "left": 865.7581609599055,
+                "top": 120.78851397355461
             },
             "post_job_actions": {
                 "HideDatasetActionsplit_fasta": {
@@ -514,13 +514,20 @@
                 }
             ],
             "position": {
-                "left": 869.0153839902872,
-                "top": 328.4501592075299
+                "left": 863.2044522477452,
+                "top": 254.00935947204033
             },
             "post_job_actions": {
                 "HideDatasetActionalignment_output": {
                     "action_arguments": {},
                     "action_type": "HideDatasetAction",
+                    "output_name": "alignment_output"
+                },
+                "RemoveTagDatasetActionalignment_output": {
+                    "action_arguments": {
+                        "tags": "#HiFi,#reads,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
                     "output_name": "alignment_output"
                 }
             },
@@ -531,7 +538,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": null}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"BAM\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": \"asm5\"}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.26+galaxy0",
             "type": "tool",
             "uuid": "4e2f930e-522b-406b-98ae-390fcb436582",
@@ -563,13 +570,20 @@
                 }
             ],
             "position": {
-                "left": 870.1206208664747,
-                "top": 1040.2221328257633
+                "left": 865.3100327270225,
+                "top": 1001.5475888038349
             },
             "post_job_actions": {
                 "HideDatasetActionalignment_output": {
                     "action_arguments": {},
                     "action_type": "HideDatasetAction",
+                    "output_name": "alignment_output"
+                },
+                "RemoveTagDatasetActionalignment_output": {
+                    "action_arguments": {
+                        "tags": "#HiFi,#reads,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
                     "output_name": "alignment_output"
                 }
             },
@@ -580,10 +594,10 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": null}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"BAM\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": \"asm5\"}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.26+galaxy0",
             "type": "tool",
-            "uuid": "c7077b6a-419b-4344-9d62-0d80fddfb041",
+            "uuid": "8ec5b137-ef57-4f12-87c6-bc55b0a2bd4f",
             "when": null,
             "workflow_outputs": []
         },
@@ -608,8 +622,8 @@
                 }
             ],
             "position": {
-                "left": 873.9086909641325,
-                "top": 1242.5959851258585
+                "left": 867.8225138466174,
+                "top": 1251.922311587086
             },
             "post_job_actions": {
                 "HideDatasetActionsplit_fasta": {
@@ -658,7 +672,7 @@
             ],
             "position": {
                 "left": 1179.7112568012228,
-                "top": 177.48438173993415
+                "top": 153.28492395011853
             },
             "post_job_actions": {
                 "HideDatasetActionalignment_output": {
@@ -674,7 +688,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": null}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"BAM\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": \"self-homology\"}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.26+galaxy0",
             "type": "tool",
             "uuid": "965231ba-e6c8-4517-bfaf-a85f4d747bc6",
@@ -730,10 +744,43 @@
                 }
             ],
             "position": {
-                "left": 1190.0536124644043,
-                "top": 431.79724908192446
+                "left": 1191.6406362539315,
+                "top": 401.2709533351701
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "HideDatasetActioncalcuts_cutoff": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "calcuts_cutoff"
+                },
+                "HideDatasetActioncalcuts_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "calcuts_log"
+                },
+                "HideDatasetActionpbcstat_cov": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "pbcstat_cov"
+                },
+                "HideDatasetActionpbcstat_wig": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "pbcstat_wig"
+                },
+                "HideDatasetActionstat_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "stat_file"
+                },
+                "TagDatasetActionhist": {
+                    "action_arguments": {
+                        "tags": "purge_hist_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hist"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "e9bd16ba5ebd",
@@ -797,10 +844,43 @@
                 }
             ],
             "position": {
-                "left": 1185.8474924395646,
-                "top": 853.2093523695078
+                "left": 1194.0475041097502,
+                "top": 826.1297684678649
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "HideDatasetActioncalcuts_cutoff": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "calcuts_cutoff"
+                },
+                "HideDatasetActioncalcuts_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "calcuts_log"
+                },
+                "HideDatasetActionpbcstat_cov": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "pbcstat_cov"
+                },
+                "HideDatasetActionpbcstat_wig": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "pbcstat_wig"
+                },
+                "HideDatasetActionstat_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "stat_file"
+                },
+                "TagDatasetActionhist": {
+                    "action_arguments": {
+                        "tags": "purge_hist_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hist"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "e9bd16ba5ebd",
@@ -840,8 +920,8 @@
                 }
             ],
             "position": {
-                "left": 1184.6676584635466,
-                "top": 1254.900633816289
+                "left": 1186.2669039016164,
+                "top": 1232.296765532684
             },
             "post_job_actions": {
                 "HideDatasetActionalignment_output": {
@@ -857,7 +937,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": null}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"BAM\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": \"self-homology\"}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.26+galaxy0",
             "type": "tool",
             "uuid": "efd06d9f-7d2a-45bf-93df-74ba5e275f29",
@@ -894,7 +974,7 @@
             ],
             "position": {
                 "left": 1562.285646608157,
-                "top": 186.23213957512607
+                "top": 162.03268178531044
             },
             "post_job_actions": {
                 "HideDatasetActionpurge_dups_bed": {
@@ -947,7 +1027,7 @@
             ],
             "position": {
                 "left": 1573.853747623694,
-                "top": 1245.449270620295
+                "top": 1221.2498128304792
             },
             "post_job_actions": {
                 "HideDatasetActionpurge_dups_bed": {
@@ -999,21 +1079,40 @@
                 }
             ],
             "position": {
-                "left": 1862.006629130679,
-                "top": 83.73438836302329
+                "left": 1872.875074509089,
+                "top": 32.128668272998155
             },
             "post_job_actions": {
+                "HideDatasetActionget_seqs_hap": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "get_seqs_hap"
+                },
                 "HideDatasetActionget_seqs_purged": {
                     "action_arguments": {},
                     "action_type": "HideDatasetAction",
                     "output_name": "get_seqs_purged"
                 },
+                "RemoveTagDatasetActionget_seqs_hap": {
+                    "action_arguments": {
+                        "tags": "#contig"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "get_seqs_hap"
+                },
                 "TagDatasetActionget_seqs_hap": {
                     "action_arguments": {
-                        "tags": "#hap1,haplotypes"
+                        "tags": "haplotypes"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "get_seqs_hap"
+                },
+                "TagDatasetActionget_seqs_purged": {
+                    "action_arguments": {
+                        "tags": "#purged"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "get_seqs_purged"
                 }
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0",
@@ -1059,8 +1158,8 @@
                 }
             ],
             "position": {
-                "left": 1824.1002730854107,
-                "top": 1435.4375254261424
+                "left": 1824.09365805431,
+                "top": 1411.2380671985459
             },
             "post_job_actions": {
                 "HideDatasetActionget_seqs_purged": {
@@ -1068,12 +1167,26 @@
                     "action_type": "HideDatasetAction",
                     "output_name": "get_seqs_purged"
                 },
+                "RemoveTagDatasetActionget_seqs_hap": {
+                    "action_arguments": {
+                        "tags": "#contig"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "get_seqs_hap"
+                },
                 "TagDatasetActionget_seqs_hap": {
                     "action_arguments": {
-                        "tags": "#hap2,haplotypes"
+                        "tags": "haplotypes"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "get_seqs_hap"
+                },
+                "TagDatasetActionget_seqs_purged": {
+                    "action_arguments": {
+                        "tags": "#purged"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "get_seqs_purged"
                 }
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0",
@@ -1116,8 +1229,8 @@
                 }
             ],
             "position": {
-                "left": 2250.7878001239765,
-                "top": 0
+                "left": 2219.920796058188,
+                "top": 11.060220397181407
             },
             "post_job_actions": {
                 "ChangeDatatypeActionoutput": {
@@ -1125,13 +1238,6 @@
                         "newtype": "gfa1"
                     },
                     "action_type": "ChangeDatatypeAction",
-                    "output_name": "output"
-                },
-                "TagDatasetActionoutput": {
-                    "action_arguments": {
-                        "tags": "#hap1,#purged"
-                    },
-                    "action_type": "TagDatasetAction",
                     "output_name": "output"
                 }
             },
@@ -1174,13 +1280,13 @@
                 }
             ],
             "position": {
-                "left": 2253.4733071036076,
-                "top": 545.4360418563062
+                "left": 2250.2510862965637,
+                "top": 487.4373084094492
             },
             "post_job_actions": {
                 "TagDatasetActionstats": {
                     "action_arguments": {
-                        "tags": "#hap1,#purged,asm_stats"
+                        "tags": "#QC,asm_stats"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "stats"
@@ -1243,34 +1349,34 @@
                 }
             ],
             "position": {
-                "left": 2662.6472034663325,
-                "top": 220.38125397011711
+                "left": 2654.5893900566275,
+                "top": 192.9397964389482
             },
             "post_job_actions": {
                 "TagDatasetActionbusco_missing": {
                     "action_arguments": {
-                        "tags": "busco_mis,#hap1,#purged,#QC"
+                        "tags": "busco_mis,#QC"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "busco_missing"
                 },
                 "TagDatasetActionbusco_sum": {
                     "action_arguments": {
-                        "tags": "busco_sum,#hap1,#purged,#QC"
+                        "tags": "busco_sum,#QC"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "busco_sum"
                 },
                 "TagDatasetActionbusco_table": {
                     "action_arguments": {
-                        "tags": "busco_tab,#hap1,#purged,#QC"
+                        "tags": "busco_tab,#QC"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "busco_table"
                 },
                 "TagDatasetActionsummary_image": {
                     "action_arguments": {
-                        "tags": "busco_png,#hap1,#purged,#QC"
+                        "tags": "busco_png,#QC"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "summary_image"
@@ -1288,18 +1394,7 @@
             "type": "tool",
             "uuid": "7eac64a7-3b94-44be-a6a1-722d81bab4b5",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "summary_image",
-                    "uuid": "09019c93-ba99-4a1e-8f51-f5bce1d26202"
-                },
-                {
-                    "label": null,
-                    "output_name": "busco_sum",
-                    "uuid": "5ec81edc-fe80-4df1-995f-8456eaf8a84d"
-                }
-            ]
+            "workflow_outputs": []
         },
         "28": {
             "annotation": "",
@@ -1326,13 +1421,13 @@
                 }
             ],
             "position": {
-                "left": 2280.1316055591337,
-                "top": 1198.5937745135013
+                "left": 2280.1250574778105,
+                "top": 1174.394299837728
             },
             "post_job_actions": {
                 "TagDatasetActionstats": {
                     "action_arguments": {
-                        "tags": "#hap2,#purged,asm_stats"
+                        "tags": "#QC,asm_stats"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "stats"
@@ -1385,7 +1480,7 @@
             ],
             "position": {
                 "left": 2258.3189852832015,
-                "top": 1722.9531190242103
+                "top": 1698.7536612343945
             },
             "post_job_actions": {
                 "ChangeDatatypeActionoutput": {
@@ -1393,13 +1488,6 @@
                         "newtype": "gfa1"
                     },
                     "action_type": "ChangeDatatypeAction",
-                    "output_name": "output"
-                },
-                "TagDatasetActionoutput": {
-                    "action_arguments": {
-                        "tags": "#hap2,#purged"
-                    },
-                    "action_type": "TagDatasetAction",
                     "output_name": "output"
                 }
             },
@@ -1460,34 +1548,34 @@
                 }
             ],
             "position": {
-                "left": 2666.428410277363,
-                "top": 1568.7531411977889
+                "left": 2655.1785246187023,
+                "top": 1567.0545857382097
             },
             "post_job_actions": {
                 "TagDatasetActionbusco_missing": {
                     "action_arguments": {
-                        "tags": "busco_mis,#hap2,#purged,#QC"
+                        "tags": "busco_mis,#QC"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "busco_missing"
                 },
                 "TagDatasetActionbusco_sum": {
                     "action_arguments": {
-                        "tags": "busco_sum,#hap2,#purged,#QC"
+                        "tags": "busco_sum,#QC"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "busco_sum"
                 },
                 "TagDatasetActionbusco_table": {
                     "action_arguments": {
-                        "tags": "busco_tab,#hap2,#purged,#QC"
+                        "tags": "busco_tab,#QC"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "busco_table"
                 },
                 "TagDatasetActionsummary_image": {
                     "action_arguments": {
-                        "tags": "busco_png,#hap2,#purged,#QC"
+                        "tags": "busco_png,#QC"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "summary_image"
@@ -1552,30 +1640,41 @@
                 {
                     "name": "stats_files",
                     "type": "input"
+                },
+                {
+                    "name": "log_file",
+                    "type": "txt"
                 }
             ],
             "position": {
-                "left": 3112.4090320554665,
-                "top": 900.593732678147
+                "left": 3024.3159787960976,
+                "top": 878.7883003645114
             },
             "post_job_actions": {
+                "TagDatasetActionlog_file": {
+                    "action_arguments": {
+                        "tags": "merqury_log"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "log_file"
+                },
                 "TagDatasetActionpng_files": {
                     "action_arguments": {
-                        "tags": "#hap1,#hap2,#purged,#QC,merqury_png"
+                        "tags": "#QC,merqury_png"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "png_files"
                 },
                 "TagDatasetActionqv_files": {
                     "action_arguments": {
-                        "tags": "#hap1,#hap2,#purged,#QC,merqury_qv"
+                        "tags": "#QC,merqury_qv"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "qv_files"
                 },
                 "TagDatasetActionstats_files": {
                     "action_arguments": {
-                        "tags": "#hap1,#hap2,#purged,#QC,merqury_completeness"
+                        "tags": "#QC,merqury_completeness"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "stats_files"
@@ -1588,7 +1687,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"label\": \"output_merqury\", \"mode\": {\"options\": \"default\", \"__current_case__\": 0, \"meryldb_F1\": {\"__class__\": \"ConnectedValue\"}, \"assembly_options\": {\"number_assemblies\": \"two\", \"__current_case__\": 1, \"assembly_01\": {\"__class__\": \"ConnectedValue\"}, \"assembly_02\": {\"__class__\": \"ConnectedValue\"}}}, \"output_add_headers\": false, \"output_selector\": [\"qv\", \"plots\", \"stats\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"label\": \"output_merqury\", \"mode\": {\"options\": \"default\", \"__current_case__\": 0, \"meryldb_F1\": {\"__class__\": \"ConnectedValue\"}, \"assembly_options\": {\"number_assemblies\": \"two\", \"__current_case__\": 1, \"assembly_01\": {\"__class__\": \"ConnectedValue\"}, \"assembly_02\": {\"__class__\": \"ConnectedValue\"}}}, \"output_add_headers\": false, \"output_selector\": [\"qv\", \"plots\", \"stats\", \"log\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.3+galaxy3",
             "type": "tool",
             "uuid": "72b6adaf-86b7-40d3-b91c-2dfaf5df88ba",
@@ -1601,13 +1700,13 @@
                 },
                 {
                     "label": null,
-                    "output_name": "stats_files",
-                    "uuid": "915b182c-b74a-4ef6-9c23-a384bac6ae7b"
+                    "output_name": "qv_files",
+                    "uuid": "4b20e7d3-0130-4dc0-82fe-c08fcf0218cb"
                 },
                 {
                     "label": null,
-                    "output_name": "qv_files",
-                    "uuid": "4b20e7d3-0130-4dc0-82fe-c08fcf0218cb"
+                    "output_name": "stats_files",
+                    "uuid": "915b182c-b74a-4ef6-9c23-a384bac6ae7b"
                 }
             ]
         }
@@ -1615,8 +1714,8 @@
     "tags": [
         "name:ERGA",
         "name:ASSEMBLY+QC",
-        "name:HIFI"
+        "name:HiFi"
     ],
-    "uuid": "fc450df6-e5b0-4872-8422-78d40e56bcfc",
-    "version": 25
+    "uuid": "1609ccdb-6378-4ffd-8c1c-d8e51f3f7872",
+    "version": 48
 }
