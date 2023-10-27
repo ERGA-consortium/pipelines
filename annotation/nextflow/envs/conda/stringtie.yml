@@ -1,0 +1,5 @@
+name: stringtie
+channels:
+  - bioconda
+dependencies:
+  - stringtie=2.2.1
