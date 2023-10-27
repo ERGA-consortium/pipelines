@@ -1,0 +1,7 @@
+name: unix
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - gzip
+  - coreutils

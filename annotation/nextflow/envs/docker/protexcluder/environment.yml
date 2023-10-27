@@ -1,0 +1,6 @@
+name: protexcluder
+channels:
+  - nanjiang
+  - bioconda
+dependencies:
+  - protexcluder=1.2

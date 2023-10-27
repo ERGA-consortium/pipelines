@@ -1,0 +1,5 @@
+name: repeatmodeler
+channels:
+  - bioconda
+dependencies:
+  - repeatmodeler=2.0.4

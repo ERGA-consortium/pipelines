@@ -1,0 +1,8 @@
+name: star
+channels:
+  - bioconda
+  - anaconda
+dependencies:
+  - star=2.7.9a
+  - samtools=1.16.1
+  - gawk=5.1.0

@@ -1,0 +1,55 @@
+title: null
+subtitle: null
+intro_text: null
+report_comment: null
+report_header_info: null
+show_analysis_paths: True
+show_analysis_time: True
+export_plots: true
+base_count_prefix: "Mb"
+base_count_desc: "millions"
+export_plot_formats:
+  - "png"
+  - "svg"
+  - "pdf"
+fn_clean_exts:
+  - ".gz"
+  - ".fastq"
+  - ".fq"
+  - ".fa"
+  - ".fasta"
+
+module_order:    
+    - fastqc:
+        name: 'FastQC (raw)'
+        anchor: 'fastqc_raw'
+        path_filters_exclude:
+            - '*.trimmed_fastqc.zip'
+    - fastp:
+        anchor: 'fastp'
+    - fastqc:
+        name: 'FastQC (trimmed)'
+        anchor: 'fastqc_trimmed'
+        path_filters:
+            - '*.trimmed_fastqc.zip'   
+    - star:
+        anchor: 'star'
+    - stringtie:
+        anchor: 'stringtie'
+    - busco:
+        anchor: 'busco'
+    - custom_data
+
+report_section_order:
+    fastqc_raw:
+        order: 1000
+    fastp:
+        after: fastqc_raw
+    fastqc_trimmed:
+        after: fastp
+    star:
+        after: fastqc_trimmed
+    stringtie:
+        after: star
+    busco:
+        after: stringtie

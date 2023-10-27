@@ -1,0 +1,5 @@
+name: repeatmasker
+channels:
+  - bioconda
+dependencies:
+  - repeatmasker=4.1.5
