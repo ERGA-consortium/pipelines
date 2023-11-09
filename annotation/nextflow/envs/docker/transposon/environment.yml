@@ -1,0 +1,6 @@
+name: transposon
+channels:
+  - nanjiang
+  - bioconda
+dependencies:
+  - transposonpsi=1.0.0
