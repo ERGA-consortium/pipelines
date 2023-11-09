@@ -3,7 +3,7 @@ Galaxy Workflows for scaffolding assemblies with HiC.
 
 ## Hap1/Hap2 assemblies
 The workflow takes trimmed HiC forward and reverse reads, and Hap1/Hap2 assemblies to produce Hap1 and Hap2 scaffolded assemblies using YaHS. It also runs all the QC analyses (gfastats, BUSCO, and Merqury).
-![ScafHap1Hap2](pics/Yahs_Hap1Hap2_2309.png)
+![ScafHap1Hap2](pics/Scaf_yahs_h1h2_2309.png)
 
 ## Hap1 or Pri assemblies
 \[in preparation]
