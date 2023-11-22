@@ -95,6 +95,9 @@ def helpMSG() {
     ${c_dim}--buscodb${c_reset}                   BUSCO database used for AUGUSTUS training and evaluation. [default: $params.buscodb]
     ${c_dim}--buscoseed${c_reset}                 AUGUSTUS pre-trained species to start BUSCO. Will be override if rnaseq data is provided. [default: $params.buscoseed]
 
+    ${c_yellow}BRAKER params:${c_reset}
+    ${c_dim}--run_braker${c_reset}                Whether to use BRAKER for gene prediction. [default: $params.run_braker]
+
     ${c_yellow}Skipping options:${c_reset}
     ${c_dim}--skip_rename${c_reset}               Skip renaming genome fasta file by funannotate sort. [default: $params.skip_rename]
     ${c_dim}--skip_all_masking${c_reset}          Skip all masking processes, please be sure that your --genome input is soft-masked before triggering this parameter. [default: $params.skip_all_masking]

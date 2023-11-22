@@ -6,15 +6,25 @@ The following programs are required to run the workflow and the listed version w
 
 `nextflow v23.04.0 or higher`
 
-`conda` or `singularity`
+`singularity`
 
-`docker` (have not been tested)
+`conda` and `mamba` (currently, having problem with Funannotate and BRAKER installation)
+
+`docker` (have not been tested but in theory should work fine)
 
 ## Workflow
 
-The pipeline is based on `Funannotate` and/or `BRAKER` and was tested on these following datasets: 
+The pipeline is based on `Funannotate` or `BRAKER` and was initially developed and tested on the two datasets:
 - Drosophila melanogaster: [https://doi.org/10.5281/zenodo.8013373](https://doi.org/10.5281/zenodo.8013373)
-- Pocillopora meandrina
+- *Pocillopora* cf. *effusa*: [https://www.ncbi.nlm.nih.gov/biosample/26809107](https://www.ncbi.nlm.nih.gov/biosample/26809107)
+
+Then, it was further tested on these species during the [BioHackathon 2023 - project 20](https://github.com/elixir-europe/biohackathon-projects-2023/tree/main/20)
+
+- Helleia helle
+- Homo sapiens chrom 19
+- Melampus jaumei
+- Phakellia ventilabrum
+- Trifolium dubium
 
 ### Input data
 
@@ -47,6 +57,20 @@ The main pipeline is divided into five different subworkflows.
 - RepeatMasker report containing quantity of masked sequence and distribution among TE families
 - Protein-coding gene annotation file in gff3 format
 - BUSCO summary of annotated sequences
+
+## Performance of the workflow on annotating difference eukaryote genomes
+
+The following table is the result predicted by ANNOTATO on difference species during the [Europe BioHackathon 2023](https://github.com/elixir-europe/biohackathon-projects-2023/tree/main/20).
+
+| Species                    | Genome size | N.Genes | N.Exons | N.mRNA | BUSCO lineage | BUSCO score                             | OMArk Completeness                                                 | OMArk Consistency                                                                       |
+| :---:                      | :---:       | :---:   | :---:   | :---:  | :---:         | :---:                                   | :---:                                                              | :---:                                                                                   |
+| Drosophila melanogaster    | 143M        | 14,753  | 57,343  | 14,499 | diptera       | C:96.1%[S:95.6%,D:0.5%],F:1.2%,M:2.7%   | melanogaster subgroup, C:90.38%[S:84.32%,D:6.06%],M:9.62%,,n:12442 | A:94.21%[P:4.05%,F:7.28%],I:1.61%[P:0.5%,F:0.42%],C:0.00%[P:0.00%,F:0.00%],U:4.19%      |
+| Helleia helle              | 547M        | 37,367  | 139,302 | 28,445 | lepidoptera   | C:74.6%[S:73.4%,D:1.2%],F:5.4%,M:20.0%  | Papilionidea, C:82.04%[S:66.12%,D:15.92%],M:17.96%, n:7939         | A:44.78%[P:14.41%,F:6.02%],I:3.53%[P:2.1%,F:0.7%],C:0.00%[P:0.00%,F:0.00%],U:51.69%     |
+| Homo sapiens chrom 19      | 58M         | 1,872   | 11,937  | 1,862  | primates      | C:5.0%[S:4.8%,D:0.2%],F:0.5%,M:94.5%    | Hominidae, C:8.57%[S:7.74%,D:0.83%],M:91.43%, n=17843              | A:87.54%[P:12.73%,F:13.1%],I:4.78%[P:1.5%,F:2.04%],C:0.00%[P:0.00%,F:0.00%],U:7.68%     |
+| Melampus jaumei            | 958M        | 61,128  | 335,483 | 60,720 | mollusca      | C:80.4%[S:67.2%,D:13.2%],F:3.8%,M:15.8% | Lophotrochozoa, C: 92.5%[S: 66.29%, D: 26.21%], M:7.5%, n:2373     | A:41.45%[P:15.72%,F:9.97%],I:15.97%[P:10.68%,F:3.07%],C:0.00%[P:0.00%,F:0.00%],U:42.57% |
+| Phakellia ventilabrum      | 186M        | 19,073  | 157,441 | 18,855 | metazoa       | C:80.9%[S:79.2%,D:1.7%],F:6.5%,M:12.6%  | Metazoa, C:86.79%[S:76.9%,D:9.9%],M:13.21% , n:3021                | A:53.81%[P:18.92%,F:5.06%],I:5.0%[P:2.7%,F:0.68%],C:0.00%[P:0.00%,F:0.00%],U:41.19%     |
+| *Pocillopora* cf. *effusa* | 347M        | 35,103  | 230,901 | 33,086 | metazoa       | C:95.1%[S:92.2%,D:2.9%],F:1.7%,M:3.2%   | Eumetazoa, C:94.16%[S:84.3%,D:9.86%],M:5.84%,n:3255                | A:52.94%[P:22.30%,F:3.69%],I:3.44%[P:2.08%,F:0.28%],C:0.00%[P:0.00%,F:0.00%],U:43.62%   |
+| Trifolium dubium           | 679M        | 78,810  | 354,662 | 77,763 | fabales       | C:95.1%[S:19.5%,D:75.6%],F:1.5%,M:3.4%  | NPAAA clade, C:94.58%[S:19.21%,D:75.38%],M:5.42%,n:15412           | A:71.99%[P:11.03%,F:6.63%],I:2.77%[P:1.66%,F:0.52%],C:0.00%[P:0.00%,F:0.00%],U:25.23%   |
 
 ## Running Annotato
 
@@ -142,6 +166,9 @@ Funannotate params:
 --buscodb                      BUSCO database used for AUGUSTUS training and evaluation. [default: eukaryota]
 --buscoseed                    AUGUSTUS pre-trained species to start BUSCO. Will be override if rnaseq data is provided. [default: null]
 
+Braker params:
+--run_braker                   Whether to use BRAKER for gene prediction. [default: false]
+
 Skipping options:
 --skip_rename                  Skip renaming genome fasta file by funannotate sort. 
 --skip_all_masking             Skip all masking processes, please be sure that your --genome input is soft-masked before triggering this 
@@ -168,4 +195,7 @@ Per default: -profile slurm,singularity is executed.
 ```
 
 ## Future work
+- Python wrapper function to remove intermediate files
 - Adding functional annotation with `Interproscan` and `eggnog`
+- Adding PASA results to further improve the accuracy of the training
+- Adding custom parameter for both `BRAKER` and `funannotate`
