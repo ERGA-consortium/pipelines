@@ -31,17 +31,17 @@ if (workflow.profile.contains('standard') || workflow.profile.contains('local'))
     println " "
 }
 
-def folder = new File(params.outdir)
-if ( folder.exists() ) { 
+def outdir = new File(params.outdir)
+if ( outdir.exists() ) { 
     println ""
-    println "\033[0;33mWARNING: Output folder exists. Results will be overwritten, you can adjust the output folder using [--output]\033[0m\n"
+    println "\033[0;33mWARNING: Output folder exists. Results will be overwritten, you can adjust the output folder using [--outdir]\033[0m\n"
 }
 
-def checkTmp = file(params.tmpdir)
+def checkTmp = new File(params.tmpdir)
 if ( !checkTmp.exists() ) {
-  exit 0
   println ""
-  println "\033[0;33mWARNING: ${params.tmpdir} does not exists, please create it.\033[0m\n"
+  println "\033[0;33mWARNING: ${params.tmpdir} does not exists, creating it.\033[0m\n"
+  checkTmp.mkdirs()
 }
 
 /*
@@ -49,6 +49,7 @@ if ( !checkTmp.exists() ) {
 */
 
 workflow {
+  println "START THE ANALYSIS\n"
 	ANNOTATO()
 }
 

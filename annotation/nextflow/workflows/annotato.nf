@@ -131,6 +131,7 @@ include { GENE_PREDICTION_BRAKER          } from '../modules/local/braker/Braker
 include { FUNANNOTATE_CLEAN               } from '../modules/local/funannotate/FunannotateClean.nf'
 include { FUNANNOTATE_SORT                } from '../modules/local/funannotate/FunannotateSort.nf'
 include { STRINGTIE                       } from '../modules/local/stringtie/Stringtie.nf'
+include { RENAMEGFF                       } from '../modules/local/utils/RenameGff.nf'
 include { MERGEBAM                        } from '../modules/local/utils/MergeBam.nf'
 include { MULTIQC                         } from '../modules/local/qc/MultiQC.nf'
 include { BUSCO                           } from '../modules/local/busco/Busco.nf'
@@ -176,17 +177,17 @@ workflow ANNOTATO {
     // Sort and rename contigs name to be shorter than 16 bases
     if ( !params.skip_rename ) {
         FUNANNOTATE_SORT ( ch_clean_genome )
-        ch_versions = ch_versions.mix(FUNANNOTATE_SORT.out.versions.first().ifEmpty(null))
-        ch_genome_sort = FUNANNOTATE_SORT.out.fasta
+        ch_versions = ch_versions.mix(FUNANNOTATE_SORT.out.versions.ifEmpty(null))
+        ch_genome_sort = FUNANNOTATE_SORT.out.fasta.collect()
     } else {
-        ch_genome_sort = ch_clean_genome
+        ch_genome_sort = ch_clean_genome.collect()
     }
 
     // Processing RNASeq data
     if ( params.rnaseq ) {
         if ( !params.skip_read_preprocessing) {
             PREPROCESS_RNA ( ch_rnaseq )
-            ch_versions = ch_versions.mix(PREPROCESS_RNA.out.versions.first().ifEmpty(null))
+            ch_versions = ch_versions.mix(PREPROCESS_RNA.out.versions.ifEmpty(null))
             ch_multiqc_files = PREPROCESS_RNA.out.multiqc_files
             ch_trimmed_reads = PREPROCESS_RNA.out.trimmed_reads
         } else {
@@ -209,13 +210,13 @@ workflow ANNOTATO {
         else {
             if ( shortCount > 0 ) {
                 PROCESS_RNA_STAR ( ch_genome_sort, ch_shortReads )
-                ch_versions = ch_versions.mix(PROCESS_RNA_STAR.out.versions.first().ifEmpty(null))
+                ch_versions = ch_versions.mix(PROCESS_RNA_STAR.out.versions.ifEmpty(null))
                 ch_bam_short = PROCESS_RNA_STAR.out.bam
                 ch_multiqc_files = ch_multiqc_files.mix(PROCESS_RNA_STAR.out.multiqc_files)
 
                 CATANDSORTSHORT ( ch_bam_short.collect(), "all_short.sorted.bam")
                 ch_all_bam_short = CATANDSORTSHORT.out.all_bam
-                ch_versions = ch_versions.mix(CATANDSORTSHORT.out.versions.first().ifEmpty(null))
+                ch_versions = ch_versions.mix(CATANDSORTSHORT.out.versions.ifEmpty(null))
                 no_all_bam_short = false
             } else {
                 no_all_bam_short = true
@@ -231,13 +232,13 @@ workflow ANNOTATO {
         } else {
             if ( longCount > 0 ) {
                 PROCESS_RNA_MINIMAP2 ( ch_genome_sort, ch_longReads )
-                ch_versions = ch_versions.mix(PROCESS_RNA_MINIMAP2.out.versions.first().ifEmpty(null))
+                ch_versions = ch_versions.mix(PROCESS_RNA_MINIMAP2.out.versions.ifEmpty(null))
                 ch_bam_long = PROCESS_RNA_MINIMAP2.out.bam
                 ch_multiqc_files = ch_multiqc_files.mix(PROCESS_RNA_MINIMAP2.out.multiqc_files)
 
                 CATANDSORTLONG ( ch_bam_long.collect(), "all_long.sorted.bam")
                 ch_all_bam_long = CATANDSORTLONG.out.all_bam
-                ch_versions = ch_versions.mix(CATANDSORTLONG.out.versions.first().ifEmpty(null))
+                ch_versions = ch_versions.mix(CATANDSORTLONG.out.versions.ifEmpty(null))
                 no_all_bam_long = false
             } else {
                 no_all_bam_long = true
@@ -250,21 +251,21 @@ workflow ANNOTATO {
 
         // Stringtie
         STRINGTIE ( stringtie_all_bam_short, stringtie_all_bam_long )
-        ch_versions = ch_versions.mix(STRINGTIE.out.versions.first().ifEmpty(null))
+        ch_versions = ch_versions.mix(STRINGTIE.out.versions.ifEmpty(null))
         ch_stringtie_gtf = STRINGTIE.out.gtf
         ch_multiqc_files = ch_multiqc_files.mix(STRINGTIE.out.log)
 
         // Merge all bam together for downstream analysis
         ch_all_bam = ch_all_bam_short.mix( ch_all_bam_long )
         MERGEBAM ( ch_all_bam.collect() )
-        ch_versions = ch_versions.mix(MERGEBAM.out.versions.first().ifEmpty(null))
+        ch_versions = ch_versions.mix(MERGEBAM.out.versions.ifEmpty(null))
         ch_rna_bam = MERGEBAM.out.all_bam  
 
     } else {
         if ( params.long_rna_bam && params.short_rna_bam ) {
             ch_all_bam = ch_long_rna_bam.mix( ch_short_rna_bam )
             MERGEBAM ( ch_all_bam.collect() )
-            ch_versions = ch_versions.mix(MERGEBAM.out.versions.first().ifEmpty(null))
+            ch_versions = ch_versions.mix(MERGEBAM.out.versions.ifEmpty(null))
             ch_rna_bam = MERGEBAM.out.all_bam
         } else if ( params.long_rna_bam && !params.short_rna_bam ) {
             ch_rna_bam = ch_long_rna_bam
@@ -280,7 +281,7 @@ workflow ANNOTATO {
             ch_long_rna_bam_stringtie  = params.long_rna_bam ? ch_long_rna_bam : "EMPTY"
 
             STRINGTIE ( ch_short_rna_bam_stringtie, ch_long_rna_bam_stringtie )
-            ch_versions = ch_versions.mix(STRINGTIE.out.versions.first().ifEmpty(null))
+            ch_versions = ch_versions.mix(STRINGTIE.out.versions.ifEmpty(null))
             ch_stringtie_gtf = STRINGTIE.out.gtf
         }
     }
@@ -289,7 +290,7 @@ workflow ANNOTATO {
     if ( !params.skip_all_masking ) {
         GENOME_MASKING ( ch_genome_sort, val_species, ch_protein )
         ch_masked_genome = GENOME_MASKING.out.ch_masked_genome
-        ch_versions = ch_versions.mix(GENOME_MASKING.out.versions.first().ifEmpty(null))
+        ch_versions = ch_versions.mix(GENOME_MASKING.out.versions.ifEmpty(null))
     } else {
         ch_masked_genome = ch_genome_sort
     }
@@ -298,18 +299,26 @@ workflow ANNOTATO {
 
     if ( params.run_funannotate && !params.run_braker ) {
         GENE_PREDICTION_FUNANNOTATE ( ch_masked_genome, ch_protein, val_species, ch_rna_bam, ch_stringtie_gtf )
-        ch_versions = ch_versions.mix(GENE_PREDICTION_FUNANNOTATE.out.versions.first().ifEmpty(null))
+        ch_versions = ch_versions.mix(GENE_PREDICTION_FUNANNOTATE.out.versions.ifEmpty(null))
         ch_predict_prot = GENE_PREDICTION_FUNANNOTATE.out.protseq
+        ch_output_gff = GENE_PREDICTION_FUNANNOTATE.out.gff
     } else {
         GENE_PREDICTION_BRAKER ( ch_masked_genome, ch_protein, val_species, ch_rna_bam )
         ch_predict_prot = GENE_PREDICTION_BRAKER.out.protseq
-        ch_versions = ch_versions.mix(GENE_PREDICTION_BRAKER.out.versions.first().ifEmpty(null))
+        ch_versions = ch_versions.mix(GENE_PREDICTION_BRAKER.out.versions.ifEmpty(null))
+        ch_output_gff = GENE_PREDICTION_BRAKER.out.gff
     }
 
     // Evaluate using BUSCO
     BUSCO ( ch_predict_prot )
-    ch_versions = ch_versions.mix(BUSCO.out.versions.first().ifEmpty(null))
+    ch_versions = ch_versions.mix(BUSCO.out.versions.ifEmpty(null))
     ch_multiqc_files = ch_multiqc_files.mix(BUSCO.out.results)
+
+    // Rename contig back to the original version
+    if ( !params.skip_rename ) {
+        RENAMEGFF ( FUNANNOTATE_SORT.out.lookuptab, ch_output_gff )
+        ch_versions = ch_versions.mix(RENAMEGFF.out.versions.ifEmpty(null))
+    } 
 
     // Dump software versions
     //CUSTOM_DUMPSOFTWAREVERSIONS ( ch_versions.unique().collectFile(name: 'collated_versions.yml') )
@@ -318,6 +327,7 @@ workflow ANNOTATO {
     // MultiQC
     ch_multiqc_config = Channel.fromPath("${projectDir}/assets/multiqc_config.yml", checkIfExists: true)
     MULTIQC ( ch_multiqc_files.collect(), ch_multiqc_config )
+
 
     // Running functional annotation
     //if ( !params.skip_functional_annotation ) {
