@@ -1,18 +1,25 @@
 # ANNOTATO - Annotation workflow To Annotate Them Oll
 
-## Prerequisites
+- [ANNOTATO - Annotation workflow To Annotate Them Oll](#annotato---annotation-workflow-to-annotate-them-oll)
+  - [Overview of the workflow](#overview-of-the-workflow)
+    - [Input data](#input-data)
+    - [Pipeline steps](#pipeline-steps)
+    - [Output data](#output-data)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running ANNOTATO](#running-annotato)
+    - [Before running the pipeline (IMPORTANT)](#before-running-the-pipeline-important)
+    - [Without RNASeq and protein data](#without-rnaseq-and-protein-data)
+    - [Running ANNOTATO with RNASeq data](#running-annotato-with-rnaseq-data)
+    - [Running ANNOTATO with protein data](#running-annotato-with-protein-data)
+    - [Running ANNOTATO with both protein and RNASeq data](#running-annotato-with-both-protein-and-rnaseq-data)
+    - [Running ANNOTATO with params.json](#running-annotato-with-paramsjson)
+    - [Other parameters for running the analysis](#other-parameters-for-running-the-analysis)
+  - [Evaluating output GFF to the exon level](#evaluating-output-gff-to-the-exon-level)
+  - [Performance of the workflow on annotating difference eukaryote genomes](#performance-of-the-workflow-on-annotating-difference-eukaryote-genomes)
+  - [Future work](#future-work)
 
-The following programs are required to run the workflow and the listed version were tested. 
-
-`nextflow v23.04.0 or higher`
-
-`singularity`
-
-`conda` and `mamba` (currently, having problem with Funannotate and BRAKER installation)
-
-`docker` (have not been tested but in theory should work fine)
-
-## Workflow
+## Overview of the workflow
 
 The pipeline is based on `Funannotate` or `BRAKER` and was initially developed and tested on the two datasets:
 - Drosophila melanogaster: [https://doi.org/10.5281/zenodo.8013373](https://doi.org/10.5281/zenodo.8013373)
@@ -58,23 +65,29 @@ The main pipeline is divided into five different subworkflows.
 - Protein-coding gene annotation file in gff3 format
 - BUSCO summary of annotated sequences
 
-## Performance of the workflow on annotating difference eukaryote genomes
+## Prerequisites
 
-The following table is the result predicted by ANNOTATO on difference species during the [Europe BioHackathon 2023](https://github.com/elixir-europe/biohackathon-projects-2023/tree/main/20).
+The following programs are required to run the workflow and the listed version were tested. 
 
-| Species                    | Genome size | N.Genes | N.Exons | N.mRNA | BUSCO lineage | BUSCO score                             | OMArk Completeness                                                 | OMArk Consistency                                                                       |
-| :---:                      | :---:       | :---:   | :---:   | :---:  | :---:         | :---:                                   | :---:                                                              | :---:                                                                                   |
-| Drosophila melanogaster    | 143M        | 14,753  | 57,343  | 14,499 | diptera       | C:96.1%[S:95.6%,D:0.5%],F:1.2%,M:2.7%   | melanogaster subgroup, C:90.38%[S:84.32%,D:6.06%],M:9.62%,,n:12442 | A:94.21%[P:4.05%,F:7.28%],I:1.61%[P:0.5%,F:0.42%],C:0.00%[P:0.00%,F:0.00%],U:4.19%      |
-| Helleia helle              | 547M        | 37,367  | 139,302 | 28,445 | lepidoptera   | C:74.6%[S:73.4%,D:1.2%],F:5.4%,M:20.0%  | Papilionidea, C:82.04%[S:66.12%,D:15.92%],M:17.96%, n:7939         | A:44.78%[P:14.41%,F:6.02%],I:3.53%[P:2.1%,F:0.7%],C:0.00%[P:0.00%,F:0.00%],U:51.69%     |
-| Homo sapiens chrom 19      | 58M         | 1,872   | 11,937  | 1,862  | primates      | C:5.0%[S:4.8%,D:0.2%],F:0.5%,M:94.5%    | Hominidae, C:8.57%[S:7.74%,D:0.83%],M:91.43%, n=17843              | A:87.54%[P:12.73%,F:13.1%],I:4.78%[P:1.5%,F:2.04%],C:0.00%[P:0.00%,F:0.00%],U:7.68%     |
-| Melampus jaumei            | 958M        | 61,128  | 335,483 | 60,720 | mollusca      | C:80.4%[S:67.2%,D:13.2%],F:3.8%,M:15.8% | Lophotrochozoa, C: 92.5%[S: 66.29%, D: 26.21%], M:7.5%, n:2373     | A:41.45%[P:15.72%,F:9.97%],I:15.97%[P:10.68%,F:3.07%],C:0.00%[P:0.00%,F:0.00%],U:42.57% |
-| Phakellia ventilabrum      | 186M        | 19,073  | 157,441 | 18,855 | metazoa       | C:80.9%[S:79.2%,D:1.7%],F:6.5%,M:12.6%  | Metazoa, C:86.79%[S:76.9%,D:9.9%],M:13.21% , n:3021                | A:53.81%[P:18.92%,F:5.06%],I:5.0%[P:2.7%,F:0.68%],C:0.00%[P:0.00%,F:0.00%],U:41.19%     |
-| *Pocillopora* cf. *effusa* | 347M        | 35,103  | 230,901 | 33,086 | metazoa       | C:95.1%[S:92.2%,D:2.9%],F:1.7%,M:3.2%   | Eumetazoa, C:94.16%[S:84.3%,D:9.86%],M:5.84%,n:3255                | A:52.94%[P:22.30%,F:3.69%],I:3.44%[P:2.08%,F:0.28%],C:0.00%[P:0.00%,F:0.00%],U:43.62%   |
-| Trifolium dubium           | 679M        | 78,810  | 354,662 | 77,763 | fabales       | C:95.1%[S:19.5%,D:75.6%],F:1.5%,M:3.4%  | NPAAA clade, C:94.58%[S:19.21%,D:75.38%],M:5.42%,n:15412           | A:71.99%[P:11.03%,F:6.63%],I:2.77%[P:1.66%,F:0.52%],C:0.00%[P:0.00%,F:0.00%],U:25.23%   |
+`nextflow v23.04.0 or higher`
 
-## Running Annotato
+`singularity`
 
-### Before running the pipeline
+`conda` and `mamba` (currently, having problem with Funannotate and BRAKER installation)
+
+`docker` (have not been tested but in theory should work fine)
+
+## Installation
+
+Simply get the code from github or workflowhub and directly use it for the analysis with `nextflow`.
+
+```
+git clone https://github.com/ERGA-consortium/pipelines/tree/main/annotation/nextflow
+```
+
+## Running ANNOTATO
+
+### Before running the pipeline (IMPORTANT)
 
 One thing with Nextflow is that it is running off a Java Virtual Machine (JVM), and it will try to use all available memory for Nextflow even though it is unnecessary (for workflow management and job control). This will cause much trouble if you run a job on an HPC cluster. Thus, to minimize the effect of it, we need to limit the maximum memory the JVM can use.
 
@@ -96,7 +109,7 @@ nextflow run main.nf --genome /path/to/genome.fasta --species "Abc def" --buscod
 
 The workflow will run Denovo repeat masking on the draft genome, then softmask the repeat region and use the genome to run `funannotate`. Add `--run_braker` to run the genome prediction using `BRAKER` instead.
 
-### Running Annotato with RNASeq data
+### Running ANNOTATO with RNASeq data
 
 When you want to let the workflow run the mapping by itself, uses `input.csv` as input with the link to all `FASTQ` file.
 
@@ -114,7 +127,7 @@ nextflow run main.nf --genome /path/to/genome.fasta[.gz] --short_rna_bam /path/t
 
 **ATTENTION**: One major drawback of the current workflow is that the input genome will be sorted and renamed by the `funannotate sort` function. This is because `AUGUSTUS` and `Funannotate` won't work normally when the header of the input genome is too long and contains weird characters. Therefore, if you want to provide a `bam` file as input instead of the raw `FASTQ`, please run `funannotate sort` on the genome fasta first and then use it as the reference for running alignment. Or in case your genome headers are already shorter than 16 character, please add `--skip_rename` when running the pipeline.
 
-### Running Annotato with protein data
+### Running ANNOTATO with protein data
 
 ```
 nextflow run main.nf --genome /path/to/genome.fasta[.gz] --protein /path/to/protein.fasta[.gz] --species "Abc def" --buscodb 'metazoa' 
@@ -122,12 +135,20 @@ nextflow run main.nf --genome /path/to/genome.fasta[.gz] --protein /path/to/prot
 
 When only protein data is provided, the workflow will run denovo masking then repeat filter with the additional protein data. The masked genome and protein fasta will then be used for gene prediction.
 
-### Running Annotato with both protein and RNASeq data
+### Running ANNOTATO with both protein and RNASeq data
 
 The full pipeline is triggered when both RNASeq data and protein fasta is provided.
 
 ```
 nextflow run main.nf --genome /path/to/genome.fasta[.gz] --protein /path/to/protein.fasta[.gz] --rnaseq /path/to/input.csv --species "Abc def" --buscodb 'metazoa' 
+```
+
+### Running ANNOTATO with params.json
+
+One plus side with Nextflow is that it can use a parameter JSON file called `params.json` to start the analysis pipeline with all required parameters. Please modify the content of the `params.json` according to your need then run the following command.
+
+```
+nextflow run main.nf -params-file params.json
 ```
 
 ### Other parameters for running the analysis
@@ -193,6 +214,63 @@ Engines (choose one):
 
 Per default: -profile slurm,singularity is executed.
 ```
+
+## Evaluating output GFF to the exon level
+
+We provided a script to analyze the output GFF of ANNOTATO (which also could be applied to the GFF file output of other pipelines) to report the number of exons per mRNA/tRNA. To run this, simply use:
+
+```
+python bin/analyze_exons.py -f ${GFF}
+```
+
+Below is the sample output of this script
+
+```
+INFORMATION REGARDING mRNA
+Number of transcripts: 33086
+Largest number of exons in all transcripts: 128
+Monoexonic transcripts: 4085
+Multiexonic transcripts: 29001
+Mono:Mult Ratio: 0.14
+Boxplot of number of exons per transcript:
+Min: 1
+25%: 2
+50%: 4
+75%: 8
+Max: 128
+Mean: 6.978812790908542
+==================================================
+INFORMATION REGARDING tRNA
+Number of transcripts: 2017
+Largest number of exons in all transcripts: 1
+Monoexonic transcripts: 2017
+Multiexonic transcripts: 0
+No multiexonic transcripts, unable to calculate Mono:Mult Ratio
+Boxplot of number of exons per transcript:
+Min: 1
+25%: 1
+50%: 1
+75%: 1
+Max: 1
+Mean: 1.0
+==================================================
+```
+
+This script was originally written by [Katharina Hoff](https://github.com/Gaius-Augustus/GALBA/blob/main/scripts/analyze_exons.py) and was modified accordingly to suit the analysis of GFF file.
+
+## Performance of the workflow on annotating difference eukaryote genomes
+
+The following table is the result predicted by ANNOTATO on difference species during the [Europe BioHackathon 2023](https://github.com/elixir-europe/biohackathon-projects-2023/tree/main/20).
+
+| Species                    | Genome size | N.Genes | N.Exons | N.mRNA | BUSCO lineage | BUSCO score                             | OMArk Completeness                                                 | OMArk Consistency                                                                       |
+| :---:                      | :---:       | :---:   | :---:   | :---:  | :---:         | :---:                                   | :---:                                                              | :---:                                                                                   |
+| Drosophila melanogaster    | 143M        | 14,753  | 57,343  | 14,499 | diptera       | C:96.1%[S:95.6%,D:0.5%],F:1.2%,M:2.7%   | melanogaster subgroup, C:90.38%[S:84.32%,D:6.06%],M:9.62%,,n:12442 | A:94.21%[P:4.05%,F:7.28%],I:1.61%[P:0.5%,F:0.42%],C:0.00%[P:0.00%,F:0.00%],U:4.19%      |
+| Helleia helle              | 547M        | 37,367  | 139,302 | 28,445 | lepidoptera   | C:74.6%[S:73.4%,D:1.2%],F:5.4%,M:20.0%  | Papilionidea, C:82.04%[S:66.12%,D:15.92%],M:17.96%, n:7939         | A:44.78%[P:14.41%,F:6.02%],I:3.53%[P:2.1%,F:0.7%],C:0.00%[P:0.00%,F:0.00%],U:51.69%     |
+| Homo sapiens chrom 19      | 58M         | 1,872   | 11,937  | 1,862  | primates      | C:5.0%[S:4.8%,D:0.2%],F:0.5%,M:94.5%    | Hominidae, C:8.57%[S:7.74%,D:0.83%],M:91.43%, n=17843              | A:87.54%[P:12.73%,F:13.1%],I:4.78%[P:1.5%,F:2.04%],C:0.00%[P:0.00%,F:0.00%],U:7.68%     |
+| Melampus jaumei            | 958M        | 61,128  | 335,483 | 60,720 | mollusca      | C:80.4%[S:67.2%,D:13.2%],F:3.8%,M:15.8% | Lophotrochozoa, C: 92.5%[S: 66.29%, D: 26.21%], M:7.5%, n:2373     | A:41.45%[P:15.72%,F:9.97%],I:15.97%[P:10.68%,F:3.07%],C:0.00%[P:0.00%,F:0.00%],U:42.57% |
+| Phakellia ventilabrum      | 186M        | 19,073  | 157,441 | 18,855 | metazoa       | C:80.9%[S:79.2%,D:1.7%],F:6.5%,M:12.6%  | Metazoa, C:86.79%[S:76.9%,D:9.9%],M:13.21% , n:3021                | A:53.81%[P:18.92%,F:5.06%],I:5.0%[P:2.7%,F:0.68%],C:0.00%[P:0.00%,F:0.00%],U:41.19%     |
+| *Pocillopora* cf. *effusa* | 347M        | 35,103  | 230,901 | 33,086 | metazoa       | C:95.1%[S:92.2%,D:2.9%],F:1.7%,M:3.2%   | Eumetazoa, C:94.16%[S:84.3%,D:9.86%],M:5.84%,n:3255                | A:52.94%[P:22.30%,F:3.69%],I:3.44%[P:2.08%,F:0.28%],C:0.00%[P:0.00%,F:0.00%],U:43.62%   |
+| Trifolium dubium           | 679M        | 78,810  | 354,662 | 77,763 | fabales       | C:95.1%[S:19.5%,D:75.6%],F:1.5%,M:3.4%  | NPAAA clade, C:94.58%[S:19.21%,D:75.38%],M:5.42%,n:15412           | A:71.99%[P:11.03%,F:6.63%],I:2.77%[P:1.66%,F:0.52%],C:0.00%[P:0.00%,F:0.00%],U:25.23%   |
 
 ## Future work
 - Python wrapper function to remove intermediate files
