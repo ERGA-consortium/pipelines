@@ -1,5 +1,6 @@
 name: funannotate
 channels:
   - bioconda
+  - conda-forge
 dependencies:
   - funannotate=1.8.15

@@ -11,9 +11,10 @@ process GENE_PREDICTION_BRAKER {
 	val(rna_bam)
 
 	output:
-	path("braker/*")         , emit: output
-	path("braker/braker.aa") , emit: protseq
-	path "versions.yml"    , emit: versions
+	path("braker/*")          , emit: output
+	path("braker/braker.aa")  , emit: protseq
+	path("braker/braker.gff3"), emit: gff
+	path "versions.yml"       , emit: versions
 
 	script:
     def args_fungus = params.organism == "fungus" ? "--fungus" : ""

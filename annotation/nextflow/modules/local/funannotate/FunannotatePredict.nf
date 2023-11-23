@@ -1,5 +1,6 @@
 process GENE_PREDICTION_FUNANNOTATE {
 	label 'process_high'
+	label 'process_high_memory'
 	label 'funannotate'
 
 	containerOptions = "--bind /env:/env --bind ${params.tmpdir}:/opt/databases --bind /mnt:/mnt"
@@ -14,6 +15,7 @@ process GENE_PREDICTION_FUNANNOTATE {
 	output:
 	path("output")                              , emit: output
 	path("output/predict_results/*.proteins.fa"), emit: protseq
+	path("output/predict_results/*.gff3")       , emit: gff
 	path "versions.yml"                         , emit: versions
 
 	script:
@@ -22,6 +24,7 @@ process GENE_PREDICTION_FUNANNOTATE {
 	def args_stringtie = stringtie != "EMPTY" ? "--stringtie ${stringtie}" : ""
     def args_buscodb = params.buscodb ? "--busco_db '${params.buscodb}'" : ""
 	def args_buscoseed = params.buscoseed == null ? "" : "--busco_seed_species '${params.buscoseed}'"
+	def args_ploidy = params.ploidy ? "--ploidy ${params.ploidy}" : ""
 
 	"""
 	augustus_species=\$(echo ${species} | sed 's/ /_/g')
@@ -37,7 +40,8 @@ process GENE_PREDICTION_FUNANNOTATE {
 	${args_buscoseed} \\
 	${args_prot} \\
 	${args_rna} \\
-	${args_stringtie}
+	${args_stringtie} \\
+	${args_ploidy}
 
 	cat <<-VERSIONS > versions.yml
 	"${task.process}":
