@@ -1,0 +1,99 @@
+import os
+import glob
+import sys
+import pandas as pd
+import yaml
+
+configfile: "config.yaml"
+
+### LOAD IN RESOURCES CONFIG  ###
+with open(config['resources'], 'r') as f:
+	resource = yaml.safe_load(f)
+
+prefix=config["prefix"]
+ploidy=config["ploidy"]
+kmer=config["kmersize"]
+contig_assembler = config['contig_assembler']
+phasing_mode = config['phasing_mode']
+busco_lineage = config['busco_lineage']
+purgel = config['purgel']
+
+#### HIFI reads 
+# Reading the hifi input file that contain a single column called "hifi_data" with one row for each file 
+samples = pd.read_csv(config['input_file_hifi'], dtype=str, index_col=False, skip_blank_lines=True)
+# Adding a new column with only the sample_id (basename without the extension)
+samples["sample_id"] = [os.path.splitext(os.path.basename(sample))[0].split('.')[0] for sample in samples["hifi_data"]]
+# Adding a new column with the sample number (example sample_1, sample_2 etc...)
+samples["sample_nr"] = [f"sample_{i+1}" for i in range(len(samples))]
+
+#### HiC reads
+# Reading the hic input file that contain two columns (HiC_R1 and HiC_R2) with the path of the hic reads. 
+hic_data = pd.read_csv(config['input_file_hic'], dtype=str, index_col=False, skip_blank_lines=True, sep = "\t")
+hic_R1 = hic_data["HiC_R1"]
+hic_R2 = hic_data["HiC_R2"]
+
+#### Contig assembler output, based on the chosen contig assembler and if phasing mode == True for Hifiasm
+def contig_output_primary(contig_assembler, phasing_mode, l = 0):
+	"""
+	Three possible assembler: hifiasm (with and without phasing mode), flye, hicanu. 
+	"""
+	if contig_assembler == "hifiasm" and purgel == "all":
+		asm_p_hifiasm_hic_l = os.path.join(config['results'], prefix, "contigging/hifiasm_hic_l" + str(l), prefix + '.asm.hic.p_ctg.fasta')
+		return asm_p_hifiasm_hic_l
+	elif contig_assembler == "hifiasm" and phasing_mode:
+		asm_p_hifiasm_hic = os.path.join(config['results'], prefix, "contigging/hifiasm_hic", prefix + '.asm.hic.p_ctg.fasta')
+		return asm_p_hifiasm_hic 
+	elif contig_assembler == "hifiasm":
+		asm_p_hifiasm = os.path.join(config['results'], prefix, "contigging/hifiasm", prefix + '.asm.p_ctg.fasta')
+		return asm_p_hifiasm 
+	elif contig_assembler == "flye":
+		asm_flye = os.path.join(config['results'],  prefix, 'contigging/flye/assembly.fasta')
+		return asm_flye
+	elif contig_assembler == "hicanu":
+		asm_hicanu =  os.path.join(config['results'],  prefix, 'contigging/hicanu/asm.contigs.fasta')
+		return asm_hicanu
+
+def evaluation_folder(contig_assembler, phasing_mode):
+	if contig_assembler == "hifiasm" and phasing_mode:
+		return os.path.join(config['results'], prefix, "assembly_evaluation/hifiasm_hic")
+	elif contig_assembler == "hifiasm":
+		return os.path.join(config['results'], prefix, "assembly_evaluation/hifiasm")
+	elif contig_assembler == "flye":
+		return os.path.join(config['results'], prefix, "assembly_evaluation/flye")
+	elif contig_assembler == "hicanu":
+		return os.path.join(config['results'], prefix, "assembly_evaluation/hicanu")
+
+evaluation_output_folder = evaluation_folder(contig_assembler, phasing_mode)
+
+include: "rules/genome_profiling.smk"
+include: "rules/contigging.smk"
+include: "rules/evaluation.smk"
+
+if config["trimming"]:
+	include: "rules/trimming.smk"
+
+
+def all_evaluation_files():
+	if config['purgel'] == "all":
+		return	os.path.join(config['results'], prefix, "genome_profiling", "smudgeplot/results_smudgeplot.png"), \ 
+				os.path.join(config['results'], prefix, "assembly_evaluation", "hifiasm_hic_l1", "merqury", prefix + ".qv"), \
+				os.path.join(config['results'], prefix, "assembly_evaluation", "hifiasm_hic_l1", "merqury", prefix + ".completeness.stats"), \	
+				os.path.join(config['results'], prefix, "assembly_evaluation", "hifiasm_hic_l1", "stats", 'gfastats.txt'),  \
+				os.path.join(config['results'], prefix, "assembly_evaluation", "hifiasm_hic_l2", "merqury", prefix + ".qv"), \
+				os.path.join(config['results'], prefix, "assembly_evaluation", "hifiasm_hic_l2", "merqury", prefix + ".completeness.stats"), \
+				os.path.join(config['results'], prefix, "assembly_evaluation", "hifiasm_hic_l2", "stats", 'gfastats.txt'),  \
+				os.path.join(config['results'], prefix, "assembly_evaluation", "hifiasm_hic_l3", "merqury", prefix + ".qv"), \
+				os.path.join(config['results'], prefix, "assembly_evaluation", "hifiasm_hic_l3", "merqury", prefix + ".completeness.stats"), \
+				os.path.join(config['results'], prefix, "assembly_evaluation", "hifiasm_hic_l3", "stats", 'gfastats.txt')  
+	else:
+		return 	os.path.join(config['results'],  prefix, "genome_profiling", "smudgeplot/results_smudgeplot.png"), \
+				os.path.join(evaluation_folder(contig_assembler, phasing_mode), "merqury", prefix + '.qv'), \
+				os.path.join(evaluation_folder(contig_assembler, phasing_mode), "merqury", prefix + '.completeness.stats'), \
+				os.path.join(evaluation_folder(contig_assembler, phasing_mode), "stats", 'gfastats.txt') 
+
+
+rule all:
+	input:
+		all_evaluation_files()
+
+

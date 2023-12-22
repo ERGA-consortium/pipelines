@@ -1,0 +1,8 @@
+cores: 64
+dry-run: False
+use-conda: True
+latency-wait: 60
+rerun-incomplete: True
+printshellcmds: False
+keep-going: False
+

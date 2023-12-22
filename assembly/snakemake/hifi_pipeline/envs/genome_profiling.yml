@@ -1,0 +1,8 @@
+name: genoplots
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - meryl==1.3
+  - genomescope2
+  - smudgeplot

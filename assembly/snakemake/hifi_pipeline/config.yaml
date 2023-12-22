@@ -1,0 +1,49 @@
+# Config file for the snakemake assembly pipeline 
+
+#### Paths for input and output files
+input_file_hifi:
+    "/scratch/galeov97/begendiv/pipelines_data_test/input_files_hifi.tsv"
+input_file_hic:
+    "/scratch/galeov97/begendiv/pipelines_data_test/input_files_hic.tsv"
+snakemake_dir_path: 
+    "/scratch/galeov97/begendiv/pipelines/assembly/snakemake/hifi_pipeline"
+results: 
+    "/scratch/galeov97/begendiv/pipelines_data_test/results_test"
+
+#### General and data inputs
+prefix:
+    speciesX
+ploidy:
+    2
+kmersize:
+    31
+trimming: 
+    False
+
+
+#### Contigging configuration
+contig_assembler:
+    "hifiasm" # possible choices: hifiasm, hicanu, flye
+
+# phasing mode = True is a valid option only when contig_assembler = hifiasm and the hic file are provided.
+# IMPORTANT if purgel is set to all then phasing mode is automatically enabled. 
+phasing_mode:
+    True
+
+# Hifiasm purging parameter:
+# 0 = No purging
+# 1 = Purge contained haplotigs (selectivity threshold s=0.75)
+# 2 = Purge all haplotigs (selectivity threshold s=0.75)
+# 3 = Aggressive purging of all haplotigs (selectivity threshold s=0.55)
+# Choose "all" to sequentially execute purging steps 1, 2, and 3 (not zero). IMPORTANT in this case phasing_mode is automatically enabled
+purgel:
+    1
+
+# busco lineage
+busco_lineage:
+    "insecta"
+
+#### Resources configuration
+# path to define slurm resources - do not change unless you wish to use in a different location
+resources:             
+    "submit_config/slurm/define_resources.yaml"
