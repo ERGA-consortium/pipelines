@@ -22,3 +22,9 @@ The workflow is structured into distinct units:
 - **description** this unit will incorporate the tool YAHS when HiC data is provided. The reason is that we first need to decide how to choose (automatically? manually?) the purge level out of the three results of Hifiasm. 
 
 ![Hifi-HiC pipeline](https://github.com/valegale/pipelines/assets/74873652/9e1c3012-b8ee-4169-a699-0d39f66e7479)
+
+
+## Config parameters
+
+**input_file_hifi** Insert the path to the file with the paths to the HiFi data. It is possible to insert multiple paths (to the same species), one path for each row. The file must contain a single column named "hifi_data" (see sample files). 
+**input_file_hic** Insert the path to the ...
