@@ -19,7 +19,7 @@ The workflow is structured into distinct units:
 5. Scaffolding 
 - **status** Work in Progress
 - **tools** YAHS
-- **description** this unit will incorporate the tool YAHS when HiC data is provided. The reason is that we first need to decide how to choose (automatically? manually?) the purge level out of the three results of Hifiasm. 
+- **description** this unit will incorporate the tool YAHS when HiC data is provided. Still not implemented how I am not sure how to choose (automatically? manually?) the purge level out of the three results of Hifiasm with the "all" option for purgeL. 
 
 ![Hifi-HiC pipeline](https://github.com/valegale/pipelines/assets/74873652/9e1c3012-b8ee-4169-a699-0d39f66e7479)
 
