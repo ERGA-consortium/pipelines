@@ -2,13 +2,11 @@
 
 #### Paths for input and output files
 input_file_hifi:
-    "/scratch/galeov97/begendiv/pipelines_data_test/input_files_hifi.tsv"
+    "test/input_files_hifi.tsv"
 input_file_hic:
-    "/scratch/galeov97/begendiv/pipelines_data_test/input_files_hic.tsv"
-snakemake_dir_path: 
-    "/scratch/galeov97/begendiv/pipelines/assembly/snakemake/hifi_pipeline"
+    "test/input_files_hic.tsv"
 results: 
-    "/scratch/galeov97/begendiv/pipelines_data_test/results_test"
+    "test/results_test"
 
 #### General and data inputs
 prefix:
@@ -28,7 +26,7 @@ contig_assembler:
 # phasing mode = True is a valid option only when contig_assembler = hifiasm and the hic file are provided.
 # IMPORTANT if purgel is set to all then phasing mode is automatically enabled. 
 phasing_mode:
-    True
+    False
 
 # Hifiasm purging parameter:
 # 0 = No purging

@@ -9,7 +9,7 @@ rule count_kmers:
 	output:
 		temp(directory(os.path.join(config['results'], prefix, "genome_profiling/{sample_nr}.meryl")))
 	conda:
-		os.path.join(config['snakemake_dir_path'], "envs/genome_profiling.yml")
+		os.path.join(workflow.basedir, "envs/genome_profiling.yml")
 	threads:
 		resource['meryl_count']['threads']
 	resources:
@@ -24,7 +24,7 @@ rule merge_kmers:
 	output:
 		directory(os.path.join(config['results'] , prefix, "genome_profiling", (prefix +".meryl")))
 	conda:
-		os.path.join(config['snakemake_dir_path'], "envs/genome_profiling.yml")
+		os.path.join(workflow.basedir, "envs/genome_profiling.yml")
 	threads:
 		resource['meryl_merge']['threads']
 	resources:
@@ -39,7 +39,7 @@ rule create_hist:
 	output:
 		os.path.join(config['results'], prefix, "genome_profiling", (prefix + ".hist"))
 	conda:
-		os.path.join(config['snakemake_dir_path'], "envs/genome_profiling.yml")
+		os.path.join(workflow.basedir, "envs/genome_profiling.yml")
 	threads:
 		resource['meryl_histogram']['threads']
 	resources:
@@ -62,7 +62,7 @@ rule run_smudgeplot:
 		meryl_path=os.path.join(config['results'], prefix, "genome_profiling", (prefix + ".meryl")),
 		kmer=kmer
 	conda:
-		os.path.join(config['snakemake_dir_path'], "envs/genome_profiling.yml")
+		os.path.join(workflow.basedir, "envs/genome_profiling.yml")
 	threads:
 		resource['run_smudgeplot']['threads']
 	resources:
@@ -90,7 +90,7 @@ rule run_genomescope:
 	output:
 		directory(os.path.join(config['results'], prefix, "genome_profiling", "genomescope"))
 	conda:
-		os.path.join(config['snakemake_dir_path'], "envs/genome_profiling.yml")
+		os.path.join(workflow.basedir, "envs/genome_profiling.yml")
 	threads:
 		resource['run_genomescope']['threads']
 	resources:

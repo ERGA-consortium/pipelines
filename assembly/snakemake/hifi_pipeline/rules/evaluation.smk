@@ -12,7 +12,7 @@ rule merqury:
 		out_folder = evaluation_folder(contig_assembler, phasing_mode),
 		asm_a = os.path.join(config['results'], prefix, "contigging/hifiasm", prefix + '.asm.a_ctg.fasta') if (contig_assembler == "hifiasm" and not phasing_mode) else "" 
 	conda:
-		os.path.join(config['snakemake_dir_path'], 'envs/evaluation.yml')
+		os.path.join(workflow.basedir, 'envs/evaluation.yml')
 	threads:
 		resource['merqury']['threads']
 	resources:
@@ -38,7 +38,7 @@ rule gfastats:
 	output:
 		out_gfastats = os.path.join(evaluation_output_folder, "stats", 'gfastats.txt')
 	conda:
-		os.path.join(config['snakemake_dir_path'], 'envs/evaluation.yml')
+		os.path.join(workflow.basedir, 'envs/evaluation.yml')
 	threads:
 		resource['gfastats']['threads']
 	resources:
@@ -63,7 +63,7 @@ rule merqury_purging:
 		out_folder = os.path.join(config['results'], prefix, "assembly_evaluation/hifiasm_hic_l{l}"),
 		asm_a = os.path.join(config['results'], prefix, "contigging/hifiasm", prefix + '.asm.a_ctg.fasta') if (contig_assembler == "hifiasm" and not phasing_mode) else "" 
 	conda:
-		os.path.join(config['snakemake_dir_path'], 'envs/evaluation.yml')
+		os.path.join(workflow.basedir, 'envs/evaluation.yml')
 	threads:
 		resource['merqury']['threads']
 	resources:
@@ -88,7 +88,7 @@ rule gfastats_purging:
 	output:
 		out_gfastats = os.path.join(config['results'], prefix, "assembly_evaluation/hifiasm_hic_l{l}", "stats", 'gfastats.txt')
 	conda:
-		os.path.join(config['snakemake_dir_path'], 'envs/evaluation.yml')
+		os.path.join(workflow.basedir, 'envs/evaluation.yml')
 	threads:
 		resource['gfastats']['threads']
 	resources:

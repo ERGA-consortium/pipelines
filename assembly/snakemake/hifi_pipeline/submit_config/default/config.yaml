@@ -1,4 +1,4 @@
-cores: 64
+cores: 32
 dry-run: False
 use-conda: True
 latency-wait: 60

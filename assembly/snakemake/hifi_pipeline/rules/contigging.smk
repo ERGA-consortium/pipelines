@@ -10,7 +10,7 @@ rule hifiasm:
 	log:
 		os.path.join(config['results'], "logs", prefix, "hifiasm.log")
 	conda:
-		os.path.join(config['snakemake_dir_path'], 'envs/hifiasm.yml')
+		os.path.join(workflow.basedir, 'envs/hifiasm.yml')
 	threads:
 		resource['hifiasm']['threads']
 	resources:
@@ -44,7 +44,7 @@ rule hifiasm_hic:
 	log:
 		os.path.join(config['results'], "logs", prefix, 'hifiasm_hic.log')
 	conda:
-		os.path.join(config['snakemake_dir_path'], 'envs/hifiasm.yml')
+		os.path.join(workflow.basedir, 'envs/hifiasm.yml')
 	threads:
 		resource['hifiasm_hic']['threads']
 	resources:
@@ -88,7 +88,7 @@ rule hifiasm_hic_purging:
 		l2_log = os.path.join(config['results'], "logs", prefix, 'hifiasm_hic_purging_l2.log'),
 		l3_log = os.path.join(config['results'], "logs", prefix, 'hifiasm_hic_purging_l3.log')
 	conda:
-		os.path.join(config['snakemake_dir_path'], 'envs/hifiasm.yml')
+		os.path.join(workflow.basedir, 'envs/hifiasm.yml')
 	threads:
 		resource['hifiasm_hic_purging']['threads']
 	resources:
@@ -126,7 +126,7 @@ rule hicanu:
 	log:
 		os.path.join(config['results'], "logs", prefix, 'hicanu.log')
 	conda:
-		os.path.join(config['snakemake_dir_path'], 'envs/hicanu.yml')
+		os.path.join(workflow.basedir, 'envs/hicanu.yml')
 	threads:
 		resource['hicanu']['threads']
 	resources:
@@ -151,7 +151,7 @@ rule flye:
 	params:
 		estimated_genome_size = os.path.join(config['results'], prefix, "genome_profiling", "estimated_genome_size.txt"),
 	conda:
-		os.path.join(config['snakemake_dir_path'], 'envs/flye.yml')
+		os.path.join(workflow.basedir, 'envs/flye.yml')
 	threads:
 		resource['flye']['threads']
 	resources:
