@@ -4,9 +4,9 @@ Galaxy Workflows for checking properties of the genome (size, heterozygosity, pl
 Load the respective .ga file in Galaxy to run the workflow.
 
 ### Illumina Reads
-The workflow takes a trimmed paired-reads collection, runs Meryl to create a K-mer database, Genomescope2 to estimate genome properties and Smudgeplot to estimate ploidy. The main results are K-mer database and genome profiling plots and tables.
+The workflow takes a trimmed paired-reads collection, runs Meryl to create a K-mer database, Genomescope2 to estimate genome properties and Smudgeplot to estimate ploidy. The main results are K-mer ddatabase and genome profiling plots, tables, and values useful for downstream analysis.
 Default K-mer length and ploidy for Genomescope are 21 and 2, respectively.
-![ProfIllu](pics/ProfIllu2305.png)
+![ProfIllu](pics/Prof_illu_2311.png)
 
 ### HiFi Reads
 The workflow takes a trimmed HiFi reads collection, runs Meryl to create a K-mer database, Genomescope2 to estimate genome properties and Smudgeplot to estimate ploidy. The main results are K-mer database and genome profiling plots, tables, and values useful for downstream analysis.
