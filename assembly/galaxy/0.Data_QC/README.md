@@ -16,9 +16,9 @@ The workflow takes a HiFi reads collection, runs FastQC and SeqKit, filters with
 ![QChifi2305](pics/QC_hifi_2309.png)
 
 ### ONT Reads
-The workflow takes ONT reads collection, runs SeqKit, filters by quality and plots the result. The main outputs are a collection of filtered reads, a table with raw reads stats and a plot of filtered reads.
+The workflow takes ONT reads collection, runs SeqKit and Nanoplot. The main outputs are a table and plots of raw reads stats.
 
-![QCont2305](pics/QCont2305.png)
+![QCont2305](pics/QC_ont_2311.png)
 
 
 
