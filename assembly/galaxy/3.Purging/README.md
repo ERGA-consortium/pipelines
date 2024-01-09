@@ -6,5 +6,8 @@ The workflow takes a trimmed HiFi reads collection, Hap1/Hap2 contigs, and the v
 ![PurgeHap1Hap2](pics/Purge_hifi_2309.png)
 
 ## Pri/Alt assemblies
+\[in preparation]
+
+## Collapsed assemblies
 The workflow takes a trimmed Illumina WGS paired-end reads collection, Collapsed contigs, and the values for transition parameter and max coverage depth (calculated from WF1) to run Purge_Dups. It produces purged Collapsed contigs assemblies, and runs all the QC analysis (gfastats, BUSCO, and Merqury).
 ![PurgeCollapsed](pics/Purge_illumina_2311.png)
