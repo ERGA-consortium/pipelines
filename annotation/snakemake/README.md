@@ -1,10 +1,10 @@
-Protein-coding gene annotation workflow. Adapted from the work of Sagane Joye:
+Protein-coding gene annotation workflow. designed, developed, and tested by Sagane Joye (ERGA-CH, UNIL)
 
 https://github.com/sdind/genome_annotation_workflow
 
 ## Prerequisites
 
-The following programs are required to run the workflow and the listed version were tested. It should be noted that older versions of snakemake are not compatible with newer versions of singularity as is noted here: [https://github.com/nextflow-io/nextflow/issues/1659](https://github.com/nextflow-io/nextflow/issues/1659).
+The following programs are required to run the workflow and the listed version were tested. It should be noted that older versions of snakemake are not compatible with newer versions of singularity as is noted here: [https://github.com/snakemake/snakemake/issues/2319](https://github.com/snakemake/snakemake/issues/2319).
 
 `conda v 23.7.3`
 `singularity v 3.7.3`
