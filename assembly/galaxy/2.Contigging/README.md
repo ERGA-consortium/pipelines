@@ -20,7 +20,8 @@ The workflow takes a trimmed HiFi reads collection, Forward/Reverse HiC reads, a
 ## ONT-based assembly
 
 ### Flye
-\[in preparation]
+The workflow takes raw ONT reads and trimmed Illumina WGS paired reads collections, and the estimated genome size and Max depth (both calculated from WF1) to run Flye and subsequently polish the assembly with HyPo. It produces collapsed assemblies (unpolished and polished) and runs all the QC analyses (gfastats, BUSCO, and Merqury).
+![ContFlye](pics/Cont_ONTflye_2403.png)
 
 ### Nextdenovo
 The workflow takes raw ONT reads and trimmed Illumina WGS paired reads collections, the ONT raw stats table (calculated from WF1) and the estimated genome size (calculated from WF1) to run NextDenovo and subsequently polish the assembly with HyPo. It produces collapsed assemblies (unpolished and polished) and runs all the QC analyses (gfastats, BUSCO, and Merqury).
