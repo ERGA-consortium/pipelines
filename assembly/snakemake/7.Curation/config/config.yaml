@@ -1,0 +1,4 @@
+prefix: 'ddCorAlb'
+ref: '/scratch/brown/asm_ddCorAlb/assembly/curated/purge_dups/asm_ddCorAlb.curated.pd.purged.fa'
+hic_dir: '/scratch/brown/asm_ddCorAlb/assembly/curated/hic/'
+tmp_dir: '/scratch/brown/asm_ddCorAlb/assembly/curated/tmp/'

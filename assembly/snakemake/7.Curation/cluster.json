@@ -1,0 +1,10 @@
+{
+  "__default__":
+  {
+    "queue":"begendiv,main",
+    "h":"24",
+    "ram":"20",
+    "out":"{rule}.{wildcards}.out",
+    "err":"{rule}.{wildcards}.err"  
+  },
+}

@@ -1,0 +1,1 @@
+snakemake --jobs 100 --cluster-config cluster.json --use-conda --cluster "sbatch -p {cluster.queue} -q standard --ntasks=1 --cpus-per-task={threads} --time={cluster.h}:00:00 --mem={resources.mem_mb}M -o {cluster.out} -e {cluster.err}"
