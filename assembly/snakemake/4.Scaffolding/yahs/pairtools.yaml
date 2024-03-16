@@ -57,4 +57,3 @@ dependencies:
   - xz=5.2.10=h5eee18b_1
   - zipp=3.11.0=py37h06a4308_0
   - zlib=1.2.13=h5eee18b_0
-prefix: /home/brown/.conda/envs/pairtools

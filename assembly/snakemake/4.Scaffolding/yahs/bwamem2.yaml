@@ -28,4 +28,3 @@ dependencies:
   - samtools=1.19.1=h50ea8bc_0
   - xz=5.2.6=h166bdaf_0
   - zstd=1.5.5=hfc55251_0
-prefix: /home/brown/.conda/envs/bwamem2
