@@ -1,0 +1,30 @@
+name: bwamem2
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=2_gnu
+  - bwa-mem2=2.2.1=hd03093a_5
+  - bzip2=1.0.8=hd590300_5
+  - c-ares=1.25.0=hd590300_0
+  - ca-certificates=2023.11.17=hbcca054_0
+  - htslib=1.19.1=h81da01d_0
+  - keyutils=1.6.1=h166bdaf_0
+  - krb5=1.21.2=h659d440_0
+  - libcurl=8.5.0=hca28451_0
+  - libdeflate=1.18=h0b41bf4_0
+  - libedit=3.1.20191231=he28a2e2_2
+  - libev=4.33=hd590300_2
+  - libgcc-ng=13.2.0=h807b86a_3
+  - libgomp=13.2.0=h807b86a_3
+  - libnghttp2=1.58.0=h47da74e_1
+  - libssh2=1.11.0=h0841786_0
+  - libstdcxx-ng=13.2.0=h7e041cc_3
+  - libzlib=1.2.13=hd590300_5
+  - ncurses=6.4=h59595ed_2
+  - openssl=3.2.0=hd590300_1
+  - samtools=1.19.1=h50ea8bc_0
+  - xz=5.2.6=h166bdaf_0
+  - zstd=1.5.5=hfc55251_0

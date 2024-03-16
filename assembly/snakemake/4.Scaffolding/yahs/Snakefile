@@ -1,126 +1,159 @@
 import os
+import snakemake.io
 import glob
-import sys
 
-configfile: "config.yaml"
-
-prefix=config["prefix"]
-tmpdir=os.getcwd()
-output_yahs=prefix+"_scaffolds_final.fa"
-
-DATASETS=["L1","L2"]
+configfile: 'config/config.yaml'
+(SAMPLES,READS,) = glob_wildcards(os.path.join(config['hic_dir'],"{sample}_{read}.fastq.gz"))
+SAMPLES=set(SAMPLES)
+READS=set(READS)
+print(SAMPLES,READS)
 
 rule all:
-	input:
-		output_yahs
+    input:
+        asm=config['prefix']+'_scaffolds_final.fa'
 
-rule index_genome:
-	input:
-		config["input_assembly"]
-	output:
-		fai=config["input_assembly"]+".fai",
-		genome=config["input_assembly"]+".genome",
-		bwt=config["input_assembly"]+".bwt",
-		pac=config["input_assembly"]+".pac",
-		ann=config["input_assembly"]+".ann",
-		amb=config["input_assembly"]+".amb",
-		sa=config["input_assembly"]+".sa"
-	conda:
-		"yahs"
-	threads:
-		1
-	shell:
-		"samtools faidx {input} && cut -f1,2 {input}.fai > {input}.genome && bwa index {input}"
+rule index_fasta:
+    input:
+        ref=config['ref']
+    output:
+        config['ref']+'.pac',
+        config['ref']+'.0123',
+        config['ref']+'.amb',
+        config['ref']+'.ann',
+        config['ref']+'.bwt.2bit.64',
+        config['ref']+'.fai',
+        config['ref']+'.genome'
+    conda:
+        'bwamem2.yaml'
+    threads:
+        1
+    resources:
+        mem_mb=100000
+    shell:
+        """
+        samtools faidx {input.ref}
+        awk "{{print \$1,\$2}}" {input.ref}.fai > {input.ref}.genome
+        sed -i 's/ /\t/g' {input.ref}.genome
+        bwa-mem2 index {input.ref}
+        """
 
-rule map_hic:
-	input:
-		bwt=config["input_assembly"]+".bwt",
-		assembly=config["input_assembly"],
-		reads_r1=expand("{dataset}_R1.fq.gz", dataset=config["SAMPLES"]),
-		reads_r2=expand("{dataset}_R2.fq.gz", dataset=config["SAMPLES"])
-	output:
-		config["prefix"]+"_bwa.sam"
-	conda:
-		"yahs"
+rule map_reads:
+    input:
+        ref=config['ref'],
+        ref_idx=config['ref']+'.pac',
+        r1=os.path.join(config['hic_dir'],"{sample}_1.fastq.gz"),
+        r2=os.path.join(config['hic_dir'],"{sample}_2.fastq.gz")
+    output:
+        out_sam=os.path.join(config['hic_dir'],"{sample}.bwa.sam")
+    conda:
+        'bwamem2.yaml'
+    threads:
+        24
+    resources:
+        mem_mb=100000
+    shell:
+        """
+        bwa-mem2 mem -T0 -5SP -t {threads} {input.ref} {input.r1} {input.r2} -o {output.out_sam}
+        """
 
-	threads:
-		config["threads"]
-	shell:
-		"echo {input.reads_r1} && echo {input.reads_r2} && bwa mem -5SP -T0 -t {threads} -o {output} {input.assembly} <(cat {input.reads_r1}) <(cat {input.reads_r2})" 
+rule merge_sams:
+    input:
+        expand(os.path.join(config['hic_dir'],"{sample}.bwa.sam"),sample=SAMPLES)
+    output:
+        merged_sam='mapped_reads/'+config['prefix']+'.bwa.sam'
+    conda:
+        'bwamem2.yaml'
+    threads:
+        6
+    resources:
+        mem_mb=100000
+    shell:
+        """
+        samtools merge -@ {threads} -o {output.merged_sam} {input}
+        """
 
-rule parse_pairsam: 
-	input:
-		input_sam=config["prefix"]+"_bwa.sam",
-		input_genome=config["input_assembly"]+".genome"
-	output:
-		config["prefix"]+"_bwa.parsed.pairsam"	
-	conda:
-		"yahs"
-	threads:
-		config["threads"]
-	shell:
-		"pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in {threads} --nproc-out {threads} --chroms-path {input.input_genome} {input.input_sam} > {output}"
+rule pairtools_parse:
+    input:
+        merged_sam='mapped_reads/'+config['prefix']+'.bwa.sam',
+        chroms=config['ref']+'.genome'
+    output:
+        parsed_stats='mapped_reads/'+config['prefix']+'.parsed.stats',
+        parsed_pairsam='mapped_reads/'+config['prefix']+'.parsed.pairsam'
+    conda:
+        'pairtools.yaml'
+    threads:
+        24
+    resources:
+        mem_mb=20000
+    shell:
+        """
+        pairtools parse --output-stats {output.parsed_stats} --min-mapq 0 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in {threads} --nproc-out {threads} --chroms-path {input.chroms} {input.merged_sam} > {output.parsed_pairsam}
+        """
 
-rule sort_pairsam:
-	input:
-		config["prefix"]+"_bwa.parsed.pairsam"
-	output:
-		config["prefix"]+"_bwa.sorted.pairsam"
-	conda:
-		"yahs"
-	threads:
-		config["threads"]	
-	shell:
-		"pairtools sort --nproc {threads} --tmpdir={tmpdir} {input} > {output}"
+rule pairtools_sort:
+    input:
+        parsed_pairsam='mapped_reads/'+config['prefix']+'.parsed.pairsam'
+    output:
+        sorted_pairsam='mapped_reads/'+config['prefix']+'.sorted.pairsam'
+    conda:
+        'pairtools.yaml'
+    threads:
+        24
+    resources:
+        mem_mb=50000
+    params:
+        TMPDIR=config['tmp_dir']
+    shell:
+        """
+        pairtools sort --nproc {threads} --tmpdir={params.TMPDIR} {input.parsed_pairsam} > {output.sorted_pairsam}
+        """
 
-rule dedup_pairsam:
-	input:
-		config["prefix"]+"_bwa.sorted.pairsam"
-	output:
-		output_pairsam=config["prefix"]+"_bwa.dedup.pairsam",
-		output_stats=config["prefix"]+".dedup.stats"
-	conda:
-		"yahs"
-	threads:
-		config["threads"]
-	shell:
-		"pairtools dedup --nproc-in {threads} --nproc-out {threads} --mark-dups --output-stats {output.output_stats} --output {output.output_pairsam} {input}"
+rule pairtools_dedup:
+    input:
+        sorted_pairsam='mapped_reads/'+config['prefix']+'.sorted.pairsam'
+    output:
+        dedup_pairsam='mapped_reads/'+config['prefix']+'.dedup.pairsam',
+        dedup_stats='mapped_reads/'+config['prefix']+'.dedup.stats'
+    conda:
+        'pairtools.yaml'
+    threads:
+        24
+    resources:
+        mem_mb=20000
+    shell:
+        """
+        pairtools dedup --nproc-in {threads} --nproc-out {threads} --mark-dups --output-stats {output.dedup_stats} --output-dups {output.dedup_pairsam} --output {output.dedup_pairsam} {input.sorted_pairsam}
+        """
 
-rule split_pairsam:
-	input:
-		config["prefix"]+"_bwa.dedup.pairsam"
-	output:
-		output_pairs=config["prefix"]+"_bwa.dedup.pairs",
-		output_bam=config["prefix"]+"_bwa.dedup.bam"
-	conda:
-		"yahs"
-	threads:
-		config["threads"]
-	shell:
-		"pairtools split --nproc-in {threads} --nproc-out {threads} --output-pairs {output.output_pairs} --output-sam {output.output_bam} {input}"
-
-rule sort_bam:
-	input:
-		config["prefix"]+"_bwa.dedup.bam"
-	output:
-		config["prefix"]+"_bwa.dedup.sortname.bam"
-	conda:
-		"yahs"
-	threads:
-		config["threads"]
-	shell:
-		"samtools sort -@ {threads} -n -T {tmpdir} -o {output} {input}"
-
-rule run_yahs:
-	input:
-		bam=config["prefix"]+"_bwa.dedup.sortname.bam",
-		assembly=config["input_assembly"]
-	output:
-		config["prefix"]+"_scaffolds_final.fa"
-	conda:
-		"yahs"
-	threads:
-		1
-	shell:
-		"yahs {input.assembly} {input.bam} -v 1 -o {prefix}"
-
+rule pairtools_split:
+    input:
+        dedup_pairsam='mapped_reads/'+config['prefix']+'.dedup.pairsam'
+    output:
+        dedup_pairs='mapped_reads/'+config['prefix']+'.dedup.pairs',
+        dedup_bam='mapped_reads/'+config['prefix']+'.dedup.bam'
+    conda:
+        'pairtools.yaml'
+    threads:
+        24
+    resources:
+        mem_mb=20000
+    shell:
+        """
+        pairtools split --nproc-in {threads} --nproc-out {threads} --output-pairs {output.dedup_pairs} --output-sam {output.dedup_bam} {input.dedup_pairsam}
+        """
+rule yahs:
+    input:
+        asm=config['ref'],
+        dedup_bam='mapped_reads/'+config['prefix']+'.dedup.bam'
+    output:
+        yahs_asm=config['prefix']+'_scaffolds_final.fa'
+    conda:
+        'yahs.yaml'
+    threads:
+        1
+    resources:
+        mem_mb=20000
+    shell:
+        """
+        yahs {input.asm} {input.dedup_bam} -o config['prefix']
+        """
