@@ -10,4 +10,3 @@ dependencies:
   - libgomp=13.2.0=h807b86a_3
   - libstdcxx-ng=13.2.0=h7e041cc_3
   - pretextmap=0.1.9=h4ac6f70_3
-prefix: /home/brown/.conda/envs/pretext
