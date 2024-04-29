@@ -86,7 +86,7 @@ rule create_pretextMap:
         mem_mb=20000
     shell:
         """
-        cat {input.merged_sam} | PretextMap -o {output.pretext_map} --sotby nosort --mapq 0 --highRes
+        cat {input.merged_sam} | PretextMap -o {output.pretext_map} --sortby nosort --mapq 0 --highRes
         """
 
 rule pairtools_parse:
