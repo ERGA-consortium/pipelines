@@ -1,0 +1,76 @@
+# genome profiling
+
+meryl_count:
+    mem_mb:     250000
+    time:       "12:00:00"
+    threads:    8
+
+meryl_merge:
+    mem_mb:     250000
+    time:       "12:00:00"
+    threads:    8
+
+meryl_histogram:
+    mem_mb:     1000
+    time:       "04:00:00"
+    threads:    1
+
+run_smudgeplot:
+    mem_mb:     32000
+    time:       "12:00:00"
+    threads:    8
+
+run_genomescope:
+    mem_mb:     32000
+    time:       "12:00:00"
+    threads:    8
+
+hifiasm:
+    mem_mb:     100000
+    time:       "24:00:00"
+    threads:    16
+
+hicanu:
+    mem_mb:     100000
+    time:       "24:00:00"
+    threads:    16
+
+flye:
+    mem_mb:     100000
+    time:       "24:00:00"
+    threads:    16
+
+hifiasm_hic:
+    mem_mb:     100000
+    time:       "24:00:00"
+    threads:    32
+
+hifiasm_hic_purging:
+    mem_mb:     100000
+    time:       "24:00:00"
+    threads:    32
+
+hifiasm_gfa_to_fasta:
+    mem_mb:     50000
+    time:       "02:00:00"
+    threads:    1
+
+hifiasm_hic_gfa_to_fasta:
+    mem_mb:     50000
+    time:       "02:00:00"
+    threads:    1
+
+merqury:
+    mem_mb:     100000
+    time:       "10:00:00"
+    threads:    8
+
+busco:
+    mem_mb:     100000
+    time:       "10:00:00"
+    threads:    16
+
+gfastats:
+    mem_mb:     50000
+    time:       "2:00:00"
+    threads:    4
