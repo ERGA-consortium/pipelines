@@ -155,5 +155,5 @@ rule yahs:
         mem_mb=20000
     shell:
         """
-        yahs {input.asm} {input.dedup_bam} -o config['prefix']
+        yahs {input.asm} {input.dedup_bam} -o {config[prefix]}
         """
