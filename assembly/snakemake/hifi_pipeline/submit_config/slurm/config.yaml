@@ -1,0 +1,32 @@
+### SBATCH JOB THAT WILL BE SUBMITTED FOR EACH RULE IN THE PIPELINE ###
+
+cluster:
+  mkdir -p slurm_logs/{rule} &&
+  sbatch
+    --partition={resources.partition}
+    --qos={resources.qos}
+    --cpus-per-task={threads}
+    --mem={resources.mem_mb}
+    --job-name=GEP.{rule}.%j
+    --output=slurm_logs/{rule}/%j.out
+    --error=slurm_logs/{rule}/%j.err
+    --time={resources.time}
+
+
+### DEFAULT RESOURCES THAT WILL BE USED IN THE ABOVE SBATCH COMMAND IF NOT DEFINED IN '../../../GEP/configuration/define_resources.yaml'  ###
+
+default-resources:
+   - partition=begendiv,main
+   - qos=standard
+
+
+### SNAKEMAKE ARGUMENTS ###
+
+cores: 256
+jobs: 100
+use-conda: True
+keep-going: False
+rerun-incomplete: True
+printshellcmds: False
+scheduler: greedy
+latency-wait: 60
