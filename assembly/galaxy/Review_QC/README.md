@@ -10,7 +10,7 @@ The workflow requires the following:
 It will obtain the data and process it to generate genome profiling (genomescope, smudgeplot is optional), assembly stats (gfastats), merqury stats (QV, completeness), BUSCO, snailplot, contamination blobplot, and HiC heatmap.
 
 ## One Assmebly, Illumina WGS reads + HiC reads 
-![asm_rev_wf_illu](pics/annot_rev.png)
+![asm_rev_wf_illu](pics/asm_rev_1.png)
 
 ## One Assmebly, HiFi WGS reads + HiC reads
-![asm_rev_wf_hifi](pics/annot_rev.png)
+![asm_rev_wf_hifi](pics/asm_rev_2.png)
