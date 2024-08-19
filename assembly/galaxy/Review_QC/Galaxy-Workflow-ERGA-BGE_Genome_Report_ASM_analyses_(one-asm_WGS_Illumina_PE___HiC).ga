@@ -76,7 +76,7 @@
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.3+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "fbf99087e067",
+                "changeset_revision": "86755160afbf",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
@@ -2556,6 +2556,63 @@
                     "output_name": "output"
                 }
             },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool hicMergeMatrixBins",
+                    "name": "matrix_h5_cooler"
+                }
+            ],
+            "label": null,
+            "name": "hicMergeMatrixBins",
+            "outputs": [
+                {
+                    "name": "outFileName",
+                    "type": "cool"
+                }
+            ],
+            "position": {
+                "left": 3332.3871463844675,
+                "top": 903.4350565408532
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutFileName": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outFileName"
+                },
+                "TagDatasetActionoutFileName": {
+                    "action_arguments": {
+                        "tags": "50bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outFileName"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/3.7.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "977dc15add20",
+                "name": "hicexplorer_hicmergematrixbins",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"matrix_h5_cooler\": {\"__class__\": \"RuntimeValue\"}, \"numBins\": \"50\", \"runningWindow\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.7.2+galaxy0",
+            "type": "tool",
+            "uuid": "11ca717a-f896-4ecd-b2d5-11983405c4a7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "51": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/3.7.2+galaxy0",
+            "errors": null,
+            "id": 51,
+            "input_connections": {
+                "matrix_h5_cooler": {
+                    "id": 49,
+                    "output_name": "output"
+                }
+            },
             "inputs": [],
             "label": null,
             "name": "hicMergeMatrixBins",
@@ -2566,10 +2623,23 @@
                 }
             ],
             "position": {
-                "left": 3318.285883439793,
-                "top": 1133.6713097760385
+                "left": 3329.3372998501627,
+                "top": 1340.493444324158
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "HideDatasetActionoutFileName": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outFileName"
+                },
+                "TagDatasetActionoutFileName": {
+                    "action_arguments": {
+                        "tags": "100bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outFileName"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/3.7.2+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "977dc15add20",
@@ -2584,11 +2654,11 @@
             "when": null,
             "workflow_outputs": []
         },
-        "51": {
+        "52": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/3.7.2+galaxy0",
             "errors": null,
-            "id": 51,
+            "id": 52,
             "input_connections": {
                 "matrix_h5_cooler": {
                     "id": 50,
@@ -2614,13 +2684,69 @@
                 }
             ],
             "position": {
-                "left": 3319.86889687313,
-                "top": 1334.5247636289157
+                "left": 3359.567645246474,
+                "top": 1095.6865436231672
             },
             "post_job_actions": {
                 "TagDatasetActionoutFileName": {
                     "action_arguments": {
-                        "tags": "hic_heatmap_svg"
+                        "tags": "hic_heatmap_svg,50bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outFileName"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/3.7.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b63363075c2e",
+                "name": "hicexplorer_hicplotmatrix",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromosomeOrder\": [], \"clearMaskedBins\": false, \"colormap\": \"YlOrRd\", \"dpi\": \"300\", \"fontSize\": null, \"image_file_format\": \"svg\", \"increaseFigureHeight\": \"0.5\", \"increaseFigureWidth\": \"0.5\", \"log\": false, \"log1p\": true, \"loop_conditional\": {\"loop_selector\": \"no\", \"__current_case__\": 1}, \"loops\": {\"__class__\": \"RuntimeValue\"}, \"matrix_h5_cooler\": {\"__class__\": \"ConnectedValue\"}, \"pca_conditional\": {\"pca_type\": \"no_file\", \"__current_case__\": 0}, \"perChromosome\": false, \"region\": null, \"region2\": null, \"rotationX\": \"45\", \"rotationY\": \"45\", \"scoreName\": null, \"tads\": {\"__class__\": \"RuntimeValue\"}, \"title\": null, \"vMax\": null, \"vMin\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.7.2+galaxy0",
+            "type": "tool",
+            "uuid": "3bff61f5-b01a-440a-8ccd-a3dfa4f8ce70",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "53": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/3.7.2+galaxy0",
+            "errors": null,
+            "id": 53,
+            "input_connections": {
+                "matrix_h5_cooler": {
+                    "id": 51,
+                    "output_name": "outFileName"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool hicPlotMatrix",
+                    "name": "loops"
+                },
+                {
+                    "description": "runtime parameter for tool hicPlotMatrix",
+                    "name": "tads"
+                }
+            ],
+            "label": null,
+            "name": "hicPlotMatrix",
+            "outputs": [
+                {
+                    "name": "outFileName",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3362.8249579891817,
+                "top": 1535.2376295218714
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutFileName": {
+                    "action_arguments": {
+                        "tags": "hic_heatmap_svg,100bins"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "outFileName"
@@ -2644,6 +2770,6 @@
     "tags": [
         "name:ERGA"
     ],
-    "uuid": "1ef8a096-a772-41e8-b749-179cf5a65bac",
-    "version": 34
+    "uuid": "51749495-7a7b-443f-88f9-c810b820c08c",
+    "version": 38
 }
