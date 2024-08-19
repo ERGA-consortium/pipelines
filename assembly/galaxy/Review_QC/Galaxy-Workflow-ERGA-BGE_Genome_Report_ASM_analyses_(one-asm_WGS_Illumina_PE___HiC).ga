@@ -38,7 +38,7 @@
             "outputs": [],
             "position": {
                 "left": 2.8281787869340476,
-                "top": 56.50212595978223
+                "top": 56.50211293950338
             },
             "tool_id": null,
             "tool_state": "{\"parameter_type\": \"integer\", \"optional\": false}",
@@ -65,7 +65,7 @@
             ],
             "position": {
                 "left": 334.09375641356775,
-                "top": 168.99999495432763
+                "top": 168.99998193404878
             },
             "post_job_actions": {
                 "HideDatasetActionoutfile": {
@@ -105,7 +105,7 @@
             "outputs": [],
             "position": {
                 "left": 1.2048409029157439,
-                "top": 399.17633176386494
+                "top": 399.1763187435861
             },
             "tool_id": null,
             "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
@@ -132,7 +132,7 @@
             "outputs": [],
             "position": {
                 "left": 1.0781041543147327,
-                "top": 664.1600136738505
+                "top": 664.1600006535716
             },
             "tool_id": null,
             "tool_state": "{\"restrictions\": [\"aconoidasida_odb10\", \"actinopterygii_odb10\", \"agaricales_odb10\", \"agaricomycetes_odb10\", \"alveolata_odb10\", \"apicomplexa_odb10\", \"arachnida_odb10\", \"arthropoda_odb10\", \"ascomycota_odb10\", \"aves_odb10\", \"basidiomycota_odb10\", \"boletales_odb10\", \"brassicales_odb10\", \"capnodiales_odb10\", \"carnivora_odb10\", \"cetartiodactyla_odb10\", \"chaetothyriales_odb10\", \"chlorophyta_odb10\", \"coccidia_odb10\", \"cyprinodontiformes_odb10\", \"diptera_odb10\", \"dothideomycetes_odb10\", \"embryophyta_odb10\", \"endopterygota_odb10\", \"euarchontoglires_odb10\", \"eudicots_odb10\", \"euglenozoa_odb10\", \"eukaryota_odb10\", \"eurotiales_odb10\", \"eurotiomycetes_odb10\", \"eutheria_odb10\", \"fabales_odb10\", \"fungi_odb10\", \"glires_odb10\", \"glomerellales_odb10\", \"helotiales_odb10\", \"hemiptera_odb10\", \"hymenoptera_odb10\", \"hypocreales_odb10\", \"insecta_odb10\", \"leotiomycetes_odb10\", \"lepidoptera_odb10\", \"liliopsida_odb10\", \"mammalia_odb10\", \"metazoa_odb10\", \"microsporidia_odb10\", \"mollusca_odb10\", \"mucorales_odb10\", \"mucoromycota_odb10\", \"nematoda_odb10\", \"onygenales_odb10\", \"passeriformes_odb10\", \"plasmodium_odb10\", \"pleosporales_odb10\", \"poales_odb10\", \"polyporales_odb10\", \"primates_odb10\", \"saccharomycetes_odb10\", \"sauropsida_odb10\", \"solanales_odb10\", \"sordariomycetes_odb10\", \"stramenopiles_odb10\", \"tetrapoda_odb10\", \"tremellomycetes_odb10\", \"vertebrata_odb10\", \"viridiplantae_odb10\"], \"parameter_type\": \"text\", \"optional\": false}",
@@ -159,7 +159,7 @@
             "outputs": [],
             "position": {
                 "left": 0.048374256886601075,
-                "top": 753.2577229159451
+                "top": 753.2577098956663
             },
             "tool_id": null,
             "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
@@ -186,7 +186,7 @@
             "outputs": [],
             "position": {
                 "left": 0.9410507881541392,
-                "top": 1112.28775944064
+                "top": 1112.2877464203611
             },
             "tool_id": null,
             "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
@@ -213,7 +213,7 @@
             "outputs": [],
             "position": {
                 "left": 1156.2094810457847,
-                "top": 1032.9325261150798
+                "top": 1032.932513094801
             },
             "tool_id": null,
             "tool_state": "{\"parameter_type\": \"boolean\", \"optional\": false}",
@@ -240,7 +240,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 2016.9533188356102
+                "top": 2016.9533058153313
             },
             "tool_id": null,
             "tool_state": "{\"default\": 2, \"parameter_type\": \"integer\", \"optional\": true}",
@@ -267,7 +267,7 @@
             "outputs": [],
             "position": {
                 "left": 0.7031215774639328,
-                "top": 2088.1138057859835
+                "top": 2088.1137927657046
             },
             "tool_id": null,
             "tool_state": "{\"default\": 21, \"parameter_type\": \"integer\", \"optional\": true}",
@@ -294,7 +294,7 @@
             "outputs": [],
             "position": {
                 "left": 1166.0781534983125,
-                "top": 1775.4549459785633
+                "top": 1775.4549329582844
             },
             "tool_id": null,
             "tool_state": "{\"parameter_type\": \"boolean\", \"optional\": false}",
@@ -326,7 +326,7 @@
             ],
             "position": {
                 "left": 566.0130936741577,
-                "top": 155.80686739904817
+                "top": 155.80685437876932
             },
             "post_job_actions": {
                 "HideDatasetActiondownloads": {
@@ -369,7 +369,7 @@
             ],
             "position": {
                 "left": 285.5311783099573,
-                "top": 418.30120582979197
+                "top": 418.3011928095131
             },
             "post_job_actions": {
                 "HideDatasetActiongenome_data_report": {
@@ -436,7 +436,7 @@
             ],
             "position": {
                 "left": 304.2828610235836,
-                "top": 752.8011479431271
+                "top": 752.8011349228483
             },
             "post_job_actions": {
                 "HideDatasetActionlist_paired": {
@@ -513,7 +513,7 @@
             ],
             "position": {
                 "left": 467.9324104127658,
-                "top": 1092.3620295973033
+                "top": 1092.3620165770244
             },
             "post_job_actions": {
                 "HideDatasetActionlist_paired": {
@@ -573,7 +573,7 @@
             ],
             "position": {
                 "left": 801.8038342448694,
-                "top": 132.39864230726315
+                "top": 132.3986292869843
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -618,7 +618,7 @@
             ],
             "position": {
                 "left": 527.9999954950697,
-                "top": 396.5199382295508
+                "top": 396.51992520927195
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -666,7 +666,7 @@
             ],
             "position": {
                 "left": 577.6093009262642,
-                "top": 819.7733164464927
+                "top": 819.7733034262138
             },
             "post_job_actions": {
                 "HideDatasetActionreport_html": {
@@ -727,7 +727,7 @@
             ],
             "position": {
                 "left": 804.0936845627461,
-                "top": 1165.3028366375308
+                "top": 1165.302823617252
             },
             "post_job_actions": {
                 "HideDatasetActionreport_html": {
@@ -779,7 +779,7 @@
             ],
             "position": {
                 "left": 756.2300963218555,
-                "top": 397.03891326684436
+                "top": 397.0389002465655
             },
             "post_job_actions": {
                 "ChangeDatatypeActionoutput": {
@@ -827,7 +827,7 @@
             ],
             "position": {
                 "left": 758.7498725903937,
-                "top": 1381.4582374008114
+                "top": 1381.4582243805326
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -846,7 +846,7 @@
         },
         "20": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy2",
             "errors": null,
             "id": 20,
             "input_connections": {
@@ -890,8 +890,8 @@
                 }
             ],
             "position": {
-                "left": 1136.5946889903637,
-                "top": 0
+                "left": 1136.5905059569652,
+                "top": 0.0
             },
             "post_job_actions": {
                 "HideDatasetActionblobdir": {
@@ -900,15 +900,15 @@
                     "output_name": "blobdir"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy2",
             "tool_shed_repository": {
-                "changeset_revision": "53dd00a4ab68",
+                "changeset_revision": "8c2167481e72",
                 "name": "blobtoolkit",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"mode_conditional\": {\"selector\": \"create\", \"__current_case__\": 0, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"meta\": {\"__class__\": \"ConnectedValue\"}, \"taxid\": {\"__class__\": \"ConnectedValue\"}, \"taxdump\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "4.0.7+galaxy1",
+            "tool_state": "{\"mode_conditional\": {\"selector\": \"create\", \"__current_case__\": 0, \"fasta\": {\"__class__\": \"RuntimeValue\"}, \"meta\": {\"__class__\": \"RuntimeValue\"}, \"taxid\": {\"__class__\": \"ConnectedValue\"}, \"taxdump\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.7+galaxy2",
             "type": "tool",
             "uuid": "7977e058-c123-4ca4-beb3-b43eb2a0556b",
             "when": null,
@@ -936,7 +936,7 @@
             ],
             "position": {
                 "left": 1131.2351528872694,
-                "top": 306.45296947514703
+                "top": 306.4529564548682
             },
             "post_job_actions": {
                 "TagDatasetActionstats": {
@@ -983,7 +983,7 @@
             ],
             "position": {
                 "left": 1189.6405640643752,
-                "top": 637.1305516448687
+                "top": 637.1305386245898
             },
             "post_job_actions": {
                 "HideDatasetActionblast_tabular": {
@@ -1041,7 +1041,7 @@
             ],
             "position": {
                 "left": 1204.4280098341721,
-                "top": 780.9160175328573
+                "top": 780.9160045125784
             },
             "post_job_actions": {
                 "HideDatasetActionbam_output": {
@@ -1082,6 +1082,10 @@
             "inputs": [
                 {
                     "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Busco",
                     "name": "lineage"
                 }
             ],
@@ -1098,8 +1102,8 @@
                 }
             ],
             "position": {
-                "left": 1403.3906846965833,
-                "top": 383.1553481674176
+                "left": 1403.390596430494,
+                "top": 383.140611272624
             },
             "post_job_actions": {
                 "HideDatasetActionbusco_table": {
@@ -1122,21 +1126,21 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"miniprot\": false, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"lineage_conditional\": {\"selector\": \"download\", \"__current_case__\": 1}, \"outputs\": [\"short_summary\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"miniprot\": false, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"lineage_conditional\": {\"selector\": \"download\", \"__current_case__\": 1}, \"outputs\": [\"short_summary\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "5.5.0+galaxy0",
             "type": "tool",
             "uuid": "e158c60a-efc6-4193-beee-0c352c9e13dd",
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "Busco on input dataset(s): short summary",
-                    "output_name": "busco_sum",
-                    "uuid": "1284cb9f-834f-470e-a773-01f7b3c48cde"
-                },
-                {
                     "label": "Busco on input dataset(s): full table",
                     "output_name": "busco_table",
                     "uuid": "7609848a-e6cb-4660-8ee2-396947dd6a8b"
+                },
+                {
+                    "label": "Busco on input dataset(s): short summary",
+                    "output_name": "busco_sum",
+                    "uuid": "1284cb9f-834f-470e-a773-01f7b3c48cde"
                 }
             ]
         },
@@ -1175,7 +1179,7 @@
             ],
             "position": {
                 "left": 1105.3906041667742,
-                "top": 1125.6762005176308
+                "top": 1125.676187497352
             },
             "post_job_actions": {
                 "HideDatasetActionbam_output": {
@@ -1220,7 +1224,7 @@
             ],
             "position": {
                 "left": 1108.5641412047526,
-                "top": 1366.8049928776566
+                "top": 1366.8049798573777
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -1268,7 +1272,7 @@
             ],
             "position": {
                 "left": 772.3306386518814,
-                "top": 1603.2437424349375
+                "top": 1603.2437294146587
             },
             "post_job_actions": {
                 "HideDatasetActionread_db": {
@@ -1313,7 +1317,7 @@
             ],
             "position": {
                 "left": 1676.6927297399802,
-                "top": 860.0958819295397
+                "top": 860.0958689092608
             },
             "post_job_actions": {
                 "HideDatasetActionoutput1": {
@@ -1369,7 +1373,7 @@
             ],
             "position": {
                 "left": 1394.3835632702885,
-                "top": 1033.3067353633055
+                "top": 1033.3067223430266
             },
             "post_job_actions": {
                 "ChangeDatatypeActionoutput": {
@@ -1421,7 +1425,7 @@
             ],
             "position": {
                 "left": 1396.5707191892354,
-                "top": 1274.2000537026645
+                "top": 1274.2000406823856
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -1460,7 +1464,7 @@
             ],
             "position": {
                 "left": 2274.6215671812843,
-                "top": 1417.5112521510584
+                "top": 1417.5112391307796
             },
             "post_job_actions": {
                 "HideDatasetActionout_file1": {
@@ -1504,7 +1508,7 @@
             ],
             "position": {
                 "left": 837.4971565026904,
-                "top": 1826.2983368774558
+                "top": 1826.298323857177
             },
             "post_job_actions": {
                 "HideDatasetActionread_db": {
@@ -1529,7 +1533,7 @@
         },
         "33": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy2",
             "errors": null,
             "id": 33,
             "input_connections": {
@@ -1594,11 +1598,15 @@
                 {
                     "name": "blobdir",
                     "type": "tgz"
+                },
+                {
+                    "name": "output_svg",
+                    "type": "svg"
                 }
             ],
             "position": {
-                "left": 2027.7655667569916,
-                "top": 324.14829039307904
+                "left": 2027.7657203720398,
+                "top": 324.1406290137937
             },
             "post_job_actions": {
                 "TagDatasetActionblobdir": {
@@ -1609,15 +1617,15 @@
                     "output_name": "blobdir"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy2",
             "tool_shed_repository": {
-                "changeset_revision": "53dd00a4ab68",
+                "changeset_revision": "8c2167481e72",
                 "name": "blobtoolkit",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"mode_conditional\": {\"selector\": \"add\", \"__current_case__\": 1, \"blobdir\": {\"__class__\": \"ConnectedValue\"}, \"taxdump\": {\"__class__\": \"ConnectedValue\"}, \"busco\": {\"__class__\": \"ConnectedValue\"}, \"blast_input\": {\"selector\": \"enabled\", \"__current_case__\": 0, \"hits\": {\"__class__\": \"ConnectedValue\"}, \"taxrule\": \"bestsum\", \"evalue\": \"1.0\", \"bitscore\": \"1.0\", \"hit_count\": \"10\", \"hits_cols\": \"1=qseqid,7=staxids,6=bitscore,2=sseqid,3=qstart,4=qend,5=evalue\"}, \"bed\": {\"__class__\": \"RuntimeValue\"}, \"cov\": {\"__class__\": \"ConnectedValue\"}, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"trnascan\": {\"__class__\": \"RuntimeValue\"}, \"text_input\": {\"selector\": \"disabled\", \"__current_case__\": 1}, \"advanced_options\": {\"blobdb\": {\"__class__\": \"RuntimeValue\"}, \"synonyms\": {\"__class__\": \"RuntimeValue\"}, \"update_plot\": false, \"pileup_args\": \"\", \"replace\": false}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "4.0.7+galaxy1",
+            "tool_state": "{\"mode_conditional\": {\"selector\": \"add\", \"__current_case__\": 1, \"blobdir\": {\"__class__\": \"RuntimeValue\"}, \"taxdump\": {\"__class__\": \"RuntimeValue\"}, \"busco\": {\"__class__\": \"RuntimeValue\"}, \"blast_input\": {\"selector\": \"enabled\", \"__current_case__\": 0, \"hits\": {\"__class__\": \"RuntimeValue\"}, \"taxrule\": \"bestsum\", \"evalue\": \"1.0\", \"bitscore\": \"1.0\", \"hit_count\": \"10\", \"hits_cols\": \"1=qseqid,7=staxids,6=bitscore,2=sseqid,3=qstart,4=qend,5=evalue\"}, \"bed\": {\"__class__\": \"RuntimeValue\"}, \"cov\": {\"__class__\": \"RuntimeValue\"}, \"fasta\": {\"__class__\": \"RuntimeValue\"}, \"trnascan\": {\"__class__\": \"RuntimeValue\"}, \"text_input\": {\"selector\": \"disabled\", \"__current_case__\": 1}, \"blobtk_plot_options\": {\"blobtk_plot\": \"yes\", \"__current_case__\": 0, \"plot_view\": \"blob\"}, \"advanced_options\": {\"blobdb\": {\"__class__\": \"RuntimeValue\"}, \"synonyms\": {\"__class__\": \"RuntimeValue\"}, \"update_plot\": false, \"pileup_args\": \"\", \"replace\": false}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.7+galaxy2",
             "type": "tool",
             "uuid": "cc148405-d71f-4d74-847d-7f88fae9dec2",
             "when": null,
@@ -1645,7 +1653,7 @@
             ],
             "position": {
                 "left": 1986.343857420896,
-                "top": 839.7316291386821
+                "top": 839.7316161184033
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -1694,7 +1702,7 @@
             ],
             "position": {
                 "left": 1634.3988433800112,
-                "top": 1114.066842757356
+                "top": 1114.0668297370771
             },
             "post_job_actions": {
                 "HideDatasetActiondata_param": {
@@ -1739,7 +1747,7 @@
             ],
             "position": {
                 "left": 3032.242735999367,
-                "top": 1427.5553739241068
+                "top": 1427.555360903828
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -1805,7 +1813,7 @@
             ],
             "position": {
                 "left": 1112.1719083597386,
-                "top": 1511.5702023372066
+                "top": 1511.5701893169278
             },
             "post_job_actions": {
                 "HideDatasetActionhist_files": {
@@ -1874,7 +1882,7 @@
             ],
             "position": {
                 "left": 1119.8438995384288,
-                "top": 1981.0897645227903
+                "top": 1981.0897515025115
             },
             "post_job_actions": {
                 "HideDatasetActionread_db_hist": {
@@ -1923,8 +1931,8 @@
                 }
             ],
             "position": {
-                "left": 2325.843708364338,
-                "top": 436.8869914128169
+                "left": 2327.170464330682,
+                "top": 430.2407430279876
             },
             "post_job_actions": {
                 "TagDatasetActionoutput_svg": {
@@ -1976,7 +1984,7 @@
             ],
             "position": {
                 "left": 2326.971351833029,
-                "top": 588.1014230442712
+                "top": 588.1014100239923
             },
             "post_job_actions": {
                 "TagDatasetActionoutput_svg": {
@@ -2031,7 +2039,7 @@
             ],
             "position": {
                 "left": 2024.3438260120008,
-                "top": 978.8593547310519
+                "top": 978.859341710773
             },
             "post_job_actions": {
                 "HideDatasetActionoutput_parsed_pairs": {
@@ -2083,7 +2091,7 @@
             ],
             "position": {
                 "left": 1899.5379261545515,
-                "top": 1312.9450173642267
+                "top": 1312.9450043439479
             },
             "post_job_actions": {
                 "TagDatasetActionoutput": {
@@ -2142,7 +2150,7 @@
             ],
             "position": {
                 "left": 1410.8750287416324,
-                "top": 1776.531223447223
+                "top": 1776.5312104269442
             },
             "post_job_actions": {
                 "HideDatasetActionsmudgeplot_log": {
@@ -2221,7 +2229,7 @@
             ],
             "position": {
                 "left": 1411.7187588022964,
-                "top": 2029.5000063364384
+                "top": 2029.4999933161596
             },
             "post_job_actions": {
                 "HideDatasetActionlog_plot": {
@@ -2304,7 +2312,7 @@
             ],
             "position": {
                 "left": 2262.208425243777,
-                "top": 876.2145293910722
+                "top": 876.2145163707934
             },
             "post_job_actions": {
                 "HideDatasetActionoutput_sorted_pairs": {
@@ -2353,7 +2361,7 @@
             ],
             "position": {
                 "left": 2309.499955586393,
-                "top": 1076.8437650617532
+                "top": 1076.8437520414743
             },
             "post_job_actions": {
                 "HideDatasetActionoutput_dedup_pairs": {
@@ -2409,7 +2417,7 @@
             ],
             "position": {
                 "left": 2539.966239513476,
-                "top": 1010.8409258428813
+                "top": 1010.8409128226025
             },
             "post_job_actions": {
                 "HideDatasetActionoutput_file": {
@@ -2468,7 +2476,7 @@
             ],
             "position": {
                 "left": 2776.171734903711,
-                "top": 1042.0668201215678
+                "top": 1042.066807101289
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -2522,7 +2530,7 @@
             ],
             "position": {
                 "left": 3080.5831124742954,
-                "top": 1142.5987131444351
+                "top": 1142.5987001241563
             },
             "post_job_actions": {
                 "HideDatasetActionoutput": {
@@ -2556,12 +2564,7 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool hicMergeMatrixBins",
-                    "name": "matrix_h5_cooler"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "hicMergeMatrixBins",
             "outputs": [
@@ -2572,7 +2575,7 @@
             ],
             "position": {
                 "left": 3332.3871463844675,
-                "top": 903.4350565408532
+                "top": 903.4350435205744
             },
             "post_job_actions": {
                 "HideDatasetActionoutFileName": {
@@ -2595,7 +2598,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"matrix_h5_cooler\": {\"__class__\": \"RuntimeValue\"}, \"numBins\": \"50\", \"runningWindow\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"matrix_h5_cooler\": {\"__class__\": \"ConnectedValue\"}, \"numBins\": \"50\", \"runningWindow\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "3.7.2+galaxy0",
             "type": "tool",
             "uuid": "11ca717a-f896-4ecd-b2d5-11983405c4a7",
@@ -2624,7 +2627,7 @@
             ],
             "position": {
                 "left": 3329.3372998501627,
-                "top": 1340.493444324158
+                "top": 1340.493431303879
             },
             "post_job_actions": {
                 "HideDatasetActionoutFileName": {
@@ -2685,7 +2688,7 @@
             ],
             "position": {
                 "left": 3359.567645246474,
-                "top": 1095.6865436231672
+                "top": 1095.6865306028883
             },
             "post_job_actions": {
                 "TagDatasetActionoutFileName": {
@@ -2741,7 +2744,7 @@
             ],
             "position": {
                 "left": 3362.8249579891817,
-                "top": 1535.2376295218714
+                "top": 1535.2376165015926
             },
             "post_job_actions": {
                 "TagDatasetActionoutFileName": {
@@ -2770,6 +2773,6 @@
     "tags": [
         "name:ERGA"
     ],
-    "uuid": "51749495-7a7b-443f-88f9-c810b820c08c",
-    "version": 38
+    "uuid": "953e8637-22b1-4c96-a98f-a13bbe8745d4",
+    "version": 40
 }
