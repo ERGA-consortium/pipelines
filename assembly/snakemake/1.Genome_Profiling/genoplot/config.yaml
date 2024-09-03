@@ -11,5 +11,8 @@ ploidy:
 kmersize:
     21
 
-MaxCov:
-    10000
+Lbound:
+    10
+
+Ubound:
+    1500

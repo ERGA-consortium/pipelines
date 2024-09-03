@@ -7,140 +7,117 @@ configfile: "config.yaml"
 prefix=config["prefix"]
 ploidy=config["ploidy"]
 k=config["kmersize"]
-maxC=config["MaxCov"]
+L=config["Lbound"]
+U=config["Ubound"]
 
-def get_L_U(wildcards):
-	with open(prefix+"_limits_L_U.txt") as f:
-		L, U = f.read().strip().split("\t")
-	return L, U
+output_meryl=config["prefix"]+".meryl"
+output_smudgeplot=prefix+"_L"+str(L)+"_U"+str(U)+"_smudgeplot.png"
+
+def get_reads(wildcards):
+	return config["READ_FILES"][wildcards.read_file]
 
 rule all:
 	input:
-		"Estimated_genome_size",
-		prefix+"_smudgeplot.OK"
-
-rule read_files_list:
-	output:
-		prefix+".list"
-	run:
-		read_files = config["READ_FILES"].values()
-		with open(output[0], "w") as out_file:
-			for read_file in read_files:
-				out_file.write(f"{read_file}\n")
+		output_smudgeplot,
+		"Estimated_genome_size"
 
 rule count_kmers:
 	input:
-		prefix+".list"
+		reads=get_reads
 	output:
-		prefix+".kmc_pre",
-		prefix+".kmc_suf"
+		directory("{read_file}.meryl")
 	conda:
-		"kmc_smudge_pairs"
+		"genoplots"
+
 	threads:
 		3
 	shell:
-		"""
-		rm -rf {prefix}.tmp
-		mkdir -p {prefix}.tmp
-		kmc \
-			-k{k} -t{threads} -m10 \
-			-ci1 -cs{maxC} \
-			@{prefix}".list" {prefix} {prefix}.tmp
-		rm -rf {prefix}.tmp
-		"""
+		"meryl count k={k} memory=10G threads={threads} {input.reads} output {output}"
+
+rule merge_kmers:
+	input:
+		expand("{read_file}.meryl", read_file=config["READ_FILES"])
+	output:
+		directory(output_meryl)
+	conda:
+		"genoplots"
+
+	threads:
+		6
+	shell:
+		"meryl union-sum memory=10G threads={threads} output {output} {input}"
 
 rule create_hist:
 	input:
-		prefix+".kmc_pre",
-		prefix+".kmc_suf"
+		output_meryl
 	output:
-		prefix+".hist"
+		config["prefix"]+".hist"
 	conda:
-		"kmc_smudge_pairs"
+		"genoplots"
+
+	threads:
+		1
 	shell:
-		"kmc_tools transform {prefix} histogram {prefix}'.hist' -cx{maxC}"
+		"meryl histogram {input} > {output}"
 
 rule run_genomescope:
 	input:
-		prefix+".hist"
+		config["prefix"]+".hist"
 	output:
-		directory(prefix+"_genomescope")
+		directory(config["prefix"]+"_genomescope")
 	conda:
 		"genoplots"
+
+	threads:
+		1
 	shell:
-		"genomescope2 -i {input} -p {ploidy} -k {k} -o {output} -m {maxC}"
+		"genomescope2 -i {input} -p {ploidy} -k {k} -o {output}"
 
 rule get_genomescopeStats:
 	input:
-		prefix+"_genomescope"
+		config["prefix"]+"_genomescope"
 	output:
 		"Estimated_genome_size"
+	threads:
+		1
 	shell:
 		"bash get_stats.sh {input}"
 
-rule find_limits_L_U:
-	input:
-		prefix+".hist"
-	output:
-		prefix+"_limits_L_U.txt"
-	conda:
-		"genoplots"
-	shell:
-		"""
-		L=$(smudgeplot.py cutoff {prefix}".hist" L)
-		U=$(smudgeplot.py cutoff {prefix}".hist" U)
-		echo -e "${{L}}\t${{U}}" > {output}
-		"""
-
 rule prepare_kmersSmudge:
 	input:
-		prefix+"_limits_L_U.txt"
+		output_meryl
 	output:
-		prefix+"_reduce.OK"
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+".kmers"
 	conda:
-		"kmc_smudge_pairs"
-	shell:
-		"""
-		L=$(cut -f1 {input})
-		U=$(cut -f2 {input})
-		kmc_tools \
-			transform {prefix} -ci${{L}} -cx${{U}} \
-			reduce {prefix}_L${{L}}_U${{U}} && touch {prefix}"_reduce.OK"
-		"""
+		"genoplots"
 
-rule run_smudge_pairs:
-	input:
-		prefix+"_limits_L_U.txt",
-		prefix+"_reduce.OK"
-	output:
-		prefix+"_coverages.OK"
-	conda:
-		"kmc_smudge_pairs"
+	threads:
+		6
 	shell:
-		"""
-		L=$(cut -f1 {input[0]})
-		U=$(cut -f2 {input[0]})
-		smudge_pairs \
-			{prefix}_L${{L}}_U${{U}} \
-			{prefix}_L${{L}}_U${{U}}_coverages.tsv \
-			{prefix}_L${{L}}_U${{U}}_pairs.tsv \
-			> {prefix}_L${{L}}_U${{U}}_familysizes.tsv && touch {prefix}"_coverages.OK"
-		"""
+		"meryl print less-than 1500 greater-than 10 threads={threads} memory=10G {input} | sort > {output}"
+
+rule run_smudgeplot:
+	input:
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+".kmers"
+	output:
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coverages.tsv"
+	conda:
+		"genoplots"
+
+	threads:
+		1
+	shell:
+		"smudgeplot.py hetkmers -o {prefix}_L{L}_U{U} < {input}"
 
 rule create_smudgeplot:
 	input:
-		prefix+"_limits_L_U.txt",
-		prefix+"_coverages.OK"
+		str(prefix)+"_L"+str(L)+"_U"+str(U)+"_coverages.tsv"
 	output:
-		prefix+"_smudgeplot.OK"
+		output_smudgeplot
 	conda:
 		"genoplots"
+
+	threads:
+		1
 	shell:
-		"""
-		L=$(cut -f1 {input[0]})
-		U=$(cut -f2 {input[0]})
-		smudgeplot_plot.R \
-			-L ${{L}} \
-			-i {prefix}_L${{L}}_U${{U}}_coverages.tsv \
-			-o {prefix}_L${{L}}_U${{U}} && touch {prefix}"_smudgeplot.OK"
-		"""
+		"smudgeplot_plot.R -L {L} -i {input} -o {prefix}_L{L}_U{U}"
