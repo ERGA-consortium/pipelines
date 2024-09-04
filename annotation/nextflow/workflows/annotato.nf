@@ -280,9 +280,11 @@ workflow ANNOTATO {
             ch_short_rna_bam_stringtie = params.short_rna_bam ? ch_short_rna_bam : "EMPTY"
             ch_long_rna_bam_stringtie  = params.long_rna_bam ? ch_long_rna_bam : "EMPTY"
 
-            STRINGTIE ( ch_short_rna_bam_stringtie, ch_long_rna_bam_stringtie )
-            ch_versions = ch_versions.mix(STRINGTIE.out.versions.ifEmpty(null))
-            ch_stringtie_gtf = STRINGTIE.out.gtf
+            if(ch_short_rna_bam_stringtie != "EMPTY" || ch_long_rna_bam_stringtie != "EMPTY") {
+                STRINGTIE ( ch_short_rna_bam_stringtie, ch_long_rna_bam_stringtie )
+                ch_versions = ch_versions.mix(STRINGTIE.out.versions.ifEmpty(null))
+                ch_stringtie_gtf = STRINGTIE.out.gtf
+            }
         }
     }
 
