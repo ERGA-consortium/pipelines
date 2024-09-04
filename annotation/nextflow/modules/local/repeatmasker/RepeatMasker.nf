@@ -26,6 +26,9 @@ process REPEATMASKER {
 	#Rename fasta header to only contain the first element
 	awk '/^>/ {sub(/ .*/, ""); printf("%s\\n", \$0); next;} {print;}' genome.fasta.masked > genome.fasta.masked.clean
 
+	#Compress cat when not already compressed
+        [ -f genome.fasta.cat.gz ] || gzip genome.fasta.cat
+
 	cat <<-VERSIONS > versions.yml
 	"${task.process}":
 	    RepeatMasker:  \$( RepeatMasker -v | sed -e "s/RepeatMasker version //g")
