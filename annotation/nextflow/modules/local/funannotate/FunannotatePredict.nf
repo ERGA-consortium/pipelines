@@ -3,7 +3,7 @@ process GENE_PREDICTION_FUNANNOTATE {
 	label 'process_high_memory'
 	label 'funannotate'
 
-	containerOptions = "--bind /env:/env --bind ${params.tmpdir}:/opt/databases --bind /mnt:/mnt"
+	containerOptions = "--bind ${params.tmpdir}:/opt/databases"
 
 	input:
 	path(softmaskFasta)
@@ -24,11 +24,12 @@ process GENE_PREDICTION_FUNANNOTATE {
 	def args_stringtie = stringtie != "EMPTY" ? "--stringtie ${stringtie}" : ""
     def args_buscodb = params.buscodb ? "--busco_db '${params.buscodb}'" : ""
 	def args_buscoseed = params.buscoseed == null ? "" : "--busco_seed_species '${params.buscoseed}'"
+	def args_augminmods = params.augminmods == null ? "" : "--min_training_models '${params.augminmods}'"
 	def args_ploidy = params.ploidy ? "--ploidy ${params.ploidy}" : ""
 
 	"""
 	augustus_species=\$(echo ${species} | sed 's/ /_/g')
-	funannotate setup -b ${params.buscodb}
+	funannotate setup -l -w -b ${params.buscodb}
 
 	funannotate predict -i ${softmaskFasta} \\
 	-o output \\
@@ -38,6 +39,7 @@ process GENE_PREDICTION_FUNANNOTATE {
 	--organism ${params.organism} \\
 	${args_buscodb} \\
 	${args_buscoseed} \\
+	${args_augminmods} \\
 	${args_prot} \\
 	${args_rna} \\
 	${args_stringtie} \\
