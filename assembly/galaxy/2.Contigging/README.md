@@ -5,17 +5,14 @@ Load the respective .ga file in Galaxy to run the workflow.
 
 ## HiFi-based assembly
 
-### Hifiasm
+### Hifiasm (HiFi & HiC)
 The workflow takes a trimmed HiFi reads collection, Forward/Reverse HiC reads, and the max coverage depth (calculated from WF1) to run Hifiasm in HiC phasing mode. It produces both Pri/Alt and Hap1/Hap2 assemblies, and runs all the QC analysis (gfastats, BUSCO, and Merqury). The default Hifiasm purge level is Light (l1).
 ![ContHifiasmHiC](pics/Cont_hifiasm_hic_2309.png)
 
+### Hifiasm (HiFi only)
+The workflow takes a trimmed HiFi reads collection, and max coverage depth (calculated from WF1) to run Hifiasm in HiFi solo mode. It produces a Pri/Alt assembly, and runs all the QC analysis (gfastats, BUSCO, and Merqury).
+![ContHifiasmSolo](pics/Cont_hifiasm_solo_2409.png)
 
-### Hicanu
-\[in preparation]
-### Flye
-\[in preparation]
-### Nextdenovo
-\[in preparation]
 
 ## ONT-based assembly
 
@@ -26,6 +23,3 @@ The workflow takes raw ONT reads and trimmed Illumina WGS paired reads collectio
 ### Nextdenovo (untested)
 The workflow takes raw ONT reads and trimmed Illumina WGS paired reads collections, the ONT raw stats table (calculated from WF1) and the estimated genome size (calculated from WF1) to run NextDenovo and subsequently polish the assembly with HyPo. It produces collapsed assemblies (unpolished and polished) and runs all the QC analyses (gfastats, BUSCO, and Merqury).
 ![ContNextdenovo](pics/Cont_ONTnextdenovo_2403.png)
-
-### Shasta
-\[in preparation]
