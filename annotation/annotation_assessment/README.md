@@ -4,7 +4,7 @@ AnnoAudit is a robust Nextflow pipeline designed to evaluate the quality of geno
 
 ## Overview of the workflow
 
-To be added
+
 
 ### Input data
 
@@ -23,7 +23,13 @@ SAM3,/path/to/R1,,short            # For SE reads
 
 ### Pipeline steps
 
-To be added
+![Pipeline](./assets/images/annotaudit-workflow.png)
+
+The main pipeline is divided into five different subworkflows.
+- `General statistics`: Calculate the statistics obtained from the GFF file.
+- `RNASeq analysis`: Map the RNASeq data to the genome (or with provided mapping bam file) to generate exon, intron, transcript coverage.
+- `Ortholog analysis`: Compare the predicted proteome to known database using BUSCO and OMArk (OMA database).
+- `Protein analysis`: Blast the predicted proteome to a known database (could be of relative species) to obtain best reciprocal hits (BRH), then generate statistics based on the BRH results.
 
 ### Output data
 
@@ -82,6 +88,7 @@ nextflow run main.nf --genome genome.fasta \
 Compulsory input:
 --genome                       Draft genome fasta file contain the assembled contigs/scaffolds
 --gff                          Annotation file that need to be evaluated
+--genome_bam                   BAM file contain the mapped information from the RNASeq to the genome FASTA.
 --rnaseq                       A CSV file following the pattern: sample_id,R1_path,R2_path,read_type.
 
 Optional input:
@@ -109,10 +116,9 @@ Executer (choose one):
   slurm
 
 Engines (choose one):
-  conda
-  mamba
   docker
   singularity
+  apptainer
 
 Per default: -profile slurm,singularity is executed.
 ```
