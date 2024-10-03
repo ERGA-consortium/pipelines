@@ -114,20 +114,17 @@ def parse_brh_output(brh_output):
     return brh_stats
 
 def parse_idxstats(file_path):
-    """Parses a file and calculates the number and percentage of lines with 0 in the third column."""
-
-    rna_stats = {}
-    num_lines_with_zero = 0
-    total_lines = 0
 
     with open(file_path, 'r') as f:
-        reader = csv.reader(f, delimiter='\t')
-        for row in reader:
-            total_lines += 1
-            if int(row[2]) == 0:
-                num_lines_with_zero += 1
+        data = json.load(f)
 
-    rna_stats['num_unsupported_gene'] = str(num_lines_with_zero) + " (" + str(round((num_lines_with_zero / total_lines) * 100, 2)) + "%)"
+    passed = data["QC-passed reads"]
+    rna_stats = {
+        "mapping_rate": str(passed["mapped %"]) + "%",
+        "primary_mapping_rate": str(passed["primary mapped %"]) + "%",
+        "properly_paired": str(passed["properly paired %"]) + "%"
+    }
+
     return rna_stats
 
 def combine_results(stats1, stats2, stats3, stats4, stats5, stats6):
