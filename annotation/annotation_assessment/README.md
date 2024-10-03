@@ -88,19 +88,33 @@ nextflow run main.nf --genome genome.fasta \
 Compulsory input:
 --genome                       Draft genome fasta file contain the assembled contigs/scaffolds
 --gff                          Annotation file that need to be evaluated
---genome_bam                   BAM file contain the mapped information from the RNASeq to the genome FASTA.
+--genome_bam                   BAM file contain the mapped information from the RNASeq to the genome FASTA, will be utilize instead of 
+                               `--rnaseq` once given.
 --rnaseq                       A CSV file following the pattern: sample_id,R1_path,R2_path,read_type.
+--genetic_code                 Genetic code for translate the intron sequences. [default: 1]
 
 Optional input:
 --protein                      Fasta file containing translated protein sequences from the GFF for running evaluation.
                                If not specified, the workflow will automatically extract it from the `genome` and `gff`
 --ref_protein                  Fasta file containing the reference protein sequences to be used for evaluation.
                                Ideally this should come from the same species and/or closely related species. If not provided
-                               the Uniprot SwissProt data will be downloaded and used.
+                               the workflow will download the protein sequences from the NCBI Entrez database (priority), if skipped as well, the Uniprot SwissProt data will be downloaded and used.
 --lineage                      Lineage information providing for BUSCO, if not provided, the `--auto-lineage` option will be used
                                instead. Example: eudicots_odb10
 --oma_database                 Pathway to the OMA database, if not specified, the workflow will download it automatically.
+
+Query NCBI option:
+--taxon_id                     Taxon ID required for searching the NCBI database, required if the `--query_ncbi_prot` is set (by default), 
+                               and the `--ref_protein` is not provided.
+--ncbi_query_email             Email address to use for NCBI Entrez, required if the `--query_ncbi_prot` is set (by default), 
+                               and the `--ref_protein` is not provided.
+--ncbi_query_count             Number of protein to query from the Entrez database. [default: 100000]
+--ncbi_query_batch             Number of protein to search at a time. [default: 10000]
+
+Running option:
 --run_blast                    If specify, will use `blast` for running best reciprocal hits instead of DIAMOND. [default: false]
+--skip_omark                   Skip OMArk analysis step. [default: false] (to be added in the future)
+--query_ncbi_prot              Query protein data from the NCBI Entrez database. [default: true]
 
 Output option:
 --outdir                       Output directory. 
@@ -128,75 +142,84 @@ Per default: -profile slurm,singularity is executed.
 Below is the sample output of this workflow
 
 ```
-|General Statistics        | Value                |
----------------------------------------------------
-|num_genes                 | 41048                |
-|num_genes_without_introns | 14365 (0.35%)        |
-|mean_gene_length          | 2444.24              |
-|median_gene_length        | 1613.0               |
-|mean_exons_per_gene       | 4.26                 |
-|median_exons_per_gene     | 2.0                  |
-|mean_cds_length           | 1109.73              |
-|median_cds_length         | 894.0                |
-|total_cds_length          | 45552283             |
-|percentage_cds_coverage   | 12.2%                |
-|num_introns               | 133989               |
-|mean_intron_length        | 408.83               |
-|median_intron_length      | 147.0                |
-|num_short_intron_<120_3n  | 18644 (33.06%)       |
-|num_short_intron_<120_3n1 | 18876 (33.47%)       |
-|num_short_intron_<120_3n2 | 18876 (33.47%)       |
-|num_long_intron_>120_3n   | 26136 (33.68%)       |
-|num_long_intron_>120_3n1  | 25866 (33.34%)       |
-|num_long_intron_>120_3n2  | 25591 (32.98%)       |
+|General Statistics                  | Value                |
+-------------------------------------------------------------
+|num_genes                           | 41048                |
+|num_genes_without_introns           | 14365 (35.0%)        |
+|mean_gene_length                    | 2444.24              |
+|median_gene_length                  | 1613.0               |
+|num_exons                           | 175037               |
+|mean_exons_per_gene                 | 4.26                 |
+|median_exons_per_gene               | 2.0                  |
+|mean_cds_length                     | 1109.73              |
+|median_cds_length                   | 894.0                |
+|total_cds_length                    | 45552283             |
+|percentage_cds_coverage             | 12.2%                |
+|num_introns                         | 133989               |
+|mean_intron_length                  | 408.83               |
+|median_intron_length                | 147.0                |
+|num_short_intron_<120_3n0           | 18876 (14.09)%       |
+|num_long_intron_>120_3n0            | 25866 (19.30)%       |
+|num_short_intron_<120_3n1           | 18876 (14.09)%       |
+|num_long_intron_>120_3n1            | 25591 (19.10)%       |
+|num_short_intron_<120_3n2           | 19194 (14.33)%       |
+|num_long_intron_>120_3n2            | 25586 (19.10)%       |
+|num_short_intron_<120_3n0_with_stop | 13839 (10.33)%       |
+|num_long_intron_>120_3n0_with_stop  | 24328 (18.16)%       |
+|num_short_intron_<120_3n1_with_stop | 13894 (10.37)%       |
+|num_long_intron_>120_3n1_with_stop  | 24105 (17.99)%       |
+|num_short_intron_<120_3n2_with_stop | 14022 (10.47)%       |
+|num_long_intron_>120_3n2_with_stop  | 24081 (17.97)%       |
 
-|BUSCO                     | Value                |
----------------------------------------------------
-|lineage_dataset           | eudicotyledons_odb10 |
-|complete                  | 86.7%                |
-|single_copy               | 70.5%                |
-|multi_copy                | 16.2%                |
-|fragmented                | 0.7%                 |
-|missing                   | 12.6%                |
-|num_markers               | 2326                 |
-|domain                    | eukaryota            |
+|BUSCO                               | Value                |
+-------------------------------------------------------------
+|lineage_dataset                     | eudicotyledons_odb10 |
+|complete                            | 86.7%                |
+|single_copy                         | 70.5%                |
+|multi_copy                          | 16.2%                |
+|fragmented                          | 0.7%                 |
+|missing                             | 12.6%                |
+|num_markers                         | 2326                 |
+|domain                              | eukaryota            |
 
-|OMARK                     | Value                |
----------------------------------------------------
-|num_conserved_hogs        | 15089                |
-|single                    | 11657 (77.25%)       |
-|duplicated                | 3012 (19.96%)        |
-|duplicated_unexpected     | 2775 (18.39%)        |
-|duplicated_expected       | 237 (1.57%)          |
-|missing                   | 420 (2.78%)          |
-|num_proteins_in_proteome  | 41044                |
-|total_consistent          | 34692 (84.52%)       |
-|consistent_partial_hits   | 1998 (4.87%)         |
-|consistent_fragmented     | 2014 (4.91%)         |
-|total_inconsistent        | 2329 (5.67%)         |
-|inconsistent_partial_hits | 624 (1.52%)          |
-|inconsistent_fragmented   | 1423 (3.47%)         |
-|total_contaminants        | 0 (0.00%)            |
-|contaminants_partial_hits | 0 (0.00%)            |
-|contaminants_fragmented   | 0 (0.00%)            |
-|total_unknown             | 4023 (9.80%)         |
+|OMARK                               | Value                |
+-------------------------------------------------------------
+|OMA_clade                           | Oryza                |
+|num_conserved_hogs                  | 15087                |
+|single                              | 11686 (77.46%)       |
+|duplicated                          | 2986 (19.79%)        |
+|duplicated_unexpected               | 2749 (18.22%)        |
+|duplicated_expected                 | 237 (1.57%)          |
+|missing                             | 415 (2.75%)          |
+|num_proteins_in_proteome            | 41044                |
+|total_consistent                    | 34598 (84.29%)       |
+|consistent_partial_hits             | 1973 (4.81%)         |
+|consistent_fragmented               | 1977 (4.82%)         |
+|total_inconsistent                  | 2456 (5.98%)         |
+|inconsistent_partial_hits           | 567 (1.38%)          |
+|inconsistent_fragmented             | 1541 (3.75%)         |
+|total_contaminants                  | 0 (0.00%)            |
+|contaminants_partial_hits           | 0 (0.00%)            |
+|contaminants_fragmented             | 0 (0.00%)            |
+|total_unknown                       | 3990 (9.72%)         |
 
-|Best Reciprocal Hits      | Value                |
----------------------------------------------------
-|num_best_reciprocal_hits  | 9167                 |
-|num_splitting_genes_08    | 1180 (12.87%)        |
-|num_splitting_genes_05    | 0 (0.0%)             |
-|num_fusion_genes_12       | 360 (3.93%)          |
-|num_fusion_genes_15       | 286 (3.12%)          |
-|KL_divergence_normed      | 0.1286               |
-|JS_divergence_normed      | 0.0223               |
-|KL_divergence_raw         | 0.1286               |
-|JS_divergence_raw         | 0.0223               |
+|Best Reciprocal Hits                | Value                |
+-------------------------------------------------------------
+|num_best_reciprocal_hits            | 29076                |
+|num_splitting_genes_08              | 1578 (5.43%)         |
+|num_splitting_genes_05              | 0 (0.0%)             |
+|num_fusion_genes_12                 | 331 (1.14%)          |
+|num_fusion_genes_15                 | 342 (1.18%)          |
+|KL_divergence_normed                | 0.0186               |
+|JS_divergence_normed                | 0.0039               |
+|Wasserstein_distance                | 8.469494             |
 
 
-|RNASeq                    | Value                |
----------------------------------------------------
-|num_unsupported_gene      | 10133 (24.69%)       |
+|RNASeq                              | Value                |
+-------------------------------------------------------------
+|mapping_rate                        | 96.27%               |
+|primary_mapping_rate                | 95.83%               |
+|properly_paired                     | 92.47%               |
 ```
 
 ## Performance of the workflow on assessing annotation
