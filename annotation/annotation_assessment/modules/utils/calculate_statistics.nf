@@ -5,6 +5,7 @@ process CALCULATE_STATISTICS {
     input:
     path(ch_fasta)
     path(ch_gff)
+    val(cds_only)
     
     output:
     path("statistics.tsv"),         emit: statistics
@@ -13,6 +14,6 @@ process CALCULATE_STATISTICS {
 
     script:
     """
-    python3 ${projectDir}/bin/annot_report.py ${ch_gff} ${ch_fasta}
+    python3 ${projectDir}/bin/annot_report.py ${ch_gff} ${ch_fasta} ${cds_only}
     """
 }

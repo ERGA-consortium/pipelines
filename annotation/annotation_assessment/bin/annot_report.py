@@ -1,7 +1,7 @@
 import sys
 import pandas as pd
 
-def parse_gff3(gff_file):
+def parse_gff3(gff_file, cds_only=False):
     columns = ['seqname', 'source', 'feature', 'start', 'end', 'score', 'strand', 'frame', 'attribute']
     df = pd.read_csv(gff_file, sep='\t', header=None, names=columns)
 
@@ -17,7 +17,10 @@ def parse_gff3(gff_file):
     df['gene_id'] = df.apply(extract_gene_id, axis=1)
 
     genes = df[df['feature'] == 'mRNA']
-    exons = df[df['feature'] == 'exon']
+    if cds_only:
+        exons = df[df['feature'] == 'CDS']
+    else:
+        exons = df[df['feature'] == 'exon']
     cds = df[df['feature'] == 'CDS']
 
     return genes, exons, cds
@@ -49,6 +52,13 @@ def calculate_statistics(genes, exons, cds, genome_size):
     num_introns_per_gene = exons_per_gene - 1
     total_introns = num_introns_per_gene.sum()
 
+    exons['exon_length'] = exons['end'] - exons['start'] + 1
+    exons['classification'] = exons['exon_length'].apply(lambda x: x % 3)
+    exons_length_count = exons['classification'].value_counts()
+    exon_3n_proportion = f"{exons_length_count.get(0, 0)} ({exons_length_count.get(0, 0) / total_exons * 100:.2f}%)"
+    exon_3n1_proportion = f"{exons_length_count.get(1, 0)} ({exons_length_count.get(1, 0) / total_exons * 100:.2f}%)"
+    exon_3n2_proportion = f"{exons_length_count.get(2, 0)} ({exons_length_count.get(2, 0) / total_exons * 100:.2f}%)"
+
     exons_sorted = exons.sort_values(['gene_id', 'start'])
     exons_sorted['intron_start'] = exons_sorted.groupby('gene_id')['end'].shift() + 1
     exons_sorted['intron_length'] = exons_sorted['start'] - exons_sorted['intron_start']
@@ -65,6 +75,9 @@ def calculate_statistics(genes, exons, cds, genome_size):
         'num_exons': total_exons,
         'mean_exons_per_gene': mean_exons_per_gene,
         'median_exons_per_gene': median_exons_per_gene,
+        'num_exon_3n': exon_3n_proportion,
+        'num_exon_3n1': exon_3n1_proportion,
+        'num_exon_3n2': exon_3n2_proportion,
         'mean_cds_length': mean_total_cds_length,
         'median_cds_length': median_total_cds_length,
         'total_cds_length': sum_cds_length,
@@ -114,19 +127,20 @@ def print_stats(stats, output_file):
         for key, value in stats.items():
             f.write(f"{key}\t{value}\n")
 
-def main(gff_file, fasta_file):
-    genes, exons, cds = parse_gff3(gff_file)
+def main(gff_file, fasta_file, cds_only):
+    genes, exons, cds = parse_gff3(gff_file, cds_only)
     genome_size, genome_seq = calculate_genome_size(fasta_file)
     stats, exons_sorted = calculate_statistics(genes, exons, cds, genome_size)
     print_stats(stats, "statistics.tsv")
-    save_sequences(exons, genome_seq, "exon_sequences.fasta")
+    #save_sequences(exons, genome_seq, "exon_sequences.fasta")
     save_sequences(exons_sorted, genome_seq, "intron_sequences.fasta", is_intron=True)
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print("Usage: python annot_report_pandas.py gff_file fasta_file")
+    if len(sys.argv) != 4:
+        print("Usage: python annot_report_pandas.py gff_file fasta_file CDS_only")
         sys.exit(1)
 
     gff_file = sys.argv[1]
     fasta_file = sys.argv[2]
-    main(gff_file, fasta_file)
+    cds_only = sys.argv[3]
+    main(gff_file, fasta_file, cds_only)

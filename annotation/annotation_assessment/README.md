@@ -112,9 +112,10 @@ Query NCBI option:
 --ncbi_query_batch             Number of protein to search at a time. [default: 10000]
 
 Running option:
+--cds_only                     Whether or not to extract the exon data from the CDS line in the provided GFF. [default: False] [option: True, False]
+--query_ncbi_prot              Query protein data from the NCBI Entrez database. [default: true]
 --run_blast                    If specify, will use `blast` for running best reciprocal hits instead of DIAMOND. [default: false]
 --skip_omark                   Skip OMArk analysis step. [default: false] (to be added in the future)
---query_ncbi_prot              Query protein data from the NCBI Entrez database. [default: true]
 
 Output option:
 --outdir                       Output directory. 

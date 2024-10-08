@@ -88,7 +88,7 @@ workflow ASSESS {
     }
 
     // General statistics
-    CALCULATE_STATISTICS ( ch_genome, ch_gff )
+    CALCULATE_STATISTICS ( ch_genome, ch_gff, params.cds_only )
     ch_statistics_out = CALCULATE_STATISTICS.out.statistics
     ch_intron_fasta = CALCULATE_STATISTICS.out.intron_fasta
 
