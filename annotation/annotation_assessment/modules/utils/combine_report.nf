@@ -11,7 +11,7 @@ process COMBINE_REPORT {
     path(ch_index_stats)
     
     output:
-    path("Evaluation_output.txt"), emit: statistics
+    path("Evaluation_output.*"), emit: statistics
 
     script:
     """

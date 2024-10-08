@@ -128,11 +128,11 @@ def parse_idxstats(file_path):
     return rna_stats
 
 def combine_results(stats1, stats2, stats3, stats4, stats5, stats6):
-    """Combines the statistics from the three input files.""" 
+    combined_stats = {**stats1, **stats2, **stats3, **stats4, **stats5, **stats6}
+    protein_combined = {**stats4, **stats5}
 
     with open("Evaluation_output.txt", "w") as f_out:
-        combined_stats = {**stats1, **stats2, **stats3, **stats4, **stats5, **stats6}
-        protein_combined = {**stats4, **stats6}
+        
         max_key_length = max(len(str(key)) for key in combined_stats)
         max_value_length = max(len(str(value)) for value in combined_stats.values())
         format_string = f"|{{:<{max_key_length}}} | {{:<{max_value_length}}} |"
@@ -166,6 +166,10 @@ def combine_results(stats1, stats2, stats3, stats4, stats5, stats6):
         for key, value in stats5.items():
             print(format_string.format(key, value), file=f_out)
 
+    pretty_json_obj = json.dumps(combined_stats, indent=4)
+    with open("Evaluation_output.json", "w") as json_out:
+        json_out.write(pretty_json_obj)
+
 def main():
     parser = argparse.ArgumentParser(description="Combine and analyze input files.")
     parser.add_argument("-s", "--statistics_output", help="Path to the general statistics file")
@@ -183,7 +187,7 @@ def main():
     transcriptome_out = parse_idxstats(args.idxstats_output)
     prot_distribution_out = parse_statistics_output(args.compare_distribution_output)
 
-    combine_results(statistics_out, busco_out, omark_out, brh_out, transcriptome_out, prot_distribution_out)
+    combine_results(statistics_out, busco_out, omark_out, brh_out, prot_distribution_out, transcriptome_out)
 
 if __name__ == '__main__':
     main()
