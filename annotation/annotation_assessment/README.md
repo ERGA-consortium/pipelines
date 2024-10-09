@@ -109,7 +109,7 @@ Query NCBI option:
 --ncbi_query_email             Email address to use for NCBI Entrez, required if the `--query_ncbi_prot` is set (by default), 
                                and the `--ref_protein` is not provided.
 --ncbi_query_count             Number of protein to query from the Entrez database. [default: 100000]
---ncbi_query_batch             Number of protein to search at a time. [default: 10000]
+--ncbi_query_batch             Number of protein to search at a time. [default: 1000]
 
 Running option:
 --cds_only                     Whether or not to extract the exon data from the CDS line in the provided GFF. [default: False] [option: True, False]
