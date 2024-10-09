@@ -163,7 +163,7 @@ def combine_results(stats1, stats2, stats3, stats4, stats5, stats6):
 
         print(format_string.format("RNASeq", "Value"), file=f_out)
         print("-" * (max_key_length + max_value_length + 6), file=f_out)
-        for key, value in stats5.items():
+        for key, value in stats6.items():
             print(format_string.format(key, value), file=f_out)
 
     pretty_json_obj = json.dumps(combined_stats, indent=4)
