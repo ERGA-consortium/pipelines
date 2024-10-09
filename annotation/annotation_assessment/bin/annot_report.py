@@ -62,6 +62,8 @@ def calculate_statistics(genes, exons, cds, genome_size):
     exons_sorted = exons.sort_values(['gene_id', 'start'])
     exons_sorted['intron_start'] = exons_sorted.groupby('gene_id')['end'].shift() + 1
     exons_sorted['intron_length'] = exons_sorted['start'] - exons_sorted['intron_start']
+    exons_sorted['accumulated_exon_length'] = exons_sorted.groupby('gene_id')['exon_length'].cumsum().shift()
+    exons_sorted['intron_phase'] = (exons_sorted['accumulated_exon_length']) % 3
     exons_sorted = exons_sorted.dropna()
 
     mean_intron_length = round(exons_sorted['intron_length'].mean(), 2)
@@ -106,18 +108,27 @@ def save_sequences(df, genome_seq, output_file, is_intron=False):
             if is_intron:
                 start = int(row['intron_start'])
                 end = int(row['start']) - 1
+                phase = int(row['intron_phase'])
+
+                if phase == 1:
+                    seq = genome_seq[start-1:end-1]
+                elif phase == 2:
+                    seq = genome_seq[start-2:end-2]
+                else:
+                    seq = genome_seq[start:end]
+
                 if pd.isna(start) or start < 0:
                     continue
+
+                f.write(f">{row['gene_id']}_{int(row['intron_start'])}_{row['start']-1}_phase{int(row['intron_phase'])}\n")
+                f.write(f"{seq}\n")
+
             else:
                 start = int(row['start']) - 1
                 end = int(row['end'])
             
-            seq = genome_seq[start:end] 
+                seq = genome_seq[start:end] 
 
-            if is_intron:
-                f.write(f">{row['gene_id']}_{int(row['intron_start'])}_{row['start']-1}\n")
-                f.write(f"{seq}\n")
-            else:
                 f.write(f">{row['gene_id']}_{row['start']}_{row['end']}\n")
                 f.write(f"{seq}\n")
                 
