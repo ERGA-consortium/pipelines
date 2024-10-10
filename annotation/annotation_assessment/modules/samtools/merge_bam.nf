@@ -11,6 +11,11 @@ process MERGEBAM {
 
 	script:
 	"""
-	samtools merge -@ ${task.cpus} -o all.sorted.bam *.bam 
+	bam_count=\$(ls *.bam | wc -l)
+	if [ \$bam_count -gt 1 ]; then
+		samtools merge -@ ${task.cpus} -o all.sorted.bam *.bam
+	else
+		mv *.bam all.sorted.bam
+	fi 
 	"""
 }

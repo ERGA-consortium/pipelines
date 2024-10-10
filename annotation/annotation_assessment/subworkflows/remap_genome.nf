@@ -22,7 +22,8 @@ workflow REMAP_GENOME {
         ch_out_bam = HISAT2.out.bam
 
         //// Collect then merging all the bam files
-        MERGEBAM ( ch_out_bam.collect() )
+        all_bam_file = ch_out_bam.collect()
+        MERGEBAM ( all_bam_file )
         ch_merged_bam = MERGEBAM.out.all_bam
         
     emit:

@@ -113,7 +113,7 @@ def parse_brh_output(brh_output):
     brh_stats['num_fusion_genes_15'] = str(num_fusion_genes_15) + " (" + str(round(num_fusion_genes_15/num_lines*100, 2)) + "%)"
     return brh_stats
 
-def parse_idxstats(file_path):
+def parse_flagstat(file_path):
 
     with open(file_path, 'r') as f:
         data = json.load(f)
@@ -127,12 +127,21 @@ def parse_idxstats(file_path):
 
     return rna_stats
 
-def combine_results(stats1, stats2, stats3, stats4, stats5, stats6):
-    """Combines the statistics from the three input files.""" 
+def parse_feature(file_path):
+    feature_stats = {}
+    with open(file_path, "r") as f_in:
+        for line in f_in:
+            data = line.rstrip().split(sep="\t")
+            feature_stats[data[0]] = str(data[1])
+    return feature_stats
+
+def combine_results(stats1, stats2, stats3, stats4, stats5, stats6, stats7):
+    combined_stats = {**stats1, **stats2, **stats3, **stats4, **stats5, **stats6, **stats7}
+    protein_combined = {**stats4, **stats5}
+    rnaseq_combined = {**stats6, **stats7}
 
     with open("Evaluation_output.txt", "w") as f_out:
-        combined_stats = {**stats1, **stats2, **stats3, **stats4, **stats5, **stats6}
-        protein_combined = {**stats4, **stats6}
+        
         max_key_length = max(len(str(key)) for key in combined_stats)
         max_value_length = max(len(str(value)) for value in combined_stats.values())
         format_string = f"|{{:<{max_key_length}}} | {{:<{max_value_length}}} |"
@@ -163,8 +172,12 @@ def combine_results(stats1, stats2, stats3, stats4, stats5, stats6):
 
         print(format_string.format("RNASeq", "Value"), file=f_out)
         print("-" * (max_key_length + max_value_length + 6), file=f_out)
-        for key, value in stats5.items():
+        for key, value in rnaseq_combined.items():
             print(format_string.format(key, value), file=f_out)
+
+    pretty_json_obj = json.dumps(combined_stats, indent=4)
+    with open("Evaluation_output.json", "w") as json_out:
+        json_out.write(pretty_json_obj)
 
 def main():
     parser = argparse.ArgumentParser(description="Combine and analyze input files.")
@@ -174,16 +187,18 @@ def main():
     parser.add_argument("-r", "--brh_output", help="Path to the brh output file")
     parser.add_argument("-i", "--idxstats_output", help="Path to the idxstats output file")
     parser.add_argument("-c", "--compare_distribution_output", help="Path to the compare distribution output")
+    parser.add_argument("-f", "--feature_output", help="Path to the featureCounts output")
     args = parser.parse_args()
 
     statistics_out = parse_statistics_output(args.statistics_output)
     busco_out = parse_busco_output(args.busco_output)
     omark_out = parse_omark_output(args.omark_output)
     brh_out = parse_brh_output(args.brh_output)
-    transcriptome_out = parse_idxstats(args.idxstats_output)
+    transcriptome_out = parse_flagstat(args.idxstats_output)
     prot_distribution_out = parse_statistics_output(args.compare_distribution_output)
+    feature_out = parse_feature(args.feature_output)
 
-    combine_results(statistics_out, busco_out, omark_out, brh_out, transcriptome_out, prot_distribution_out)
+    combine_results(statistics_out, busco_out, omark_out, brh_out, prot_distribution_out, transcriptome_out, feature_out)
 
 if __name__ == '__main__':
     main()

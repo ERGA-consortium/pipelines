@@ -71,8 +71,8 @@ def calculate_divergence(brh_out_file):
     wasserstein_dist = round(wasserstein_distance_custom(lengths1, lengths2), 6)
 
     with open("Distribution_output.txt", "w") as f_out:
-        print(f"KL_divergence_normed\t{kl_div_normed}", file=f_out)
-        print(f"JS_divergence_normed\t{js_div_normed}", file=f_out)
+        print(f"KL_divergence_normalized\t{kl_div_normed}", file=f_out)
+        print(f"JS_divergence_normalized\t{js_div_normed}", file=f_out)
         print(f"Wasserstein_distance\t{wasserstein_dist}", file=f_out)
 
 if __name__ == "__main__":

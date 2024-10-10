@@ -6,7 +6,8 @@ process DOWNLOAD_UNI {
 
     script:
     """
-    wget https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
-    gzip -d uniprot_sprot.fasta.gz
+    wget -P ${params.tmpdir} https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.fasta.gz
+    gzip -d ${params.tmpdir}/uniprot_sprot.fasta.gz
+    ln -s ${params.tmpdir}/uniprot_sprot.fasta .
     """
 }

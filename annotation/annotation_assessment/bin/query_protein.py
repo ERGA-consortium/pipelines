@@ -3,7 +3,7 @@ from Bio import Entrez
 from Bio import SeqIO
 import time
 
-def fetch_protein_sequences(email, taxon_id, target_count=100000, batch_size=10000):
+def fetch_protein_sequences(email, taxon_id, target_count=100000, batch_size=1000):
     Entrez.email = email
     sequences = []
     current_taxon_id = str(taxon_id)
@@ -15,9 +15,13 @@ def fetch_protein_sequences(email, taxon_id, target_count=100000, batch_size=100
         
         while True:
             # Search for protein sequences for the current taxon ID
-            search_handle = Entrez.esearch(db="protein", term=f"txid{current_taxon_id}[Organism:exp]", retstart=total_fetched, retmax=batch_size)
-            search_results = Entrez.read(search_handle)
-            search_handle.close()
+            try:
+                search_handle = Entrez.esearch(db="protein", term=f"txid{current_taxon_id}[Organism:exp]", retstart=total_fetched, retmax=batch_size)
+                search_results = Entrez.read(search_handle)
+                search_handle.close()
+            except Exception as e:
+                print(f"Error duiring Entrez search and read: {e}")
+                break
             
             # Fetch sequences in batches
             if 'IdList' in search_results:
@@ -37,7 +41,7 @@ def fetch_protein_sequences(email, taxon_id, target_count=100000, batch_size=100
                 total_fetched += len(protein_ids)
                 
                 # Sleep to avoid NCBI rate limit
-                time.sleep(0.5)
+                time.sleep(1)
                 
                 if len(sequences) >= target_count:
                     break

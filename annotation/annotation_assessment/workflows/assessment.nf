@@ -48,7 +48,7 @@ if (params.genome_bam) {
 
 if (!params.ref_protein && params.query_ncbi_prot) {
     if (!params.ncbi_query_email && !params.taxon_id) {
-        error ('Reference protein not provided, querying data from the NCBI Entrez protein database. Required: ncbi_query_email and taxon_id!!')
+        error ('Reference protein not provided, querying data from the NCBI Entrez protein database. Required: --ncbi_query_email and --taxon_id!!')
     }
 }
 
@@ -69,6 +69,8 @@ include { EXTRACT_PROTEOME     } from '../modules/utils/extract_proteome.nf'
 include { COMBINE_REPORT       } from '../modules/utils/combine_report.nf'
 include { COMPARE_DISTRIBUTION } from '../modules/utils/compare_distribution.nf'
 include { FLAGSTAT             } from '../modules/samtools/flagstat.nf'
+include { GFF2GTF              } from '../modules/gffread/gff2gtf.nf'
+include { FEATURECOUNTS        } from '../modules/featureCounts/featureCounts.nf'
 
 // SUBWORKFLOWS
 include { BEST_RECIPROCAL_HIT  } from '../subworkflows/best_reciprocal_hit.nf'
@@ -88,7 +90,7 @@ workflow ASSESS {
     }
 
     // General statistics
-    CALCULATE_STATISTICS ( ch_genome, ch_gff )
+    CALCULATE_STATISTICS ( ch_genome, ch_gff, params.cds_only )
     ch_statistics_out = CALCULATE_STATISTICS.out.statistics
     ch_intron_fasta = CALCULATE_STATISTICS.out.intron_fasta
 
@@ -141,8 +143,14 @@ workflow ASSESS {
     FLAGSTAT ( ch_genome_bam ) 
     ch_genome_stat = FLAGSTAT.out.flagstat
 
+    GFF2GTF ( ch_gff )
+    annotation_gtf = GFF2GTF.out.gtf
+
+    FEATURECOUNTS ( annotation_gtf, ch_genome_bam )
+    featureCounts_stats = FEATURECOUNTS.out.gene_count
+    
     // Generate report
     // Combined all the information to a final output file
-    COMBINE_REPORT ( ch_all_statistics, ch_busco_short, ch_omark_out, ch_brh_out, ch_compare_distribution_out, ch_genome_stat )
+    COMBINE_REPORT ( ch_all_statistics, ch_busco_short, ch_omark_out, ch_brh_out, ch_compare_distribution_out, ch_genome_stat, featureCounts_stats)
     
 }
