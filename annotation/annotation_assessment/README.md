@@ -77,7 +77,7 @@ Please modify this according to your situation.
 ```
 nextflow run main.nf --genome genome.fasta \
       --gff annotation.gff3 \
-      --rnaseq metadata.csv \
+      --rnaseq metadata.csv [--genome_bam path/to/the/mapped/bam]\
       --outdir OUTDIR_NAME \
       --rm -resume
 ```
