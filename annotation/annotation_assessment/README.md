@@ -4,7 +4,11 @@ AnnoAudit is a robust Nextflow pipeline designed to evaluate the quality of geno
 
 ## Overview of the workflow
 
-
+The workflow assess the annotation quality based on different criteria:
+- Protein evidence support
+- RNASeq evidence support
+- Statistics of the predictions (i.e., gene length, exon number, etc.)
+- Ortholog analysis (BUSCO, OMArk)
 
 ### Input data
 
@@ -143,84 +147,87 @@ Per default: -profile slurm,singularity is executed.
 Below is the sample output of this workflow
 
 ```
-|General Statistics                  | Value                |
--------------------------------------------------------------
-|num_genes                           | 41048                |
-|num_genes_without_introns           | 14365 (35.0%)        |
-|mean_gene_length                    | 2444.24              |
-|median_gene_length                  | 1613.0               |
-|num_exons                           | 175037               |
-|mean_exons_per_gene                 | 4.26                 |
-|median_exons_per_gene               | 2.0                  |
-|mean_cds_length                     | 1109.73              |
-|median_cds_length                   | 894.0                |
-|total_cds_length                    | 45552283             |
-|percentage_cds_coverage             | 12.2%                |
-|num_introns                         | 133989               |
-|mean_intron_length                  | 408.83               |
-|median_intron_length                | 147.0                |
-|num_short_intron_<120_3n0           | 18876 (14.09)%       |
-|num_long_intron_>120_3n0            | 25866 (19.30)%       |
-|num_short_intron_<120_3n1           | 18876 (14.09)%       |
-|num_long_intron_>120_3n1            | 25591 (19.10)%       |
-|num_short_intron_<120_3n2           | 19194 (14.33)%       |
-|num_long_intron_>120_3n2            | 25586 (19.10)%       |
-|num_short_intron_<120_3n0_with_stop | 13839 (10.33)%       |
-|num_long_intron_>120_3n0_with_stop  | 24328 (18.16)%       |
-|num_short_intron_<120_3n1_with_stop | 13894 (10.37)%       |
-|num_long_intron_>120_3n1_with_stop  | 24105 (17.99)%       |
-|num_short_intron_<120_3n2_with_stop | 14022 (10.47)%       |
-|num_long_intron_>120_3n2_with_stop  | 24081 (17.97)%       |
+|General Statistics                 | Value                |
+------------------------------------------------------------
+|num_genes                          | 41048                |
+|num_genes_without_introns          | 14365 (35.0%)        |
+|mean_gene_length                   | 2444.24              |
+|median_gene_length                 | 1613.0               |
+|num_exons                          | 175037               |
+|mean_exons_per_gene                | 4.26                 |
+|median_exons_per_gene              | 2.0                  |
+|num_exon_3n                        | 89250 (50.99%)       |
+|num_exon_3n1                       | 43323 (24.75%)       |
+|num_exon_3n2                       | 42464 (24.26%)       |
+|mean_cds_length                    | 1109.73              |
+|median_cds_length                  | 894.0                |
+|total_cds_length                   | 45552283             |
+|percentage_cds_coverage            | 12.2%                |
+|num_introns                        | 133989               |
+|mean_intron_length                 | 408.83               |
+|median_intron_length               | 147.0                |
+|short_intron_<120_3n0_without_stop | 5027 (3.75)%         |
+|long_intron_>120_3n0_without_stop  | 1503 (1.12)%         |
+|short_intron_<120_3n1_without_stop | 5027 (3.75)%         |
+|long_intron_>120_3n1_without_stop  | 1515 (1.13)%         |
+|short_intron_<120_3n2_without_stop | 5126 (3.83)%         |
+|long_intron_>120_3n2_without_stop  | 1473 (1.10)%         |
+|short_intron_<120_3n0_with_stop    | 13849 (10.34)%       |
+|long_intron_>120_3n0_with_stop     | 24363 (18.18)%       |
+|short_intron_<120_3n1_with_stop    | 13849 (10.34)%       |
+|long_intron_>120_3n1_with_stop     | 24076 (17.97)%       |
+|short_intron_<120_3n2_with_stop    | 14068 (10.50)%       |
+|long_intron_>120_3n2_with_stop     | 24113 (18.00)%       |
 
-|BUSCO                               | Value                |
--------------------------------------------------------------
-|lineage_dataset                     | eudicotyledons_odb10 |
-|complete                            | 86.7%                |
-|single_copy                         | 70.5%                |
-|multi_copy                          | 16.2%                |
-|fragmented                          | 0.7%                 |
-|missing                             | 12.6%                |
-|num_markers                         | 2326                 |
-|domain                              | eukaryota            |
+|BUSCO                              | Value                |
+------------------------------------------------------------
+|lineage_dataset                    | eudicotyledons_odb10 |
+|complete                           | 86.7%                |
+|single_copy                        | 70.5%                |
+|multi_copy                         | 16.2%                |
+|fragmented                         | 0.7%                 |
+|missing                            | 12.6%                |
+|num_markers                        | 2326                 |
+|domain                             | eukaryota            |
 
-|OMARK                               | Value                |
--------------------------------------------------------------
-|OMA_clade                           | Oryza                |
-|num_conserved_hogs                  | 15087                |
-|single                              | 11686 (77.46%)       |
-|duplicated                          | 2986 (19.79%)        |
-|duplicated_unexpected               | 2749 (18.22%)        |
-|duplicated_expected                 | 237 (1.57%)          |
-|missing                             | 415 (2.75%)          |
-|num_proteins_in_proteome            | 41044                |
-|total_consistent                    | 34598 (84.29%)       |
-|consistent_partial_hits             | 1973 (4.81%)         |
-|consistent_fragmented               | 1977 (4.82%)         |
-|total_inconsistent                  | 2456 (5.98%)         |
-|inconsistent_partial_hits           | 567 (1.38%)          |
-|inconsistent_fragmented             | 1541 (3.75%)         |
-|total_contaminants                  | 0 (0.00%)            |
-|contaminants_partial_hits           | 0 (0.00%)            |
-|contaminants_fragmented             | 0 (0.00%)            |
-|total_unknown                       | 3990 (9.72%)         |
+|OMARK                              | Value                |
+------------------------------------------------------------
+|OMA_clade                          | Oryza                |
+|num_conserved_hogs                 | 15087                |
+|single                             | 11686 (77.46%)       |
+|duplicated                         | 2986 (19.79%)        |
+|duplicated_unexpected              | 2749 (18.22%)        |
+|duplicated_expected                | 237 (1.57%)          |
+|missing                            | 415 (2.75%)          |
+|num_proteins_in_proteome           | 41044                |
+|total_consistent                   | 34598 (84.29%)       |
+|consistent_partial_hits            | 1973 (4.81%)         |
+|consistent_fragmented              | 1977 (4.82%)         |
+|total_inconsistent                 | 2456 (5.98%)         |
+|inconsistent_partial_hits          | 567 (1.38%)          |
+|inconsistent_fragmented            | 1541 (3.75%)         |
+|total_contaminants                 | 0 (0.00%)            |
+|contaminants_partial_hits          | 0 (0.00%)            |
+|contaminants_fragmented            | 0 (0.00%)            |
+|total_unknown                      | 3990 (9.72%)         |
 
-|Best Reciprocal Hits                | Value                |
--------------------------------------------------------------
-|num_best_reciprocal_hits            | 29076                |
-|num_splitting_genes_08              | 1578 (5.43%)         |
-|num_splitting_genes_05              | 0 (0.0%)             |
-|num_fusion_genes_12                 | 331 (1.14%)          |
-|num_fusion_genes_15                 | 342 (1.18%)          |
-|KL_divergence_normed                | 0.0186               |
-|JS_divergence_normed                | 0.0039               |
-|Wasserstein_distance                | 8.469494             |
+|Best Reciprocal Hits               | Value                |
+------------------------------------------------------------
+|num_best_reciprocal_hits           | 29076                |
+|num_splitting_genes_08             | 1578 (5.43%)         |
+|num_splitting_genes_05             | 0 (0.0%)             |
+|num_fusion_genes_12                | 331 (1.14%)          |
+|num_fusion_genes_15                | 342 (1.18%)          |
+|KL_divergence_normed               | 0.0186               |
+|JS_divergence_normed               | 0.0039               |
+|Wasserstein_distance               | 8.469494             |
 
-
-|RNASeq                              | Value                |
--------------------------------------------------------------
-|mapping_rate                        | 96.27%               |
-|primary_mapping_rate                | 95.83%               |
-|properly_paired                     | 92.47%               |
+|RNASeq                             | Value                |
+------------------------------------------------------------
+|mapping_rate                       | 96.27%               |
+|primary_mapping_rate               | 95.83%               |
+|properly_paired                    | 92.47%               |
+|num_gene_unsupported               | 9184 (25.24%)        |
 ```
 
 ## Performance of the workflow on assessing annotation
@@ -229,4 +236,5 @@ To be added
 
 ## Future work
 
-To be added
+- Adding more criteria for the RNASeq analysis
+- Perform comparative performance with different genomes

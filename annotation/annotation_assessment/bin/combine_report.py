@@ -131,7 +131,7 @@ def parse_feature(file_path):
     feature_stats = {}
     with open(file_path, "r") as f_in:
         for line in f_in:
-            data = line.split(sep="\t")
+            data = line.rstrip().split(sep="\t")
             feature_stats[data[0]] = str(data[1])
     return feature_stats
 
