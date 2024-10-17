@@ -175,6 +175,11 @@ def combine_results(stats1, stats2, stats3, stats4, stats5, stats6, stats7):
         for key, value in rnaseq_combined.items():
             print(format_string.format(key, value), file=f_out)
 
+    combined_stats = {"General Statistics": stats1, 
+                      "BUSCO": stats2, 
+                      "OMArk": stats3, 
+                      "Best Reciprocal Hits": protein_combined, 
+                      "RNASeq": rnaseq_combined}
     pretty_json_obj = json.dumps(combined_stats, indent=4)
     with open("Evaluation_output.json", "w") as json_out:
         json_out.write(pretty_json_obj)

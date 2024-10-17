@@ -69,7 +69,7 @@ include { EXTRACT_PROTEOME     } from '../modules/utils/extract_proteome.nf'
 include { COMBINE_REPORT       } from '../modules/utils/combine_report.nf'
 include { COMPARE_DISTRIBUTION } from '../modules/utils/compare_distribution.nf'
 include { FLAGSTAT             } from '../modules/samtools/flagstat.nf'
-include { GFF2GTF              } from '../modules/gffread/gff2gtf.nf'
+include { CUSTOM_GFF2GTF       } from '../modules/utils/gff2gtf_custom.nf'
 include { FEATURECOUNTS        } from '../modules/featureCounts/featureCounts.nf'
 
 // SUBWORKFLOWS
@@ -143,8 +143,8 @@ workflow ASSESS {
     FLAGSTAT ( ch_genome_bam ) 
     ch_genome_stat = FLAGSTAT.out.flagstat
 
-    GFF2GTF ( ch_gff )
-    annotation_gtf = GFF2GTF.out.gtf
+    CUSTOM_GFF2GTF ( ch_gff )
+    annotation_gtf = CUSTOM_GFF2GTF.out.gtf
 
     FEATURECOUNTS ( annotation_gtf, ch_genome_bam )
     featureCounts_stats = FEATURECOUNTS.out.gene_count
