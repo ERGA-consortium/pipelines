@@ -27,7 +27,7 @@ SAM3,/path/to/R1,,short            # For SE reads
 
 ### Pipeline steps
 
-![Pipeline](./assets/images/annotaudit-workflow.svg)
+![Pipeline](./assets/images/annoaudit-workflow.svg)
 
 The main pipeline is divided into five different subworkflows.
 - `General statistics`: Calculate the statistics obtained from the GFF file.
