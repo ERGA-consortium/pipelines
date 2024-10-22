@@ -227,7 +227,8 @@ Below is the sample output of this workflow
 |mapping_rate                       | 96.27%               |
 |primary_mapping_rate               | 95.83%               |
 |properly_paired                    | 92.47%               |
-|num_gene_unsupported               | 9184 (25.24%)        |
+|num_gene_unsupported               | 15472 (37.69%)       |
+|num_exon_unsupported               | 23003 (13.14%)       |
 ```
 
 ## Performance of the workflow on assessing annotation
