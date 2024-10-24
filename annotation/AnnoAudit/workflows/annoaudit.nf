@@ -80,7 +80,7 @@ include { REMAP_GENOME         } from '../subworkflows/remap_genome.nf'
   RUN WORKFLOW
 */
 
-workflow ASSESS {
+workflow ANNOAUDIT {
     
     if (params.protein) {
         ch_protein = Channel.fromPath("${params.protein}", checkIfExists: true)

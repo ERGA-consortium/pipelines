@@ -4,7 +4,7 @@ nextflow.enable.dsl = 2
 
 if (params.help) { exit 0, helpMSG() }
 
-include { ASSESS } from './workflows/assessment.nf'
+include { ANNOAUDIT } from './workflows/annoaudit.nf'
 
 /* 
  Terminal prints
@@ -50,7 +50,7 @@ if ( !checkTmp.exists() ) {
 
 workflow {
     println "START THE ANALYSIS\n"
-    ASSESS()
+    ANNOAUDIT()
 }
 
 def helpMSG() {
