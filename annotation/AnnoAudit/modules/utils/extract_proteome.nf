@@ -1,6 +1,5 @@
 process EXTRACT_PROTEOME {
     label 'process_single'
-    label 'process_medium_memory'
     label 'biopython'
 
     input:

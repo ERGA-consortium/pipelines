@@ -1,6 +1,5 @@
 process OMARK {
     label 'process_single'
-    label 'process_medium_memory'
     label 'omark'
 
     input:
