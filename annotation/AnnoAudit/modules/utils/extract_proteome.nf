@@ -12,6 +12,6 @@ process EXTRACT_PROTEOME {
 
     script:
     """
-    python3 ${projectDir}/bin/gff2fasta_biopython.py --gff ${ch_gff} --seq ${ch_fasta} --concat --out predicted_proteome.fa --tr
+    python3 ${projectDir}/bin/gff2fasta_biopython.py --gff ${ch_gff} --seq ${ch_fasta} --concat --out predicted_proteome.fa --tr --gc ${params.genetic_code}
     """
 }
