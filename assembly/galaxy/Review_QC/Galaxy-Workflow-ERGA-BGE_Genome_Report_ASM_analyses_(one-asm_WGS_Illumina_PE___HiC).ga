@@ -1587,10 +1587,6 @@
                 {
                     "name": "blobdir",
                     "type": "tgz"
-                },
-                {
-                    "name": "output_svg",
-                    "type": "svg"
                 }
             ],
             "position": {
@@ -1613,7 +1609,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"mode_conditional\": {\"selector\": \"add\", \"__current_case__\": 1, \"blobdir\": {\"__class__\": \"ConnectedValue\"}, \"taxdump\": {\"__class__\": \"ConnectedValue\"}, \"busco\": {\"__class__\": \"ConnectedValue\"}, \"blast_input\": {\"selector\": \"enabled\", \"__current_case__\": 0, \"hits\": {\"__class__\": \"ConnectedValue\"}, \"taxrule\": \"bestsum\", \"evalue\": \"1.0\", \"bitscore\": \"1.0\", \"hit_count\": \"10\", \"hits_cols\": \"1=qseqid,7=staxids,6=bitscore,2=sseqid,3=qstart,4=qend,5=evalue\"}, \"bed\": {\"__class__\": \"RuntimeValue\"}, \"cov\": {\"__class__\": \"ConnectedValue\"}, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"trnascan\": {\"__class__\": \"RuntimeValue\"}, \"text_input\": {\"selector\": \"disabled\", \"__current_case__\": 1}, \"blobtk_plot_options\": {\"blobtk_plot\": \"yes\", \"__current_case__\": 0, \"plot_view\": \"blob\"}, \"advanced_options\": {\"blobdb\": {\"__class__\": \"RuntimeValue\"}, \"synonyms\": {\"__class__\": \"RuntimeValue\"}, \"update_plot\": false, \"pileup_args\": \"\", \"replace\": false}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"mode_conditional\": {\"selector\": \"add\", \"__current_case__\": 1, \"blobdir\": {\"__class__\": \"RuntimeValue\"}, \"taxdump\": {\"__class__\": \"RuntimeValue\"}, \"busco\": {\"__class__\": \"RuntimeValue\"}, \"blast_input\": {\"selector\": \"enabled\", \"__current_case__\": 0, \"hits\": {\"__class__\": \"RuntimeValue\"}, \"taxrule\": \"bestsum\", \"evalue\": \"1.0\", \"bitscore\": \"1.0\", \"hit_count\": \"10\", \"hits_cols\": \"1=qseqid,7=staxids,6=bitscore,2=sseqid,3=qstart,4=qend,5=evalue\"}, \"bed\": {\"__class__\": \"RuntimeValue\"}, \"cov\": {\"__class__\": \"RuntimeValue\"}, \"fasta\": {\"__class__\": \"RuntimeValue\"}, \"trnascan\": {\"__class__\": \"RuntimeValue\"}, \"text_input\": {\"selector\": \"disabled\", \"__current_case__\": 1}, \"blobtk_plot_options\": {\"blobtk_plot\": \"no\", \"__current_case__\": 1}, \"advanced_options\": {\"blobdb\": {\"__class__\": \"RuntimeValue\"}, \"synonyms\": {\"__class__\": \"RuntimeValue\"}, \"update_plot\": false, \"pileup_args\": \"\", \"replace\": false}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "4.0.7+galaxy2",
             "type": "tool",
             "uuid": "cc148405-d71f-4d74-847d-7f88fae9dec2",
@@ -2570,8 +2566,60 @@
                 }
             ],
             "position": {
-                "left": 3332.3871463844675,
-                "top": 903.4350435205744
+                "left": 3291.917128796664,
+                "top": 552.7379234995435
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutFileName": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outFileName"
+                },
+                "TagDatasetActionoutFileName": {
+                    "action_arguments": {
+                        "tags": "25bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outFileName"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/3.7.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "977dc15add20",
+                "name": "hicexplorer_hicmergematrixbins",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"matrix_h5_cooler\": {\"__class__\": \"ConnectedValue\"}, \"numBins\": \"50\", \"runningWindow\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.7.2+galaxy0",
+            "type": "tool",
+            "uuid": "c9a20d5f-8872-4462-bd4c-2ec5d9fd9d86",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "51": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/3.7.2+galaxy0",
+            "errors": null,
+            "id": 51,
+            "input_connections": {
+                "matrix_h5_cooler": {
+                    "id": 49,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "hicMergeMatrixBins",
+            "outputs": [
+                {
+                    "name": "outFileName",
+                    "type": "cool"
+                }
+            ],
+            "position": {
+                "left": 3376.358438412999,
+                "top": 998.3969659631193
             },
             "post_job_actions": {
                 "HideDatasetActionoutFileName": {
@@ -2601,11 +2649,11 @@
             "when": null,
             "workflow_outputs": []
         },
-        "51": {
+        "52": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/3.7.2+galaxy0",
             "errors": null,
-            "id": 51,
+            "id": 52,
             "input_connections": {
                 "matrix_h5_cooler": {
                     "id": 49,
@@ -2622,8 +2670,8 @@
                 }
             ],
             "position": {
-                "left": 3329.3372998501627,
-                "top": 1340.493431303879
+                "left": 3333.7265120828565,
+                "top": 1443.1125968345245
             },
             "post_job_actions": {
                 "HideDatasetActionoutFileName": {
@@ -2653,11 +2701,11 @@
             "when": null,
             "workflow_outputs": []
         },
-        "52": {
+        "53": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/3.7.2+galaxy0",
             "errors": null,
-            "id": 52,
+            "id": 53,
             "input_connections": {
                 "matrix_h5_cooler": {
                     "id": 50,
@@ -2683,13 +2731,13 @@
                 }
             ],
             "position": {
-                "left": 3359.567645246474,
-                "top": 1095.6865306028883
+                "left": 3381.344166027962,
+                "top": 738.6355596839559
             },
             "post_job_actions": {
                 "TagDatasetActionoutFileName": {
                     "action_arguments": {
-                        "tags": "hic_heatmap_svg,50bins"
+                        "tags": "hic_heatmap_svg,25bins"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "outFileName"
@@ -2705,15 +2753,15 @@
             "tool_state": "{\"chromosomeOrder\": [], \"clearMaskedBins\": false, \"colormap\": \"YlOrRd\", \"dpi\": \"300\", \"fontSize\": null, \"image_file_format\": \"svg\", \"increaseFigureHeight\": \"0.5\", \"increaseFigureWidth\": \"0.5\", \"log\": false, \"log1p\": true, \"loop_conditional\": {\"loop_selector\": \"no\", \"__current_case__\": 1}, \"loops\": {\"__class__\": \"RuntimeValue\"}, \"matrix_h5_cooler\": {\"__class__\": \"ConnectedValue\"}, \"pca_conditional\": {\"pca_type\": \"no_file\", \"__current_case__\": 0}, \"perChromosome\": false, \"region\": null, \"region2\": null, \"rotationX\": \"45\", \"rotationY\": \"45\", \"scoreName\": null, \"tads\": {\"__class__\": \"RuntimeValue\"}, \"title\": null, \"vMax\": null, \"vMin\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "3.7.2+galaxy0",
             "type": "tool",
-            "uuid": "3bff61f5-b01a-440a-8ccd-a3dfa4f8ce70",
+            "uuid": "5938d45a-ca55-4c4d-9145-a905cc22bce7",
             "when": null,
             "workflow_outputs": []
         },
-        "53": {
+        "54": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/3.7.2+galaxy0",
             "errors": null,
-            "id": 53,
+            "id": 54,
             "input_connections": {
                 "matrix_h5_cooler": {
                     "id": 51,
@@ -2739,8 +2787,64 @@
                 }
             ],
             "position": {
-                "left": 3362.8249579891817,
-                "top": 1535.2376165015926
+                "left": 3416.7410781947583,
+                "top": 1195.367857901124
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutFileName": {
+                    "action_arguments": {
+                        "tags": "hic_heatmap_svg,50bins"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outFileName"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/3.7.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b63363075c2e",
+                "name": "hicexplorer_hicplotmatrix",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromosomeOrder\": [], \"clearMaskedBins\": false, \"colormap\": \"YlOrRd\", \"dpi\": \"300\", \"fontSize\": null, \"image_file_format\": \"svg\", \"increaseFigureHeight\": \"0.5\", \"increaseFigureWidth\": \"0.5\", \"log\": false, \"log1p\": true, \"loop_conditional\": {\"loop_selector\": \"no\", \"__current_case__\": 1}, \"loops\": {\"__class__\": \"RuntimeValue\"}, \"matrix_h5_cooler\": {\"__class__\": \"ConnectedValue\"}, \"pca_conditional\": {\"pca_type\": \"no_file\", \"__current_case__\": 0}, \"perChromosome\": false, \"region\": null, \"region2\": null, \"rotationX\": \"45\", \"rotationY\": \"45\", \"scoreName\": null, \"tads\": {\"__class__\": \"RuntimeValue\"}, \"title\": null, \"vMax\": null, \"vMin\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.7.2+galaxy0",
+            "type": "tool",
+            "uuid": "3bff61f5-b01a-440a-8ccd-a3dfa4f8ce70",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "55": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/3.7.2+galaxy0",
+            "errors": null,
+            "id": 55,
+            "input_connections": {
+                "matrix_h5_cooler": {
+                    "id": 52,
+                    "output_name": "outFileName"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool hicPlotMatrix",
+                    "name": "loops"
+                },
+                {
+                    "description": "runtime parameter for tool hicPlotMatrix",
+                    "name": "tads"
+                }
+            ],
+            "label": null,
+            "name": "hicPlotMatrix",
+            "outputs": [
+                {
+                    "name": "outFileName",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3352.5497009251117,
+                "top": 1648.1253879530818
             },
             "post_job_actions": {
                 "TagDatasetActionoutFileName": {
@@ -2769,6 +2873,6 @@
     "tags": [
         "name:ERGA"
     ],
-    "uuid": "1536455e-d062-4ba0-bbaf-369b9bae6954",
-    "version": 1
+    "uuid": "1e627996-f8c8-40dc-99e0-8369a2d2352a",
+    "version": 3
 }
