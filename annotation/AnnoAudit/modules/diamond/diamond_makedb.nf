@@ -1,5 +1,5 @@
 process DIAMOND_MAKEDB {
-	label 'process_medium'
+	label 'process_low'
 	label 'diamond'
 
 	input:
