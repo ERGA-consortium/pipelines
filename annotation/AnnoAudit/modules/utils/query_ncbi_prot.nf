@@ -13,6 +13,6 @@ process QUERY_NCBI_PROT {
 
     script:
     """
-    python3 ${projectDir}/bin/query_protein.py --email ${email} --taxon_id ${taxon_id} --target_count ${target_count} --batch_size ${batch_size}
+    python3 ${projectDir}/bin/query_protein_parallel.py --email ${email} --taxon_id ${taxon_id} --target_count ${target_count}
     """
 }
