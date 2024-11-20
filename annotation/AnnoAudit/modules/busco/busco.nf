@@ -4,15 +4,16 @@ process BUSCO {
 
     input:
     path(protein)
+    val(busco_lineage)
 
     output:
     path ("annotated")                              , emit: annotated
     path ("annotated/short_summary.specific.*.json"), emit: results
 
     script:
-    if (params.lineage){
+    if (busco_lineage){
         """
-        busco -m prot -i ${protein} -o annotated -l ${params.lineage} -c ${task.cpus}
+        busco -m prot -i ${protein} -o annotated -c ${task.cpus} -l ${busco_lineage}
         """
     } else {
         """

@@ -59,7 +59,7 @@ The following programs are required to run the workflow and the listed version w
 Simply get the code from github or workflowhub and directly use it for the analysis with `nextflow`.
 
 ```
-git clone https://github.com/phuongdoand/ERGA-pipelines/tree/main/annotation/annotation_assessment
+git clone https://github.com/ERGA-consortium/pipelines
 ```
 
 ## Running AnnoAudit
@@ -83,6 +83,8 @@ nextflow run main.nf --genome genome.fasta \
       --gff annotation.gff3 \
       --rnaseq metadata.csv [--genome_bam path/to/the/mapped/bam]\
       --outdir OUTDIR_NAME \
+      --taxon_id 9606 [Optional] \
+      --ncbi_query_email xxxx \
       --rm -resume
 ```
 
