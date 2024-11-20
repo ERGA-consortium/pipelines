@@ -59,6 +59,7 @@ if (!params.ref_protein && params.query_ncbi_prot) {
 // MODULES
 include { CALCULATE_STATISTICS } from '../modules/utils/calculate_statistics.nf'
 include { EXTRACT_INTRON_STATS } from '../modules/utils/extract_intron_stats.nf'
+include { GET_BUSCO_LINEAGE    } from '../modules/utils/get_busco_lineage.nf'
 include { BUSCO                } from '../modules/busco/busco.nf'
 include { DOWNLOAD_OMA         } from '../modules/utils/download_oma.nf'
 include { OMAMER               } from '../modules/omark/omamer.nf'
@@ -98,7 +99,16 @@ workflow ANNOAUDIT {
     ch_all_statistics = EXTRACT_INTRON_STATS.out.statistics
 
     // Ortholog analysis
-    BUSCO ( ch_protein )
+    if (params.lineage) {
+        ch_busco_lineage = params.lineage
+    } else if (params.ncbi_query_email && params.taxon_id && !params.lineage ) {
+        GET_BUSCO_LINEAGE ( params.ncbi_query_email, params.taxon_id )
+        ch_busco_lineage = GET_BUSCO_LINEAGE.out
+    } else {
+        ch_busco_lineage = null
+    }
+
+    BUSCO ( ch_protein, ch_busco_lineage )
     ch_busco_short = BUSCO.out.results
 
     // Check database then run OMARK
