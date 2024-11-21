@@ -1098,8 +1098,8 @@
                 }
             ],
             "position": {
-                "left": 1403.390596430494,
-                "top": 383.140611272624
+                "left": 1403.3905857285454,
+                "top": 383.1406075757011
             },
             "post_job_actions": {
                 "HideDatasetActionbusco_table": {
@@ -1122,7 +1122,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"miniprot\": false, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"lineage_conditional\": {\"selector\": \"download\", \"__current_case__\": 1}, \"outputs\": [\"short_summary\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"miniprot\": false, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"lineage_conditional\": {\"selector\": \"cached\", \"__current_case__\": 0, \"cached_db\": \"all+2024-03-21-114020\"}, \"outputs\": [\"short_summary\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "5.5.0+galaxy0",
             "type": "tool",
             "uuid": "e158c60a-efc6-4193-beee-0c352c9e13dd",
@@ -1609,7 +1609,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"mode_conditional\": {\"selector\": \"add\", \"__current_case__\": 1, \"blobdir\": {\"__class__\": \"RuntimeValue\"}, \"taxdump\": {\"__class__\": \"RuntimeValue\"}, \"busco\": {\"__class__\": \"RuntimeValue\"}, \"blast_input\": {\"selector\": \"enabled\", \"__current_case__\": 0, \"hits\": {\"__class__\": \"RuntimeValue\"}, \"taxrule\": \"bestsum\", \"evalue\": \"1.0\", \"bitscore\": \"1.0\", \"hit_count\": \"10\", \"hits_cols\": \"1=qseqid,7=staxids,6=bitscore,2=sseqid,3=qstart,4=qend,5=evalue\"}, \"bed\": {\"__class__\": \"RuntimeValue\"}, \"cov\": {\"__class__\": \"RuntimeValue\"}, \"fasta\": {\"__class__\": \"RuntimeValue\"}, \"trnascan\": {\"__class__\": \"RuntimeValue\"}, \"text_input\": {\"selector\": \"disabled\", \"__current_case__\": 1}, \"blobtk_plot_options\": {\"blobtk_plot\": \"no\", \"__current_case__\": 1}, \"advanced_options\": {\"blobdb\": {\"__class__\": \"RuntimeValue\"}, \"synonyms\": {\"__class__\": \"RuntimeValue\"}, \"update_plot\": false, \"pileup_args\": \"\", \"replace\": false}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"mode_conditional\": {\"selector\": \"add\", \"__current_case__\": 1, \"blobdir\": {\"__class__\": \"ConnectedValue\"}, \"taxdump\": {\"__class__\": \"ConnectedValue\"}, \"busco\": {\"__class__\": \"ConnectedValue\"}, \"blast_input\": {\"selector\": \"enabled\", \"__current_case__\": 0, \"hits\": {\"__class__\": \"ConnectedValue\"}, \"taxrule\": \"bestsum\", \"evalue\": \"1.0\", \"bitscore\": \"1.0\", \"hit_count\": \"10\", \"hits_cols\": \"1=qseqid,7=staxids,6=bitscore,2=sseqid,3=qstart,4=qend,5=evalue\"}, \"bed\": {\"__class__\": \"RuntimeValue\"}, \"cov\": {\"__class__\": \"ConnectedValue\"}, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"trnascan\": {\"__class__\": \"RuntimeValue\"}, \"text_input\": {\"selector\": \"disabled\", \"__current_case__\": 1}, \"blobtk_plot_options\": {\"blobtk_plot\": \"no\", \"__current_case__\": 1}, \"advanced_options\": {\"blobdb\": {\"__class__\": \"RuntimeValue\"}, \"synonyms\": {\"__class__\": \"RuntimeValue\"}, \"update_plot\": false, \"pileup_args\": \"\", \"replace\": false}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "4.0.7+galaxy2",
             "type": "tool",
             "uuid": "cc148405-d71f-4d74-847d-7f88fae9dec2",
@@ -2556,7 +2556,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool hicMergeMatrixBins",
+                    "name": "matrix_h5_cooler"
+                }
+            ],
             "label": null,
             "name": "hicMergeMatrixBins",
             "outputs": [
@@ -2590,7 +2595,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"matrix_h5_cooler\": {\"__class__\": \"ConnectedValue\"}, \"numBins\": \"50\", \"runningWindow\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"matrix_h5_cooler\": {\"__class__\": \"RuntimeValue\"}, \"numBins\": \"25\", \"runningWindow\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "3.7.2+galaxy0",
             "type": "tool",
             "uuid": "c9a20d5f-8872-4462-bd4c-2ec5d9fd9d86",
@@ -2873,6 +2878,6 @@
     "tags": [
         "name:ERGA"
     ],
-    "uuid": "1e627996-f8c8-40dc-99e0-8369a2d2352a",
-    "version": 3
+    "uuid": "756f96dc-71d8-4c1f-92ad-999f58df885a",
+    "version": 5
 }
