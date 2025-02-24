@@ -22,14 +22,14 @@
     },
     "steps": {
         "0": {
-            "annotation": "EXAMPLE: https://ftp.ensembl.org/pub/rapid-release/species/Apodemus_agrarius/GCA_964023405.1/ensembl/geneset/2024_05/Apodemus_agrarius-GCA_964023405.1-2024_05-genes.gff3.gz",
+            "annotation": "EXAMPLE: https://ftp.ebi.ac.uk/pub/ensemblorganisms/Arca_noae/GCA_964261245.1/ensembl/geneset/2024_11/genes.gff3 OR https://ftp.ensembl.org/pub/rapid-release/species/Apodemus_agrarius/GCA_964023405.1/ensembl/geneset/2024_05/Apodemus_agrarius-GCA_964023405.1-2024_05-genes.gff3.gz",
             "content_id": null,
             "errors": null,
             "id": 0,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "EXAMPLE: https://ftp.ensembl.org/pub/rapid-release/species/Apodemus_agrarius/GCA_964023405.1/ensembl/geneset/2024_05/Apodemus_agrarius-GCA_964023405.1-2024_05-genes.gff3.gz",
+                    "description": "EXAMPLE: https://ftp.ebi.ac.uk/pub/ensemblorganisms/Arca_noae/GCA_964261245.1/ensembl/geneset/2024_11/genes.gff3 OR https://ftp.ensembl.org/pub/rapid-release/species/Apodemus_agrarius/GCA_964023405.1/ensembl/geneset/2024_05/Apodemus_agrarius-GCA_964023405.1-2024_05-genes.gff3.gz",
                     "name": "Enter GFF3 ENSEMBL link"
                 }
             ],
@@ -37,8 +37,8 @@
             "name": "Input parameter",
             "outputs": [],
             "position": {
-                "left": 0.30197901997003773,
-                "top": 0.8476532112348635
+                "left": 0.296875,
+                "top": 0.84375
             },
             "tool_id": null,
             "tool_state": "{\"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
@@ -76,14 +76,14 @@
             "workflow_outputs": []
         },
         "2": {
-            "annotation": "EXAMPLE: https://ftp.ensembl.org/pub/rapid-release/species/Apodemus_agrarius/GCA_964023405.1/ensembl/genome/Apodemus_agrarius-GCA_964023405.1-unmasked.fa.gz",
+            "annotation": "EXAMPLE: https://ftp.ebi.ac.uk/pub/ensemblorganisms/Arca_noae/GCA_964261245.1/genome/unmasked.fa.gz OR https://ftp.ensembl.org/pub/rapid-release/species/Apodemus_agrarius/GCA_964023405.1/ensembl/genome/Apodemus_agrarius-GCA_964023405.1-unmasked.fa.gz",
             "content_id": null,
             "errors": null,
             "id": 2,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "EXAMPLE: https://ftp.ensembl.org/pub/rapid-release/species/Apodemus_agrarius/GCA_964023405.1/ensembl/genome/Apodemus_agrarius-GCA_964023405.1-unmasked.fa.gz",
+                    "description": "EXAMPLE: https://ftp.ebi.ac.uk/pub/ensemblorganisms/Arca_noae/GCA_964261245.1/genome/unmasked.fa.gz OR https://ftp.ensembl.org/pub/rapid-release/species/Apodemus_agrarius/GCA_964023405.1/ensembl/genome/Apodemus_agrarius-GCA_964023405.1-unmasked.fa.gz",
                     "name": "Enter genome ENSEMBL link"
                 }
             ],
@@ -91,8 +91,8 @@
             "name": "Input parameter",
             "outputs": [],
             "position": {
-                "left": 0.7949185331709615,
-                "top": 400.9459500824769
+                "left": 0.78122598799672,
+                "top": 400.93749901085795
             },
             "tool_id": null,
             "tool_state": "{\"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
@@ -145,11 +145,11 @@
             "name": "Input parameter",
             "outputs": [],
             "position": {
-                "left": 0.1406065520174809,
-                "top": 906.8144111920813
+                "left": 0.125,
+                "top": 906.8125
             },
             "tool_id": null,
-            "tool_state": "{\"validators\": [], \"restrictions\": [\"Metazoa-v2.0.0.h5\", \"Viridiplantae-v2.0.0.h5\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_state": "{\"multiple\": false, \"validators\": [], \"restrictions\": [\"LUCA-v2.0.0.h5\", \"Metazoa-v2.0.0.h5\", \"Viridiplantae-v2.0.0.h5\"], \"parameter_type\": \"text\", \"optional\": false}",
             "tool_version": null,
             "type": "parameter_input",
             "uuid": "31b5ad4a-764e-43af-b59c-d3cec33e1d1d",
@@ -910,6 +910,6 @@
     "tags": [
         "name:ERGA"
     ],
-    "uuid": "410897e0-943d-49ed-80a7-f389b7a64702",
-    "version": 5
+    "uuid": "fce25917-cbe9-4c15-a730-ce9fe4da30a1",
+    "version": 4
 }
