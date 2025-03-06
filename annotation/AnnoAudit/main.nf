@@ -63,30 +63,42 @@ def helpMSG() {
     ____________________________________________________________________________________________
 
     ${c_yellow}Usage examples:${c_reset}
-    nextflow run main.nf --genome draftfasta.fa[.gz] --species "Abc def" [--rnaseq] [--protein] [...]
+    nextflow run main.nf --genome draftfasta.fa[.gz] --gff annotation.gff [--rnaseq] [--protein] [...]
 
     ${c_yellow}Input parameter:${c_reset}
-    ${c_green}--genome${c_reset}                  Draft genome fasta file contain the assembled contigs/scaffolds
-    ${c_green}--gff${c_reset}                     Annotation file that need to be evaluated
+    ${c_green}--genome${c_reset}                  Draft genome fasta file contain the assembled contigs/scaffolds.
+    ${c_green}--gff${c_reset}                     Annotation file that need to be evaluated.
     ${c_green}--genome_bam${c_reset}              BAM file contain the mapped information from the RNASeq to the genome FASTA.
-    ${c_green}--rnaseq${c_reset}                  A CSV file following the pattern: sample_id,R1_path,R2_path,read_type. Required if `genome_bam` is not provided.
-
+    ${c_green}--rnaseq${c_reset}                  A metadata CSV file following the pattern: sample_id,R1_path,R2_path,read_type. Required if `genome_bam` is not provided.
+    ${c_green}--taxon_id${c_reset}                Taxon ID for identifying BUSCO lineage and download protein data from NCBI if needed.
+    ${c_green}--ncbi_query_email${c_reset}        Email for querying protein from NCBI database.
 
     ${c_yellow}Optional input:${c_reset}
-    ${c_blue}--protein${c_reset}                  Fasta file containing translated protein sequences from the GFF for running evaluation. If not specified, the workflow will automatically extract it from the `genome` and `gff`
-    ${c_blue}--ref_protein${c_reset}              Fasta file containing the reference protein sequences to be used for evaluation. Ideally this should come from the same species and/or closely related species. If not provided, the Uniprot SwissProt data will be downloaded and used.
-    ${c_blue}--lineage${c_reset}                  Lineage information providing for BUSCO, if not provided, the `--auto-lineage` option will be used instead. Example: eudicots_odb10
-    ${c_blue}--oma_database${c_reset}             Pathway to the OMA database, if not specified, the workflow will download it automatically.
-    ${c_blue}--run_blast${c_reset}                If specify, will use `blast` for running best reciprocal hits instead of DIAMOND. [default: false]
+    ${c_blue}--protein${c_reset}                  Fasta file containing translated protein sequences from the GFF for running evaluation. If not specified, the workflow will automatically extract it from the `genome` and `gff`.
+    ${c_blue}--ref_protein${c_reset}              Fasta file containing the reference protein sequences to be used for evaluation. Ideally this should come from the same species and/or closely related species. If not provided, the workflow will download the proteome from NCBI or using Uniprot SwissProt database.
+    ${c_blue}--lineage${c_reset}                  Lineage information providing for BUSCO, if not provided, the workflow will automatically search for the closest lineage. Example: eudicots_odb10.
+    ${c_blue}--genetic_code${c_reset}             Genetic code for translation of protein.
+    ${c_blue}--stranding${c_reset}                Strandness of the RNASeq reads used for extraction of junction position using `regtools`.
+
+    ${c_yellow}Database input:${c_reset}
+    ${c_blue}--oma_database${c_reset}             Pathway to the OMA database, if not specified, the workflow will download it automatically. [default: null]
+    ${c_blue}--ref_protein${c_reset}              Pathway to the reference proteome for comparison. [default: null]
+    ${c_blue}--ncbi_query_count${c_reset}         Number of protein to extract from the NCBI database. [default: 100000]
+    ${c_blue}--ncbi_query_batch${c_reset}         Number of protein to query for each batch. [default: 1000]
 
     ${c_yellow}Output option:${c_reset}
+    ${c_blue}--pdf${c_reset}                      Output PDF name. [default: AnnoAudit_Report.pdf]
     ${c_blue}--outdir${c_reset}                   Output directory. [default: $params.outdir]
     ${c_blue}--tracedir${c_reset}                 Pipeline information. [default: $params.tracedir]
     ${c_blue}--publish_dir_mode${c_reset}         Option for nextflow to move data to the output directory. [default: $params.publish_dir_mode]
     ${c_blue}--tmpdir${c_reset}                   Database directory. [default: $params.tmpdir]
 
-    ${c_yellow}Skipping options:${c_reset}
-    ${c_dim}--skip_rename${c_reset}               Skip renaming genome fasta file by funannotate sort. [default: $params.skip_rename]
+    ${c_yellow}Conditioning options:${c_reset}
+    ${c_dim}--run_blast${c_reset}                 If specify, will use `blast` for running best reciprocal hits instead of DIAMOND. [default: false]
+    ${c_dim}--query_ncbi_prot${c_reset}           If specify, will download the reference proteome from NCBI, other wise, will use the provided proteom or Uniprot SwissProt. [default: true]
+    ${c_dim}--cds_only${c_reset}                  If specify, only extracting information from the GFF file using the CDS line. [default: "False"]
+
+    ${c_yellow}--help${c_reset}                   Print help message.
 
     ${c_yellow}Execution/Engine profiles:${c_reset}
     The pipeline supports profiles to run via different ${c_green}Executers${c_reset} and ${c_blue}Engines${c_reset} e.g.: -profile ${c_green}local${c_reset},${c_blue}conda${c_reset}
