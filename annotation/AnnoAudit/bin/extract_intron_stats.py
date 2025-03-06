@@ -1,4 +1,5 @@
 import sys
+import pickle
 from Bio.Seq import Seq
 from Bio import SeqIO
 
@@ -11,6 +12,8 @@ def count_stop_codons(input_file, genetic_code):
     total_introns = 0
     short_intron_counts_with_stop = {0: 0, 1: 0, 2: 0} 
     short_intron_counts_without_stop = {0: 0, 1: 0, 2: 0}
+    short_intron_with_stop_length = {'phase0': [], 'phase1': [], 'phase2': []}
+    short_intron_without_stop_length = {'phase0': [], 'phase1': [], 'phase2': []}
     long_intron_counts_with_stop = {0: 0, 1: 0, 2: 0} 
     long_intron_counts_without_stop = {0: 0, 1: 0, 2: 0}
 
@@ -18,10 +21,14 @@ def count_stop_codons(input_file, genetic_code):
         length_mod_3 = (len(record.seq) % 3)
         total_introns += 1
         protein_seq = translate_dna(str(record.seq), genetic_code)
-        if len(record.seq) < 120:
+        seq_len = len(record.seq)
+        if seq_len <= 120:
+            phase = record.id.split('_')[-1]
             if '*' in protein_seq:
+                short_intron_with_stop_length[phase].append(seq_len)
                 short_intron_counts_with_stop[length_mod_3] += 1
             else:
+                short_intron_without_stop_length[phase].append(seq_len)
                 short_intron_counts_without_stop[length_mod_3] += 1
         else:
             if '*' in protein_seq:
@@ -34,7 +41,9 @@ def count_stop_codons(input_file, genetic_code):
         'short_intron_counts_with_stop': short_intron_counts_with_stop,
         'short_intron_counts_without_stop': short_intron_counts_without_stop,
         'long_intron_counts_with_stop': long_intron_counts_with_stop,
-        'long_intron_counts_without_stop': long_intron_counts_without_stop
+        'long_intron_counts_without_stop': long_intron_counts_without_stop,
+        'short_intron_with_stop_length': short_intron_with_stop_length,
+        'short_intron_without_stop_length': short_intron_without_stop_length
     }
 
 def main(intron_file, genetic_code):
@@ -47,6 +56,12 @@ def main(intron_file, genetic_code):
         for key in [0, 1, 2]:
             f.write(f"short_intron_<120_3n{key}_with_stop\t{intron_stats['short_intron_counts_with_stop'][key]} ({intron_stats['short_intron_counts_with_stop'][key]/intron_stats['total_introns']*100:.2f})%\n")
             f.write(f"long_intron_>120_3n{key}_with_stop\t{intron_stats['long_intron_counts_with_stop'][key]} ({intron_stats['long_intron_counts_with_stop'][key]/intron_stats['total_introns']*100:.2f})%\n")
+
+    with open('short_with_stop.pickle', 'wb') as handle:
+        pickle.dump(intron_stats["short_intron_with_stop_length"], handle, protocol=pickle.HIGHEST_PROTOCOL)
+    
+    with open('short_without_stop.pickle', 'wb') as handle:
+        pickle.dump(intron_stats["short_intron_without_stop_length"], handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:

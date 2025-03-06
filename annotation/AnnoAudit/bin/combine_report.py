@@ -1,10 +1,10 @@
+import statistics
 import argparse
 import json
 import csv
+import re
 
 def parse_statistics_output(stats_file):
-    """Reads an input file and returns a dictionary of data."""
-
     basic_stats = {}
     with open(stats_file, 'r') as f:
         reader = csv.reader(f, delimiter='\t')
@@ -15,13 +15,11 @@ def parse_statistics_output(stats_file):
     return basic_stats
 
 def parse_busco_output(busco_file):
-    """Parses BUSCO output and returns a dictionary of statistics."""
-
     with open(busco_file, 'r') as f:
         data = json.load(f)
-
     results = data["results"]
-    busco_stats = {
+
+    return {
         "lineage_dataset": data["lineage_dataset"]["name"],
         "complete": str(results["Complete"]) + "%",
         "single_copy": str(results["Single copy"]) + "%",
@@ -30,13 +28,9 @@ def parse_busco_output(busco_file):
         "missing": str(results["Missing"]) + "%",
         "num_markers": results["n_markers"],
         "domain": results["domain"],
-    }
-
-    return busco_stats 
+    } 
 
 def parse_omark_output(omark_output):
-    """Parses omark output file and returns a dictionary of statistics."""
-
     omark_stats = {}
     with open(omark_output, 'r') as f:
         for line in f:
@@ -82,8 +76,6 @@ def parse_omark_output(omark_output):
     return omark_stats
 
 def parse_brh_output(brh_output):
-    """Parses BRH output and returns statistics."""
-
     brh_stats = {}
     num_lines = 0
     num_splitting_genes_08 = 0
@@ -113,19 +105,54 @@ def parse_brh_output(brh_output):
     brh_stats['num_fusion_genes_15'] = str(num_fusion_genes_15) + " (" + str(round(num_fusion_genes_15/num_lines*100, 2)) + "%)"
     return brh_stats
 
-def parse_flagstat(file_path):
+def parse_psauron_output(csv_file_path):
+    psauron_score = None
+    true_count = 0
+    false_count = 0
+    scores = []
+    
+    with open(csv_file_path, newline='') as file:
+        reader = csv.reader(file)
+        
+        next(reader, None) # Skip first line
+        score_line = next(reader, None)
+        if score_line:
+            score_match = re.search(r'psauron score: ([\d\.]+)', score_line[0])
+            psauron_score = float(score_match.group(1)) if score_match else None
+        next(reader, None) # Skip the third line (header)
+        
+        # Process remaining lines
+        for row in reader:
+            if len(row) >= 3:
+                if row[1] == "True":
+                    true_count += 1
+                elif row[1] == "False":
+                    false_count += 1
+                
+                try:
+                    scores.append(float(row[2]))
+                except ValueError:
+                    pass
+    
+    return {
+        "psauron_score": psauron_score,
+        "true_count": true_count,
+        "false_count": false_count,
+        "median_score": statistics.median(scores) if scores else None,
+        "max_score": max(scores) if scores else None,
+        "min_score": min(scores) if scores else None
+    }
 
+def parse_flagstat(file_path):
     with open(file_path, 'r') as f:
         data = json.load(f)
-
     passed = data["QC-passed reads"]
-    rna_stats = {
+
+    return {
         "mapping_rate": str(passed["mapped %"]) + "%",
         "primary_mapping_rate": str(passed["primary mapped %"]) + "%",
         "properly_paired": str(passed["properly paired %"]) + "%"
     }
-
-    return rna_stats
 
 def parse_feature(file_path):
     feature_stats = {}
@@ -135,10 +162,10 @@ def parse_feature(file_path):
             feature_stats[data[0]] = str(data[1])
     return feature_stats
 
-def combine_results(stats1, stats2, stats3, stats4, stats5, stats6, stats7):
-    combined_stats = {**stats1, **stats2, **stats3, **stats4, **stats5, **stats6, **stats7}
+def combine_results(stats1, stats2, stats3, stats4, stats5, stats6, stats7, stats8, stats9):
+    combined_stats = {**stats1, **stats2, **stats3, **stats4, **stats5, **stats6, **stats7, **stats8, **stats9}
     protein_combined = {**stats4, **stats5}
-    rnaseq_combined = {**stats6, **stats7}
+    rnaseq_combined = {**stats6, **stats7, **stats9}
 
     with open("Evaluation_output.txt", "w") as f_out:
         
@@ -164,6 +191,12 @@ def combine_results(stats1, stats2, stats3, stats4, stats5, stats6, stats7):
             print(format_string.format(key, value), file=f_out)
         print("\n", file=f_out)
 
+        print(format_string.format("PSAURON", "Value"), file=f_out)
+        print("-" * (max_key_length + max_value_length + 6), file=f_out)
+        for key, value in stats8.items():
+            print(format_string.format(key, value), file=f_out)
+        print("\n", file=f_out)
+
         print(format_string.format("Best Reciprocal Hits", "Value"), file=f_out)
         print("-" * (max_key_length + max_value_length + 6), file=f_out)
         for key, value in protein_combined.items():
@@ -178,6 +211,7 @@ def combine_results(stats1, stats2, stats3, stats4, stats5, stats6, stats7):
     combined_stats = {"General Statistics": stats1, 
                       "BUSCO": stats2, 
                       "OMArk": stats3, 
+                      "PSAURON": stats8,
                       "Best Reciprocal Hits": protein_combined, 
                       "RNASeq": rnaseq_combined}
     pretty_json_obj = json.dumps(combined_stats, indent=4)
@@ -193,6 +227,8 @@ def main():
     parser.add_argument("-i", "--idxstats_output", help="Path to the idxstats output file")
     parser.add_argument("-c", "--compare_distribution_output", help="Path to the compare distribution output")
     parser.add_argument("-f", "--feature_output", help="Path to the featureCounts output")
+    parser.add_argument("-p", "--psauron_output", help="Path to the output of Psauron")
+    parser.add_argument("-k", "--intron_output", help="Path to the output of intron analysis")
     args = parser.parse_args()
 
     statistics_out = parse_statistics_output(args.statistics_output)
@@ -202,8 +238,10 @@ def main():
     transcriptome_out = parse_flagstat(args.idxstats_output)
     prot_distribution_out = parse_statistics_output(args.compare_distribution_output)
     feature_out = parse_feature(args.feature_output)
+    psauron_out = parse_psauron_output(args.psauron_output)
+    intron_out = parse_feature(args.intron_output)
 
-    combine_results(statistics_out, busco_out, omark_out, brh_out, prot_distribution_out, transcriptome_out, feature_out)
+    combine_results(statistics_out, busco_out, omark_out, brh_out, prot_distribution_out, transcriptome_out, feature_out, psauron_out, intron_out)
 
 if __name__ == '__main__':
     main()

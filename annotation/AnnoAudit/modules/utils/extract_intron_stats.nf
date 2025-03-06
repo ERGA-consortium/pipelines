@@ -9,6 +9,8 @@ process EXTRACT_INTRON_STATS {
     
     output:
     path("statistics.tsv"), emit: statistics
+    path("short_with_stop.pickle"), emit: short_with_stop
+    path("short_without_stop.pickle"), emit: short_without_stop
 
     script:
     """
