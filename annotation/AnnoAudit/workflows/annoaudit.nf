@@ -57,30 +57,30 @@ if (!params.ref_protein && params.query_ncbi_prot) {
 */
 
 // MODULES
-include { FILTER_LONGEST_GFF   } from '../modules/utils/filter_longest_isoforms.nf'
-include { CALCULATE_STATISTICS } from '../modules/utils/calculate_statistics.nf'
-include { EXTRACT_INTRON_STATS } from '../modules/utils/extract_intron_stats.nf'
-include { PLOT_INTRON_PHASE    } from '../modules/utils/plot_intron_phase.nf'
-include { GET_BUSCO_LINEAGE    } from '../modules/utils/get_busco_lineage.nf'
-include { BUSCO                } from '../modules/busco/busco.nf'
-include { PSAURON              } from '../modules/psauron/psauron.nf'
-include { DOWNLOAD_OMA         } from '../modules/utils/download_oma.nf'
-include { OMAMER               } from '../modules/omark/omamer.nf'
-include { OMARK                } from '../modules/omark/omark.nf'
-include { DOWNLOAD_UNI         } from '../modules/utils/download_uni.nf'
-include { QUERY_NCBI_PROT      } from '../modules/utils/query_ncbi_prot.nf'
-include { EXTRACT_PROTEOME     } from '../modules/utils/extract_proteome.nf'
-include { COMBINE_REPORT       } from '../modules/utils/combine_report.nf'
-include { COMPARE_DISTRIBUTION } from '../modules/utils/compare_distribution.nf'
-include { PLOT_DISTRIBUTION    } from '../modules/utils/plot_protein_distribution.nf'
-include { FLAGSTAT             } from '../modules/samtools/flagstat.nf'
-include { CUSTOM_GFF2GTF       } from '../modules/utils/gff2gtf_custom.nf'
-include { FEATURECOUNTS        } from '../modules/featureCounts/featureCounts.nf'
-include { GENERATE_PDF         } from '../modules/utils/generate_pdf.nf'
+include { FILTER_LONGEST_GFF     } from '../modules/utils/filter_longest_isoforms.nf'
+include { CALCULATE_STATISTICS   } from '../modules/utils/calculate_statistics.nf'
+include { EXTRACT_INTRON_STATS   } from '../modules/utils/extract_intron_stats.nf'
+include { PLOT_INTRON_PHASE      } from '../modules/utils/plot_intron_phase.nf'
+include { GET_BUSCO_LINEAGE      } from '../modules/utils/get_busco_lineage.nf'
+include { BUSCO                  } from '../modules/busco/busco.nf'
+include { PSAURON                } from '../modules/psauron/psauron.nf'
+include { DOWNLOAD_OMA           } from '../modules/utils/download_oma.nf'
+include { OMAMER                 } from '../modules/omark/omamer.nf'
+include { OMARK                  } from '../modules/omark/omark.nf'
+include { DOWNLOAD_UNI           } from '../modules/utils/download_uni.nf'
+include { QUERY_NCBI_PROT        } from '../modules/utils/query_ncbi_prot.nf'
+include { EXTRACT_PROTEOME       } from '../modules/utils/extract_proteome.nf'
+include { COMBINE_REPORT         } from '../modules/utils/combine_report.nf'
+include { COMPARE_DISTRIBUTION   } from '../modules/utils/compare_distribution.nf'
+include { PLOT_DISTRIBUTION      } from '../modules/utils/plot_protein_distribution.nf'
+include { FLAGSTAT               } from '../modules/samtools/flagstat.nf'
+include { CUSTOM_GFF2GTF         } from '../modules/utils/gff2gtf_custom.nf'
+include { FEATURECOUNTS          } from '../modules/featureCounts/featureCounts.nf'
+include { GENERATE_PDF           } from '../modules/utils/generate_pdf.nf'
 
 // SUBWORKFLOWS
-include { BEST_RECIPROCAL_HIT  } from '../subworkflows/best_reciprocal_hit.nf'
-include { REMAP_GENOME         } from '../subworkflows/remap_genome.nf'
+include { BEST_RECIPROCAL_HIT    } from '../subworkflows/best_reciprocal_hit.nf'
+include { REMAP_GENOME           } from '../subworkflows/remap_genome.nf'
 include { CALCULATE_INTRON_STATS } from '../subworkflows/calculate_intron_stats.nf'
 
 /*
@@ -116,7 +116,7 @@ workflow ANNOAUDIT {
     if (params.lineage) {
         ch_busco_lineage = params.lineage
     } else if (params.ncbi_query_email && params.taxon_id && !params.lineage ) {
-        GET_BUSCO_LINEAGE ( params.ncbi_query_email, params.taxon_id )
+        GET_BUSCO_LINEAGE ( params.ncbi_query_email, params.taxon_id, params.odb_version)
         ch_busco_lineage = GET_BUSCO_LINEAGE.out
     } else {
         ch_busco_lineage = null
@@ -124,6 +124,7 @@ workflow ANNOAUDIT {
 
     BUSCO ( ch_protein, ch_busco_lineage )
     ch_busco_short = BUSCO.out.results
+    ch_busco_plot = BUSCO.out.plot
 
     // Check database then run OMARK
     if (params.oma_database) {
@@ -162,6 +163,7 @@ workflow ANNOAUDIT {
     ch_compare_distribution_out = COMPARE_DISTRIBUTION.out.compare_distribution
 
     PLOT_DISTRIBUTION ( ch_brh_out )
+    ch_ditribution_plot = PLOT_DISTRIBUTION.out.distribution_png
 
     // RNASeq analysis
     if (params.rnaseq && !params.genome_bam) {
@@ -185,7 +187,8 @@ workflow ANNOAUDIT {
 
     // Combined information
     COMBINE_REPORT ( ch_all_statistics, ch_busco_short, ch_omark_out, ch_brh_out, ch_compare_distribution_out, ch_genome_stat, featureCounts_stats, ch_psauron_out, ch_canonical_stats )
+    ch_statistis_json = COMBINE_REPORT.out.statistics_json
 
     // Generate PDF
-    GENERATE_PDF ( COMBINE_REPORT.out.statistics_json, PLOT_DISTRIBUTION.out.distribution_png, PLOT_INTRON_PHASE.out.short_with_stop_png, PLOT_INTRON_PHASE.out.short_without_stop_png )
+    GENERATE_PDF ( ch_statistis_json, ch_busco_plot, ch_ditribution_plot, PLOT_INTRON_PHASE.out.short_with_stop_png, PLOT_INTRON_PHASE.out.short_without_stop_png )
 }

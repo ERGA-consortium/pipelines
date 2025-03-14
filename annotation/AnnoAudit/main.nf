@@ -81,6 +81,7 @@ def helpMSG() {
     ${c_blue}--stranding${c_reset}                Strandness of the RNASeq reads used for extraction of junction position using `regtools`.
 
     ${c_yellow}Database input:${c_reset}
+    ${c_blue}--odb_version${c_reset}              Specify odb version to use to run BUSCO, option: "odb10" or "odb12". [default: odb12]
     ${c_blue}--oma_database${c_reset}             Pathway to the OMA database, if not specified, the workflow will download it automatically. [default: null]
     ${c_blue}--ref_protein${c_reset}              Pathway to the reference proteome for comparison. [default: null]
     ${c_blue}--ncbi_query_count${c_reset}         Number of protein to extract from the NCBI database. [default: 100000]
