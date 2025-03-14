@@ -21,14 +21,14 @@ def parse_busco_output(busco_file):
 
     return {
         "lineage_dataset": data["lineage_dataset"]["name"],
-        "complete": str(results["Complete"]) + "%",
-        "single_copy": str(results["Single copy"]) + "%",
-        "multi_copy": str(results["Multi copy"]) + "%",
-        "fragmented": str(results["Fragmented"]) + "%",
-        "missing": str(results["Missing"]) + "%",
+        "complete": str(results["Complete percentage"]) + "%",
+        "single_copy": str(results["Single copy percentage"]) + "%",
+        "multi_copy": str(results["Multi copy percentage"]) + "%",
+        "fragmented": str(results["Fragmented percentage"]) + "%",
+        "missing": str(results["Missing percentage"]) + "%",
         "num_markers": results["n_markers"],
         "domain": results["domain"],
-    } 
+    }
 
 def parse_omark_output(omark_output):
     omark_stats = {}

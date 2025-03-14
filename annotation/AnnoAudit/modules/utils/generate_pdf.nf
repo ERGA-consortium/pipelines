@@ -4,6 +4,7 @@ process GENERATE_PDF {
 
     input:
     path(evaluate_json)
+    path(busco_plot)
     path(protein_distribution)
     path(intron_without_stop)
     path(intron_with_stop)
@@ -13,7 +14,8 @@ process GENERATE_PDF {
 
     script:
     """
-    realpath "${protein_distribution}" > image_paths.txt
+    realpath "${busco_plot}" > image_paths.txt
+    realpath "${protein_distribution}" >> image_paths.txt
     realpath "${intron_without_stop}" >> image_paths.txt
     realpath "${intron_with_stop}" >> image_paths.txt
 
