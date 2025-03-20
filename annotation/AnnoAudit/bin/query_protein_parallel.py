@@ -169,13 +169,22 @@ def main():
     
     args = parser.parse_args()
     
-    loop = asyncio.get_event_loop()
-    sequences = loop.run_until_complete(fetch_protein_sequences(args.email, args.taxon_id, args.target_count, args.batch_size, args.chunk_size, args.max_concurrent_requests,
-                                                                args.error_rate, args.num_hash))
+    #loop = asyncio.get_event_loop()
+    #sequences = loop.run_until_complete(fetch_protein_sequences(args.email, args.taxon_id, args.target_count, args.batch_size, args.chunk_size, args.max_concurrent_requests,
+    #                                                            args.error_rate, args.num_hash))
+
+    sequences = asyncio.run(
+        fetch_protein_sequences(
+            args.email, args.taxon_id, 
+            args.target_count, args.batch_size,
+            args.chunk_size, args.max_concurrent_requests,
+            args.error_rate, args.num_hash
+        )
+    )
     
     print(f"Retrieved {len(sequences)} protein sequences.")
 
-    with open('protein_sequences.fasta', 'w') as output_handle:
+    with open('NCBI_protein_sequences.fasta', 'w') as output_handle:
         SeqIO.write(sequences, output_handle, 'fasta')
 
 if __name__ == "__main__":

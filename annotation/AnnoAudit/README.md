@@ -109,6 +109,8 @@ s. If not provided, the workflow will download the proteome from NCBI or using U
 --stranding                Strandness of the RNASeq reads used for extraction of junction position using `regtools`.
 
 Database input:
+--odb_version              odb version to choose to run BUSCO, option: odb12, odb10. [default: odb12]
+--busco_database           Pathway to the BUSCO databse store locally. [default: null]
 --oma_database             Pathway to the OMA database, if not specified, the workflow will download it automatically. [default: null]
 --ref_protein              Pathway to the reference proteome for comparison. [default: null]
 --ncbi_query_count         Number of protein to extract from the NCBI database. [default: 100000]
@@ -122,6 +124,7 @@ Output option:
 --tmpdir                   Database directory. [default: /env/export/bigtmp2/pdoan/evaluate_pipeline/tmpdir]
 
 Conditioning options:
+--rnaseq_single             If specify, will run `featureCounts` in single read mode, this is necessary if the mapped RNASeq is single-ended. [default: false]
 --run_blast                 If specify, will use `blast` for running best reciprocal hits instead of DIAMOND. [default: false]
 --query_ncbi_prot           If specify, will download the reference proteome from NCBI, other wise, will use the provided proteom or Uniprot SwissProt. [default: true]
 --cds_only                  If specify, only extracting information from the GFF file using the CDS line. [default: "False"]
@@ -150,7 +153,7 @@ Below is the sample output of this workflow. The example PDF output is located i
 ```
 |General Statistics                 | Value           |
 -------------------------------------------------------
-|num_transcripts                    | 36391           |
+|num_genes                          | 36391           |
 |num_genes_without_introns          | 12968 (35.64%)  |
 |mean_gene_length                   | 2359.57         |
 |median_gene_length                 | 1562.0          |

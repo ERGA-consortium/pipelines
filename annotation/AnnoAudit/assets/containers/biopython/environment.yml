@@ -1,0 +1,8 @@
+name: biopython-aiohttp
+channels:
+  - conda-forge
+  - anaconda
+dependencies:
+  - biopython=1.84
+  - aiohttp
+  - procps-ng

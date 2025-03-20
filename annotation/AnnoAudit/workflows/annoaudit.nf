@@ -64,9 +64,11 @@ include { PLOT_INTRON_PHASE      } from '../modules/utils/plot_intron_phase.nf'
 include { GET_BUSCO_LINEAGE      } from '../modules/utils/get_busco_lineage.nf'
 include { BUSCO                  } from '../modules/busco/busco.nf'
 include { PSAURON                } from '../modules/psauron/psauron.nf'
+include { PLOT_PSAURON           } from '../modules/utils/plot_psauron.nf'
 include { DOWNLOAD_OMA           } from '../modules/utils/download_oma.nf'
 include { OMAMER                 } from '../modules/omark/omamer.nf'
 include { OMARK                  } from '../modules/omark/omark.nf'
+include { PLOT_OMARK             } from '../modules/utils/plot_omark.nf'
 include { DOWNLOAD_UNI           } from '../modules/utils/download_uni.nf'
 include { QUERY_NCBI_PROT        } from '../modules/utils/query_ncbi_prot.nf'
 include { EXTRACT_PROTEOME       } from '../modules/utils/extract_proteome.nf'
@@ -139,9 +141,15 @@ workflow ANNOAUDIT {
     OMARK (ch_oma_database, OMAMER.out.omamer)
     ch_omark_out = OMARK.out.omark_results
 
+    PLOT_OMARK (ch_omark_out)
+    ch_omark_plot = PLOT_OMARK.out.omark_png
+
     // Run Psauron
-    PSAURON ( ch_protein )
+    PSAURON (ch_protein) 
     ch_psauron_out = PSAURON.out.psauron_out
+
+    PLOT_PSAURON (ch_psauron_out)
+    ch_psauron_plot = PLOT_PSAURON.out.psauron_png
 
     // Protein analysis
 
@@ -164,6 +172,7 @@ workflow ANNOAUDIT {
 
     PLOT_DISTRIBUTION ( ch_brh_out )
     ch_ditribution_plot = PLOT_DISTRIBUTION.out.distribution_png
+    ch_length_plot = PLOT_DISTRIBUTION.out.length_png
 
     // RNASeq analysis
     if (params.rnaseq && !params.genome_bam) {
@@ -190,5 +199,5 @@ workflow ANNOAUDIT {
     ch_statistis_json = COMBINE_REPORT.out.statistics_json
 
     // Generate PDF
-    GENERATE_PDF ( ch_statistis_json, ch_busco_plot, ch_ditribution_plot, PLOT_INTRON_PHASE.out.short_with_stop_png, PLOT_INTRON_PHASE.out.short_without_stop_png )
+    GENERATE_PDF ( ch_statistis_json, ch_busco_plot, ch_omark_plot, ch_psauron_plot, ch_length_plot, ch_ditribution_plot, PLOT_INTRON_PHASE.out.short_with_stop_png, PLOT_INTRON_PHASE.out.short_without_stop_png )
 }
