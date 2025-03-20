@@ -9,7 +9,7 @@ process QUERY_NCBI_PROT {
     val(batch_size)
      
     output:
-    path("protein_sequences.fasta"), emit: database
+    path("NCBI_protein_sequences.fasta"), emit: database
 
     script:
     """

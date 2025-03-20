@@ -12,7 +12,12 @@ process BUSCO {
     path ("annotated/busco_figure.png")             , emit: plot
 
     script:
-    if (busco_lineage){
+    if (params.busco_database && busco_lineage) {
+        """
+        busco -m prot -i ${protein} -o annotated -c ${task.cpus} -l ${busco_lineage} --offline --download_path ${params.busco_database}/${params.odb_version}
+        generate_plot.py -wd annotated
+        """
+    } else if (busco_lineage) {
         """
         busco -m prot -i ${protein} -o annotated -c ${task.cpus} -l ${busco_lineage}
         generate_plot.py -wd annotated
