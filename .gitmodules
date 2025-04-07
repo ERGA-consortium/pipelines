@@ -1,0 +1,3 @@
+[submodule "annotation/AnnoAudit"]
+	path = annotation/AnnoAudit
+	url = https://github.com/ERGA-consortium/AnnoAudit.git
