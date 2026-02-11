@@ -1,0 +1,2341 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [
+        {
+            "color": "none",
+            "data": {
+                "line": [
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "thickness": 5
+            },
+            "id": 0,
+            "position": [
+                709.5446918447228,
+                689.1697088995555
+            ],
+            "size": [
+                0,
+                0
+            ],
+            "type": "freehand"
+        }
+    ],
+    "creator": [
+        {
+            "address": "https://www.erga-biodiversity.eu",
+            "class": "Organization",
+            "name": "ERGA"
+        },
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "Diego De Panis"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "ERGA Long reads+HiC Assembly+QC Hifiasm v2602 (WF2)",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "If your long reads are HiFi, leave it 'yes'",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "If your long reads are HiFi, leave it 'yes'",
+                    "name": "The Long Reads are PacBio HiFi"
+                }
+            ],
+            "label": "The Long Reads are PacBio HiFi",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 2.651267032369292,
+                "top": 994.1740818178498
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": true, \"validators\": [], \"parameter_type\": \"boolean\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "216df441-c606-40c7-9541-3c3161ce67e8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "If your long reads are ONT, switch to 'yes'. IMPORTANT: Remember to also switch HiFi to 'no'",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "If your long reads are ONT, switch to 'yes'. IMPORTANT: Remember to also switch HiFi to 'no'",
+                    "name": "The Long reads are ONT"
+                }
+            ],
+            "label": "The Long reads are ONT",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 1.0882170493474086,
+                "top": 1101.501945946154
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": false, \"validators\": [], \"parameter_type\": \"boolean\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "367470f4-b60a-4dd4-8b8f-60ea8c0510ca",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Collection of Long reads in fastq format",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Collection of Long reads in fastq format",
+                    "name": "(Trimmed) Long Reads Collection"
+                }
+            ],
+            "label": "(Trimmed) Long Reads Collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 1.0353313636473522,
+                "top": 1205.1818381532985
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\", \"fields\": null, \"column_definitions\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "39165d8a-d3c3-407b-9fe3-230c519c44ae",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "HiC R trimmed"
+                }
+            ],
+            "label": "HiC R trimmed",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.3547014050854027,
+                "top": 1398.9599735517904
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d5cef629-2209-42c2-b7ff-4a33ead0a8b5",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "HiC F trimmed"
+                }
+            ],
+            "label": "HiC F trimmed",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1.5753574101467707,
+                "top": 1498.4649898288137
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c3a977e3-d1ab-4354-8d3d-5262d7c2f972",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Select the est_genome_size result obtained during profiling",
+            "content_id": null,
+            "errors": null,
+            "id": 5,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select the est_genome_size result obtained during profiling",
+                    "name": "Estimated genome size"
+                }
+            ],
+            "label": "Estimated genome size",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1.3862756646008225,
+                "top": 1700.144993107054
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "838f6153-6488-4756-8d77-68136730bf66",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "lineage for BUSCO, e.g.: arthropoda_odb10, vertebrata_odb10, mammalia_odb10, aves_odb10, tetrapoda_odb10 ...",
+            "content_id": null,
+            "errors": null,
+            "id": 6,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "lineage for BUSCO, e.g.: arthropoda_odb10, vertebrata_odb10, mammalia_odb10, aves_odb10, tetrapoda_odb10 ...",
+                    "name": "lineage"
+                }
+            ],
+            "label": "lineage",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 1.573994551103696,
+                "top": 1900.7304486681967
+            },
+            "tool_id": null,
+            "tool_state": "{\"validators\": [], \"restrictions\": [\"aconoidasida_odb10\", \"actinopterygii_odb10\", \"agaricales_odb10\", \"agaricomycetes_odb10\", \"alveolata_odb10\", \"apicomplexa_odb10\", \"arachnida_odb10\", \"arthropoda_odb10\", \"ascomycota_odb10\", \"aves_odb10\", \"basidiomycota_odb10\", \"boletales_odb10\", \"brassicales_odb10\", \"capnodiales_odb10\", \"carnivora_odb10\", \"cetartiodactyla_odb10\", \"chaetothyriales_odb10\", \"chlorophyta_odb10\", \"coccidia_odb10\", \"cyprinodontiformes_odb10\", \"diptera_odb10\", \"dothideomycetes_odb10\", \"embryophyta_odb10\", \"endopterygota_odb10\", \"euarchontoglires_odb10\", \"eudicots_odb10\", \"euglenozoa_odb10\", \"eukaryota_odb10\", \"eurotiales_odb10\", \"eurotiomycetes_odb10\", \"eutheria_odb10\", \"fabales_odb10\", \"fungi_odb10\", \"glires_odb10\", \"glomerellales_odb10\", \"helotiales_odb10\", \"hemiptera_odb10\", \"hymenoptera_odb10\", \"hypocreales_odb10\", \"insecta_odb10\", \"leotiomycetes_odb10\", \"lepidoptera_odb10\", \"liliopsida_odb10\", \"mammalia_odb10\", \"metazoa_odb10\", \"microsporidia_odb10\", \"mollusca_odb10\", \"mucorales_odb10\", \"mucoromycota_odb10\", \"nematoda_odb10\", \"onygenales_odb10\", \"passeriformes_odb10\", \"plasmodium_odb10\", \"pleosporales_odb10\", \"poales_odb10\", \"polyporales_odb10\", \"primates_odb10\", \"saccharomycetes_odb10\", \"sauropsida_odb10\", \"solanales_odb10\", \"sordariomycetes_odb10\", \"stramenopiles_odb10\", \"tetrapoda_odb10\", \"tremellomycetes_odb10\", \"vertebrata_odb10\", \"viridiplantae_odb10\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "6a6ea600-3626-4ce4-b96d-101a3ba8ed6b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "Select the meryl_db result obtained during profiling",
+            "content_id": null,
+            "errors": null,
+            "id": 7,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select the meryl_db result obtained during profiling",
+                    "name": "Meryl Database"
+                }
+            ],
+            "label": "Meryl Database",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 1998.4505569209807
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "24a0d529-bf78-4f8a-8b70-152f424db221",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.25.0+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "hic_partition|h1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "hic_partition|h2": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "mode|reads": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "when": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Hifiasm",
+                    "name": "hic_partition"
+                },
+                {
+                    "description": "runtime parameter for tool Hifiasm",
+                    "name": "hic_partition"
+                },
+                {
+                    "description": "runtime parameter for tool Hifiasm",
+                    "name": "mode"
+                }
+            ],
+            "label": null,
+            "name": "Hifiasm",
+            "outputs": [
+                {
+                    "name": "noseq_files",
+                    "type": "input"
+                },
+                {
+                    "name": "hic_pcontig_graph",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "hic_acontig_graph",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "hic_balanced_contig_hap1_graph",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "hic_balanced_contig_hap2_graph",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "hic_raw_initig",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "log_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1002.3098711740644,
+                "top": 0
+            },
+            "post_job_actions": {
+                "HideDatasetActionhic_raw_initig": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "hic_raw_initig"
+                },
+                "HideDatasetActionlog_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "log_file"
+                },
+                "HideDatasetActionnoseq_files": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "noseq_files"
+                },
+                "HideDatasetActionprocessed_unitigs": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "processed_unitigs"
+                },
+                "HideDatasetActionraw_unitigs": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "raw_unitigs"
+                },
+                "RemoveTagDatasetActionalternate_contig_graph": {
+                    "action_arguments": {
+                        "tags": "name:trimmed,name:reads,name:HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "alternate_contig_graph"
+                },
+                "RemoveTagDatasetActionhic_acontig_graph": {
+                    "action_arguments": {
+                        "tags": "#HiC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_acontig_graph"
+                },
+                "RemoveTagDatasetActionhic_balanced_contig_hap1_graph": {
+                    "action_arguments": {
+                        "tags": "#HiC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_balanced_contig_hap1_graph"
+                },
+                "RemoveTagDatasetActionhic_balanced_contig_hap2_graph": {
+                    "action_arguments": {
+                        "tags": "#HiC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_balanced_contig_hap2_graph"
+                },
+                "RemoveTagDatasetActionhic_pcontig_graph": {
+                    "action_arguments": {
+                        "tags": "#HiC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_pcontig_graph"
+                },
+                "RemoveTagDatasetActionhic_raw_initig": {
+                    "action_arguments": {
+                        "tags": "#HIC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_raw_initig"
+                },
+                "RemoveTagDatasetActionlog_file": {
+                    "action_arguments": {
+                        "tags": "#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "log_file"
+                },
+                "RemoveTagDatasetActionnoseq_files": {
+                    "action_arguments": {
+                        "tags": "#HiFi,#reads,#trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "noseq_files"
+                },
+                "RemoveTagDatasetActionprimary_contig_graph": {
+                    "action_arguments": {
+                        "tags": "name:trimmed,name:reads,name:HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "primary_contig_graph"
+                },
+                "RemoveTagDatasetActionprocessed_unitigs": {
+                    "action_arguments": {
+                        "tags": "#HiFi,#reads, #trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "processed_unitigs"
+                },
+                "RemoveTagDatasetActionraw_unitigs": {
+                    "action_arguments": {
+                        "tags": "#HiFi,#reads, #trimmed"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "raw_unitigs"
+                },
+                "TagDatasetActionalternate_contig_graph": {
+                    "action_arguments": {
+                        "tags": "name:alt,name:contig,alt_contig_gfa"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "alternate_contig_graph"
+                },
+                "TagDatasetActionhic_acontig_graph": {
+                    "action_arguments": {
+                        "tags": "#contig,#alt"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_acontig_graph"
+                },
+                "TagDatasetActionhic_balanced_contig_hap1_graph": {
+                    "action_arguments": {
+                        "tags": "#hap1, #contig"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_balanced_contig_hap1_graph"
+                },
+                "TagDatasetActionhic_balanced_contig_hap2_graph": {
+                    "action_arguments": {
+                        "tags": "#hap2, #contig"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_balanced_contig_hap2_graph"
+                },
+                "TagDatasetActionhic_pcontig_graph": {
+                    "action_arguments": {
+                        "tags": "#pri, #contig"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_pcontig_graph"
+                },
+                "TagDatasetActionhic_raw_initig": {
+                    "action_arguments": {
+                        "tags": "#unitig"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_raw_initig"
+                },
+                "TagDatasetActionlog_file": {
+                    "action_arguments": {
+                        "tags": "hifiasm_log"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "log_file"
+                },
+                "TagDatasetActionprimary_contig_graph": {
+                    "action_arguments": {
+                        "tags": "name:pri,name:contig,pri_contig_gfa"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "primary_contig_graph"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.25.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e5e767089163",
+                "name": "hifiasm",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"advanced_selector\": \"set\", \"__current_case__\": 1, \"hifiasm_kmer_length\": \"51\", \"window_size\": \"51\", \"drop_kmers\": \"5.0\", \"max_overlaps\": \"100\", \"correction_rounds\": \"3\", \"min_hist_cnt\": null, \"max_kocc\": \"20000\", \"hg_size\": \"\", \"rl_cut\": \"1000\", \"sc_cut\": \"10\"}, \"assembly_options\": {\"assembly_selector\": \"blank\", \"__current_case__\": 0}, \"bins_out\": false, \"filter_bits\": \"37\", \"hic_partition\": {\"hic_partition_selector\": \"set\", \"__current_case__\": 1, \"h1\": {\"__class__\": \"ConnectedValue\"}, \"h2\": {\"__class__\": \"ConnectedValue\"}, \"seed\": null, \"n_weight\": null, \"n_perturb\": null, \"f_perturb\": null, \"l_msjoin\": \"500000\"}, \"log_out\": true, \"mode\": {\"mode_selector\": \"standard\", \"__current_case__\": 0, \"reads\": {\"__class__\": \"ConnectedValue\"}}, \"ont_integration\": {\"ont_integration_selector\": \"blank\", \"__current_case__\": 0}, \"purge_options\": {\"purge_selector\": \"set\", \"__current_case__\": 1, \"purge_level\": \"3\", \"similarity_threshold\": \"0.75\", \"minimum_overlap\": \"1\", \"purge_max\": null, \"n_hap\": null}, \"scaffolding_options\": {\"scaffold_selector\": \"blank\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.0+galaxy1",
+            "type": "tool",
+            "uuid": "a691e43a-a0a4-4d44-98bd-274451a186e2",
+            "when": "$(inputs.when)",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.25.0+galaxy1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "hic_partition|h1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "hic_partition|h2": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "mode|reads": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "when": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Hifiasm",
+                    "name": "hic_partition"
+                },
+                {
+                    "description": "runtime parameter for tool Hifiasm",
+                    "name": "hic_partition"
+                },
+                {
+                    "description": "runtime parameter for tool Hifiasm",
+                    "name": "mode"
+                }
+            ],
+            "label": null,
+            "name": "Hifiasm",
+            "outputs": [
+                {
+                    "name": "noseq_files",
+                    "type": "input"
+                },
+                {
+                    "name": "hic_pcontig_graph",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "hic_acontig_graph",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "hic_balanced_contig_hap1_graph",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "hic_balanced_contig_hap2_graph",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "hic_raw_initig",
+                    "type": "gfa1"
+                },
+                {
+                    "name": "log_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1000.6211934199742,
+                "top": 2061.1806376422805
+            },
+            "post_job_actions": {
+                "HideDatasetActionhic_raw_initig": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "hic_raw_initig"
+                },
+                "HideDatasetActionlog_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "log_file"
+                },
+                "HideDatasetActionnoseq_files": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "noseq_files"
+                },
+                "HideDatasetActionprocessed_unitigs": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "processed_unitigs"
+                },
+                "HideDatasetActionraw_unitigs": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "raw_unitigs"
+                },
+                "RemoveTagDatasetActionalternate_contig_graph": {
+                    "action_arguments": {
+                        "tags": "#trimmed,#reads,name:ONT"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "alternate_contig_graph"
+                },
+                "RemoveTagDatasetActionhic_acontig_graph": {
+                    "action_arguments": {
+                        "tags": "#HiC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_acontig_graph"
+                },
+                "RemoveTagDatasetActionhic_balanced_contig_hap1_graph": {
+                    "action_arguments": {
+                        "tags": "#HiC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_balanced_contig_hap1_graph"
+                },
+                "RemoveTagDatasetActionhic_balanced_contig_hap2_graph": {
+                    "action_arguments": {
+                        "tags": "#HiC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_balanced_contig_hap2_graph"
+                },
+                "RemoveTagDatasetActionhic_pcontig_graph": {
+                    "action_arguments": {
+                        "tags": "#HiC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_pcontig_graph"
+                },
+                "RemoveTagDatasetActionhic_raw_initig": {
+                    "action_arguments": {
+                        "tags": "#HIC,#forward,#reverse,#trimmed,#reads,#HiFi"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "hic_raw_initig"
+                },
+                "RemoveTagDatasetActionlog_file": {
+                    "action_arguments": {
+                        "tags": "#trimmed,#reads,#ONT"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "log_file"
+                },
+                "RemoveTagDatasetActionnoseq_files": {
+                    "action_arguments": {
+                        "tags": "#reads,#trimmed,#ONT"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "noseq_files"
+                },
+                "RemoveTagDatasetActionprimary_contig_graph": {
+                    "action_arguments": {
+                        "tags": "#trimmed,#reads,#ONT"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "primary_contig_graph"
+                },
+                "RemoveTagDatasetActionprocessed_unitigs": {
+                    "action_arguments": {
+                        "tags": "#reads,#trimmed,name:ONT"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "processed_unitigs"
+                },
+                "RemoveTagDatasetActionraw_unitigs": {
+                    "action_arguments": {
+                        "tags": "#reads,#trimmed,#ONT"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "raw_unitigs"
+                },
+                "TagDatasetActionalternate_contig_graph": {
+                    "action_arguments": {
+                        "tags": "name:alt,name:contig,alt_contig_gfa"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "alternate_contig_graph"
+                },
+                "TagDatasetActionhic_acontig_graph": {
+                    "action_arguments": {
+                        "tags": "#contig,#alt"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_acontig_graph"
+                },
+                "TagDatasetActionhic_balanced_contig_hap1_graph": {
+                    "action_arguments": {
+                        "tags": "#hap1, #contig"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_balanced_contig_hap1_graph"
+                },
+                "TagDatasetActionhic_balanced_contig_hap2_graph": {
+                    "action_arguments": {
+                        "tags": "#hap2, #contig"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_balanced_contig_hap2_graph"
+                },
+                "TagDatasetActionhic_pcontig_graph": {
+                    "action_arguments": {
+                        "tags": "#pri, #contig"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_pcontig_graph"
+                },
+                "TagDatasetActionhic_raw_initig": {
+                    "action_arguments": {
+                        "tags": "#unitig"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "hic_raw_initig"
+                },
+                "TagDatasetActionlog_file": {
+                    "action_arguments": {
+                        "tags": "hifiasm_log"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "log_file"
+                },
+                "TagDatasetActionprimary_contig_graph": {
+                    "action_arguments": {
+                        "tags": "name:pri,name:contig,pri_contig_gfa"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "primary_contig_graph"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.25.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e5e767089163",
+                "name": "hifiasm",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"advanced_selector\": \"blank\", \"__current_case__\": 0}, \"assembly_options\": {\"assembly_selector\": \"blank\", \"__current_case__\": 0}, \"bins_out\": false, \"filter_bits\": \"37\", \"hic_partition\": {\"hic_partition_selector\": \"set\", \"__current_case__\": 1, \"h1\": {\"__class__\": \"ConnectedValue\"}, \"h2\": {\"__class__\": \"ConnectedValue\"}, \"seed\": null, \"n_weight\": null, \"n_perturb\": null, \"f_perturb\": null, \"l_msjoin\": \"500000\"}, \"log_out\": true, \"mode\": {\"mode_selector\": \"ont\", \"__current_case__\": 1, \"reads\": {\"__class__\": \"ConnectedValue\"}}, \"ont_integration\": {\"ont_integration_selector\": \"blank\", \"__current_case__\": 0}, \"purge_options\": {\"purge_selector\": \"set\", \"__current_case__\": 1, \"purge_level\": \"3\", \"similarity_threshold\": \"0.75\", \"minimum_overlap\": \"1\", \"purge_max\": null, \"n_hap\": null}, \"scaffolding_options\": {\"scaffold_selector\": \"blank\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.0+galaxy1",
+            "type": "tool",
+            "uuid": "1c502061-a7c8-4a91-9970-b76f8d16bc58",
+            "when": "$(inputs.when)",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "param_value_from_file",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input1": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Parse parameter value",
+            "outputs": [
+                {
+                    "name": "integer_param",
+                    "type": "expression.json"
+                }
+            ],
+            "position": {
+                "left": 1201.3077041124143,
+                "top": 1506.4017826187949
+            },
+            "post_job_actions": {
+                "DeleteIntermediatesActioninteger_param": {
+                    "action_arguments": {},
+                    "action_type": "DeleteIntermediatesAction",
+                    "output_name": "integer_param"
+                },
+                "HideDatasetActioninteger_param": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "integer_param"
+                },
+                "RenameDatasetActioninteger_param": {
+                    "action_arguments": {
+                        "newname": "Estimated genome size"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "integer_param"
+                }
+            },
+            "tool_id": "param_value_from_file",
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"param_type\": \"integer\", \"remove_newlines\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "101c94b2-fb02-40a9-84a6-3f646a3241cf",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/pick_value/pick_value/0.2.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "style_cond|type_cond|pick_from_0|value": {
+                    "id": 8,
+                    "output_name": "hic_pcontig_graph"
+                },
+                "style_cond|type_cond|pick_from_1|value": {
+                    "id": 9,
+                    "output_name": "hic_pcontig_graph"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Pick parameter value",
+            "outputs": [
+                {
+                    "name": "data_param",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2206.7591537184003,
+                "top": 301.4191863886334
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/pick_value/pick_value/0.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "b19e21af9c52",
+                "name": "pick_value",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"style_cond\": {\"pick_style\": \"first\", \"__current_case__\": 0, \"type_cond\": {\"param_type\": \"data\", \"__current_case__\": 4, \"pick_from\": [{\"__index__\": 0, \"value\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"value\": {\"__class__\": \"ConnectedValue\"}}]}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.2.0",
+            "type": "tool",
+            "uuid": "03660916-8553-4c4a-8200-4afa04ade5ab",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/pick_value/pick_value/0.2.0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "style_cond|type_cond|pick_from_0|value": {
+                    "id": 8,
+                    "output_name": "hic_acontig_graph"
+                },
+                "style_cond|type_cond|pick_from_1|value": {
+                    "id": 9,
+                    "output_name": "hic_acontig_graph"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Pick parameter value",
+            "outputs": [
+                {
+                    "name": "data_param",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2203.1772392595576,
+                "top": 1100.4928074031563
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/pick_value/pick_value/0.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "b19e21af9c52",
+                "name": "pick_value",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"style_cond\": {\"pick_style\": \"first\", \"__current_case__\": 0, \"type_cond\": {\"param_type\": \"data\", \"__current_case__\": 4, \"pick_from\": [{\"__index__\": 0, \"value\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"value\": {\"__class__\": \"ConnectedValue\"}}]}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.2.0",
+            "type": "tool",
+            "uuid": "f7e56f07-9309-4cd7-be2b-4ddf9a9a0512",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/pick_value/pick_value/0.2.0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "style_cond|type_cond|pick_from_0|value": {
+                    "id": 8,
+                    "output_name": "hic_balanced_contig_hap1_graph"
+                },
+                "style_cond|type_cond|pick_from_1|value": {
+                    "id": 9,
+                    "output_name": "hic_balanced_contig_hap1_graph"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Pick parameter value",
+            "outputs": [
+                {
+                    "name": "data_param",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2204.0488636870687,
+                "top": 1902.3745332377919
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/pick_value/pick_value/0.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "b19e21af9c52",
+                "name": "pick_value",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"style_cond\": {\"pick_style\": \"first\", \"__current_case__\": 0, \"type_cond\": {\"param_type\": \"data\", \"__current_case__\": 4, \"pick_from\": [{\"__index__\": 0, \"value\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"value\": {\"__class__\": \"ConnectedValue\"}}]}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.2.0",
+            "type": "tool",
+            "uuid": "b670535d-099c-4f93-a2b6-1108f9cf30cd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/pick_value/pick_value/0.2.0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "style_cond|type_cond|pick_from_0|value": {
+                    "id": 8,
+                    "output_name": "hic_balanced_contig_hap2_graph"
+                },
+                "style_cond|type_cond|pick_from_1|value": {
+                    "id": 9,
+                    "output_name": "hic_balanced_contig_hap2_graph"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Pick parameter value",
+            "outputs": [
+                {
+                    "name": "data_param",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2201.408984136039,
+                "top": 2697.7618352818567
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/pick_value/pick_value/0.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "b19e21af9c52",
+                "name": "pick_value",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"style_cond\": {\"pick_style\": \"first\", \"__current_case__\": 0, \"type_cond\": {\"param_type\": \"data\", \"__current_case__\": 4, \"pick_from\": [{\"__index__\": 0, \"value\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"value\": {\"__class__\": \"ConnectedValue\"}}]}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.2.0",
+            "type": "tool",
+            "uuid": "76accb53-253c-4349-a548-312873843d79",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "in_gfa": {
+                    "id": 11,
+                    "output_name": "data_param"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "GFA to FASTA",
+            "outputs": [
+                {
+                    "name": "out_fa",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 3002.3228860033882,
+                "top": 98.10127452033828
+            },
+            "post_job_actions": {
+                "DeleteIntermediatesActionout_fa": {
+                    "action_arguments": {},
+                    "action_type": "DeleteIntermediatesAction",
+                    "output_name": "out_fa"
+                },
+                "HideDatasetActionout_fa": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_fa"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "e33c82b63727",
+                "name": "gfa_to_fa",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_gfa\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.2",
+            "type": "tool",
+            "uuid": "bc839e34-df1d-4133-a4a8-2e372be4c91b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input_file": {
+                    "id": 11,
+                    "output_name": "data_param"
+                }
+            },
+            "inputs": [],
+            "label": "Bandage Pri",
+            "name": "Bandage Image",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 3002.4065844879997,
+                "top": 302.6155324369276
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutfile": {
+                    "action_arguments": {
+                        "tags": "bandage_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "ddddce450736",
+                "name": "bandage",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fontsize\": null, \"height\": \"1000\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"lengths\": false, \"names\": true, \"nodewidth\": null, \"output_format\": \"png\", \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2022.09+galaxy4",
+            "type": "tool",
+            "uuid": "4076f0c7-491a-4b90-885d-9a3f4fc48a09",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "6dc4e2da-42e2-49f8-8938-d40a06b425ae"
+                }
+            ]
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.11+galaxy0",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "input_file": {
+                    "id": 11,
+                    "output_name": "data_param"
+                },
+                "mode_condition|statistics_condition|expected_genomesize": {
+                    "id": 10,
+                    "output_name": "integer_param"
+                }
+            },
+            "inputs": [],
+            "label": "gfastats pri",
+            "name": "gfastats",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 3000.8842467134828,
+                "top": 535.5110110069004
+            },
+            "post_job_actions": {
+                "TagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#QC,asm_stats"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.11+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "59150c883ed5",
+                "name": "gfastats",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"ConnectedValue\"}, \"mode_condition\": {\"selector\": \"statistics\", \"__current_case__\": 1, \"statistics_condition\": {\"selector\": \"assembly\", \"__current_case__\": 2, \"expected_genomesize\": {\"__class__\": \"ConnectedValue\"}}, \"locale\": true, \"tabular\": true, \"discover_paths\": true}, \"target_condition\": {\"target_option\": \"false\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.3.11+galaxy0",
+            "type": "tool",
+            "uuid": "3c0958a2-1643-4fea-81a9-da73b7af317c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "stats",
+                    "uuid": "0040948b-34ab-43e6-b930-e84d2365db13"
+                }
+            ]
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "in_gfa": {
+                    "id": 12,
+                    "output_name": "data_param"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "GFA to FASTA",
+            "outputs": [
+                {
+                    "name": "out_fa",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 2998.760217341182,
+                "top": 894.3933448352273
+            },
+            "post_job_actions": {
+                "DeleteIntermediatesActionout_fa": {
+                    "action_arguments": {},
+                    "action_type": "DeleteIntermediatesAction",
+                    "output_name": "out_fa"
+                },
+                "HideDatasetActionout_fa": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_fa"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "e33c82b63727",
+                "name": "gfa_to_fa",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_gfa\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.2",
+            "type": "tool",
+            "uuid": "2d07e8bc-5373-4380-8be2-62d82e33148d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input_file": {
+                    "id": 12,
+                    "output_name": "data_param"
+                }
+            },
+            "inputs": [],
+            "label": "Bandage alt",
+            "name": "Bandage Image",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 2997.590416620481,
+                "top": 1095.3996361467082
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutfile": {
+                    "action_arguments": {
+                        "tags": "bandage_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "ddddce450736",
+                "name": "bandage",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fontsize\": null, \"height\": \"1000\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"lengths\": false, \"names\": true, \"nodewidth\": null, \"output_format\": \"png\", \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2022.09+galaxy4",
+            "type": "tool",
+            "uuid": "a499c573-c687-4838-a14b-35bbfaad9952",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "bbd392ce-74c2-41d7-a295-70c6451d6a80"
+                }
+            ]
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.11+galaxy0",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "input_file": {
+                    "id": 12,
+                    "output_name": "data_param"
+                },
+                "mode_condition|statistics_condition|expected_genomesize": {
+                    "id": 10,
+                    "output_name": "integer_param"
+                }
+            },
+            "inputs": [],
+            "label": "gfastats alt",
+            "name": "gfastats",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 3002.4333252542283,
+                "top": 1299.773825584596
+            },
+            "post_job_actions": {
+                "TagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#QC,asm_stats"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.11+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "59150c883ed5",
+                "name": "gfastats",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"ConnectedValue\"}, \"mode_condition\": {\"selector\": \"statistics\", \"__current_case__\": 1, \"statistics_condition\": {\"selector\": \"assembly\", \"__current_case__\": 2, \"expected_genomesize\": {\"__class__\": \"ConnectedValue\"}}, \"locale\": true, \"tabular\": true, \"discover_paths\": false}, \"target_condition\": {\"target_option\": \"false\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.3.11+galaxy0",
+            "type": "tool",
+            "uuid": "24484d31-1d5d-4b2e-a813-bdb4288dddab",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "stats",
+                    "uuid": "92bf7a23-c245-4734-9ed0-5b1e99e053b7"
+                }
+            ]
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "in_gfa": {
+                    "id": 13,
+                    "output_name": "data_param"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "GFA to FASTA",
+            "outputs": [
+                {
+                    "name": "out_fa",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 2999.608180094983,
+                "top": 1698.9105318060374
+            },
+            "post_job_actions": {
+                "DeleteIntermediatesActionout_fa": {
+                    "action_arguments": {},
+                    "action_type": "DeleteIntermediatesAction",
+                    "output_name": "out_fa"
+                },
+                "HideDatasetActionout_fa": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_fa"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "e33c82b63727",
+                "name": "gfa_to_fa",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_gfa\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.2",
+            "type": "tool",
+            "uuid": "eb2dbf53-3e93-468c-86dd-90b970944321",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input_file": {
+                    "id": 13,
+                    "output_name": "data_param"
+                }
+            },
+            "inputs": [],
+            "label": "Bandage Hap1",
+            "name": "Bandage Image",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 2999.523508523611,
+                "top": 1897.1195874818077
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutfile": {
+                    "action_arguments": {
+                        "tags": "bandage_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "ddddce450736",
+                "name": "bandage",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fontsize\": null, \"height\": \"1000\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"lengths\": false, \"names\": true, \"nodewidth\": null, \"output_format\": \"png\", \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2022.09+galaxy4",
+            "type": "tool",
+            "uuid": "dfd99007-8b1e-4d84-a54d-ba92da359e72",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "7d260317-22f0-4a01-8698-693d28e1ea34"
+                }
+            ]
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.11+galaxy0",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "input_file": {
+                    "id": 13,
+                    "output_name": "data_param"
+                },
+                "mode_condition|statistics_condition|expected_genomesize": {
+                    "id": 10,
+                    "output_name": "integer_param"
+                }
+            },
+            "inputs": [],
+            "label": "gfastats Hap1",
+            "name": "gfastats",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 3000.666366379237,
+                "top": 2102.9725846580277
+            },
+            "post_job_actions": {
+                "TagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#QC,asm_stats"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.11+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "59150c883ed5",
+                "name": "gfastats",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"ConnectedValue\"}, \"mode_condition\": {\"selector\": \"statistics\", \"__current_case__\": 1, \"statistics_condition\": {\"selector\": \"assembly\", \"__current_case__\": 2, \"expected_genomesize\": {\"__class__\": \"ConnectedValue\"}}, \"locale\": true, \"tabular\": true, \"discover_paths\": true}, \"target_condition\": {\"target_option\": \"false\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.3.11+galaxy0",
+            "type": "tool",
+            "uuid": "1219274a-d666-46c4-bee4-f67d75587e7c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "stats",
+                    "uuid": "34522237-4b43-41f6-9c96-faacfcec494b"
+                }
+            ]
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "in_gfa": {
+                    "id": 14,
+                    "output_name": "data_param"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "GFA to FASTA",
+            "outputs": [
+                {
+                    "name": "out_fa",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 2996.436444272137,
+                "top": 2498.7610894886625
+            },
+            "post_job_actions": {
+                "DeleteIntermediatesActionout_fa": {
+                    "action_arguments": {},
+                    "action_type": "DeleteIntermediatesAction",
+                    "output_name": "out_fa"
+                },
+                "HideDatasetActionout_fa": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_fa"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "e33c82b63727",
+                "name": "gfa_to_fa",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_gfa\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.2",
+            "type": "tool",
+            "uuid": "d7926e21-ebe2-42d2-9cd4-4b38d48ecf6f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "input_file": {
+                    "id": 14,
+                    "output_name": "data_param"
+                }
+            },
+            "inputs": [],
+            "label": "Bandage Hap2",
+            "name": "Bandage Image",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 2999.7967506817117,
+                "top": 2702.2207076427735
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutfile": {
+                    "action_arguments": {
+                        "tags": "bandage_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "ddddce450736",
+                "name": "bandage",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fontsize\": null, \"height\": \"1000\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"lengths\": false, \"names\": true, \"nodewidth\": null, \"output_format\": \"png\", \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2022.09+galaxy4",
+            "type": "tool",
+            "uuid": "c3e394ae-dc30-49c9-b8a0-1f73a151ff7f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "89ef590b-bbfe-41a7-89b5-54eaba6bdb15"
+                }
+            ]
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.11+galaxy0",
+            "errors": null,
+            "id": 26,
+            "input_connections": {
+                "input_file": {
+                    "id": 14,
+                    "output_name": "data_param"
+                },
+                "mode_condition|statistics_condition|expected_genomesize": {
+                    "id": 10,
+                    "output_name": "integer_param"
+                }
+            },
+            "inputs": [],
+            "label": "gfastats Hap2",
+            "name": "gfastats",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 3000.2176985743477,
+                "top": 2900.7129642581685
+            },
+            "post_job_actions": {
+                "TagDatasetActionstats": {
+                    "action_arguments": {
+                        "tags": "#QC,asm_stats"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.11+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "59150c883ed5",
+                "name": "gfastats",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"ConnectedValue\"}, \"mode_condition\": {\"selector\": \"statistics\", \"__current_case__\": 1, \"statistics_condition\": {\"selector\": \"assembly\", \"__current_case__\": 2, \"expected_genomesize\": {\"__class__\": \"ConnectedValue\"}}, \"locale\": true, \"tabular\": true, \"discover_paths\": false}, \"target_condition\": {\"target_option\": \"false\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.3.11+galaxy0",
+            "type": "tool",
+            "uuid": "1204f7e8-8303-49af-aedc-db99217d27ab",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "stats",
+                    "uuid": "77720cb5-e136-4457-b763-7826b2928e95"
+                }
+            ]
+        },
+        "27": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2",
+            "errors": null,
+            "id": 27,
+            "input_connections": {
+                "input": {
+                    "id": 15,
+                    "output_name": "out_fa"
+                },
+                "lineage|lineage_dataset": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "lineage"
+                }
+            ],
+            "label": "BUSCO pri",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4001.7499349704376,
+                "top": 296.01916963449725
+            },
+            "post_job_actions": {
+                "TagDatasetActionbusco_missing": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_mis"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_missing"
+                },
+                "TagDatasetActionbusco_sum": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_sum"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_sum"
+                },
+                "TagDatasetActionbusco_table": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_tab"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_table"
+                },
+                "TagDatasetActionsummary_image": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "summary_image"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c5a90fa4b8dd",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"miniprot\", \"__current_case__\": 1}}, \"cached_db\": \"all+2024-03-21-114020\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"outputs\": [\"short_summary\", \"missing\", \"image\"], \"test\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "5.8.0+galaxy2",
+            "type": "tool",
+            "uuid": "cb89ff21-ad77-42dc-b2ff-ebf639d9caf3",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "busco_sum",
+                    "uuid": "60dd3870-eb35-4181-9cf1-0a291d909f66"
+                },
+                {
+                    "label": null,
+                    "output_name": "summary_image",
+                    "uuid": "b899a752-1827-40cb-9cf1-17fc23d9f4f5"
+                }
+            ]
+        },
+        "28": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2",
+            "errors": null,
+            "id": 28,
+            "input_connections": {
+                "input": {
+                    "id": 18,
+                    "output_name": "out_fa"
+                },
+                "lineage|lineage_dataset": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "lineage"
+                }
+            ],
+            "label": "BUSCO alt",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4005.7595318990143,
+                "top": 1098.6230340822967
+            },
+            "post_job_actions": {
+                "TagDatasetActionbusco_missing": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_mis"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_missing"
+                },
+                "TagDatasetActionbusco_sum": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_sum"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_sum"
+                },
+                "TagDatasetActionbusco_table": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_tab"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_table"
+                },
+                "TagDatasetActionsummary_image": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "summary_image"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c5a90fa4b8dd",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"miniprot\", \"__current_case__\": 1}}, \"cached_db\": \"all+2024-03-21-114020\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"outputs\": [\"short_summary\", \"missing\", \"image\"], \"test\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "5.8.0+galaxy2",
+            "type": "tool",
+            "uuid": "d57a921a-ee99-46eb-bd07-fdbd0ab8fa09",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "summary_image",
+                    "uuid": "cc32299c-1afb-45ce-a0fd-8a81eeb864f0"
+                },
+                {
+                    "label": null,
+                    "output_name": "busco_sum",
+                    "uuid": "9c031005-7476-40c3-8671-5b4dc3f20857"
+                }
+            ]
+        },
+        "29": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy4",
+            "errors": null,
+            "id": 29,
+            "input_connections": {
+                "mode|assembly_options|assembly_01": {
+                    "id": 15,
+                    "output_name": "out_fa"
+                },
+                "mode|assembly_options|assembly_02": {
+                    "id": 18,
+                    "output_name": "out_fa"
+                },
+                "mode|meryldb_F1": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Merqury",
+                    "name": "mode"
+                }
+            ],
+            "label": "Merqury pri/alt",
+            "name": "Merqury",
+            "outputs": [
+                {
+                    "name": "qv_files",
+                    "type": "input"
+                },
+                {
+                    "name": "png_files",
+                    "type": "input"
+                },
+                {
+                    "name": "stats_files",
+                    "type": "input"
+                },
+                {
+                    "name": "log_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 4800.497392590558,
+                "top": 796.6775388547128
+            },
+            "post_job_actions": {
+                "HideDatasetActionlog_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "log_file"
+                },
+                "TagDatasetActionbed_files": {
+                    "action_arguments": {
+                        "tags": "merqury_hifi_hic_bed, #hic_phased"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "bed_files"
+                },
+                "TagDatasetActionlog_file": {
+                    "action_arguments": {
+                        "tags": "merqury_log"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "log_file"
+                },
+                "TagDatasetActionpng_files": {
+                    "action_arguments": {
+                        "tags": "#QC,merqury_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "png_files"
+                },
+                "TagDatasetActionqv_files": {
+                    "action_arguments": {
+                        "tags": "#QC,merqury_qv"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "qv_files"
+                },
+                "TagDatasetActionsizes_files": {
+                    "action_arguments": {
+                        "tags": "merqury_hifi_hic_sizes, #hic_phased"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "sizes_files"
+                },
+                "TagDatasetActionstats_files": {
+                    "action_arguments": {
+                        "tags": "#QC,merqury_completeness"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "stats_files"
+                },
+                "TagDatasetActionwig_files": {
+                    "action_arguments": {
+                        "tags": "merqury_hifi_hic_wig, #hic_phased"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "wig_files"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "eb7b00ec347d",
+                "name": "merqury",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"label\": \"output_merqury\", \"mode\": {\"options\": \"default\", \"__current_case__\": 0, \"meryldb_F1\": {\"__class__\": \"ConnectedValue\"}, \"assembly_options\": {\"number_assemblies\": \"two\", \"__current_case__\": 1, \"assembly_01\": {\"__class__\": \"ConnectedValue\"}, \"assembly_02\": {\"__class__\": \"ConnectedValue\"}}}, \"output_add_headers\": true, \"output_selector\": [\"qv\", \"plots\", \"stats\", \"log\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.3+galaxy4",
+            "type": "tool",
+            "uuid": "0ce21f90-352f-4977-b111-c13927b300a2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "png_files",
+                    "uuid": "ca5a0067-0db0-42bb-86d2-481234a04bf5"
+                },
+                {
+                    "label": null,
+                    "output_name": "qv_files",
+                    "uuid": "dcf8da31-cca8-4bdd-801a-e7ddc08b45b3"
+                },
+                {
+                    "label": null,
+                    "output_name": "stats_files",
+                    "uuid": "36f011af-098f-468c-ac4e-46299789e1e2"
+                }
+            ]
+        },
+        "30": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2",
+            "errors": null,
+            "id": 30,
+            "input_connections": {
+                "input": {
+                    "id": 21,
+                    "output_name": "out_fa"
+                },
+                "lineage|lineage_dataset": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "lineage"
+                }
+            ],
+            "label": "BUSCO Hap1",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4003.265737579347,
+                "top": 1896.4896111287742
+            },
+            "post_job_actions": {
+                "TagDatasetActionbusco_missing": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_mis"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_missing"
+                },
+                "TagDatasetActionbusco_sum": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_sum"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_sum"
+                },
+                "TagDatasetActionbusco_table": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_tab"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_table"
+                },
+                "TagDatasetActionsummary_image": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "summary_image"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c5a90fa4b8dd",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"miniprot\", \"__current_case__\": 1}}, \"cached_db\": \"all+2024-03-21-114020\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"outputs\": [\"short_summary\", \"missing\", \"image\"], \"test\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "5.8.0+galaxy2",
+            "type": "tool",
+            "uuid": "c68456d3-93f6-4e72-9a6b-2fe8d5ebb8a3",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "busco_sum",
+                    "uuid": "0983d490-6a52-4e2d-95ef-68aa3e5274e9"
+                },
+                {
+                    "label": null,
+                    "output_name": "summary_image",
+                    "uuid": "94d0585c-92ca-4bbd-8be2-6114f9811b82"
+                }
+            ]
+        },
+        "31": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2",
+            "errors": null,
+            "id": 31,
+            "input_connections": {
+                "input": {
+                    "id": 24,
+                    "output_name": "out_fa"
+                },
+                "lineage|lineage_dataset": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "lineage"
+                }
+            ],
+            "label": "BUSCO Hap2",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3999.015750018818,
+                "top": 2708.1798239506056
+            },
+            "post_job_actions": {
+                "TagDatasetActionbusco_missing": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_mis"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_missing"
+                },
+                "TagDatasetActionbusco_sum": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_sum"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_sum"
+                },
+                "TagDatasetActionbusco_table": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_tab"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "busco_table"
+                },
+                "TagDatasetActionsummary_image": {
+                    "action_arguments": {
+                        "tags": "#QC,busco_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "summary_image"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c5a90fa4b8dd",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"miniprot\", \"__current_case__\": 1}}, \"cached_db\": \"all+2024-03-21-114020\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"outputs\": [\"short_summary\", \"missing\", \"image\"], \"test\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "5.8.0+galaxy2",
+            "type": "tool",
+            "uuid": "5d26ad18-c47c-4d83-bd9e-63bfed7f87cf",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "summary_image",
+                    "uuid": "ff6cef6a-83fa-4383-8720-9d822ea7565f"
+                },
+                {
+                    "label": null,
+                    "output_name": "busco_sum",
+                    "uuid": "bd9bf858-4bb5-406a-940f-1b4fabdf8107"
+                }
+            ]
+        },
+        "32": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy4",
+            "errors": null,
+            "id": 32,
+            "input_connections": {
+                "mode|assembly_options|assembly_01": {
+                    "id": 21,
+                    "output_name": "out_fa"
+                },
+                "mode|assembly_options|assembly_02": {
+                    "id": 24,
+                    "output_name": "out_fa"
+                },
+                "mode|meryldb_F1": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Merqury",
+                    "name": "mode"
+                }
+            ],
+            "label": "Merqury Hap1/Hap2",
+            "name": "Merqury",
+            "outputs": [
+                {
+                    "name": "qv_files",
+                    "type": "input"
+                },
+                {
+                    "name": "png_files",
+                    "type": "input"
+                },
+                {
+                    "name": "stats_files",
+                    "type": "input"
+                },
+                {
+                    "name": "log_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 4800.245352718196,
+                "top": 2393.756751231071
+            },
+            "post_job_actions": {
+                "HideDatasetActionlog_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "log_file"
+                },
+                "TagDatasetActionbed_files": {
+                    "action_arguments": {
+                        "tags": "merqury_hifi_hic_bed, #hic_phased"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "bed_files"
+                },
+                "TagDatasetActionlog_file": {
+                    "action_arguments": {
+                        "tags": "merqury_log"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "log_file"
+                },
+                "TagDatasetActionpng_files": {
+                    "action_arguments": {
+                        "tags": "#QC,merqury_png"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "png_files"
+                },
+                "TagDatasetActionqv_files": {
+                    "action_arguments": {
+                        "tags": "#QC,merqury_qv"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "qv_files"
+                },
+                "TagDatasetActionsizes_files": {
+                    "action_arguments": {
+                        "tags": "merqury_hifi_hic_sizes, #hic_phased"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "sizes_files"
+                },
+                "TagDatasetActionstats_files": {
+                    "action_arguments": {
+                        "tags": "#QC,merqury_completeness"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "stats_files"
+                },
+                "TagDatasetActionwig_files": {
+                    "action_arguments": {
+                        "tags": "merqury_hifi_hic_wig, #hic_phased"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "wig_files"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "eb7b00ec347d",
+                "name": "merqury",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"label\": \"output_merqury\", \"mode\": {\"options\": \"default\", \"__current_case__\": 0, \"meryldb_F1\": {\"__class__\": \"ConnectedValue\"}, \"assembly_options\": {\"number_assemblies\": \"two\", \"__current_case__\": 1, \"assembly_01\": {\"__class__\": \"ConnectedValue\"}, \"assembly_02\": {\"__class__\": \"ConnectedValue\"}}}, \"output_add_headers\": true, \"output_selector\": [\"qv\", \"plots\", \"stats\", \"log\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.3+galaxy4",
+            "type": "tool",
+            "uuid": "d2c5af24-9919-4ed0-952e-702d9012cf11",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "png_files",
+                    "uuid": "befdfd9c-3c89-47e3-8344-dd5845646681"
+                },
+                {
+                    "label": null,
+                    "output_name": "stats_files",
+                    "uuid": "429c1387-23af-4925-a232-e6543617aca9"
+                },
+                {
+                    "label": null,
+                    "output_name": "qv_files",
+                    "uuid": "dd1fe923-07cd-4e36-a10b-29f4c681561e"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:ERGA",
+        "name:ASSEMBLY+QC",
+        "name:HiFi",
+        "name:ONT",
+        "name:HiC"
+    ],
+    "uuid": "f994de6d-a6a9-4de6-ba29-cef04d98ed1c",
+    "version": 20
+}
