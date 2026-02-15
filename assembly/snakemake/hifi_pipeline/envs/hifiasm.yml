@@ -1,0 +1,6 @@
+name: hifiasm
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - hifiasm
