@@ -1,0 +1,8 @@
+name: evaluation
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - merqury
+  - busco
+  - gfastats

@@ -1,0 +1,6 @@
+name: hicanu
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - canu=2.2
